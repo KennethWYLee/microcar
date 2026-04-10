@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>下載區 | Raspberry Pi Pico 循跡小車教學站</title>
-  <meta name="description" content="Raspberry Pi Pico 循跡小車入門教材下載頁，依照老師和學生的使用順序整理檔案，避免不知道先開哪份。">
+  <title>下載區 | Raspberry Pi Pico 小車入門教學站</title>
+  <meta name="description" content="Raspberry Pi Pico 小車入門教材下載頁。先整理第一堂必用，再整理老師備課與延伸教材，避免不知道先開哪份。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -16,8 +16,8 @@
       <a class="brand" href="index.html">
         <span class="brand-mark">MC</span>
         <span class="brand-copy">
-          <strong>Raspberry Pi Pico 循跡小車教學站</strong>
-          <small>Line-following Car Teaching Site</small>
+          <strong>Raspberry Pi Pico 小車入門教學站</strong>
+          <small>Beginner Microcar Course</small>
         </span>
       </a>
       <nav class="site-nav" aria-label="網站導覽">
@@ -38,8 +38,8 @@
             這一頁不是只把檔案堆在一起，而是幫你排好順序。老師和學生都可以知道自己現在應該先開哪一份、後開哪一份。
           </p>
           <div class="action-row">
-            <a class="button primary" href="#teacher-downloads">老師先看</a>
-            <a class="button secondary" href="#student-downloads">學生先看</a>
+            <a class="button primary" href="#starter-pack">第一堂必用</a>
+            <a class="button secondary" href="#teacher-downloads">老師備課</a>
             <a class="button ghost" href="#extension-materials">延伸教材</a>
           </div>
         </div>
@@ -47,92 +47,70 @@
           <article class="aside-card">
             <span class="zone-badge teacher">Recommended Order</span>
             <ol class="number-list">
+              <li>學生講義</li>
               <li>教學建議</li>
               <li>鍵盤控制範例</li>
               <li>馬達基本函式</li>
-              <li>距離感測範例</li>
             </ol>
+          </article>
+        </div>
+      </section>
+
+      <section id="starter-pack" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Start Here</p>
+          <h2>第一堂課真正必用的 3 份內容</h2>
+          <p>如果你只想把第一堂課帶穩，先用這三份就夠了：學生講義、鍵盤控制程式、1 小時授課建議。</p>
+        </div>
+        <div class="download-grid">
+          <article id="download-handout" class="download-card">
+            <span class="download-type">START 1</span>
+            <h3>學生講義頁</h3>
+            <p>最適合上課當下直接投影，或讓學生自己開著看。</p>
+            <a class="button primary block" href="student-handout.html">前往講義</a>
+          </article>
+          <article id="download-keyboard" class="download-card">
+            <span class="download-type">START 2</span>
+            <h3>Thonny 鍵盤控制範例</h3>
+            <p>第一堂課的主程式。執行後可直接在 Thonny Shell 輸入 `w / a / s / d / x`。</p>
+            <a class="button secondary block" href="code-viewer.html?file=keyboard-car-control">查看程式</a>
+          </article>
+          <article id="download-teaching-plan" class="download-card">
+            <span class="download-type">START 3</span>
+            <h3>1 小時授課建議</h3>
+            <p>老師用來確認節奏、時間與完成線。</p>
+            <a class="button primary block" href="downloads/one-hour-bootcamp-teaching-plan.txt">下載 TXT</a>
           </article>
         </div>
       </section>
 
       <section id="teacher-downloads" class="section reveal">
         <div class="section-heading">
-          <p class="eyebrow">For Teachers</p>
-          <h2>老師建議下載順序</h2>
-          <p>如果你是要帶這堂 1 小時國中生 Boot Camp，前兩份就已經是核心主線。</p>
+          <p class="eyebrow">Teacher Prep</p>
+          <h2>老師備課與下一步延伸</h2>
+          <p>這一區偏老師備課與第二堂以後的準備，不一定要在第一堂課全部打開。</p>
         </div>
         <div class="download-grid">
-          <article id="download-teaching-plan" class="download-card">
-            <span class="download-type">STEP 1</span>
-            <h3>1 小時授課建議</h3>
-            <p>先決定這堂課的邊界和節奏。</p>
-            <a class="button primary block" href="downloads/one-hour-bootcamp-teaching-plan.txt">下載 TXT</a>
-          </article>
-          <article id="download-keyboard" class="download-card">
-            <span class="download-type">STEP 2</span>
-            <h3>Thonny 鍵盤控制範例</h3>
-            <p>最適合第一個示範。執行後可直接在 Thonny Shell 輸入 `w / a / s / d / x`。</p>
-            <a class="button secondary block" href="code-viewer.html?file=keyboard-car-control">查看程式</a>
-          </article>
           <article id="download-motor" class="download-card">
-            <span class="download-type">STEP 3</span>
+            <span class="download-type">PREP 1</span>
             <h3>馬達基本函式</h3>
-            <p>如果學生吸收很快，再當補充使用。</p>
+            <p>適合老師解釋前進、後退、左轉、右轉的函式結構。</p>
             <a class="button secondary block" href="code-viewer.html?file=basic-motor-functions">查看程式</a>
           </article>
           <article id="download-sensor" class="download-card">
-            <span class="download-type">STEP 4</span>
+            <span class="download-type">PREP 2</span>
             <h3>距離感測範例</h3>
-            <p>這堂 Boot Camp 先不使用，留到之後延伸。</p>
-            <a class="button secondary block" href="code-viewer.html?file=distance-sensor-rgb">查看程式</a>
-          </article>
-        </div>
-      </section>
-
-      <section id="student-downloads" class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">For Students</p>
-          <h2>學生建議先下載什麼</h2>
-          <p>學生不用一次下載全部，先拿最容易成功的就好。</p>
-        </div>
-        <div class="download-grid">
-          <article class="download-card">
-            <span class="download-type">先做</span>
-            <h3>Thonny 鍵盤控制範例</h3>
-            <p>先看按鍵和動作的關係，再在 Thonny Shell 輸入字母控制小車。</p>
-            <a class="button primary block" href="code-viewer.html?file=keyboard-car-control">先看第一份程式</a>
+            <p>第二堂課或延伸課再加入感測器與判斷時使用。</p>
+            <a class="button secondary block" href="code-viewer.html?file=distance-sensor-rgb">查看延伸程式</a>
           </article>
           <article class="download-card">
-            <span class="download-type">再看</span>
-            <h3>馬達基本函式</h3>
-            <p>如果想知道前進、後退、左轉、右轉是怎麼寫出來，再看這份。</p>
-            <a class="button secondary block" href="code-viewer.html?file=basic-motor-functions">先看補充程式</a>
-          </article>
-          <article class="download-card">
-            <span class="download-type">下一堂</span>
-            <h3>距離感測範例</h3>
-            <p>這份先留到之後延伸課，再加入感測器和判斷。</p>
-            <a class="button ghost block" href="code-viewer.html?file=distance-sensor-rgb">先看延伸程式</a>
-          </article>
-        </div>
-      </section>
-
-      <section id="support-downloads" class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">Support Materials</p>
-          <h2>補充教材</h2>
-          <p>這些是備課或課後閱讀用，不一定要在第一堂課就打開。</p>
-        </div>
-        <div class="download-grid">
-          <article class="download-card">
-            <span class="download-type">PDF</span>
+            <span class="download-type">PREP 3</span>
             <h3>機器人程式設計實務(Python)</h3>
             <p>適合老師備課或學生課後複習。</p>
             <a class="button ghost block" href="downloads/robot-programming-practice-python.pdf">下載 PDF</a>
           </article>
           <article class="download-card">
-            <span class="download-type">PDF</span>
+            <span class="download-type">PREP 4</span>
             <h3>Robot Code Jumpstart</h3>
             <p>適合作為更多程式參考。</p>
             <a class="button ghost block" href="downloads/robot-code-jumpstart.pdf">下載 PDF</a>
@@ -144,7 +122,7 @@
         <div class="section-heading">
           <p class="eyebrow">Extension Materials</p>
           <h2>延伸教材</h2>
-          <p>這一區不是目前這台循跡小車的主線教材，而是之後再討論的延伸內容。</p>
+          <p>這一區不是目前這台 Pico 小車入門課的主線教材，而是之後再討論的延伸內容。</p>
         </div>
         <div class="page-grid">
           <article class="content-card">

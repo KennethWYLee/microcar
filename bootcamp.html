@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>1 小時 Boot Camp | Raspberry Pi Pico 循跡小車教學站</title>
+  <title>1 小時 Boot Camp | Raspberry Pi Pico 小車入門教學站</title>
   <meta name="description" content="給國中生看的 Raspberry Pi Pico 小車 1 小時 Boot Camp。先用 Thonny 連上車子，再用鍵盤控制前進、後退、左轉、右轉、停止。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,8 +16,8 @@
       <a class="brand" href="index.html">
         <span class="brand-mark">MC</span>
         <span class="brand-copy">
-          <strong>Raspberry Pi Pico 循跡小車教學站</strong>
-          <small>Line-following Car Teaching Site</small>
+          <strong>Raspberry Pi Pico 小車入門教學站</strong>
+          <small>Beginner Microcar Course</small>
         </span>
       </a>
       <nav class="site-nav" aria-label="網站導覽">
@@ -40,9 +40,9 @@
             用 `Thonny` 讓電腦連上 Raspberry Pi Pico 小車，然後用鍵盤控制前進、後退、左轉、右轉、停止。
           </p>
           <div class="action-row">
-            <a class="button primary" href="code-viewer.html?file=keyboard-car-control">查看今天的程式</a>
-            <a class="button secondary" href="#thonny-steps">先看 Thonny 步驟</a>
-            <a class="button ghost" href="#code-walkthrough">從上到下讀程式</a>
+            <a class="button primary" href="student-handout.html">先看學生講義</a>
+            <a class="button secondary" href="#thonny-visuals">看 Thonny 圖解</a>
+            <a class="button ghost" href="code-viewer.html?file=keyboard-car-control">查看今天的程式</a>
           </div>
         </div>
         <div class="subpage-aside">
@@ -159,6 +159,78 @@
               <li>要停車時輸入 `x` 後按 Enter。</li>
               <li>如果車子不聽話，先輸入 `x`。</li>
             </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="thonny-visuals" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Thonny Visual Guide</p>
+          <h2>用圖解看懂 Thonny 要按哪裡</h2>
+          <p>這一段不是實機截圖，而是把真正要看的位置整理成更容易理解的操作圖。老師投影時可以直接用這一區帶學生找位置。</p>
+        </div>
+        <div class="thonny-visual-grid">
+          <article class="thonny-visual-card">
+            <span class="zone-badge teacher">Step A</span>
+            <h3>先確認解譯器</h3>
+            <div class="thonny-window">
+              <div class="thonny-topbar">
+                <span class="thonny-dot"></span>
+                <span class="thonny-dot"></span>
+                <span class="thonny-dot"></span>
+                <strong>Thonny</strong>
+              </div>
+              <div class="thonny-toolbar">
+                <span class="ui-pill">Open</span>
+                <span class="ui-pill active">Run</span>
+                <span class="ui-pill">Stop</span>
+              </div>
+              <div class="thonny-editor">
+                <p class="mini-label">Interpreter</p>
+                <strong>MicroPython (Raspberry Pi Pico)</strong>
+                <span>如果不是這個，請跟著老師一起切換。</span>
+              </div>
+            </div>
+          </article>
+          <article class="thonny-visual-card">
+            <span class="zone-badge student">Step B</span>
+            <h3>打開檔案後按 Run</h3>
+            <div class="thonny-window">
+              <div class="thonny-topbar">
+                <span class="thonny-dot"></span>
+                <span class="thonny-dot"></span>
+                <span class="thonny-dot"></span>
+                <strong>keyboard-car-control.py</strong>
+              </div>
+              <div class="thonny-toolbar">
+                <span class="ui-pill">Open</span>
+                <span class="ui-pill active">Run</span>
+                <span class="ui-pill">Save</span>
+              </div>
+              <div class="thonny-editor code-surface">
+                <span>print("請在 Thonny Shell 輸入指令")</span>
+                <span>while True:</span>
+                <span>    cmd = sys.stdin.read(1)</span>
+              </div>
+            </div>
+          </article>
+          <article class="thonny-visual-card">
+            <span class="zone-badge student">Step C</span>
+            <h3>到 Shell 打字控制</h3>
+            <div class="thonny-window">
+              <div class="thonny-topbar">
+                <span class="thonny-dot"></span>
+                <span class="thonny-dot"></span>
+                <span class="thonny-dot"></span>
+                <strong>Shell</strong>
+              </div>
+              <div class="thonny-shell">
+                <span>&gt;&gt;&gt; w</span>
+                <span>car: forward</span>
+                <span>&gt;&gt;&gt; x</span>
+                <span>car: stop</span>
+              </div>
+            </div>
           </article>
         </div>
       </section>
@@ -361,7 +433,13 @@ while True:
           <h2>今天真的要用到的檔案</h2>
           <p>這堂課先用一份主程式就夠了。其他檔案先當補充，不要一下子開太多。</p>
         </div>
-        <div class="download-grid">
+        <div class="download-grid compact-grid">
+          <article class="download-card">
+            <span class="download-type">START</span>
+            <h3>學生講義頁</h3>
+            <p>如果你想先用最短的路線帶學生進入狀況，請先打開這一頁。</p>
+            <a class="button primary block" href="student-handout.html">前往學生講義</a>
+          </article>
           <article class="download-card">
             <span class="download-type">MAIN</span>
             <h3>小車鍵盤控制範例</h3>

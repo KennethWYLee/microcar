@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>學生區 | Raspberry Pi Pico 循跡小車教學站</title>
+  <title>學生區 | Raspberry Pi Pico 小車入門教學站</title>
   <meta name="description" content="Raspberry Pi Pico 循跡小車學生區完整頁。這一版先專注在電腦連上車子，再用鍵盤控制前進、後退、左轉、右轉、停止。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,8 +16,8 @@
       <a class="brand" href="index.html">
         <span class="brand-mark">MC</span>
         <span class="brand-copy">
-          <strong>Raspberry Pi Pico 循跡小車教學站</strong>
-          <small>Line-following Car Teaching Site</small>
+          <strong>Raspberry Pi Pico 小車入門教學站</strong>
+          <small>Beginner Microcar Course</small>
         </span>
       </a>
       <nav class="site-nav" aria-label="網站導覽">
@@ -39,9 +39,9 @@
             再學會用鍵盤控制前進、後退、左轉、右轉、停止，就很棒了。
           </p>
           <div class="action-row">
-            <a class="button primary" href="downloads.html#download-keyboard">下載第一份程式</a>
+            <a class="button primary" href="student-handout.html">先看學生講義</a>
             <a class="button secondary" href="#student-missions">直接開始任務</a>
-            <a class="button ghost" href="downloads.html#download-motor">看動作函式</a>
+            <a class="button ghost" href="#troubleshooting">卡住時看這裡</a>
           </div>
         </div>
         <div class="subpage-aside">
@@ -182,6 +182,32 @@ elif cmd == "d":
     turn_right()
 else:
     stop()</code></pre>
+          </article>
+        </div>
+      </section>
+
+      <section id="troubleshooting" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Troubleshooting</p>
+          <h2>如果卡住，先看這 4 個地方</h2>
+          <p>第一堂課最常卡在連線、執行和輸入的位置。先查這幾個地方，很多問題都能立刻解決。</p>
+        </div>
+        <div class="troubleshoot-grid">
+          <article class="troubleshoot-card">
+            <h3>找不到 Pico</h3>
+            <p>先確認 USB 線有插好，再請老師一起看 `MicroPython (Raspberry Pi Pico)` 有沒有選對。</p>
+          </article>
+          <article class="troubleshoot-card">
+            <h3>按了 Run 沒反應</h3>
+            <p>確認你打開的是 `keyboard-car-control.py`，然後再按一次綠色 `Run`。</p>
+          </article>
+          <article class="troubleshoot-card">
+            <h3>打字沒反應</h3>
+            <p>請把游標點到 Thonny 下方 `Shell`，再輸入 `w` 或 `x` 後按 Enter。</p>
+          </article>
+          <article class="troubleshoot-card">
+            <h3>車子一直動</h3>
+            <p>先輸入 `x`，如果還是沒有停，立刻請老師協助並先斷開電源。</p>
           </article>
         </div>
       </section>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>學生講義 | Raspberry Pi Pico 小車入門教學站</title>
+  <meta name="description" content="給國中生看的 Raspberry Pi Pico 小車入門學生講義。整理第一堂課目標、Thonny 操作圖解、5 個按鍵、成功清單與常見問題。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="handout-page">
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">MC</span>
+        <span class="brand-copy">
+          <strong>Raspberry Pi Pico 小車入門教學站</strong>
+          <small>Beginner Microcar Course</small>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="網站導覽">
+        <a href="bootcamp.html">Boot Camp</a>
+        <a href="teacher-zone.html">教師區</a>
+        <a href="student-zone.html">學生區</a>
+        <a href="downloads.html">下載區</a>
+      </nav>
+      <a class="button ghost" href="student-zone.html">回學生區</a>
+    </header>
+
+    <main>
+      <section class="subpage-hero reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">Student Handout</p>
+          <h1>第一堂課學生講義</h1>
+          <p class="hero-text">
+            這一頁是上課時最適合直接打開給學生看的版本。
+            今天只做三件事：把電腦和小車連起來、打開 `Thonny`、用鍵盤控制前進、後退、左轉、右轉、停止。
+          </p>
+          <div class="action-row">
+            <button class="button primary" type="button" onclick="window.print()">列印這份講義</button>
+            <a class="button secondary" href="bootcamp.html">回 Boot Camp</a>
+            <a class="button ghost" href="code-viewer.html?file=keyboard-car-control">看今天的程式</a>
+          </div>
+        </div>
+        <div class="subpage-aside">
+          <article class="aside-card">
+            <span class="zone-badge student">Today</span>
+            <h3>今天做到這樣就成功</h3>
+            <ul class="detail-list">
+              <li>知道怎麼把 Pico 小車接上電腦。</li>
+              <li>知道 `W / A / S / D / X` 代表什麼動作。</li>
+              <li>可以讓車子動起來，再安全地停下來。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Quick Goals</p>
+          <h2>今天的 3 個小目標</h2>
+        </div>
+        <div class="handout-grid">
+          <article class="check-card">
+            <span class="zone-badge student">Goal 1</span>
+            <h3>接好車子</h3>
+            <p>把 Raspberry Pi Pico 小車接上電腦，確認老師示範時看得到自己的車。</p>
+          </article>
+          <article class="check-card">
+            <span class="zone-badge student">Goal 2</span>
+            <h3>看懂 Thonny</h3>
+            <p>知道要在哪裡開檔、按 Run、在哪裡輸入指令。</p>
+          </article>
+          <article class="check-card">
+            <span class="zone-badge student">Goal 3</span>
+            <h3>控制小車</h3>
+            <p>會用 `W / A / S / D / X` 控制前進、後退、左轉、右轉、停止。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Thonny Visual Guide</p>
+          <h2>照這個圖解操作 Thonny</h2>
+          <p>這不是實機截圖，而是把你真正要看的地方整理成更好懂的版本。</p>
+        </div>
+        <div class="thonny-visual-grid">
+          <article class="thonny-visual-card">
+            <span class="zone-badge student">Step 1</span>
+            <h3>先看右下角</h3>
+            <div class="thonny-window">
+              <div class="thonny-topbar">
+                <span class="thonny-dot"></span>
+                <span class="thonny-dot"></span>
+                <span class="thonny-dot"></span>
+                <strong>Thonny</strong>
+              </div>
+              <div class="thonny-toolbar">
+                <span class="ui-pill">Open</span>
+                <span class="ui-pill active">Run</span>
+                <span class="ui-pill">Stop</span>
+              </div>
+              <div class="thonny-editor">
+                <p class="mini-label">Interpreter</p>
+                <strong>MicroPython (Raspberry Pi Pico)</strong>
+                <span>如果不是這個，請跟著老師一起調整。</span>
+              </div>
+            </div>
+          </article>
+          <article class="thonny-visual-card">
+            <span class="zone-badge student">Step 2</span>
+            <h3>打開檔案按 Run</h3>
+            <div class="thonny-window">
+              <div class="thonny-topbar">
+                <span class="thonny-dot"></span>
+                <span class="thonny-dot"></span>
+                <span class="thonny-dot"></span>
+                <strong>keyboard-car-control.py</strong>
+              </div>
+              <div class="thonny-toolbar">
+                <span class="ui-pill">Open</span>
+                <span class="ui-pill active">Run</span>
+                <span class="ui-pill">Save</span>
+              </div>
+              <div class="thonny-editor code-surface">
+                <span>print("請在 Thonny Shell 輸入指令")</span>
+                <span>while True:</span>
+                <span>    cmd = sys.stdin.read(1)</span>
+              </div>
+            </div>
+          </article>
+          <article class="thonny-visual-card">
+            <span class="zone-badge student">Step 3</span>
+            <h3>到 Shell 輸入指令</h3>
+            <div class="thonny-window">
+              <div class="thonny-topbar">
+                <span class="thonny-dot"></span>
+                <span class="thonny-dot"></span>
+                <span class="thonny-dot"></span>
+                <strong>Shell</strong>
+              </div>
+              <div class="thonny-shell">
+                <span>&gt;&gt;&gt; w</span>
+                <span>car: forward</span>
+                <span>&gt;&gt;&gt; x</span>
+                <span>car: stop</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Keyboard Map</p>
+          <h2>先背這 5 個按鍵就夠了</h2>
+        </div>
+        <div class="page-grid">
+          <article class="student-card mission-card">
+            <span class="zone-badge student">Keyboard Control</span>
+            <div class="keys-grid" aria-label="鍵盤控制小車">
+              <div class="key empty"></div>
+              <div class="key active">W<span>前進</span></div>
+              <div class="key empty"></div>
+              <div class="key">A<span>左轉</span></div>
+              <div class="key active">S<span>後退</span></div>
+              <div class="key">D<span>右轉</span></div>
+              <div class="key stop">X<span>停止</span></div>
+            </div>
+          </article>
+          <article class="content-card">
+            <h3>記住這 3 件事</h3>
+            <ul class="detail-list">
+              <li>每個按鍵都對應一個動作。</li>
+              <li>每做完一個動作，最好先按 `X` 停車。</li>
+              <li>先會操作，不用急著把程式全部背起來。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Success Checklist</p>
+          <h2>下課前檢查一下</h2>
+        </div>
+        <div class="check-grid">
+          <article class="check-card">
+            <h3>我會接線</h3>
+            <p>我知道怎麼把 Pico 小車接到電腦。</p>
+          </article>
+          <article class="check-card">
+            <h3>我會按 Run</h3>
+            <p>我知道打開檔案後要在哪裡執行。</p>
+          </article>
+          <article class="check-card">
+            <h3>我會輸入指令</h3>
+            <p>我知道要到 Thonny Shell 輸入字母。</p>
+          </article>
+          <article class="check-card">
+            <h3>我會停車</h3>
+            <p>我知道遇到狀況要先按 `X`。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Need Help?</p>
+          <h2>如果遇到問題，先看這裡</h2>
+        </div>
+        <div class="troubleshoot-grid">
+          <article class="troubleshoot-card">
+            <h3>找不到 Pico</h3>
+            <p>先確認 USB 線有插好，再請老師一起看解譯器有沒有選對。</p>
+          </article>
+          <article class="troubleshoot-card">
+            <h3>按了 Run 沒反應</h3>
+            <p>先看是不是打開 `keyboard-car-control.py`，再按一次綠色 `Run`。</p>
+          </article>
+          <article class="troubleshoot-card">
+            <h3>打字沒反應</h3>
+            <p>把游標點到下方 `Shell`，輸入 `w` 或 `x` 後再按 Enter。</p>
+          </article>
+          <article class="troubleshoot-card">
+            <h3>車子一直動</h3>
+            <p>先輸入 `x`，如果還是沒有停，立刻請老師協助並先斷電。</p>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

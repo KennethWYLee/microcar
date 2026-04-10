@@ -1,21 +1,21 @@
-# Raspberry Pi Pico 循跡小車教學站
+# Raspberry Pi Pico 小車入門教學站
 
 網站連結：
 
 - [GitHub Pages 網站](https://kennethwylee.github.io/microcar/)
 - [GitHub Repository](https://github.com/KennethWYLee/microcar)
 
-這個專案是一個以機器人課程教材為基礎重新整理的教學網站，主題聚焦在 `Raspberry Pi Pico` 循跡小車的初階教學。
+這個專案是一個以機器人課程教材為基礎重新整理的教學網站，主題聚焦在 `Raspberry Pi Pico` 小車入門教學。
 
 網站不是把原始教材直接堆上來，而是重新篩選成適合老師授課、也適合學生自學的版本。  
-目前教學主線先聚焦在：
+目前教學主線先聚焦在第一堂課最需要的內容：
 
+- 電腦與小車連線(Connection)
+- `Thonny` 操作與執行
+- 鍵盤控制(Keyboard Control)
 - 小車基本移動(Car Motion)
-- 感測器(Sensor)
-- 條件判斷(Condition)
-- 入門程式邏輯(Beginner Logic)
 
-藍牙遙控(Bluetooth Control) 等內容目前視為後續進階案例，不放在第一階段 `Raspberry Pi Pico` 主線首頁。
+藍牙遙控(Bluetooth Control)、感測器與循跡等內容目前視為後續進階案例，不放在第一階段主線首頁。
 
 ## 這個網站適合誰
 
@@ -44,6 +44,8 @@
   教師區完整頁。
 - `student-zone.html`
   學生區完整頁。
+- `student-handout.html`
+  學生版單頁講義，可直接投影或列印。
 - `downloads.html`
   下載區完整頁，並依使用順序整理檔案。
 
@@ -78,13 +80,15 @@
 目前學生區的重點有：
 
 - 鍵盤控制與動作對照
-- 感測器讀值與判斷
+- `Thonny` 操作圖解
 - 小車移動函式
+- 常見問題排除
 
 ### 4. 下載區(Downloads)
 
-下載區現在只放和初階小車教學直接相關的資源，例如：
+下載區現在先把第一堂必用資源排在最前面，例如：
 
+- 學生講義頁
 - 1 小時授課建議
 - 小車鍵盤控制範例
 - 馬達基本函式範例
@@ -110,6 +114,7 @@ microcar/
 ├─ index.html
 ├─ styles.css
 ├─ script.js
+├─ student-handout.html
 ├─ student-zone.html
 ├─ teacher-zone.html
 ├─ README.md
@@ -142,16 +147,18 @@ microcar/
 建議從 `教師區(Teacher Zone)` 開始：
 
 1. 先看 `1 小時 Boot Camp`
-2. 再看 `教師區(Teacher Zone)` 的授課重點
-3. 最後到 `下載區(Downloads)` 取用需要的程式或教材
+2. 再看 `student-handout.html`，確認學生會看到的版本
+3. 再看 `教師區(Teacher Zone)` 的授課重點
+4. 最後到 `下載區(Downloads)` 取用需要的程式或教材
 
 ### 給學生
 
 建議從 `學生區(Student Zone)` 開始：
 
-1. 先看動作和感測器圖解
-2. 再讀短程式
-3. 最後下載範例程式自己試改
+1. 先看 `student-handout.html`
+2. 再看動作和按鍵圖解
+3. 再讀短程式
+4. 最後下載範例程式自己試改
 
 ## 進度紀錄
 
