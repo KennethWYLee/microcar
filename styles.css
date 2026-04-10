@@ -843,6 +843,33 @@ pre code {
   padding: 22px;
 }
 
+.code-highlight-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.code-highlight-card {
+  display: grid;
+  gap: 12px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  box-shadow: 0 12px 28px rgba(31, 43, 58, 0.06);
+}
+
+.code-highlight-card h3 {
+  margin: 0;
+  font-size: 1.08rem;
+}
+
+.code-highlight-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
 .code-toolbar {
   display: flex;
   flex-wrap: wrap;
@@ -855,6 +882,40 @@ pre code {
 .code-block {
   min-height: 360px;
   background: #152433;
+}
+
+.code-line {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+  padding: 2px 0;
+}
+
+.code-line-no {
+  color: rgba(216, 244, 255, 0.48);
+  text-align: right;
+  user-select: none;
+}
+
+.code-line-text {
+  min-width: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.code-line.is-highlight {
+  margin: 1px -10px;
+  padding: 5px 10px;
+  border-radius: 12px;
+}
+
+.code-line.highlight-teacher {
+  background: rgba(98, 175, 235, 0.12);
+}
+
+.code-line.highlight-student {
+  background: rgba(242, 181, 68, 0.12);
 }
 
 .download-grid {
@@ -968,9 +1029,12 @@ pre code {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.check-grid,
-.troubleshoot-grid {
+.check-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.troubleshoot-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .check-card,
@@ -1130,6 +1194,7 @@ pre code {
   .product-rail,
   .flow-stage-grid,
   .thonny-visual-grid,
+  .code-highlight-grid,
   .handout-grid,
   .check-grid,
   .troubleshoot-grid,
@@ -1253,10 +1318,16 @@ pre code {
   .product-rail,
   .flow-stage-grid,
   .thonny-visual-grid,
+  .code-highlight-grid,
   .handout-grid,
   .check-grid,
   .troubleshoot-grid {
     grid-template-columns: 1fr;
+  }
+
+  .code-line {
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 10px;
   }
 }
 

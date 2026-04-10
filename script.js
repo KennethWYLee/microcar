@@ -23,6 +23,29 @@ const codePages = {
       "先在 Thonny 開啟這份程式。",
       "按 Run 執行後，到下方 Shell 輸入 w / a / s / d / x。",
       "先試 w 和 x，再慢慢加入其他動作。"
+    ],
+    highlights: [
+      {
+        title: "接腳與 LED",
+        summary: "這一段先告訴 Pico 小車，哪些腳位要拿來控制左右馬達和板上的 LED。",
+        range: "第 1-12 行",
+        lines: [1, 12],
+        tone: "teacher"
+      },
+      {
+        title: "動作函式",
+        summary: "這裡把前進、後退、左轉、右轉、停止包成函式，之後只要呼叫函式就能控制小車。",
+        range: "第 15-49 行",
+        lines: [15, 49],
+        tone: "student"
+      },
+      {
+        title: "啟動與讀取按鍵",
+        summary: "這一段會先印出提示，再一直等待你從 Thonny Shell 輸入字母。",
+        range: "第 52-88 行",
+        lines: [52, 88],
+        tone: "teacher"
+      }
     ]
   },
   "basic-motor-functions": {
@@ -35,6 +58,29 @@ const codePages = {
       "先看 stop() 和 forward()。",
       "再看 backward()、turn_left()、turn_right()。",
       "把每一個函式和實際動作連起來。"
+    ],
+    highlights: [
+      {
+        title: "接腳設定",
+        summary: "先把控制左右馬達的 4 個腳位設定好，這樣後面的函式才知道要控制哪裡。",
+        range: "第 1-11 行",
+        lines: [1, 11],
+        tone: "teacher"
+      },
+      {
+        title: "核心控制函式",
+        summary: "_set_motor() 是最底層的控制器，其他動作函式都會用到它。",
+        range: "第 13-22 行",
+        lines: [13, 22],
+        tone: "student"
+      },
+      {
+        title: "五個基本動作",
+        summary: "這一段把停止、前進、後退、左轉、右轉拆成清楚的函式。",
+        range: "第 25-50 行",
+        lines: [25, 50],
+        tone: "teacher"
+      }
     ]
   },
   "distance-sensor-rgb": {
@@ -47,6 +93,29 @@ const codePages = {
       "這份不一定要在第一堂課打開。",
       "先看感測器讀值，再看 if 判斷。",
       "等學生熟悉鍵盤控制後再加入這份。"
+    ],
+    highlights: [
+      {
+        title: "匯入與初始化",
+        summary: "先載入距離感測器與顏色工具，再建立超音波感測器和 RGB LED。",
+        range: "第 1-8 行",
+        lines: [1, 8],
+        tone: "teacher"
+      },
+      {
+        title: "重複量測",
+        summary: "for 迴圈會一直量距離，所以這份程式會持續更新感測結果。",
+        range: "第 9-21 行",
+        lines: [9, 21],
+        tone: "student"
+      },
+      {
+        title: "距離判斷",
+        summary: "if / elif / else 會依照距離不同，改變 RGB 燈號顏色。",
+        range: "第 14-19 行",
+        lines: [14, 19],
+        tone: "teacher"
+      }
     ]
   }
 };
@@ -65,6 +134,48 @@ if (codeContent) {
   const backNode = document.getElementById("code-back");
   const stepsNode = document.getElementById("code-steps");
   const copyNode = document.getElementById("copy-code");
+  const highlightGrid = document.getElementById("code-highlight-grid");
+
+  const escapeHtml = value =>
+    value
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;");
+
+  const renderCode = (text, highlights = []) => {
+    const ranges = highlights.map(item => ({
+      start: item.lines[0],
+      end: item.lines[1],
+      tone: item.tone
+    }));
+    const lines = text.split("\n");
+    codeContent.innerHTML = lines
+      .map((line, index) => {
+        const lineNo = index + 1;
+        const activeRange = ranges.find(range => lineNo >= range.start && lineNo <= range.end);
+        const toneClass = activeRange ? ` highlight-${activeRange.tone}` : "";
+        const highlightClass = activeRange ? " is-highlight" : "";
+        return `<span class="code-line${highlightClass}${toneClass}"><span class="code-line-no">${lineNo}</span><span class="code-line-text">${escapeHtml(line) || "&nbsp;"}</span></span>`;
+      })
+      .join("");
+  };
+
+  const renderHighlights = highlights => {
+    if (!highlightGrid || !highlights?.length) {
+      return;
+    }
+    highlightGrid.innerHTML = highlights
+      .map(
+        item => `
+          <article class="code-highlight-card ${item.tone === "student" ? "student-card" : "teacher-card"}">
+            <span class="download-type">${item.range}</span>
+            <h3>${item.title}</h3>
+            <p>${item.summary}</p>
+          </article>
+        `
+      )
+      .join("");
+  };
 
   if (!meta) {
     titleNode.textContent = "找不到這份程式";
@@ -75,7 +186,7 @@ if (codeContent) {
     downloadNode.href = "downloads.html";
     backNode.href = "downloads.html";
   } else {
-    document.title = `${meta.title} | Raspberry Pi Pico 循跡小車教學站`;
+    document.title = `${meta.title} | Raspberry Pi Pico 小車入門教學站`;
     titleNode.textContent = meta.title;
     summaryNode.textContent = meta.summary;
     fileLabelNode.textContent = meta.path;
@@ -83,6 +194,7 @@ if (codeContent) {
     downloadNode.href = meta.path;
     backNode.href = meta.backHref;
     stepsNode.innerHTML = meta.steps.map(step => `<li>${step}</li>`).join("");
+    renderHighlights(meta.highlights);
 
     fetch(meta.path)
       .then(response => {
@@ -92,7 +204,7 @@ if (codeContent) {
         return response.text();
       })
       .then(text => {
-        codeContent.textContent = text;
+        renderCode(text, meta.highlights);
 
         copyNode.addEventListener("click", async () => {
           try {
