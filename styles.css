@@ -421,6 +421,12 @@ button.button {
   background: #f0eee7;
 }
 
+.asset-preview {
+  object-fit: contain !important;
+  background: linear-gradient(180deg, #fffdf8, #f5efe6) !important;
+  padding: 14px;
+}
+
 .teaching-visual {
   width: 100%;
   border-radius: 18px;
