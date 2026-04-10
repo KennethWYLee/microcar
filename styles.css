@@ -643,6 +643,11 @@ pre code {
   gap: 18px;
 }
 
+.compact-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-top: 18px;
+}
+
 .download-card {
   display: flex;
   flex-direction: column;
