@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>下載區 | 循跡小車入門教學站</title>
+  <meta name="description" content="循跡小車入門教材下載頁，依照老師和學生的使用順序整理檔案，避免不知道先開哪份。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">MC</span>
+        <span class="brand-copy">
+          <strong>循跡小車入門教學站</strong>
+          <small>Line-following Car Teaching Site</small>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="網站導覽">
+        <a href="bootcamp.html">1 小時 Boot Camp</a>
+        <a href="teacher-zone.html">教師區(Teacher Zone)</a>
+        <a href="student-zone.html">學生區(Student Zone)</a>
+        <a href="downloads.html">下載區(Downloads)</a>
+      </nav>
+      <a class="button ghost" href="index.html">回首頁</a>
+    </header>
+
+    <main>
+      <section class="subpage-hero reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">Downloads</p>
+          <h1>下載區完整頁</h1>
+          <p class="hero-text">
+            這一頁不是只把檔案堆在一起，而是幫你排好順序。老師和學生都可以知道自己現在應該先開哪一份、後開哪一份。
+          </p>
+          <div class="action-row">
+            <a class="button primary" href="#teacher-downloads">老師先看</a>
+            <a class="button secondary" href="#student-downloads">學生先看</a>
+            <a class="button ghost" href="#support-downloads">補充教材</a>
+          </div>
+        </div>
+        <div class="subpage-aside">
+          <article class="aside-card">
+            <span class="zone-badge teacher">Recommended Order</span>
+            <ol class="number-list">
+              <li>教學建議</li>
+              <li>鍵盤控制範例</li>
+              <li>馬達基本函式</li>
+              <li>距離感測範例</li>
+            </ol>
+          </article>
+        </div>
+      </section>
+
+      <section id="teacher-downloads" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">For Teachers</p>
+          <h2>老師建議下載順序</h2>
+          <p>如果你是老師，建議先照這個順序開檔案，會最省時間。</p>
+        </div>
+        <div class="download-grid">
+          <article id="download-teaching-plan" class="download-card">
+            <span class="download-type">STEP 1</span>
+            <h3>1 小時授課建議</h3>
+            <p>先決定這堂課的邊界和節奏。</p>
+            <a class="button primary block" href="downloads/one-hour-bootcamp-teaching-plan.txt">下載 TXT</a>
+          </article>
+          <article id="download-keyboard" class="download-card">
+            <span class="download-type">STEP 2</span>
+            <h3>小車鍵盤控制範例</h3>
+            <p>最適合第一個示範，學生也最容易看懂。</p>
+            <a class="button secondary block" href="downloads/keyboard-car-control.py">下載 PY</a>
+          </article>
+          <article id="download-motor" class="download-card">
+            <span class="download-type">STEP 3</span>
+            <h3>馬達基本函式</h3>
+            <p>用來補充方向、速度和動作函式。</p>
+            <a class="button secondary block" href="downloads/basic-motor-functions.py">下載 PY</a>
+          </article>
+          <article id="download-sensor" class="download-card">
+            <span class="download-type">STEP 4</span>
+            <h3>距離感測範例</h3>
+            <p>適合帶入感測器和 if 判斷。</p>
+            <a class="button secondary block" href="downloads/distance-sensor-rgb.py">下載 PY</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="student-downloads" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">For Students</p>
+          <h2>學生建議先下載什麼</h2>
+          <p>學生不用一次下載全部，先拿最容易成功的就好。</p>
+        </div>
+        <div class="download-grid">
+          <article class="download-card">
+            <span class="download-type">先做</span>
+            <h3>小車鍵盤控制範例</h3>
+            <p>先看按鍵和動作的關係。</p>
+            <a class="button primary block" href="downloads/keyboard-car-control.py">下載第一份程式</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">再做</span>
+            <h3>距離感測範例</h3>
+            <p>等你知道 if 在做什麼，再來試這份。</p>
+            <a class="button secondary block" href="downloads/distance-sensor-rgb.py">下載挑戰程式</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">補充</span>
+            <h3>馬達基本函式</h3>
+            <p>想知道每個方向怎麼寫出來時再看。</p>
+            <a class="button ghost block" href="downloads/basic-motor-functions.py">下載補充程式</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="support-downloads" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Support Materials</p>
+          <h2>補充教材</h2>
+          <p>這些是備課或課後延伸用，不一定要在第一堂課就打開。</p>
+        </div>
+        <div class="download-grid">
+          <article class="download-card">
+            <span class="download-type">PDF</span>
+            <h3>機器人程式設計實務(Python)</h3>
+            <p>適合老師備課或學生課後複習。</p>
+            <a class="button ghost block" href="downloads/robot-programming-practice-python.pdf">下載 PDF</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">PDF</span>
+            <h3>Robot Code Jumpstart</h3>
+            <p>適合作為更多程式參考。</p>
+            <a class="button ghost block" href="downloads/robot-code-jumpstart.pdf">下載 PDF</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">ZIP</span>
+            <h3>Mango 套件</h3>
+            <p>需要套件環境時再下載，不必第一堂課就先處理。</p>
+            <a class="button ghost block" href="downloads/mango-library.zip">下載 ZIP</a>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

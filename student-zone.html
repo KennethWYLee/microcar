@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>學生區 | 循跡小車入門教學站</title>
+  <meta name="description" content="循跡小車學生區完整頁。帶學生先認識動作、再看短程式、再下載第一份程式，最後挑戰感測器。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">MC</span>
+        <span class="brand-copy">
+          <strong>循跡小車入門教學站</strong>
+          <small>Line-following Car Teaching Site</small>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="網站導覽">
+        <a href="bootcamp.html">1 小時 Boot Camp</a>
+        <a href="teacher-zone.html">教師區(Teacher Zone)</a>
+        <a href="student-zone.html">學生區(Student Zone)</a>
+        <a href="downloads.html">下載區(Downloads)</a>
+      </nav>
+      <a class="button ghost" href="index.html">回首頁</a>
+    </header>
+
+    <main>
+      <section class="subpage-hero reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">Student Zone</p>
+          <h1>學生區完整頁</h1>
+          <p class="hero-text">
+            這一頁是給學生一步一步跟著做的版本。你不用一次懂全部，只要先會看動作、看短程式，再自己改一點點，就很厲害了。
+          </p>
+          <div class="action-row">
+            <a class="button primary" href="downloads.html#download-keyboard">下載第一份程式</a>
+            <a class="button secondary" href="#student-missions">直接開始任務</a>
+            <a class="button ghost" href="downloads.html#download-sensor">挑戰感測器</a>
+          </div>
+        </div>
+        <div class="subpage-aside">
+          <article class="aside-card">
+            <img src="assets/ir-sensor.png" alt="循跡感測模組">
+          </article>
+          <article class="aside-card">
+            <span class="zone-badge student">Today</span>
+            <h3>今天先做到這樣就很好</h3>
+            <ul class="detail-list">
+              <li>知道小車怎麼前進和停止。</li>
+              <li>知道感測器有數值。</li>
+              <li>知道 if 會幫車子做判斷。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="student-missions" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Mission Route</p>
+          <h2>先照這個順序做</h2>
+        </div>
+        <div class="student-path-grid">
+          <div class="student-path-step">
+            <strong>任務 1</strong>
+            <p>先認識 5 個基本動作：前進、後退、左轉、右轉、停止。</p>
+          </div>
+          <div class="student-path-step">
+            <strong>任務 2</strong>
+            <p>再看 4 個基本函式：`forward()`、`backward()`、`turn_left()`、`turn_right()`。</p>
+          </div>
+          <div class="student-path-step">
+            <strong>任務 3</strong>
+            <p>下載第一份程式，先跟著打，不用急著自己寫全部。</p>
+          </div>
+          <div class="student-path-step">
+            <strong>任務 4</strong>
+            <p>最後挑戰感測器範例，看看距離不同時為什麼反應不同。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Action Map</p>
+          <h2>先看懂這張動作圖</h2>
+        </div>
+        <div class="page-grid">
+          <article class="student-card mission-card">
+            <span class="zone-badge student">基本控制</span>
+            <div class="keys-grid" aria-label="鍵盤控制小車">
+              <div class="key empty"></div>
+              <div class="key active">W<span>前進</span></div>
+              <div class="key empty"></div>
+              <div class="key">A<span>左轉</span></div>
+              <div class="key active">S<span>後退</span></div>
+              <div class="key">D<span>右轉</span></div>
+              <div class="key stop">X<span>停止</span></div>
+            </div>
+          </article>
+          <article class="content-card">
+            <h3>你現在要記住的事</h3>
+            <ul class="detail-list">
+              <li>每個按鍵都有一個動作。</li>
+              <li>每個動作後面，通常都會對應一個函式(Function)。</li>
+              <li>你不用一開始背很多程式，只要先知道「哪個動作對哪個結果」。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Mini Code</p>
+          <h2>先看短程式，不要先看大程式</h2>
+        </div>
+        <div class="student-lesson-layout">
+          <article class="lesson-card">
+            <div class="lesson-copy">
+              <p class="mini-label">小車移動(Car Motion)</p>
+              <h3>這四個動作最重要</h3>
+            </div>
+            <pre><code>def forward(speed=30):
+    ...
+
+def backward(speed=30):
+    ...
+
+def turn_left(speed=30):
+    ...
+
+def turn_right(speed=30):
+    ...</code></pre>
+          </article>
+          <article class="lesson-card">
+            <div class="lesson-copy">
+              <p class="mini-label">感測器(Sensor)</p>
+              <h3>這就是 if 判斷</h3>
+            </div>
+            <pre><code>dist = sensor.ping()
+
+if dist &lt; 10:
+    sensor.rgb_all(utils.COLOR_RED)
+elif dist &lt; 20:
+    sensor.rgb_all(utils.COLOR_BLUE)
+else:
+    sensor.rgb_all(utils.COLOR_GREEN)</code></pre>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Next Step</p>
+          <h2>你現在該下載什麼</h2>
+        </div>
+        <div class="download-grid">
+          <article class="download-card">
+            <span class="download-type">先下載</span>
+            <h3>小車鍵盤控制範例</h3>
+            <p>第一個最適合學生開始的檔案。</p>
+            <a class="button primary block" href="downloads.html#download-keyboard">前往下載</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">再挑戰</span>
+            <h3>距離感測範例</h3>
+            <p>當你知道 if 在做什麼後，再來看這個。</p>
+            <a class="button secondary block" href="downloads.html#download-sensor">前往下載</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">最後試試</span>
+            <h3>馬達基本函式</h3>
+            <p>如果你想知道每個方向怎麼寫出來，再看這份。</p>
+            <a class="button ghost block" href="downloads.html#download-motor">前往下載</a>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
