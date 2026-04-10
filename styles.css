@@ -436,6 +436,13 @@ button.button {
   border: 1px solid rgba(20, 38, 58, 0.08);
 }
 
+.diagram-visual {
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: linear-gradient(180deg, #fffdf8, #f4efe6);
+  padding: 12px;
+}
+
 .teaching-media {
   width: 100%;
   border-radius: 18px;
