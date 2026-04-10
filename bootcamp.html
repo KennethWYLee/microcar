@@ -41,8 +41,8 @@
           </p>
           <div class="action-row">
             <a class="button primary" href="student-handout.html">先看學生講義</a>
-            <a class="button secondary" href="#thonny-visuals">看 Thonny 圖解</a>
-            <a class="button ghost" href="code-viewer.html?file=keyboard-car-control">查看今天的程式</a>
+            <a class="button secondary" href="#thonny-steps">看 20 步驟</a>
+            <a class="button ghost" href="#full-code">直接複製程式</a>
           </div>
         </div>
         <div class="subpage-aside">
@@ -244,40 +244,60 @@
 
       <section id="thonny-steps" class="section reveal">
         <div class="section-heading">
-          <p class="eyebrow">Thonny Steps</p>
-          <h2>先照這個順序操作 Thonny</h2>
-          <p>依照以下順序逐步操作，即可完成本堂課的基本連線與控制。</p>
+          <p class="eyebrow">20-step Route</p>
+          <h2>照著這 20 個步驟做，就能完成今天的課</h2>
+          <p>本堂課不需要先下載程式。學生只要在 Thonny 開一個新檔，從網頁複製完整程式貼上，再照著步驟操作即可。</p>
         </div>
-        <div class="page-grid">
-          <article class="content-card">
-            <h3>Step 1. 接上 USB 線</h3>
-            <ul class="detail-list">
-              <li>把 Raspberry Pi Pico 小車接到電腦。</li>
-                <li>請保持車子與電腦連線，不要任意拔除接線。</li>
-            </ul>
+        <div class="bootcamp-step-track">
+          <article class="bootcamp-step-card">
+            <span class="zone-badge teacher">Stage 1</span>
+            <h3>先把桌面準備好</h3>
+            <ol class="number-list" start="1">
+              <li>把小車放在平坦桌面或地面，避免一開始就撞出去。</li>
+              <li>確認電腦、滑鼠和小車都在自己看得到的位置。</li>
+              <li>把 USB 線接上 Raspberry Pi Pico 小車與電腦。</li>
+              <li>等老師確認每一組都連線成功。</li>
+            </ol>
           </article>
-          <article class="content-card">
-            <h3>Step 2. 打開 Thonny</h3>
-            <ul class="detail-list">
-              <li>右下角確認解譯器是 `MicroPython (Raspberry Pi Pico)`。</li>
-              <li>如果還沒選到，請跟著老師一起設定。</li>
-            </ul>
+          <article class="bootcamp-step-card">
+            <span class="zone-badge teacher">Stage 2</span>
+            <h3>打開 Thonny，建立新檔</h3>
+            <ol class="number-list" start="5">
+              <li>打開 `Thonny`。</li>
+              <li>看右下角是否為 `MicroPython (Raspberry Pi Pico)`。</li>
+              <li>如果不是，跟著老師一起切換解譯器。</li>
+              <li>按 `File > New` 建立新的 Python 檔。</li>
+            </ol>
           </article>
-          <article class="content-card">
-            <h3>Step 3. 開啟今天的程式</h3>
-            <ul class="detail-list">
-              <li>下載 `keyboard-car-control.py`。</li>
-              <li>在 Thonny 打開這份檔案。</li>
-              <li>按綠色 `Run` 執行。</li>
-            </ul>
+          <article class="bootcamp-step-card">
+            <span class="zone-badge student">Stage 3</span>
+            <h3>從網頁複製完整程式</h3>
+            <ol class="number-list" start="9">
+              <li>往下滑到「完整程式」區塊。</li>
+              <li>按下「複製完整程式」。</li>
+              <li>回到 Thonny，把整份程式貼到新檔裡。</li>
+              <li>按 `Ctrl + S`，存成 `keyboard_car.py`。</li>
+            </ol>
           </article>
-          <article class="content-card">
-            <h3>Step 4. 到 Shell 打字控制</h3>
-            <ul class="detail-list">
-              <li>在 Thonny 下方 `Shell` 輸入 `w` 後按 Enter。</li>
-              <li>要停車時輸入 `x` 後按 Enter。</li>
-              <li>如果車子不聽話，先輸入 `x`。</li>
-            </ul>
+          <article class="bootcamp-step-card">
+            <span class="zone-badge student">Stage 4</span>
+            <h3>執行並測試基本動作</h3>
+            <ol class="number-list" start="13">
+              <li>按綠色 `Run` 執行程式。</li>
+              <li>把滑鼠點到下方 `Shell`。</li>
+              <li>先輸入 `x` 後按 Enter，確認知道怎麼停車。</li>
+              <li>再依序輸入 `w`、`a`、`d`、`s` 測試動作。</li>
+            </ol>
+          </article>
+          <article class="bootcamp-step-card">
+            <span class="zone-badge student">Stage 5</span>
+            <h3>完成今天的小挑戰</h3>
+            <ol class="number-list" start="17">
+              <li>做完一個動作後，記得先按 `x` 停車。</li>
+              <li>完成 `w -> x`，確認前進與停止都成功。</li>
+              <li>完成 `w -> a -> x` 或 `w -> d -> x`。</li>
+              <li>能說出 `W / A / S / D / X` 各自代表的動作。</li>
+            </ol>
           </article>
         </div>
       </section>
@@ -407,6 +427,26 @@
               <p>學生先理解小車動作後，再閱讀 `if cmd == "w"` 這段，較容易建立對應關係。</p>
           </article>
         </div>
+      </section>
+
+      <section id="full-code" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Full Code</p>
+          <h2>完整程式在這裡，直接複製到 Thonny</h2>
+          <p>學生不需要先下載檔案。請在 Thonny 建立新檔後，直接從本頁複製整份程式貼上，再按 Run 執行。</p>
+        </div>
+        <div class="action-row">
+          <button id="bootcamp-copy-code" class="button primary" type="button">複製完整程式</button>
+          <a class="button secondary" href="code-viewer.html?file=keyboard-car-control">看可標註版本</a>
+          <a class="button ghost" href="#thonny-steps">回 20 步驟</a>
+        </div>
+        <article class="code-viewer-card">
+          <div class="code-toolbar">
+            <span class="download-type">BOOT CAMP CODE</span>
+            <span class="zone-badge teacher">直接貼到 Thonny</span>
+          </div>
+          <pre class="code-block"><code id="bootcamp-full-code">載入中...</code></pre>
+        </article>
       </section>
 
       <section id="code-walkthrough" class="section reveal">
@@ -549,8 +589,8 @@ while True:
       <section class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">Today Files</p>
-          <h2>今天真的要用到的檔案</h2>
-          <p>本堂課以一份主程式為主，其餘檔案作為補充或備課參考。</p>
+          <h2>今天不用先下載程式</h2>
+          <p>第一堂課以網頁上的完整程式為主。若要補充閱讀，再開其他頁面或備用檔案即可。</p>
         </div>
         <div class="download-grid compact-grid">
           <article class="download-card">
@@ -561,9 +601,9 @@ while True:
           </article>
           <article class="download-card">
             <span class="download-type">MAIN</span>
-            <h3>小車鍵盤控制範例</h3>
-              <p>本堂課的主程式，請先開啟此檔，再於 Thonny 執行。</p>
-            <a class="button primary block" href="code-viewer.html?file=keyboard-car-control">查看今天的程式</a>
+            <h3>完整程式頁</h3>
+              <p>本堂課的主程式可直接從網頁複製，不需要先下載檔案。</p>
+            <a class="button primary block" href="#full-code">前往完整程式</a>
           </article>
           <article class="download-card">
             <span class="download-type">EXTRA</span>
