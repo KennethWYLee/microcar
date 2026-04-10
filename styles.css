@@ -223,7 +223,7 @@ pre {
   grid-template-columns: 1.06fr 0.94fr;
   gap: 40px;
   padding: 72px 0 42px;
-  align-items: center;
+  align-items: start;
 }
 
 .hero-copy {
@@ -402,13 +402,31 @@ pre {
 
 .hero-visual {
   position: relative;
-  min-height: 640px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-content: start;
+  min-height: auto;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 34px;
+  background:
+    radial-gradient(circle at top right, rgba(28, 106, 137, 0.08), transparent 32%),
+    linear-gradient(180deg, rgba(255, 252, 247, 0.98), rgba(245, 237, 225, 0.94));
+  box-shadow: var(--shadow);
+}
+
+.hero-visual::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border-radius: 26px;
+  border: 1px dashed rgba(20, 32, 43, 0.08);
+  pointer-events: none;
 }
 
 .orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(1px);
+  display: none;
 }
 
 .orb-a {
@@ -426,40 +444,55 @@ pre {
 }
 
 .photo-card {
-  position: absolute;
+  position: relative;
   overflow: hidden;
-  padding: 18px;
-  border-radius: 32px;
-  background: linear-gradient(180deg, rgba(255, 253, 249, 0.98), rgba(246, 237, 224, 0.86));
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  box-shadow: var(--shadow-lg);
+  padding: 16px;
+  border-radius: 26px;
+  background: linear-gradient(180deg, rgba(255, 254, 251, 0.98), rgba(246, 239, 229, 0.9));
+  border: 1px solid rgba(20, 32, 43, 0.08);
+  box-shadow: var(--shadow-sm);
 }
 
 .photo-board {
-  top: 0;
-  right: 0;
-  width: min(100%, 420px);
+  grid-column: 1 / -1;
 }
 
 .photo-mechanism {
-  left: 0;
-  bottom: 34px;
-  width: min(72%, 320px);
+  grid-column: 1 / 2;
 }
 
 .signal-card {
-  position: absolute;
-  right: 24px;
-  bottom: 6px;
-  width: min(76%, 340px);
+  position: relative;
+  grid-column: 2 / 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 20px 22px;
+  border-radius: 26px;
+  border: 1px solid rgba(20, 32, 43, 0.08);
   background: linear-gradient(180deg, rgba(255, 252, 248, 0.96), rgba(234, 244, 255, 0.92));
+  box-shadow: var(--shadow-sm);
 }
 
 .signal-card strong {
   display: block;
   margin: 4px 0 10px;
   font-size: 1.18rem;
+}
+
+.photo-card img {
+  width: 100%;
+  object-fit: contain;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.photo-board img {
+  aspect-ratio: 16 / 9;
+}
+
+.photo-mechanism img {
+  aspect-ratio: 4 / 3;
 }
 
 .section {
@@ -1282,7 +1315,7 @@ pre {
   }
 
   .hero-visual {
-    min-height: 560px;
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1326,25 +1359,6 @@ pre {
 
   .keys-board {
     max-width: none;
-  }
-
-  .hero-visual {
-    min-height: 520px;
-  }
-
-  .photo-board {
-    right: 10px;
-    width: 88%;
-  }
-
-  .photo-mechanism {
-    width: 60%;
-    bottom: 96px;
-  }
-
-  .signal-card {
-    inset: auto 12px 0 12px;
-    width: auto;
   }
 
   .site-footer {
