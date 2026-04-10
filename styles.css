@@ -504,6 +504,21 @@ button.button {
   line-height: 1.75;
 }
 
+.tool-focus-card {
+  display: grid;
+  gap: 14px;
+}
+
+.tool-link-row {
+  align-items: flex-start;
+}
+
+.tool-note {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
 .text-link {
   color: var(--navy);
   font-weight: 700;
@@ -1133,7 +1148,8 @@ pre code {
   overflow: hidden;
   border: 1px solid rgba(21, 36, 51, 0.1);
   border-radius: 18px;
-  background: #f8fafc;
+  background: #f6f6f2;
+  box-shadow: 0 12px 28px rgba(31, 43, 58, 0.08);
 }
 
 .thonny-topbar,
@@ -1147,8 +1163,8 @@ pre code {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #e8f6ff;
-  background: #223547;
+  color: #f4f8f1;
+  background: linear-gradient(180deg, #70866d, #5f745c);
 }
 
 .thonny-topbar strong {
@@ -1160,7 +1176,7 @@ pre code {
   width: 10px;
   height: 10px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.45);
 }
 
 .thonny-toolbar {
@@ -1168,7 +1184,7 @@ pre code {
   flex-wrap: wrap;
   gap: 8px;
   border-bottom: 1px solid rgba(21, 36, 51, 0.08);
-  background: rgba(255, 255, 255, 0.92);
+  background: #ececec;
 }
 
 .ui-pill {
@@ -1179,13 +1195,14 @@ pre code {
   border-radius: 999px;
   font-family: "IBM Plex Mono", monospace;
   font-size: 0.78rem;
-  color: var(--muted);
-  background: rgba(29, 79, 122, 0.08);
+  color: #3d4d5b;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(61, 77, 91, 0.12);
 }
 
 .ui-pill.active {
   color: white;
-  background: linear-gradient(135deg, var(--navy), var(--teal));
+  background: linear-gradient(135deg, #3c8b49, #67ab64);
 }
 
 .thonny-editor,
@@ -1205,6 +1222,10 @@ pre code {
   line-height: 1.7;
 }
 
+.thonny-editor {
+  background: linear-gradient(180deg, #fff8cc, #fffdf0);
+}
+
 .code-surface {
   font-family: "IBM Plex Mono", monospace;
   font-size: 0.86rem;
@@ -1215,8 +1236,9 @@ pre code {
 .thonny-shell {
   font-family: "IBM Plex Mono", monospace;
   font-size: 0.9rem;
-  color: #d8f4ff;
-  background: #152433;
+  color: #1d2f41;
+  background: #fffdfb;
+  border-top: 1px solid rgba(21, 36, 51, 0.08);
 }
 
 .thonny-shell span {
