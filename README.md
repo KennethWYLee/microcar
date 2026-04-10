@@ -1,5 +1,9 @@
 # 機器人程式設計教學站
 
+網站連結：
+- [GitHub Pages 網站](https://kennethwylee.github.io/microcar/)
+- [GitHub Repository](https://github.com/KennethWYLee/microcar)
+
 這個專案是一個以 `機器人` 課程教材為基礎整理而成的教學網站，主題聚焦在小車程式、感測器互動、馬達控制與機構整合。  
 網站不是單純把原始教材上傳，而是重新整理成更適合教學與自學的形式。
 
