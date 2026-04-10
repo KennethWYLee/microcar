@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="home-page">
   <div class="page-shell">
     <header class="site-header">
       <a class="brand" href="index.html">
@@ -84,6 +84,39 @@
         </div>
       </section>
 
+      <section class="section product-band reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Product Overview</p>
+          <h2>一個網站，同時支援上課、自學、備課。</h2>
+          <p>首頁先幫你把最常用的三條路整理好。老師可以快速備課，學生可以直接開任務，第一堂課也能立刻開始。</p>
+        </div>
+        <div class="product-rail">
+          <article class="product-panel product-primary">
+            <span class="zone-badge teacher">Boot Camp</span>
+            <h3>60 分鐘快速開課</h3>
+            <p>最適合五月那堂國中生體驗課。直接帶學生完成連線、打字控制、五個基本動作。</p>
+            <div class="chip-list compact">
+              <span>1 小時</span>
+              <span>5 個指令</span>
+              <span>Thonny</span>
+            </div>
+            <a class="button primary" href="bootcamp.html">進入 Boot Camp</a>
+          </article>
+          <article class="product-panel product-teacher">
+            <span class="zone-badge teacher">Teacher Zone</span>
+            <h3>老師的授課控制台</h3>
+            <p>把課前準備、下載順序、完成線和延伸方向都整理好，讓你上課時更穩。</p>
+            <a class="button ghost" href="teacher-zone.html">前往教師區</a>
+          </article>
+          <article class="product-panel product-student">
+            <span class="zone-badge student">Student Zone</span>
+            <h3>學生的任務地圖</h3>
+            <p>用更容易理解的方式，把按鍵、動作、短程式和第一個挑戰排成一條線。</p>
+            <a class="button secondary" href="student-zone.html">前往學生區</a>
+          </article>
+        </div>
+      </section>
+
       <section id="may-course" class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">1 小時 Boot Camp</p>
@@ -97,7 +130,7 @@
           <a class="button primary" href="bootcamp.html">進入完整 Boot Camp 頁</a>
         </div>
 
-        <div class="bootcamp-grid">
+        <div class="bootcamp-grid bootcamp-home-grid">
           <article class="bootcamp-card feature-card">
             <span class="zone-badge teacher">Boot Camp Snapshot</span>
             <h3>課程定位</h3>
@@ -109,7 +142,7 @@
             </ul>
           </article>
 
-          <article class="bootcamp-card">
+          <article class="bootcamp-card product-spotlight">
             <span class="zone-badge teacher">60-min Plan</span>
             <h3>建議節奏</h3>
             <div class="timeline">

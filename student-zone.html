@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="student-page">
   <div class="page-shell">
     <header class="site-header">
       <a class="brand" href="index.html">
@@ -56,6 +56,34 @@
               <li>知道 `W / A / S / D / X` 代表什麼動作。</li>
               <li>知道 `X` 是停止，遇到狀況要先停車。</li>
             </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section student-mission-board reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Mission Board</p>
+          <h2>學生先完成這 3 個任務就很棒</h2>
+          <p>這個區塊改成更像任務板的視覺，讓國中生一眼就知道現在該做什麼、下一步是什麼，不會被太多資訊嚇到。</p>
+        </div>
+        <div class="student-mission-track">
+          <article class="student-mission-tile student-mission-start">
+            <span class="zone-badge student">Mission 1</span>
+            <h3>接好車子</h3>
+            <p>先把 Raspberry Pi Pico 小車接上電腦，確認 Thonny 看得到它。</p>
+            <a class="button ghost block" href="bootcamp.html#thonny-steps">先看 Thonny 步驟</a>
+          </article>
+          <article class="student-mission-tile">
+            <span class="zone-badge student">Mission 2</span>
+            <h3>記住 5 個按鍵</h3>
+            <p>先認識 `W / A / S / D / X`，知道每一個按鍵要讓車子做什麼。</p>
+            <a class="button secondary block" href="#student-missions">看按鍵動作</a>
+          </article>
+          <article class="student-mission-tile">
+            <span class="zone-badge student">Mission 3</span>
+            <h3>讓車子動起來</h3>
+            <p>先跟著老師操作，不用一次把全部程式背起來，只要會前進、轉向、停止就成功了。</p>
+            <a class="button primary block" href="code-viewer.html?file=keyboard-car-control">直接看程式</a>
           </article>
         </div>
       </section>

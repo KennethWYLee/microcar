@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="bootcamp-page">
   <div class="page-shell">
     <header class="site-header">
       <a class="brand" href="index.html">
@@ -64,44 +64,60 @@
       <section class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">60-min Route</p>
-          <h2>1 小時可以怎麼學</h2>
-          <p>今天的版本先求穩定和成功感。你只要會控制小車，就已經完成這堂課最重要的目標。</p>
+          <h2>把 1 小時課程拆成 4 個明確階段</h2>
+          <p>這一段改成更像教學流程圖的版本。你可以把它想成：老師先示範，學生再跟著做，每一段都有清楚的完成線。</p>
         </div>
-        <div class="page-grid">
-          <article class="content-card">
-            <span class="zone-badge student">0-10 分鐘</span>
-            <h3>先把電腦和小車連起來</h3>
+        <div class="flow-stage-grid">
+          <article class="flow-stage-card flow-connect">
+            <div class="flow-stage-top">
+              <span class="flow-no">01</span>
+              <span class="flow-time">0-10 分鐘</span>
+            </div>
+            <h3>連線成功</h3>
+            <p>先讓每一組都把電腦和小車接好，這是整堂課最重要的起點。</p>
             <ul class="detail-list">
-              <li>把 USB 線接好。</li>
-              <li>打開 `Thonny`。</li>
-              <li>確認老師的車和你的車都能被電腦看到。</li>
+              <li>老師做：示範 USB 線和 Thonny 的位置。</li>
+              <li>學生做：確認自己的車有成功連上。</li>
+              <li>完成線：知道等一下要在哪裡輸入指令。</li>
             </ul>
           </article>
-          <article class="content-card">
-            <span class="zone-badge student">10-20 分鐘</span>
-            <h3>先看老師示範一次</h3>
+          <article class="flow-stage-card flow-demo">
+            <div class="flow-stage-top">
+              <span class="flow-no">02</span>
+              <span class="flow-time">10-20 分鐘</span>
+            </div>
+            <h3>老師示範</h3>
+            <p>老師先打給學生看，讓大家把按鍵和動作直接連起來。</p>
             <ul class="detail-list">
-              <li>看老師在 `Thonny Shell` 輸入 `w / a / s / d / x`。</li>
-              <li>看懂每個字母對應什麼動作。</li>
-              <li>先記住 `x` 是停止。</li>
+              <li>老師做：在 Thonny Shell 輸入 `w / a / s / d / x`。</li>
+              <li>學生做：口頭說出每個字母控制什麼。</li>
+              <li>完成線：知道 `x` 是停止鍵。</li>
             </ul>
           </article>
-          <article class="content-card">
-            <span class="zone-badge student">20-40 分鐘</span>
-            <h3>換你自己操作</h3>
+          <article class="flow-stage-card flow-practice">
+            <div class="flow-stage-top">
+              <span class="flow-no">03</span>
+              <span class="flow-time">20-40 分鐘</span>
+            </div>
+            <h3>輪流操作</h3>
+            <p>每個學生都要真的摸到一次操作，不只是看老師演示。</p>
             <ul class="detail-list">
-              <li>先試 `w` 和 `x`。</li>
-              <li>再試 `a`、`d` 和 `s`。</li>
-              <li>每做完一個動作，都記得讓小車停下來。</li>
+              <li>老師做：提醒每做完一個動作先停車。</li>
+              <li>學生做：依序試 `w`、`a`、`s`、`d`、`x`。</li>
+              <li>完成線：每個人都能讓車子成功動一次。</li>
             </ul>
           </article>
-          <article class="content-card">
-            <span class="zone-badge student">40-60 分鐘</span>
-            <h3>完成小挑戰</h3>
+          <article class="flow-stage-card flow-finish">
+            <div class="flow-stage-top">
+              <span class="flow-no">04</span>
+              <span class="flow-time">40-60 分鐘</span>
+            </div>
+            <h3>完成任務</h3>
+            <p>最後用一個簡單小挑戰收尾，讓學生有完成感。</p>
             <ul class="detail-list">
-              <li>讓小車完成「前進、左轉、停止」。</li>
-              <li>讓小車完成「前進、右轉、後退、停止」。</li>
-              <li>最後說出每個字母控制什麼動作。</li>
+              <li>老師做：出一段簡單動作題。</li>
+              <li>學生做：完成「前進、左轉、停止」或「前進、右轉、後退、停止」。</li>
+              <li>完成線：能說出 `W / A / S / D / X` 對應的動作。</li>
             </ul>
           </article>
         </div>
@@ -173,6 +189,31 @@
               <li>先會 `w` 和 `x`，就已經很厲害。</li>
               <li>操作完一個動作，最好先停車再換下一個動作。</li>
             </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Teaching Sequence</p>
+          <h2>老師從上到下，可以這樣帶</h2>
+          <p>如果你要現場投影帶讀，建議先走這一條教學順序。每一步都只講一個重點，學生比較跟得上。</p>
+        </div>
+        <div class="product-rail lesson-sequence-rail">
+          <article class="product-panel product-primary">
+            <span class="zone-badge teacher">Step A</span>
+            <h3>先講操作，不先講理論</h3>
+            <p>先讓學生看到車子會動，再回來解釋函式和指令，成功感會高很多。</p>
+          </article>
+          <article class="product-panel product-teacher">
+            <span class="zone-badge teacher">Step B</span>
+            <h3>先讀主程式的前半段</h3>
+            <p>從匯入模組、設定腳位、`stop()` 和 `forward()` 開始，就很夠用了。</p>
+          </article>
+          <article class="product-panel product-student">
+            <span class="zone-badge student">Step C</span>
+            <h3>最後才看按鍵對應</h3>
+            <p>等學生先知道小車有哪些動作，再讀 `if cmd == "w"` 這段會更好懂。</p>
           </article>
         </div>
       </section>
