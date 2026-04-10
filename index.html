@@ -166,6 +166,38 @@
         </div>
 
         <div class="teacher-grid">
+          <article class="teacher-card teacher-card-wide path-card">
+            <span class="zone-badge teacher">Teacher Path</span>
+            <h3>老師點進來後，建議先照這個順序走</h3>
+            <div class="path-steps">
+              <div class="path-step">
+                <strong>Step 1</strong>
+                <p>先看上方的 `1 小時 Boot Camp`，確認這堂課的時間、目標和材料。</p>
+              </div>
+              <div class="path-step">
+                <strong>Step 2</strong>
+                <p>先下載 `1 小時授課建議(Teaching Plan)`，用它決定這堂課要帶到哪裡就好。</p>
+              </div>
+              <div class="path-step">
+                <strong>Step 3</strong>
+                <p>上課示範時，先用 `小車鍵盤控制範例(Keyboard Control)` 帶學生看懂動作。</p>
+              </div>
+              <div class="path-step">
+                <strong>Step 4</strong>
+                <p>接著再打開 `馬達基本函式(Basic Motor Functions)`，讓學生理解函式和方向的關係。</p>
+              </div>
+              <div class="path-step">
+                <strong>Step 5</strong>
+                <p>最後才用 `距離感測範例(Distance Sensor)` 帶入 if 判斷和感測器反應。</p>
+              </div>
+            </div>
+            <div class="action-row">
+              <a class="button primary" href="#may-course">先看 Boot Camp</a>
+              <a class="button secondary" href="#download-teaching-plan">先下載教學建議</a>
+              <a class="button ghost" href="#download-keyboard">第一個示範程式</a>
+            </div>
+          </article>
+
           <article class="teacher-card teacher-card-wide">
             <span class="zone-badge teacher">Learning Outcomes</span>
             <h3>建議學習目標</h3>
@@ -221,7 +253,35 @@
           </p>
         </div>
 
-        <div class="student-grid">
+        <article class="student-start-card">
+          <span class="zone-badge student">Student Path</span>
+          <h3>學生進來後，就照這 4 步做</h3>
+          <div class="student-path-grid">
+            <div class="student-path-step">
+              <strong>1. 先認識動作</strong>
+              <p>先看前進、後退、左轉、右轉、停止，不急著記全部程式。</p>
+            </div>
+            <div class="student-path-step">
+              <strong>2. 再看短程式</strong>
+              <p>先看 `forward()`、`turn_left()` 這些小積木，知道它們代表什麼。</p>
+            </div>
+            <div class="student-path-step">
+              <strong>3. 下載第一份程式</strong>
+              <p>先下載 `小車鍵盤控制範例`，跟著老師或網站一步一步試。</p>
+            </div>
+            <div class="student-path-step">
+              <strong>4. 做第一個挑戰</strong>
+              <p>再挑戰 `距離感測範例`，看看不同距離為什麼會有不同反應。</p>
+            </div>
+          </div>
+          <div class="action-row">
+            <a class="button secondary" href="#student-missions">先看任務</a>
+            <a class="button primary" href="#download-keyboard">下載第一份程式</a>
+            <a class="button ghost" href="#download-sensor">挑戰感測器</a>
+          </div>
+        </article>
+
+        <div id="student-missions" class="student-grid">
           <article class="student-card mission-card">
             <span class="zone-badge student">任務 1</span>
             <h3>認識 5 個基本動作</h3>
@@ -257,6 +317,7 @@
               <span>改距離</span>
               <span>改方向</span>
             </div>
+            <p class="mission-next">下一步：先下載 `小車鍵盤控制範例`，把一個按鍵對應的動作改掉試試看。</p>
           </article>
         </div>
 
@@ -308,28 +369,28 @@ else:
         </div>
 
         <div class="download-grid">
-          <article class="download-card">
+          <article id="download-teaching-plan" class="download-card">
             <span class="download-type">TXT</span>
             <h3>1 小時授課建議(Teaching Plan)</h3>
             <p>給老師快速掌握這一堂課的節奏、目標與提醒。</p>
             <a class="button primary block" href="downloads/one-hour-bootcamp-teaching-plan.txt">下載教學建議</a>
           </article>
 
-          <article class="download-card">
+          <article id="download-keyboard" class="download-card">
             <span class="download-type">PY</span>
             <h3>小車鍵盤控制範例(Keyboard Control)</h3>
             <p>用最直覺的方式理解指令和動作的關係。</p>
             <a class="button secondary block" href="downloads/keyboard-car-control.py">下載程式</a>
           </article>
 
-          <article class="download-card">
+          <article id="download-motor" class="download-card">
             <span class="download-type">PY</span>
             <h3>馬達基本函式(Basic Motor Functions)</h3>
             <p>前進、後退、左轉、右轉的入門函式版本。</p>
             <a class="button secondary block" href="downloads/basic-motor-functions.py">下載程式</a>
           </article>
 
-          <article class="download-card">
+          <article id="download-sensor" class="download-card">
             <span class="download-type">PY</span>
             <h3>距離感測範例(Distance Sensor)</h3>
             <p>讀取距離並改變 RGB 顏色，適合講 `if` 判斷。</p>
