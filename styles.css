@@ -493,6 +493,12 @@ pre {
   margin-bottom: 18px;
 }
 
+.teacher-dashboard {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 18px;
+}
+
 .zone-card {
   padding: 22px 24px;
 }
@@ -503,6 +509,89 @@ pre {
 
 .student-zone-card {
   background: linear-gradient(180deg, rgba(255, 242, 226, 0.94), rgba(255, 251, 246, 0.92));
+}
+
+.teacher-panel,
+.student-hero-card,
+.student-path-panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.teacher-panel {
+  padding: 24px 26px;
+  background:
+    radial-gradient(circle at top right, rgba(28, 106, 137, 0.12), transparent 28%),
+    linear-gradient(180deg, rgba(247, 251, 255, 0.98), rgba(240, 246, 252, 0.95));
+}
+
+.teacher-panel-main {
+  grid-row: span 2;
+  background:
+    radial-gradient(circle at top right, rgba(18, 67, 87, 0.14), transparent 30%),
+    linear-gradient(180deg, rgba(245, 250, 255, 0.98), rgba(231, 240, 250, 0.96));
+}
+
+.teacher-panel h3,
+.student-hero-card h3,
+.student-path-panel h3 {
+  margin: 0 0 10px;
+  line-height: 1.35;
+}
+
+.teacher-panel p,
+.teacher-level-card p,
+.teacher-metric span,
+.teacher-timeline-item span,
+.student-hero-card p,
+.student-path-panel p {
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.teacher-checklist {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0 0;
+  padding-left: 18px;
+}
+
+.teacher-checklist li {
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.teacher-timeline,
+.teacher-metrics {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.teacher-timeline-item,
+.teacher-metric,
+.teacher-level-card {
+  padding: 16px 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(20, 32, 43, 0.08);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: var(--shadow-sm);
+}
+
+.teacher-timeline-item strong,
+.teacher-level-card strong,
+.teacher-metric strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--primary-deep);
+}
+
+.teacher-level-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 14px;
 }
 
 .zone-badge {
@@ -520,11 +609,75 @@ pre {
   letter-spacing: 0.04em;
 }
 
+.zone-badge-teacher {
+  background: linear-gradient(135deg, rgba(28, 106, 137, 0.18), #fff);
+}
+
+.zone-badge-student {
+  background: linear-gradient(135deg, rgba(226, 127, 52, 0.18), #fff);
+}
+
 .zone-links {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
   margin-top: 14px;
+}
+
+.student-hero-card {
+  margin-bottom: 18px;
+  padding: 24px;
+  background:
+    radial-gradient(circle at top left, rgba(226, 127, 52, 0.14), transparent 28%),
+    linear-gradient(180deg, rgba(255, 249, 241, 0.98), rgba(255, 241, 224, 0.96));
+}
+
+.student-skill-row,
+.student-mission-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.student-skill-row {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 16px;
+}
+
+.student-skill-row span {
+  display: grid;
+  place-items: center;
+  min-height: 64px;
+  padding: 12px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(226, 127, 52, 0.12);
+  color: var(--primary-deep);
+  font-weight: 900;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.student-mission-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.student-mission-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  background:
+    radial-gradient(circle at top right, rgba(226, 127, 52, 0.12), transparent 30%),
+    linear-gradient(180deg, rgba(255, 250, 243, 0.98), rgba(255, 239, 219, 0.94));
+}
+
+.student-mission-card .button {
+  align-self: start;
+}
+
+.student-path-panel {
+  padding: 22px 24px;
+  background: linear-gradient(180deg, rgba(255, 252, 247, 0.98), rgba(249, 243, 235, 0.94));
 }
 
 .path-list {
@@ -1012,7 +1165,10 @@ pre {
   .guide-grid,
   .role-grid,
   .zone-grid,
+  .teacher-dashboard,
   .student-learn-grid,
+  .student-mission-grid,
+  .student-skill-row,
   .path-list,
   .overview-grid,
   .teaching-grid,
@@ -1055,7 +1211,10 @@ pre {
   .hero-stats,
   .role-grid,
   .zone-grid,
+  .teacher-dashboard,
   .student-learn-grid,
+  .student-mission-grid,
+  .student-skill-row,
   .path-list,
   .guide-grid,
   .overview-grid,

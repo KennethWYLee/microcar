@@ -104,38 +104,83 @@
       <section id="teacher-zone" class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">教師區 Teacher Zone</p>
-          <h2>老師可以從這裡直接帶課，先講概念，再帶程式，再做實作。</h2>
+          <h2>給老師使用的授課控制台，聚焦備課、節奏安排與學習成果。</h2>
           <p>
-            教師區把備課、投影片使用、課堂示範與課後延伸放在一起，方便老師快速找到「這一節要怎麼教」。
+            教師區改成較專業的備課版面。老師可以先確認學習目標，再看課堂節奏、差異化教學與形成性評量(Formative Assessment) 的安排。
           </p>
         </div>
 
-        <div class="zone-grid teacher-zone-grid">
-          <article class="zone-card teacher-zone-card">
-            <span class="zone-badge">課前準備(Prepare)</span>
-            <h3>先選教材，再決定這節只教一個控制重點。</h3>
-            <p>建議先從 LED、按鈕(Button) 或單一小車動作開始，不要一次塞太多概念給初學者。</p>
-            <div class="zone-links">
-              <a class="text-link" href="#downloads">先下載簡報</a>
-              <a class="text-link" href="#lessons">看單元地圖</a>
+        <div class="teacher-dashboard">
+          <article class="teacher-panel teacher-panel-main">
+            <span class="zone-badge zone-badge-teacher">學習目標(Learning Outcomes)</span>
+            <h3>建議把每節課的學習成果收斂成「看得懂、說得出、改得動」三層。</h3>
+            <p>對國小與國中階段而言，最重要的不只是完成作品，而是能說出一個指令如何變成一個動作，並且願意自己改一個條件或參數。</p>
+            <ul class="teacher-checklist">
+              <li>能說出輸入(Input)、判斷(Condition)、輸出(Output) 的關係。</li>
+              <li>能辨認 `forward()`、`turn_left()`、`stop()` 這類函式的用途。</li>
+              <li>能把感測器結果和 `if / elif / else` 對應起來。</li>
+              <li>能修改一個速度、距離或方向設定，觀察小車反應。</li>
+            </ul>
+          </article>
+
+          <article class="teacher-panel">
+            <span class="zone-badge zone-badge-teacher">授課節奏(Pacing)</span>
+            <h3>建議採用 4 段式教學流程。</h3>
+            <div class="teacher-timeline">
+              <div class="teacher-timeline-item">
+                <strong>導入 5 分鐘</strong>
+                <span>先用圖解建立今天只學一個重點。</span>
+              </div>
+              <div class="teacher-timeline-item">
+                <strong>示範 8 分鐘</strong>
+                <span>對照圖解與範例程式做投影說明。</span>
+              </div>
+              <div class="teacher-timeline-item">
+                <strong>實作 12 分鐘</strong>
+                <span>讓學生打一次，並改一個小地方。</span>
+              </div>
+              <div class="teacher-timeline-item">
+                <strong>回饋 5 分鐘</strong>
+                <span>請學生口頭說出程式和動作的對應。</span>
+              </div>
             </div>
           </article>
-          <article class="zone-card teacher-zone-card">
-            <span class="zone-badge">課堂帶領(Teaching Flow)</span>
-            <h3>先看圖解，再示範程式，最後讓學生自己改。</h3>
-            <p>對國小與國中學生來說，先理解「指令會讓車做什麼」比先背語法更重要。</p>
-            <div class="zone-links">
-              <a class="text-link" href="#illustrations">進入圖解學習</a>
-              <a class="text-link" href="#code">對照程式練習</a>
+
+          <article class="teacher-panel">
+            <span class="zone-badge zone-badge-teacher">差異化教學(Differentiation)</span>
+            <h3>同一份教材可以分成國小版與國中版兩種要求。</h3>
+            <div class="teacher-level-grid">
+              <div class="teacher-level-card">
+                <strong>國小版本(Elementary)</strong>
+                <p>重點放在認識動作、模仿程式、改一個數字，不強求完整語法解釋。</p>
+              </div>
+              <div class="teacher-level-card">
+                <strong>國中版本(Junior High)</strong>
+                <p>可以進一步討論函式封裝、條件分支、資料流與感測器回饋邏輯。</p>
+              </div>
             </div>
           </article>
-          <article class="zone-card teacher-zone-card">
-            <span class="zone-badge">課後延伸(Extend)</span>
-            <h3>讓學生回家重做一次，並修改一個條件或一個動作。</h3>
-            <p>只要學生願意自己改速度、方向或感測距離，就已經開始建立真正的程式思維。</p>
+
+          <article class="teacher-panel">
+            <span class="zone-badge zone-badge-teacher">評量建議(Assessment)</span>
+            <h3>用簡短、可觀察的任務檢查學生是否真的理解。</h3>
+            <div class="teacher-metrics">
+              <div class="teacher-metric">
+                <strong>口語解釋</strong>
+                <span>請學生說明按下按鍵後，小車為什麼會這樣動。</span>
+              </div>
+              <div class="teacher-metric">
+                <strong>程式修改</strong>
+                <span>請學生改一個距離門檻或一個動作函式。</span>
+              </div>
+              <div class="teacher-metric">
+                <strong>實機展示</strong>
+                <span>請學生讓小車完成一個指定動作或避障反應。</span>
+              </div>
+            </div>
             <div class="zone-links">
-              <a class="text-link" href="#student-zone">查看學生自學路線</a>
-              <a class="text-link" href="#downloads">下載補充教材</a>
+              <a class="text-link" href="#illustrations">使用圖解學習區</a>
+              <a class="text-link" href="#downloads">下載教師教材</a>
             </div>
           </article>
         </div>
@@ -144,42 +189,59 @@
       <section id="student-zone" class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">學生區 Student Zone</p>
-          <h2>學生可以照這個順序學，不需要一次看懂全部。</h2>
+          <h2>這一區改成國小也能接受的版本，先玩懂，再慢慢學會。</h2>
           <p>
-            如果你是第一次學小車程式，沒關係。先看懂圖，再照著打一小段程式，最後自己改一個地方就很好了。
+            如果你是第一次學小車程式，沒關係。你現在不用一次學很多，也不用一開始就把所有英文都背起來。
+            只要先知道「按哪個鍵，小車會做什麼」，你就已經開始會寫程式了。
           </p>
         </div>
 
-        <div class="student-learn-grid">
-          <article class="zone-card student-zone-card">
-            <span class="zone-badge">Step 1</span>
-            <h3>先看圖，知道每個指令代表什麼。</h3>
-            <p>把前進、後退、左轉、右轉、停止這五個動作先認熟，小車程式就不會那麼可怕。</p>
+        <div class="student-hero-card">
+          <p class="mini-label">給小朋友的學習方式(Learn Like a Game)</p>
+          <h3>你只要完成 3 個小任務，就會開始懂小車程式。</h3>
+          <div class="student-skill-row">
+            <span>看得懂動作</span>
+            <span>打得出程式</span>
+            <span>改得動一點點</span>
+          </div>
+        </div>
+
+        <div class="student-mission-grid">
+          <article class="zone-card student-zone-card student-mission-card">
+            <span class="zone-badge zone-badge-student">任務 1</span>
+            <h3>先認識 5 個小車動作。</h3>
+            <p>先記住前進、後退、左轉、右轉、停止。你不用急著記英文，只要知道每個動作長什麼樣子就可以了。</p>
+            <a class="button secondary" href="#illustrations">去看動作圖解</a>
           </article>
-          <article class="zone-card student-zone-card">
-            <span class="zone-badge">Step 2</span>
-            <h3>跟著打一段程式，不要只用看。</h3>
-            <p>只要你真的動手打一次，程式裡的 `if`、`while` 和函式(Function) 就會開始變得有感覺。</p>
+          <article class="zone-card student-zone-card student-mission-card">
+            <span class="zone-badge zone-badge-student">任務 2</span>
+            <h3>跟著打一小段程式。</h3>
+            <p>只要把一小段範例程式打進去，小車真的動起來，你就會發現程式其實沒有想像中那麼難。</p>
+            <a class="button secondary" href="#code">去看範例程式</a>
           </article>
-          <article class="zone-card student-zone-card">
-            <span class="zone-badge">Step 3</span>
-            <h3>自己改一個小地方，觀察會發生什麼。</h3>
-            <p>你可以改速度、改方向、改感測距離，這些微小改動就是學會寫程式的開始。</p>
+          <article class="zone-card student-zone-card student-mission-card">
+            <span class="zone-badge zone-badge-student">任務 3</span>
+            <h3>改一個地方，看看會發生什麼。</h3>
+            <p>你可以改速度、改方向、改感測距離。只要你敢改，你就在學真正的程式設計。</p>
+            <a class="button secondary" href="#downloads">下載回家練習</a>
           </article>
         </div>
 
-        <div class="path-list" aria-label="學生自學路線">
-          <div class="path-step">
-            <strong>看圖解學習</strong>
-            <span>先理解動作和流程</span>
-          </div>
-          <div class="path-step">
-            <strong>看程式練習</strong>
-            <span>照著打一段範例</span>
-          </div>
-          <div class="path-step">
-            <strong>下載教材</strong>
-            <span>回家複習或補看簡報</span>
+        <div class="student-path-panel" aria-label="學生自學路線">
+          <h3>我的自學路線(My Learning Path)</h3>
+          <div class="path-list">
+            <div class="path-step">
+              <strong>先看圖</strong>
+              <span>先理解指令和動作</span>
+            </div>
+            <div class="path-step">
+              <strong>再打程式</strong>
+              <span>照著範例打一遍</span>
+            </div>
+            <div class="path-step">
+              <strong>自己小修改</strong>
+              <span>改一個數字或一個方向</span>
+            </div>
           </div>
         </div>
       </section>
