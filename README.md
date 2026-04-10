@@ -1,11 +1,11 @@
-# 循跡小車入門教學站
+# Raspberry Pi Pico 循跡小車教學站
 
 網站連結：
 
 - [GitHub Pages 網站](https://kennethwylee.github.io/microcar/)
 - [GitHub Repository](https://github.com/KennethWYLee/microcar)
 
-這個專案是一個以機器人課程教材為基礎重新整理的教學網站，主題聚焦在「循跡小車的初階教學」。
+這個專案是一個以機器人課程教材為基礎重新整理的教學網站，主題聚焦在 `Raspberry Pi Pico` 循跡小車的初階教學。
 
 網站不是把原始教材直接堆上來，而是重新篩選成適合老師授課、也適合學生自學的版本。  
 目前教學主線先聚焦在：
@@ -15,7 +15,7 @@
 - 條件判斷(Condition)
 - 入門程式邏輯(Beginner Logic)
 
-藍牙遙控(Bluetooth Control) 等內容目前視為後續進階案例，不放在第一階段首頁主線。
+藍牙遙控(Bluetooth Control) 等內容目前視為後續進階案例，不放在第一階段 `Raspberry Pi Pico` 主線首頁。
 
 ## 這個網站適合誰
 
