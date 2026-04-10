@@ -32,6 +32,21 @@
 
 這樣的設計是為了讓首頁保持清楚，不把內部設計訊息或與主線無關的素材塞進首頁。
 
+## 目前網站結構
+
+網站現在不是只有首頁，而是：
+
+- `index.html`
+  首頁入口，提供四個主題的概覽。
+- `bootcamp.html`
+  1 小時 Boot Camp 的完整教學頁。
+- `teacher-zone.html`
+  教師區完整頁。
+- `student-zone.html`
+  學生區完整頁。
+- `downloads.html`
+  下載區完整頁，並依使用順序整理檔案。
+
 ## 內容特色
 
 ### 1. 1 小時 Boot Camp
@@ -84,9 +99,13 @@ microcar/
 ├─ archive/
 │  ├─ legacy-extra-packages/
 │  └─ legacy-smart-fan/
+├─ bootcamp.html
+├─ downloads.html
 ├─ index.html
 ├─ styles.css
 ├─ script.js
+├─ student-zone.html
+├─ teacher-zone.html
 ├─ README.md
 ├─ WEB_DESIGN_PROGRESS.md
 ├─ .nojekyll
