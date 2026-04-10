@@ -950,6 +950,159 @@ pre code {
     linear-gradient(180deg, rgba(242, 181, 68, 0.14), rgba(255, 255, 255, 0.98));
 }
 
+.handout-page .subpage-hero {
+  background:
+    radial-gradient(circle at top left, rgba(242, 181, 68, 0.18), transparent 26%),
+    linear-gradient(180deg, rgba(255, 250, 240, 0.96), rgba(255, 255, 255, 0.98));
+}
+
+.handout-grid,
+.check-grid,
+.troubleshoot-grid,
+.thonny-visual-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.handout-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.check-grid,
+.troubleshoot-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.check-card,
+.troubleshoot-card,
+.thonny-visual-card {
+  display: grid;
+  gap: 12px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 12px 28px rgba(31, 43, 58, 0.06);
+}
+
+.check-card h3,
+.troubleshoot-card h3,
+.thonny-visual-card h3 {
+  margin: 0;
+  font-size: 1.14rem;
+}
+
+.check-card p,
+.troubleshoot-card p,
+.thonny-visual-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.thonny-visual-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.thonny-window {
+  overflow: hidden;
+  border: 1px solid rgba(21, 36, 51, 0.1);
+  border-radius: 18px;
+  background: #f8fafc;
+}
+
+.thonny-topbar,
+.thonny-toolbar,
+.thonny-editor,
+.thonny-shell {
+  padding: 14px 16px;
+}
+
+.thonny-topbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #e8f6ff;
+  background: #223547;
+}
+
+.thonny-topbar strong {
+  margin-left: 4px;
+  font-size: 0.94rem;
+}
+
+.thonny-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.thonny-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  border-bottom: 1px solid rgba(21, 36, 51, 0.08);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.ui-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.78rem;
+  color: var(--muted);
+  background: rgba(29, 79, 122, 0.08);
+}
+
+.ui-pill.active {
+  color: white;
+  background: linear-gradient(135deg, var(--navy), var(--teal));
+}
+
+.thonny-editor,
+.thonny-shell {
+  display: grid;
+  gap: 10px;
+}
+
+.thonny-editor strong,
+.thonny-shell strong {
+  font-size: 1rem;
+}
+
+.thonny-editor span,
+.thonny-shell span {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.code-surface {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.86rem;
+  color: #1d2f41;
+  background: linear-gradient(180deg, rgba(234, 244, 251, 0.8), rgba(255, 255, 255, 0.98));
+}
+
+.thonny-shell {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.9rem;
+  color: #d8f4ff;
+  background: #152433;
+}
+
+.thonny-shell span {
+  color: inherit;
+}
+
+.troubleshoot-card {
+  background:
+    linear-gradient(180deg, rgba(255, 244, 220, 0.82), rgba(255, 255, 255, 0.98));
+}
+
 .site-footer {
   padding: 22px 6px 10px;
   color: var(--muted);
@@ -976,6 +1129,10 @@ pre code {
   .subpage-hero,
   .product-rail,
   .flow-stage-grid,
+  .thonny-visual-grid,
+  .handout-grid,
+  .check-grid,
+  .troubleshoot-grid,
   .teacher-console-grid,
   .student-mission-track,
   .teacher-grid,
@@ -1094,7 +1251,35 @@ pre code {
   .teacher-console-grid,
   .student-mission-track,
   .product-rail,
-  .flow-stage-grid {
+  .flow-stage-grid,
+  .thonny-visual-grid,
+  .handout-grid,
+  .check-grid,
+  .troubleshoot-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  body {
+    background: white;
+  }
+
+  .site-header,
+  .button,
+  .action-row {
+    display: none !important;
+  }
+
+  .page-shell {
+    width: 100%;
+    padding: 0;
+  }
+
+  .section,
+  .subpage-hero {
+    box-shadow: none;
+    border: 1px solid #d6dbe1;
+    break-inside: avoid;
   }
 }
