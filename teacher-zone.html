@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>教師區 | Raspberry Pi Pico 小車入門教學站</title>
-  <meta name="description" content="Raspberry Pi Pico 循跡小車教師區完整頁，整理 1 小時國中生 Boot Camp 的授課順序、下載順序、課前準備與課後延伸。">
+  <meta name="description" content="Raspberry Pi Pico 小車入門教師區，整理 1 小時 Boot Camp 的授課順序、下載順序、課前準備與課後延伸。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -35,8 +35,8 @@
           <p class="eyebrow">Teacher Zone</p>
           <h1>教師區完整頁</h1>
           <p class="hero-text">
-            這一頁是老師的授課控制台。你可以從這裡知道課前先看什麼、上課先示範什麼、下載順序怎麼排，
-            也能快速判斷第一堂課哪些內容先不要帶進來。
+            本頁整理課前準備、示範順序、下載流程與第一堂課的教學範圍，
+            方便教師快速掌握授課重點與延伸內容的安排方式。
           </p>
           <div class="action-row">
             <a class="button primary" href="downloads.html#download-teaching-plan">先下載教學建議</a>
@@ -47,7 +47,7 @@
         <div class="subpage-aside">
           <article class="aside-card">
             <img src="assets/photo-classroom-overview.jpg" alt="Raspberry Pi Pico 小車課堂全景">
-            <p class="visual-note">這張是真實教室情境，和目前網站的教師區定位一致：老師先投影示範，再讓學生跟著操作。</p>
+            <p class="visual-note">課堂情境以教師示範與學生跟做為主，適合用於 1 小時入門課程的授課安排。</p>
           </article>
           <article class="aside-card">
             <span class="zone-badge teacher">Quick Route</span>
@@ -65,17 +65,17 @@
       <section class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">Real Teaching Context</p>
-          <h2>這些畫面最接近你實際帶課的樣子</h2>
-          <p>我把參考素材裡最能對應現在教學主線的照片放進來，幫教師區多一點真實感，而不是只剩文字流程。</p>
+          <h2>這些畫面呈現實際授課情境</h2>
+          <p>本區收錄與教學主線相符的課堂照片，用以呈現授課現場的實際樣貌。</p>
         </div>
         <div class="page-grid">
           <article class="content-card">
             <img class="teaching-visual" src="assets/photo-teacher-demo.jpg" alt="老師在電腦教室示範程式">
-            <p>老師先示範程式操作，再讓學生開始輸入 `W / A / S / D / X`，這和目前 Boot Camp 的節奏完全一致。</p>
+            <p>課堂流程可由教師先示範程式操作，再由學生輸入 `W / A / S / D / X` 進行基本控制。</p>
           </article>
           <article class="content-card">
             <img class="teaching-visual" src="assets/photo-student-work.jpg" alt="學生圍桌操作 Raspberry Pi Pico 小車">
-            <p>小組操作時，學生通常會一邊看電腦、一邊看小車反應。教師區現在就是在幫你把這個過程簡化成穩定流程。</p>
+            <p>小組操作時，學生需同步觀察螢幕與小車反應，因此課堂流程宜保持簡潔與穩定。</p>
           </article>
         </div>
       </section>
@@ -84,7 +84,7 @@
         <div class="section-heading">
           <p class="eyebrow">Teacher Console</p>
           <h2>先把這堂課控制在清楚、穩定、可完成</h2>
-          <p>教師區先幫你決定這一堂課的完成線、下載順序和不需要帶進來的內容，讓授課節奏更像一個成熟的教學產品，而不是把所有素材一次丟給學生。</p>
+          <p>本頁以完成線、下載順序與內容取捨為核心，協助教師維持清楚、穩定且可完成的授課節奏。</p>
         </div>
         <div class="teacher-console-grid">
           <article class="teacher-console-card teacher-console-focus">
@@ -108,7 +108,7 @@
           </article>
           <article class="teacher-console-card">
             <span class="zone-badge teacher">Not Today</span>
-            <h3>這堂課先不要教</h3>
+            <h3>本堂課暫不納入</h3>
             <ul class="detail-list">
               <li>藍牙(Bluetooth) 遙控。</li>
               <li>感測器邏輯與循跡。</li>
@@ -133,7 +133,7 @@
             </ul>
           </article>
           <article class="content-card">
-            <h3>先開這三份就夠了</h3>
+            <h3>優先開啟這三份教材</h3>
             <ol class="number-list">
               <li><a class="text-link" href="student-handout.html">學生講義頁</a></li>
               <li><a class="text-link" href="downloads.html#download-teaching-plan">1 小時授課建議</a></li>
@@ -188,13 +188,13 @@
           <article class="download-card">
             <span class="download-type">STEP 3</span>
             <h3>鍵盤控制範例</h3>
-            <p>最適合第一個示範的主程式。</p>
+            <p>適合作為第一個示範的主程式。</p>
             <a class="button secondary block" href="downloads.html#download-keyboard">前往下載</a>
           </article>
           <article class="download-card">
             <span class="download-type">STEP 4</span>
             <h3>馬達基本函式</h3>
-            <p>如果學生吸收很快，再拿這份補充使用。</p>
+            <p>若學生進度較快，可再加入這份作為補充。</p>
             <a class="button secondary block" href="downloads.html#download-motor">前往下載</a>
           </article>
         </div>
@@ -231,7 +231,7 @@
             <div class="visual-story-copy">
               <span class="zone-badge teacher">Video</span>
               <h3>先讓老師看見延伸成果</h3>
-              <p>這段真實影片很適合拿來告訴老師：第一堂課先把 Pico 小車連好、動好，後面就能自然銜接到循跡活動。</p>
+              <p>此段影片可用於說明第一堂課完成基本控制後，後續可如何銜接循跡活動。</p>
             </div>
           </article>
           <article class="visual-story-card">
@@ -239,7 +239,7 @@
             <div class="visual-story-copy">
               <span class="zone-badge teacher">Extension</span>
               <h3>之後可以帶到循跡挑戰</h3>
-              <p>這張照片很適合拿來告訴老師：第一堂課先穩穩完成基本控制，後面就能自然延伸到循跡活動。</p>
+              <p>此張照片呈現循跡活動場景，可作為後續單元規劃的參考。</p>
             </div>
           </article>
           <article class="visual-story-card">
@@ -247,7 +247,7 @@
             <div class="visual-story-copy">
               <span class="zone-badge teacher">Poster</span>
               <h3>成果也能整理成專題展示</h3>
-              <p>這份海報很適合放在老師區，讓備課者看到這門課不只是一堂體驗，也能慢慢發展成完整專題。</p>
+              <p>專題海報可用於展示課程後續成果，說明本課程可逐步發展為完整專題。</p>
             </div>
           </article>
         </div>
