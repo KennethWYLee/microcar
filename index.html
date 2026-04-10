@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Microcar Robotics Studio</title>
+  <meta name="description" content="A GitHub-ready course website inspired by the robot-programming lecture decks, focusing on a smart oscillating fan project powered by Raspberry Pi Pico, sensors, mechanisms, and Python control.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="#top">
+        <span class="brand-mark">M</span>
+        <span class="brand-copy">
+          <strong>Microcar Robotics Studio</strong>
+          <small>Robot Programming Course Website</small>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#course">Course</a>
+        <a href="#modules">Modules</a>
+        <a href="#hardware">Hardware</a>
+        <a href="#code">Code</a>
+        <a href="#resources">Resources</a>
+      </nav>
+      <a class="button ghost" href="https://github.com/KennethWYLee/microcar" target="_blank" rel="noreferrer">Open GitHub</a>
+    </header>
+
+    <main id="top">
+      <section class="hero reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">Built from the robot course lecture decks</p>
+          <h1>Design, assemble, and control a smart oscillating fan with code.</h1>
+          <p class="hero-text">
+            This site turns the existing robot-course materials into a clear learning hub. It follows the three PPT storylines:
+            mechanism design, smart control programming, and full project assembly with Raspberry Pi Pico, sensors, motors,
+            PWM, Bluetooth, and structured hands-on practice.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#modules">Explore the Modules</a>
+            <a class="button secondary" href="#resources">See the Course Assets</a>
+          </div>
+          <div class="hero-stats">
+            <div>
+              <strong>3</strong>
+              <span>lecture decks</span>
+            </div>
+            <div>
+              <strong>93</strong>
+              <span>Python files</span>
+            </div>
+            <div>
+              <strong>1</strong>
+              <span>capstone build</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="orb orb-a"></div>
+          <div class="orb orb-b"></div>
+          <div class="photo-card photo-board">
+            <img src="assets/control-board.png" alt="Robot control board with Raspberry Pi Pico and display">
+          </div>
+          <div class="photo-card photo-mechanism">
+            <img src="assets/mechanism-rig.png" alt="Mechanical rig used for the oscillating fan project">
+          </div>
+          <div class="signal-card">
+            <span class="signal-label">Course Focus</span>
+            <strong>Mechanics + Electronics + Python</strong>
+            <p>From linkages and worm gears to PWM, sensing, and Bluetooth control.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="course" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Course arc</p>
+          <h2>One project, four layers of understanding.</h2>
+        </div>
+        <div class="pillar-grid">
+          <article class="pillar-card">
+            <h3>Mechanism Thinking</h3>
+            <p>Students study how linkages, worm gears, and transmission paths convert motor rotation into controlled oscillation.</p>
+          </article>
+          <article class="pillar-card">
+            <h3>Circuit Foundations</h3>
+            <p>The PPTs introduce power, switches, sensor connections, motor interfaces, and Raspberry Pi Pico pin mapping.</p>
+          </article>
+          <article class="pillar-card">
+            <h3>Control Logic</h3>
+            <p>Digital input/output, PWM speed control, WS2812B lighting, message display, and Bluetooth interaction become one system.</p>
+          </article>
+          <article class="pillar-card">
+            <h3>Project Integration</h3>
+            <p>The course culminates in a smart adjustable fan that combines structure, wiring, firmware, and interaction design.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="modules" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Lecture decks</p>
+          <h2>The site structure follows the original PPT sequence.</h2>
+        </div>
+        <div class="module-grid">
+          <article class="module-card accent-blue">
+            <span class="module-tag">Deck 01</span>
+            <h3>Smart Control Programming</h3>
+            <p class="module-subtitle">Source: 擺頭電扇-智慧控制程式設計.pptx</p>
+            <ul>
+              <li>Board orientation, firmware updates, and pin definitions</li>
+              <li>Digital I/O, button logic, and motor direction control</li>
+              <li>PWM output, analog input, and WS2812B lighting</li>
+              <li>Bluetooth control and practical coding exercises</li>
+            </ul>
+          </article>
+          <article class="module-card accent-orange">
+            <span class="module-tag">Deck 02</span>
+            <h3>Mechanism Structure</h3>
+            <p class="module-subtitle">Source: 擺頭電扇-機構結構.pptx</p>
+            <ul>
+              <li>What mechanisms are and how machine parts cooperate</li>
+              <li>Four-bar linkage concepts behind fan oscillation</li>
+              <li>Worm gear transmission for direction change and speed reduction</li>
+              <li>Material selection and assembly process planning</li>
+            </ul>
+          </article>
+          <article class="module-card accent-sand">
+            <span class="module-tag">Deck 03</span>
+            <h3>Integrated Course Slides</h3>
+            <p class="module-subtitle">Source: 擺頭電扇-課程簡報.pptx</p>
+            <ul>
+              <li>Course goals, material list, and learning roadmap</li>
+              <li>Mechanical principles and smart control in one narrative</li>
+              <li>MangoBlock setup, LED demos, PWM, ADC, and project workflow</li>
+              <li>A single deck for teaching, demonstration, and student pacing</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="hardware" class="section split reveal">
+        <div class="section-heading compact">
+          <p class="eyebrow">Hardware stack</p>
+          <h2>Physical parts that make the lessons tangible.</h2>
+          <p>
+            The PPTs consistently move between hardware literacy and project construction. These visuals are drawn from the
+            course decks and help anchor the web experience in the same classroom materials.
+          </p>
+        </div>
+        <div class="hardware-grid">
+          <article class="hardware-card">
+            <img src="assets/control-board.png" alt="Control board">
+            <div>
+              <h3>Control Board</h3>
+              <p>Raspberry Pi Pico, OLED display, power switching, sensor ports, and a layout built for experimentation.</p>
+            </div>
+          </article>
+          <article class="hardware-card">
+            <img src="assets/motion-sensor.png" alt="Motion sensor">
+            <div>
+              <h3>Motion Sensing</h3>
+              <p>Sensors make the project reactive, opening the door to smart fan behavior, environmental triggers, and IoT ideas.</p>
+            </div>
+          </article>
+          <article class="hardware-card">
+            <img src="assets/ir-sensor.png" alt="Infrared sensor">
+            <div>
+              <h3>Input Devices</h3>
+              <p>Simple modules teach state changes, thresholds, and how the physical world becomes program logic.</p>
+            </div>
+          </article>
+          <article class="hardware-card">
+            <img src="assets/mechanism-rig.png" alt="Mechanical structure">
+            <div>
+              <h3>Mechanical Rig</h3>
+              <p>The structure section shows how form, transmission, and assembly translate into visible movement.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Learning flow</p>
+          <h2>How the course moves from setup to a finished build.</h2>
+        </div>
+        <div class="timeline">
+          <article>
+            <span>01</span>
+            <h3>Prepare the board</h3>
+            <p>Update firmware, learn the Pico X2 pin map, and verify power, switches, and connection points.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Prototype control</h3>
+            <p>Use LEDs, buttons, PWM, and analog input to build intuition for control logic before integrating the fan.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Build the mechanism</h3>
+            <p>Assemble the structure, understand worm gears and linkages, and connect movement to design intent.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>Add smart interaction</h3>
+            <p>Blend sensors, lighting, display, and Bluetooth into a project that feels like a real robotics prototype.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="code" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Code patterns</p>
+          <h2>Representative examples from the course files.</h2>
+        </div>
+        <div class="code-grid">
+          <article class="code-card">
+            <header>
+              <h3>LED Warm-up</h3>
+              <span>LED.py</span>
+            </header>
+            <pre><code>from machine import Pin
+import time
+
+led = Pin("LED", Pin.OUT)
+
+while True:
+    led.toggle()
+    time.sleep(1)</code></pre>
+          </article>
+          <article class="code-card">
+            <header>
+              <h3>Button to Actuator Logic</h3>
+              <span>btn control led.py</span>
+            </header>
+            <pre><code>from machine import Pin
+from time import sleep
+
+led = Pin(25, Pin.OUT)
+btn = Pin(3, Pin.IN)
+
+while True:
+    led.value(btn.value())
+    sleep(0.3)</code></pre>
+          </article>
+          <article class="code-card">
+            <header>
+              <h3>Distance-driven RGB Response</h3>
+              <span>change sensor color by dist.py</span>
+            </header>
+            <pre><code>dist = sensor.ping()
+
+if dist &lt; 10:
+    sensor.rgb_all(utils.COLOR_RED)
+elif dist &lt; 20:
+    sensor.rgb_all(utils.COLOR_BLUE)
+else:
+    sensor.rgb_all(utils.COLOR_GREEN)</code></pre>
+          </article>
+        </div>
+      </section>
+
+      <section id="resources" class="section resource-band reveal">
+        <div class="resource-copy">
+          <p class="eyebrow">Repository-ready</p>
+          <h2>Prepared as a static site for GitHub.</h2>
+          <p>
+            The project is intentionally simple to host: plain HTML, CSS, and JavaScript, with assets derived from the
+            robot-course PPTs. It is lightweight, editable, and easy to publish through GitHub Pages.
+          </p>
+        </div>
+        <div class="resource-panel">
+          <div>
+            <span class="meta-label">Built from</span>
+            <strong>Robot course materials</strong>
+          </div>
+          <div>
+            <span class="meta-label">Primary source decks</span>
+            <strong>3 PowerPoint files</strong>
+          </div>
+          <div>
+            <span class="meta-label">Best fit for hosting</span>
+            <strong>GitHub Pages</strong>
+          </div>
+          <a class="button primary block" href="https://github.com/KennethWYLee/microcar" target="_blank" rel="noreferrer">Open the Repository</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Microcar Robotics Studio</p>
+      <p>Designed from the existing robot-course lecture materials with emphasis on the PPT structure and classroom project flow.</p>
+    </footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
