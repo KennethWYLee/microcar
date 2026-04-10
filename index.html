@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>機器人程式設計教學站 | 小車程式與智慧風扇專題</title>
-  <meta name="description" content="以機器人課程既有教材與 PPT 為基礎，整理成老師授課版教學網站，並加入大量圖解，幫助學生理解怎樣撰寫小車程式。">
+  <title>機器人程式設計教學站 | 無人小車 Boot Camp</title>
+  <meta name="description" content="以機器人課程教材整理而成的教學網站，首頁精簡為 1 小時 Boot Camp、教師區、學生區與下載區，方便老師授課與學生自學。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -17,15 +17,13 @@
         <span class="brand-mark">教</span>
         <span class="brand-copy">
           <strong>機器人程式設計教學站</strong>
-          <small>教師區 + 學生區 Teacher & Student Edition</small>
+          <small>四區版 Four-Zone Edition</small>
         </span>
       </a>
       <nav class="site-nav" aria-label="主要導覽">
         <a href="#may-course">1 小時 Boot Camp</a>
         <a href="#teacher-zone">教師區</a>
         <a href="#student-zone">學生區</a>
-        <a href="#illustrations">圖解學習</a>
-        <a href="#code">程式練習</a>
         <a href="#downloads">下載區</a>
       </nav>
       <a class="button ghost" href="https://github.com/KennethWYLee/microcar" target="_blank" rel="noreferrer">GitHub</a>
@@ -35,12 +33,11 @@
       <section class="hero reveal">
         <div class="hero-copy">
           <p class="eyebrow">教學網站 Teaching Site</p>
-          <h1>給老師好教的教材網站，也給學生看得懂的自學入口。</h1>
+          <h1>現在首頁只保留 4 個最重要的區塊，讓授課和自學都更直覺。</h1>
           <p class="hero-text">
-            這個網站不是單純把原始簡報放上來，而是把課程內容重新整理成更清楚的教學網站。
-            我們保留課程的核心主題，例如數位輸入輸出(Digital I/O)、脈衝寬度調變(PWM)、馬達控制(Motor Control)、
-            感測器(Sensor)、藍牙遙控(Bluetooth Control) 與連桿機構(Linkage Mechanism)，並加入更容易理解的圖解說明。
-            老師可以把它當成上課引導頁，學生也可以依照圖解和範例一步一步學會怎樣寫小車程式。
+            這個網站把原本分散的教學內容重新收斂成 4 個主區塊：
+            `1 小時 Boot Camp`、`教師區(Teacher Zone)`、`學生區(Student Zone)`、`下載區(Downloads)`。
+            老師可以更快找到授課節奏與教材，學生也可以直接看圖解、看範例，理解小車怎樣接收指令並做出動作。
           </p>
           <div class="hero-actions">
             <a class="button ghost" href="#may-course">前往 1 小時 Boot Camp</a>
@@ -50,45 +47,30 @@
 
           <div class="hero-stats">
             <div>
-              <strong>3</strong>
-              <span>份簡報(PPT)</span>
+              <strong>4</strong>
+              <span>主區塊(Sections)</span>
+            </div>
+            <div>
+              <strong>60</strong>
+              <span>分鐘 Boot Camp</span>
             </div>
             <div>
               <strong>93</strong>
               <span>個程式檔(Python)</span>
             </div>
-            <div>
-              <strong>1</strong>
-              <span>整合專題(Project)</span>
-            </div>
           </div>
 
           <ul class="hero-tags" aria-label="課程關鍵詞">
-            <li>小車程式(Car Program)</li>
+            <li>無人小車(Robot Car)</li>
             <li>馬達控制(Motor Control)</li>
-            <li>條件判斷(Condition)</li>
-            <li>感測回饋(Sensor Feedback)</li>
+            <li>感測器(Sensor)</li>
+            <li>自動避障(Obstacle Avoidance)</li>
             <li>藍牙遙控(Bluetooth Control)</li>
-            <li>機構設計(Mechanism Design)</li>
+            <li>程式流程(Program Flow)</li>
           </ul>
-
-          <div class="role-grid" aria-label="角色入口">
-            <a class="role-card role-card-teacher" href="#teacher-zone">
-              <p class="mini-label">教師區(Teacher Zone)</p>
-              <h3>先看授課順序、課堂節奏與教材下載。</h3>
-              <p>適合老師備課、投影說明、帶學生做活動時快速找到對應內容。</p>
-            </a>
-            <a class="role-card role-card-student" href="#student-zone">
-              <p class="mini-label">學生區(Student Zone)</p>
-              <h3>先看圖解，再跟著打程式，再自己改一點點。</h3>
-              <p>適合國小和國中學生一步一步自學，減少第一次接觸程式時的壓力。</p>
-            </a>
-          </div>
         </div>
 
         <div class="hero-visual" aria-hidden="true">
-          <div class="orb orb-a"></div>
-          <div class="orb orb-b"></div>
           <div class="photo-card photo-board">
             <img src="assets/control-board.png" alt="控制板與 Raspberry Pi Pico">
           </div>
@@ -96,9 +78,9 @@
             <img src="assets/mechanism-rig.png" alt="機構組裝示意">
           </div>
           <div class="signal-card">
-            <span class="signal-label">教學重點 Focus</span>
-            <strong>先看圖，再寫程式，再理解小車怎麼動。</strong>
-            <p>這次特別加入圖解化教學，幫學生理解指令、流程、感測與動作之間的關係。</p>
+            <span class="signal-label">四區結構 Four-Zone Layout</span>
+            <strong>Boot Camp 先帶活動，教師區帶節奏，學生區帶理解，下載區補教材。</strong>
+            <p>整體改成更清楚的四區式資訊架構，讓老師和學生一進站就知道去哪裡。</p>
           </div>
         </div>
       </section>
@@ -106,38 +88,33 @@
       <section id="may-course" class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">1 小時 Boot Camp</p>
-          <h2>五月國中生無人小車 Boot Camp 專區。</h2>
+          <h2>五月國中生無人小車 60 分鐘體驗課。</h2>
           <p>
-            這一區是為你五月的課先整理好的快速授課頁。目標不是把所有理論一次講完，
-            而是讓國中生在 1 小時內真的操作無人小車，理解「指令、感測器、動作」三者怎樣連在一起。
+            這一區專門給五月的課使用。目標不是一次講完所有理論，而是讓學生在一小時內真的看到、
+            操作到、說得出小車如何接收指令、判斷環境，再做出動作。
           </p>
         </div>
 
         <div class="special-layout">
           <article class="special-panel special-panel-main">
             <span class="zone-badge zone-badge-teacher">Boot Camp Snapshot</span>
-            <h3>一堂讓學生看得到、操作得到、說得出來的 60 分鐘無人小車 Boot Camp。</h3>
+            <h3>一堂讓學生操作無人小車、理解控制流程的 60 分鐘入門課。</h3>
             <div class="special-meta">
               <span>60 分鐘(60 min)</span>
               <span>國中生(Junior High)</span>
               <span>2 到 4 人一組(Team of 2-4)</span>
-              <span>Boot Camp 體驗課</span>
+              <span>Hands-on Demo</span>
             </div>
             <p>
-              建議你把這堂課聚焦在三件事：先讓學生知道無人小車怎樣接收指令，
-              再讓他們操作一次前進、轉向、停止，最後體驗感測器如何幫小車自動避障(Obstacle Avoidance)。
+              建議把這堂課聚焦在三件事：認識指令、操作小車、理解感測器避障。
+              只要學生能說出「偵測到障礙物後，小車為什麼改變方向」，這堂課就很成功。
             </p>
             <ul class="teacher-checklist">
-              <li>學生能分辨手動控制(Manual Control) 與自動控制(Autonomous Control) 的差別。</li>
-              <li>學生能操作小車完成前進、左轉、右轉、停止。</li>
-              <li>學生能理解感測器偵測到距離後，程式會做出判斷。</li>
-              <li>學生能用自己的話說出小車為什麼會避開障礙物。</li>
+              <li>學生能分辨手動控制(Manual Control) 與自動控制(Autonomous Control)。</li>
+              <li>學生能完成前進、左轉、右轉、停止等基本操作。</li>
+              <li>學生能理解感測器偵測距離後，程式會進行條件判斷。</li>
+              <li>學生能用自己的話說出小車為什麼會避障。</li>
             </ul>
-            <div class="zone-links">
-              <a class="text-link" href="#illustrations">對照圖解學習</a>
-              <a class="text-link" href="#code">對照範例程式</a>
-              <a class="text-link" href="#downloads">下載教材</a>
-            </div>
           </article>
 
           <article class="special-panel">
@@ -146,47 +123,44 @@
             <div class="special-timeline">
               <div class="special-timeline-item">
                 <strong>0-10 分鐘</strong>
-                <span>認識無人小車、說明安全規則、展示今天的挑戰目標。</span>
+                <span>認識無人小車、說明安全規則、展示今天的任務。</span>
               </div>
               <div class="special-timeline-item">
                 <strong>10-20 分鐘</strong>
-                <span>用圖解介紹前進、後退、左轉、右轉、停止五個基本指令。</span>
+                <span>介紹前進、後退、左轉、右轉、停止等基本指令。</span>
               </div>
               <div class="special-timeline-item">
                 <strong>20-35 分鐘</strong>
-                <span>學生分組操作小車，完成基本遙控或按鍵控制。</span>
+                <span>學生分組操作小車，完成基本動作控制。</span>
               </div>
               <div class="special-timeline-item">
                 <strong>35-50 分鐘</strong>
-                <span>示範感測器避障，讓學生觀察距離判斷如何改變小車動作。</span>
+                <span>示範感測器避障，觀察偵測與動作的關係。</span>
               </div>
               <div class="special-timeline-item">
                 <strong>50-60 分鐘</strong>
-                <span>進行小挑戰，例如避開障礙物或走過簡單路線，最後請學生分享。</span>
+                <span>完成小挑戰，最後請學生分享他看到的控制邏輯。</span>
               </div>
             </div>
           </article>
 
           <article class="special-panel">
             <span class="zone-badge zone-badge-teacher">Teacher Checklist</span>
-            <h3>上課前建議先備好</h3>
+            <h3>上課前先備好</h3>
             <div class="special-chip-list">
               <span>小車本體(Car)</span>
               <span>控制板(Control Board)</span>
               <span>電池(Battery)</span>
               <span>感測器(Sensor)</span>
-              <span>場地與障礙物(Props)</span>
-              <span>投影圖解(Slides)</span>
+              <span>障礙物(Props)</span>
+              <span>投影片(Slides)</span>
             </div>
-            <p>
-              如果時間真的只有 1 小時，建議把環境和硬體都先準備好，課堂上把重點放在「操作與理解」，
-              不要把太多時間花在接線或安裝。
-            </p>
+            <p>如果時間只有一小時，建議硬體先準備完成，課堂上把時間留給操作、觀察和分享。</p>
           </article>
 
           <article class="special-panel special-panel-student">
             <span class="zone-badge zone-badge-student">Student Missions</span>
-            <h3>讓國中生有完成感的 3 個 Boot Camp 任務</h3>
+            <h3>國中生 Boot Camp 任務</h3>
             <div class="special-mission-list">
               <div class="special-mission-item">
                 <strong>任務 A</strong>
@@ -208,83 +182,79 @@
       <section id="teacher-zone" class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">教師區 Teacher Zone</p>
-          <h2>給老師使用的授課控制台，聚焦備課、節奏安排與學習成果。</h2>
+          <h2>把授課節奏、教學重點和教材使用方式收在同一區。</h2>
           <p>
-            教師區改成較專業的備課版面。老師可以先確認學習目標，再看課堂節奏、差異化教學與形成性評量(Formative Assessment) 的安排。
+            教師區保留較專業的授課視角，但不再拆成很多不同區塊。老師只要看這一區，就能快速知道怎麼帶課、怎麼安排學生任務。
           </p>
         </div>
 
         <div class="teacher-dashboard">
           <article class="teacher-panel teacher-panel-main">
-            <span class="zone-badge zone-badge-teacher">學習目標(Learning Outcomes)</span>
-            <h3>建議把每節課的學習成果收斂成「看得懂、說得出、改得動」三層。</h3>
-            <p>對國小與國中階段而言，最重要的不只是完成作品，而是能說出一個指令如何變成一個動作，並且願意自己改一個條件或參數。</p>
+            <span class="zone-badge zone-badge-teacher">Learning Outcomes</span>
+            <h3>建議把學習成果收斂成「看得懂、說得出、改得動」三層。</h3>
+            <p>對國中生而言，最重要的是能說出指令怎樣變成動作，並且願意親手改一個條件或參數。</p>
             <ul class="teacher-checklist">
               <li>能說出輸入(Input)、判斷(Condition)、輸出(Output) 的關係。</li>
-              <li>能辨認 `forward()`、`turn_left()`、`stop()` 這類函式的用途。</li>
+              <li>能辨認前進、轉向、停止等動作函式的用途。</li>
               <li>能把感測器結果和 `if / elif / else` 對應起來。</li>
               <li>能修改一個速度、距離或方向設定，觀察小車反應。</li>
             </ul>
           </article>
 
           <article class="teacher-panel">
-            <span class="zone-badge zone-badge-teacher">授課節奏(Pacing)</span>
-            <h3>建議採用 4 段式教學流程。</h3>
+            <span class="zone-badge zone-badge-teacher">Teaching Route</span>
+            <h3>建議 4 段授課地圖</h3>
             <div class="teacher-timeline">
               <div class="teacher-timeline-item">
-                <strong>導入 5 分鐘</strong>
-                <span>先用圖解建立今天只學一個重點。</span>
+                <strong>指令與動作</strong>
+                <span>先用圖解建立基本方向感與控制概念。</span>
               </div>
               <div class="teacher-timeline-item">
-                <strong>示範 8 分鐘</strong>
-                <span>對照圖解與範例程式做投影說明。</span>
+                <strong>程式與流程</strong>
+                <span>再介紹最基本的函式、輸入與條件判斷。</span>
               </div>
               <div class="teacher-timeline-item">
-                <strong>實作 12 分鐘</strong>
-                <span>讓學生打一次，並改一個小地方。</span>
+                <strong>感測與反應</strong>
+                <span>讓學生看到感測器資料如何影響小車動作。</span>
               </div>
               <div class="teacher-timeline-item">
-                <strong>回饋 5 分鐘</strong>
-                <span>請學生口頭說出程式和動作的對應。</span>
+                <strong>挑戰與分享</strong>
+                <span>用小任務檢查學生是否真正看懂。</span>
               </div>
             </div>
           </article>
 
           <article class="teacher-panel">
-            <span class="zone-badge zone-badge-teacher">差異化教學(Differentiation)</span>
-            <h3>同一份教材可以分成國小版與國中版兩種要求。</h3>
+            <span class="zone-badge zone-badge-teacher">Classroom Tips</span>
+            <h3>一堂課內最值得保留的做法</h3>
             <div class="teacher-level-grid">
               <div class="teacher-level-card">
-                <strong>國小版本(Elementary)</strong>
-                <p>重點放在認識動作、模仿程式、改一個數字，不強求完整語法解釋。</p>
+                <strong>先示範再放手</strong>
+                <p>先做一次完整示範，再讓學生自己操作，會比直接講語法更有效。</p>
               </div>
               <div class="teacher-level-card">
-                <strong>國中版本(Junior High)</strong>
-                <p>可以進一步討論函式封裝、條件分支、資料流與感測器回饋邏輯。</p>
+                <strong>一次只教一個重點</strong>
+                <p>先讓學生理解一種控制邏輯，再往下帶感測器和自動避障。</p>
               </div>
             </div>
           </article>
 
           <article class="teacher-panel">
-            <span class="zone-badge zone-badge-teacher">評量建議(Assessment)</span>
-            <h3>用簡短、可觀察的任務檢查學生是否真的理解。</h3>
+            <span class="zone-badge zone-badge-teacher">Assessment</span>
+            <h3>可直接觀察的學習表現</h3>
             <div class="teacher-metrics">
               <div class="teacher-metric">
                 <strong>口語解釋</strong>
-                <span>請學生說明按下按鍵後，小車為什麼會這樣動。</span>
+                <span>學生能說明按鍵、感測器和小車動作的關係。</span>
               </div>
               <div class="teacher-metric">
                 <strong>程式修改</strong>
-                <span>請學生改一個距離門檻或一個動作函式。</span>
+                <span>學生能改一個數字或條件，並看懂結果。</span>
               </div>
               <div class="teacher-metric">
                 <strong>實機展示</strong>
-                <span>請學生讓小車完成一個指定動作或避障反應。</span>
+                <span>學生能完成基本動作或簡單避障挑戰。</span>
               </div>
-            </div>
-            <div class="zone-links">
-              <a class="text-link" href="#illustrations">使用圖解學習區</a>
-              <a class="text-link" href="#downloads">下載教師教材</a>
             </div>
           </article>
         </div>
@@ -293,432 +263,164 @@
       <section id="student-zone" class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">學生區 Student Zone</p>
-          <h2>這一區改成國小也能接受的版本，先玩懂，再慢慢學會。</h2>
+          <h2>把看圖、懂流程、打程式收在同一區，學生不用跳來跳去。</h2>
           <p>
-            如果你是第一次學小車程式，沒關係。你現在不用一次學很多，也不用一開始就把所有英文都背起來。
-            只要先知道「按哪個鍵，小車會做什麼」，你就已經開始會寫程式了。
+            學生區保留最重要的圖解和範例程式，但不再拆成很多頁面。你可以先看懂小車怎麼動，再看簡單程式怎麼寫。
           </p>
         </div>
 
         <div class="student-hero-card">
-          <p class="mini-label">給小朋友的學習方式(Learn Like a Game)</p>
-          <h3>你只要完成 3 個小任務，就會開始懂小車程式。</h3>
+          <p class="mini-label">學習方式 Learn Like a Game</p>
+          <h3>先看懂動作，再照著寫，再自己改一點點。</h3>
           <div class="student-skill-row">
             <span>看得懂動作</span>
+            <span>看得懂流程</span>
             <span>打得出程式</span>
-            <span>改得動一點點</span>
           </div>
         </div>
 
         <div class="student-mission-grid">
           <article class="zone-card student-zone-card student-mission-card">
             <span class="zone-badge zone-badge-student">任務 1</span>
-            <h3>先認識 5 個小車動作。</h3>
-            <p>先記住前進、後退、左轉、右轉、停止。你不用急著記英文，只要知道每個動作長什麼樣子就可以了。</p>
-            <a class="button secondary" href="#illustrations">去看動作圖解</a>
+            <h3>先認識小車怎樣前進、轉彎和停止。</h3>
+            <p>把指令和動作對起來，小車程式就不會只剩一堆看不懂的英文。</p>
+            <a class="button secondary" href="#student-visuals">看動作圖解</a>
           </article>
           <article class="zone-card student-zone-card student-mission-card">
             <span class="zone-badge zone-badge-student">任務 2</span>
-            <h3>跟著打一小段程式。</h3>
-            <p>只要把一小段範例程式打進去，小車真的動起來，你就會發現程式其實沒有想像中那麼難。</p>
-            <a class="button secondary" href="#code">去看範例程式</a>
+            <h3>看懂感測器怎樣讓小車改變方向。</h3>
+            <p>重點不是背公式，而是知道「有偵測到東西」之後，程式會怎麼判斷。</p>
+            <a class="button secondary" href="#student-visuals">看感測流程</a>
           </article>
           <article class="zone-card student-zone-card student-mission-card">
             <span class="zone-badge zone-badge-student">任務 3</span>
-            <h3>改一個地方，看看會發生什麼。</h3>
-            <p>你可以改速度、改方向、改感測距離。只要你敢改，你就在學真正的程式設計。</p>
-            <a class="button secondary" href="#downloads">下載回家練習</a>
+            <h3>照著打一小段程式，再自己改一個地方。</h3>
+            <p>只要敢改一個數字、方向或距離，你就已經在學真正的程式設計了。</p>
+            <a class="button secondary" href="#student-practice">看程式範例</a>
           </article>
         </div>
 
-        <div class="student-path-panel" aria-label="學生自學路線">
-          <h3>我的自學路線(My Learning Path)</h3>
-          <div class="path-list">
-            <div class="path-step">
-              <strong>先看圖</strong>
-              <span>先理解指令和動作</span>
-            </div>
-            <div class="path-step">
-              <strong>再打程式</strong>
-              <span>照著範例打一遍</span>
-            </div>
-            <div class="path-step">
-              <strong>自己小修改</strong>
-              <span>改一個數字或一個方向</span>
-            </div>
+        <div id="student-visuals" class="student-zone-layout">
+          <div class="section-heading compact subsection-heading">
+            <p class="eyebrow">學生圖解 Student Visuals</p>
+            <h2>先用圖理解小車怎麼動，再看程式。</h2>
           </div>
-        </div>
-      </section>
 
-      <section id="guide" class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">導覽區 Navigation</p>
-          <h2>如果想看完整網站地圖，可以再從這裡進入各個區塊。</h2>
-          <p>
-            上面的教師區和學生區是快速入口，這一區則是完整網站地圖。
-            如果時間有限，老師建議先看「教師區」，學生建議先看「學生區」與「圖解學習」。
-          </p>
-        </div>
-
-        <div class="guide-grid">
-          <a class="guide-card" href="#teacher-zone">
-            <span>01</span>
-            <h3>教師區(Teacher Zone)</h3>
-            <p>老師可先看授課節奏、重點安排與教材使用方式。</p>
-          </a>
-          <a class="guide-card" href="#student-zone">
-            <span>02</span>
-            <h3>學生區(Student Zone)</h3>
-            <p>學生可先照著自學順序看圖、打程式、做修改。</p>
-          </a>
-          <a class="guide-card" href="#illustrations">
-            <span>03</span>
-            <h3>圖解學習(Illustrated Learning)</h3>
-            <p>用圖卡、流程圖與控制對照圖幫學生理解怎樣寫小車程式。</p>
-          </a>
-          <a class="guide-card" href="#lessons">
-            <span>04</span>
-            <h3>單元地圖(Lesson Map)</h3>
-            <p>把原始 PPT 內容改成更清楚的教學模組。</p>
-          </a>
-          <a class="guide-card" href="#code">
-            <span>05</span>
-            <h3>程式練習(Code Practice)</h3>
-            <p>再從範例程式下手，把剛剛看懂的流程真的寫出來。</p>
-          </a>
-          <a class="guide-card" href="#downloads">
-            <span>06</span>
-            <h3>下載區(Downloads)</h3>
-            <p>把簡報、PDF 和套件下載回去複習或備課。</p>
-          </a>
-        </div>
-      </section>
-
-      <section id="overview" class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">課程定位 Overview</p>
-          <h2>小車與風扇只是載體，真正學的是控制(Control) 與整合(Integration)。</h2>
-        </div>
-
-        <div class="overview-grid">
-          <article class="overview-card">
-            <h3>控制思維(Control Thinking)</h3>
-            <p>學生要學會怎樣讓輸入(Input) 經過判斷(Condition) 後，變成輸出(Output) 與動作(Motion)。</p>
-          </article>
-          <article class="overview-card">
-            <h3>程式思維(Programming Thinking)</h3>
-            <p>從函式(Function)、條件判斷(If / Elif)、迴圈(Loop) 到指令映射(Command Mapping) 逐步建立邏輯。</p>
-          </article>
-          <article class="overview-card">
-            <h3>硬體思維(Hardware Thinking)</h3>
-            <p>理解按鈕(Button)、LED、感測器(Sensor)、馬達(Motor) 與控制板(Control Board) 的角色。</p>
-          </article>
-          <article class="overview-card">
-            <h3>作品整合(Project Integration)</h3>
-            <p>最後能把小車與風扇專題串起來，知道「哪個程式控制哪個動作」。</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="teaching" class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">授課建議 Teaching Plan</p>
-          <h2>先讓學生看得懂，再讓學生寫得出來。</h2>
-        </div>
-
-        <div class="teaching-grid">
-          <article class="teaching-card teacher-card">
-            <h3>老師授課順序(Teacher Flow)</h3>
-            <ul>
-              <li>先用圖解說明小車的五個基本指令：前進、後退、左轉、右轉、停止。</li>
-              <li>再帶學生看程式骨架：初始化(Init) -> 定義函式(Function) -> 接收指令(Input) -> 判斷 -> 輸出。</li>
-              <li>接著用 LED、按鈕、感測器做簡單練習，建立「輸入控制輸出」的概念。</li>
-              <li>最後再帶入馬達控制(Motor Control) 與藍牙遙控(Bluetooth Control)。</li>
-            </ul>
-          </article>
-
-          <article class="teaching-card student-card">
-            <h3>學生自學順序(Self-study Flow)</h3>
-            <ul>
-              <li>先看圖解學習區，把動作和程式流程看懂。</li>
-              <li>再照著程式練習區打一次程式，不要只是看。</li>
-              <li>接著修改速度、條件或方向，觀察程式改變後小車的反應。</li>
-              <li>最後再回到下載區看簡報與 PDF，補齊細節。</li>
-            </ul>
-          </article>
-
-          <article class="teaching-card note-card">
-            <h3>最適合的節奏(Class Rhythm)</h3>
-            <p>建議用「圖解 5 分鐘 -> 範例程式 10 分鐘 -> 實作 10 分鐘 -> 回饋 5 分鐘」的節奏。對初學者來說，先看懂圖，再寫程式，吸收會快很多。</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="lessons" class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">單元地圖 Lesson Map</p>
-          <h2>依照原始教材重排後，更適合學小車控制與智慧專題的順序。</h2>
-        </div>
-
-        <div class="lesson-list">
-          <article class="lesson-card">
-            <div class="lesson-number">單元 1</div>
-            <div class="lesson-copy">
-              <h3>控制板與韌體(Control Board & Firmware)</h3>
-              <p>先認識控制板、腳位(Pin)、感測器接口與韌體更新流程，建立上課環境。</p>
-            </div>
-          </article>
-          <article class="lesson-card">
-            <div class="lesson-number">單元 2</div>
-            <div class="lesson-copy">
-              <h3>數位輸入輸出(Digital I/O)</h3>
-              <p>從 LED 與按鈕(Button) 入門，理解輸入和輸出是如何配合工作的。</p>
-            </div>
-          </article>
-          <article class="lesson-card">
-            <div class="lesson-number">單元 3</div>
-            <div class="lesson-copy">
-              <h3>類比控制與感測(Analog Control & Sensing)</h3>
-              <p>學習 PWM、ADC 與感測器回饋(Sensor Feedback)，讓程式不只是開與關。</p>
-            </div>
-          </article>
-          <article class="lesson-card">
-            <div class="lesson-number">單元 4</div>
-            <div class="lesson-copy">
-              <h3>小車與馬達控制(Car & Motor Control)</h3>
-              <p>把輸出控制從燈號延伸到小車動作，正式進入前進、後退、轉向與停止。</p>
-            </div>
-          </article>
-          <article class="lesson-card">
-            <div class="lesson-number">單元 5</div>
-            <div class="lesson-copy">
-              <h3>藍牙遙控與整合(Bluetooth & Integration)</h3>
-              <p>從鍵盤或藍牙指令映射到小車動作，讓學生理解遠端控制的資料流。</p>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section id="illustrations" class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">圖解學習 Illustrated Learning</p>
-          <h2>用很多圖輔助學生理解怎樣寫小車程式。</h2>
-          <p>
-            這一區是這次新增的重點。它不是裝飾圖，而是教學圖。
-            每一張圖都在幫學生回答同一件事：按下指令後，程式做了什麼，小車又為什麼會這樣動。
-          </p>
-        </div>
-
-        <div class="illustration-stack">
-          <article class="illustration-card">
-            <div class="illustration-copy">
-              <p class="mini-label">圖 1</p>
-              <h3>指令與動作對照圖(Command to Motion)</h3>
-              <p>學生最容易混亂的是「按哪個鍵，對應哪個動作」。這張圖先把指令記熟，之後程式就比較好理解。</p>
-            </div>
-            <div class="control-map">
-              <div class="keys-board">
-                <div class="key empty"></div>
-                <div class="key active">W<span>前進(Forward)</span></div>
-                <div class="key empty"></div>
-                <div class="key">A<span>左轉(Left)</span></div>
-                <div class="key active">S<span>後退(Backward)</span></div>
-                <div class="key">D<span>右轉(Right)</span></div>
-                <div class="key stop">X<span>停止(Stop)</span></div>
+          <div class="illustration-stack">
+            <article class="illustration-card">
+              <div class="illustration-copy">
+                <p class="mini-label">圖 1</p>
+                <h3>指令與動作對照圖(Command to Motion)</h3>
+                <p>先把前進、左轉、右轉、後退、停止記熟，後面的程式才會有畫面。</p>
               </div>
-              <div class="motion-cards">
-                <div class="motion-card">
-                  <strong>前進(Forward)</strong>
-                  <p>兩側馬達同向轉動，小車直行。</p>
+              <div class="control-map">
+                <div class="keys-board">
+                  <div class="key empty"></div>
+                  <div class="key active">W<span>前進(Forward)</span></div>
+                  <div class="key empty"></div>
+                  <div class="key">A<span>左轉(Left)</span></div>
+                  <div class="key active">S<span>後退(Backward)</span></div>
+                  <div class="key">D<span>右轉(Right)</span></div>
+                  <div class="key stop">X<span>停止(Stop)</span></div>
                 </div>
-                <div class="motion-card">
-                  <strong>左轉(Left)</strong>
-                  <p>左右兩輪速度或方向不同，小車轉向。</p>
-                </div>
-                <div class="motion-card">
-                  <strong>停止(Stop)</strong>
-                  <p>兩側輸出歸零，小車不再移動。</p>
+                <div class="motion-cards">
+                  <div class="motion-card">
+                    <strong>前進(Forward)</strong>
+                    <p>兩側馬達同向轉動，小車直行。</p>
+                  </div>
+                  <div class="motion-card">
+                    <strong>左轉(Left)</strong>
+                    <p>左右兩輪速度或方向不同，小車就會轉向。</p>
+                  </div>
+                  <div class="motion-card">
+                    <strong>停止(Stop)</strong>
+                    <p>兩側輸出歸零，小車就會停下來。</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </article>
+            </article>
 
-          <article class="illustration-card">
-            <div class="illustration-copy">
-              <p class="mini-label">圖 2</p>
-              <h3>小車程式骨架圖(Program Skeleton)</h3>
-              <p>很多學生不是不會寫，而是不知道順序。這張流程圖把最基本的小車程式寫法拆成 6 步。</p>
-            </div>
-            <div class="flow-diagram">
-              <div class="flow-node">初始化元件<br><small>Init Pins / PWM</small></div>
-              <div class="flow-arrow">→</div>
-              <div class="flow-node">定義動作函式<br><small>forward / backward / turn</small></div>
-              <div class="flow-arrow">→</div>
-              <div class="flow-node">接收指令<br><small>Keyboard / BLE / Sensor</small></div>
-              <div class="flow-arrow">→</div>
-              <div class="flow-node">條件判斷<br><small>if / elif / else</small></div>
-              <div class="flow-arrow">→</div>
-              <div class="flow-node">輸出到馬達<br><small>Pin High / Low</small></div>
-              <div class="flow-arrow">→</div>
-              <div class="flow-node">小車移動<br><small>Motion</small></div>
-            </div>
-          </article>
-
-          <article class="illustration-card dual">
-            <div class="illustration-copy">
-              <p class="mini-label">圖 3</p>
-              <h3>感測器程式圖解(Sensor Logic)</h3>
-              <p>這張圖對應課程裡的距離感測與 RGB 回饋範例，幫學生理解感測器程式通常就是「讀值 -> 判斷 -> 動作」。</p>
-            </div>
-            <div class="sensor-logic">
-              <div class="sensor-column">
-                <div class="sensor-step">讀取距離<br><small>dist = sensor.ping()</small></div>
-                <div class="sensor-arrow">↓</div>
-                <div class="sensor-step">判斷條件<br><small>if / elif / else</small></div>
-                <div class="sensor-arrow">↓</div>
-                <div class="sensor-step">執行反應<br><small>RGB / Motor / Stop</small></div>
+            <article class="illustration-card dual">
+              <div class="illustration-copy">
+                <p class="mini-label">圖 2</p>
+                <h3>感測器判斷圖(Sensor Logic)</h3>
+                <p>這張圖幫你看懂「先偵測，再判斷，最後改變動作」的流程。</p>
               </div>
-              <div class="sensor-ranges">
-                <div class="range-card red">
-                  <strong>小於 10 公分</strong>
-                  <p>紅燈(Red)</p>
+              <div class="sensor-logic">
+                <div class="sensor-column">
+                  <div class="sensor-step">讀取距離值<br><small>dist = sensor.ping()</small></div>
+                  <div class="sensor-arrow">→</div>
+                  <div class="sensor-step">條件判斷<br><small>if / elif / else</small></div>
+                  <div class="sensor-arrow">→</div>
+                  <div class="sensor-step">改變輸出<br><small>RGB / Motor / Stop</small></div>
                 </div>
-                <div class="range-card blue">
-                  <strong>10 到 20 公分</strong>
-                  <p>藍燈(Blue)</p>
-                </div>
-                <div class="range-card green">
-                  <strong>大於 20 公分</strong>
-                  <p>綠燈(Green)</p>
+                <div class="sensor-ranges">
+                  <div class="range-card red">
+                    <strong>小於 10 公分</strong>
+                    <p>停下或轉向</p>
+                  </div>
+                  <div class="range-card blue">
+                    <strong>10 到 20 公分</strong>
+                    <p>減速或提醒</p>
+                  </div>
+                  <div class="range-card green">
+                    <strong>大於 20 公分</strong>
+                    <p>維持前進</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </article>
+            </article>
 
-          <article class="illustration-card">
-            <div class="illustration-copy">
-              <p class="mini-label">圖 4</p>
-              <h3>藍牙遙控資料流(Bluetooth Control Flow)</h3>
-              <p>學生常常只看到手機或電腦畫面，不知道資料是怎樣跑到車子上的。這張圖把資料流拆開來看。</p>
-            </div>
-            <div class="pipeline">
-              <div class="pipe-node">電腦 / 手機<br><small>Keyboard or App</small></div>
-              <div class="pipe-arrow">→</div>
-              <div class="pipe-node">藍牙 / 序列傳輸<br><small>BLE / Serial</small></div>
-              <div class="pipe-arrow">→</div>
-              <div class="pipe-node">Pico 讀取指令<br><small>read() / decode()</small></div>
-              <div class="pipe-arrow">→</div>
-              <div class="pipe-node">呼叫動作函式<br><small>forward() / stop()</small></div>
-              <div class="pipe-arrow">→</div>
-              <div class="pipe-node">馬達輸出動作<br><small>Motor Motion</small></div>
-            </div>
-          </article>
-
-          <article class="illustration-card">
-            <div class="illustration-copy">
-              <p class="mini-label">圖 5</p>
-              <h3>小車函式與用途對照(Function Guide)</h3>
-              <p>如果學生忘記某個函式是做什麼的，可以直接看這張對照表，不需要先回去翻整份程式。</p>
-            </div>
-            <div class="function-grid">
-              <div class="function-chip">
-                <code>forward()</code>
-                <span>前進，兩輪向前</span>
+            <article class="illustration-card">
+              <div class="illustration-copy">
+                <p class="mini-label">圖 3</p>
+                <h3>常用函式對照圖(Function Guide)</h3>
+                <p>把函式名稱先和用途對起來，等一下看範例程式會輕鬆很多。</p>
               </div>
-              <div class="function-chip">
-                <code>backward()</code>
-                <span>後退，兩輪向後</span>
+              <div class="function-grid">
+                <div class="function-chip">
+                  <code>forward()</code>
+                  <span>讓小車往前走</span>
+                </div>
+                <div class="function-chip">
+                  <code>turn_left()</code>
+                  <span>讓小車往左轉</span>
+                </div>
+                <div class="function-chip">
+                  <code>turn_right()</code>
+                  <span>讓小車往右轉</span>
+                </div>
+                <div class="function-chip">
+                  <code>stop()</code>
+                  <span>讓小車停下來</span>
+                </div>
+                <div class="function-chip">
+                  <code>sensor.ping()</code>
+                  <span>讀取前方距離</span>
+                </div>
+                <div class="function-chip">
+                  <code>if / elif</code>
+                  <span>根據條件決定動作</span>
+                </div>
               </div>
-              <div class="function-chip">
-                <code>turn_left()</code>
-                <span>左轉，左右輪不一致</span>
-              </div>
-              <div class="function-chip">
-                <code>turn_right()</code>
-                <span>右轉，左右輪不一致</span>
-              </div>
-              <div class="function-chip">
-                <code>stop()</code>
-                <span>停止，輸出歸零</span>
-              </div>
-              <div class="function-chip">
-                <code>read()</code>
-                <span>讀取輸入指令或資料</span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section id="build" class="section split reveal">
-        <div class="section-heading compact">
-          <p class="eyebrow">材料設備 Build Kit</p>
-          <h2>圖解理解之後，再回頭認識元件與材料會更快。</h2>
-          <p>這一區保留課程原本的重要材料內容，讓老師點名、學生確認都更方便。</p>
-
-          <div class="checklist-card">
-            <h3>材料清單(Material Checklist)</h3>
-            <ul class="checklist">
-              <li>樹莓派 Pico(Raspberry Pi Pico)</li>
-              <li>控制板(Control Board)</li>
-              <li>麵包板(Breadboard) 與跳線(Jumper Wires)</li>
-              <li>鋰電池(Lithium Battery)</li>
-              <li>雙出軸直流馬達(DC Motor)</li>
-              <li>感測器(Sensor)</li>
-              <li>風扇葉片(Fan Blade)</li>
-              <li>蝸桿蝸輪(Worm Gear)</li>
-              <li>減速齒輪(Reduction Gear)</li>
-              <li>底座與支架(Frame Structure)</li>
-            </ul>
+            </article>
           </div>
         </div>
 
-        <div class="hardware-grid">
-          <article class="hardware-card">
-            <img src="assets/control-board.png" alt="控制板">
-            <div>
-              <h3>控制板(Control Board)</h3>
-              <p>程式最終就是透過這塊板子把指令送到 LED、感測器與馬達。</p>
-            </div>
-          </article>
-          <article class="hardware-card">
-            <img src="assets/mechanism-rig.png" alt="機構組件">
-            <div>
-              <h3>機構組件(Mechanical Structure)</h3>
-              <p>幫學生理解「程式控制」最後如何變成「實際運動」。</p>
-            </div>
-          </article>
-          <article class="hardware-card">
-            <img src="assets/motion-sensor.png" alt="感測器">
-            <div>
-              <h3>感測器(Sensor)</h3>
-              <p>適合搭配條件判斷(Condition) 與互動控制(Control Logic) 教學。</p>
-            </div>
-          </article>
-          <article class="hardware-card">
-            <img src="assets/ir-sensor.png" alt="輸入模組">
-            <div>
-              <h3>輸入模組(Input Module)</h3>
-              <p>讓學生知道輸入不是抽象概念，而是實際元件送進來的訊號。</p>
-            </div>
-          </article>
-        </div>
-      </section>
+        <div id="student-practice" class="student-zone-layout">
+          <div class="section-heading compact subsection-heading">
+            <p class="eyebrow">學生程式 Student Practice</p>
+            <h2>看完圖，直接用小段範例開始。</h2>
+          </div>
 
-      <section id="code" class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">程式練習 Code Practice</p>
-          <h2>看完圖解之後，再用範例把概念轉成程式。</h2>
-        </div>
-
-        <div class="practice-grid">
-          <article class="practice-card">
-            <header>
-              <h3>LED 基礎練習(LED Basics)</h3>
-              <span>LED.py</span>
-            </header>
-            <p>建立最基本的輸出(Output) 概念。</p>
-            <pre><code>from machine import Pin
+          <div class="practice-grid">
+            <article class="practice-card">
+              <header>
+                <h3>LED 基礎練習(LED Basics)</h3>
+                <span>LED.py</span>
+              </header>
+              <p>先建立最基本的輸出(Output) 概念。</p>
+              <pre><code>from machine import Pin
 import time
 
 led = Pin("LED", Pin.OUT)
@@ -726,32 +428,15 @@ led = Pin("LED", Pin.OUT)
 while True:
     led.toggle()
     time.sleep(1)</code></pre>
-          </article>
+            </article>
 
-          <article class="practice-card">
-            <header>
-              <h3>按鈕控制 LED(Button to LED)</h3>
-              <span>btn control led.py</span>
-            </header>
-            <p>理解輸入(Input) 怎樣控制輸出(Output)。</p>
-            <pre><code>from machine import Pin
-from time import sleep
-
-led = Pin(25, Pin.OUT)
-btn = Pin(3, Pin.IN)
-
-while True:
-    led.value(btn.value())
-    sleep(0.3)</code></pre>
-          </article>
-
-          <article class="practice-card">
-            <header>
-              <h3>感測器條件判斷(Sensor Condition)</h3>
-              <span>change sensor color by dist.py</span>
-            </header>
-            <p>這段對應上面的感測器圖解，非常適合初學者理解 if / elif。</p>
-            <pre><code>dist = sensor.ping()
+            <article class="practice-card">
+              <header>
+                <h3>感測器條件判斷(Sensor Condition)</h3>
+                <span>change sensor color by dist.py</span>
+              </header>
+              <p>這段最適合搭配上面的感測器圖解一起看。</p>
+              <pre><code>dist = sensor.ping()
 
 if dist &lt; 10:
     sensor.rgb_all(utils.COLOR_RED)
@@ -759,67 +444,68 @@ elif dist &lt; 20:
     sensor.rgb_all(utils.COLOR_BLUE)
 else:
     sensor.rgb_all(utils.COLOR_GREEN)</code></pre>
-          </article>
+            </article>
 
-          <article class="practice-card">
-            <header>
-              <h3>小車動作函式(Car Motion Functions)</h3>
-              <span>moto.py</span>
-            </header>
-            <p>這段最適合對照「函式與用途對照圖」來看。</p>
-            <pre><code>def forward():
+            <article class="practice-card">
+              <header>
+                <h3>小車動作函式(Car Motion Functions)</h3>
+                <span>moto.py</span>
+              </header>
+              <p>把「前進」和「左轉」變成函式，程式會更清楚。</p>
+              <pre><code>def forward():
     _set_motor(M1_A, M1_B, 1)
     _set_motor(M2_A, M2_B, 1)
 
 def turn_left():
     _set_motor(M1_A, M1_B, -1)
     _set_motor(M2_A, M2_B, 1)</code></pre>
-          </article>
+            </article>
+          </div>
         </div>
       </section>
 
       <section id="downloads" class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">下載區 Downloads</p>
-          <h2>學生看完網站後，可以直接下載教材繼續學。</h2>
-          <p>這一區保留老師授課與學生自學最常用的教材檔案。</p>
+          <h2>教材、簡報、PDF 和套件都集中在這裡。</h2>
+          <p>如果要備課、複習或課後延伸，直接從這一區下載就可以，不用再到資料夾裡慢慢找。</p>
         </div>
 
         <div class="download-grid">
           <article class="download-card">
             <span class="download-type">PPT</span>
             <h3>智慧控制程式設計(Smart Control Programming)</h3>
-            <p>控制板、韌體、腳位、數位輸出、PWM、感測器與藍牙遙控。</p>
+            <p>控制板、腳位、PWM、感測器與藍牙遙控的主要簡報。</p>
             <a class="button primary block" href="downloads/smart-fan-smart-control-programming.pptx">下載簡報</a>
           </article>
           <article class="download-card">
             <span class="download-type">PPT</span>
             <h3>機構結構(Mechanism Structure)</h3>
-            <p>齒輪、蝸桿蝸輪、四連桿與擺頭原理。</p>
+            <p>齒輪、蝸桿蝸輪、四連桿與擺頭原理整理。</p>
             <a class="button primary block" href="downloads/smart-fan-mechanism-structure.pptx">下載簡報</a>
           </article>
           <article class="download-card">
             <span class="download-type">PPT</span>
             <h3>課程簡報(Integrated Course Slides)</h3>
-            <p>控制與機構的整合版簡報，適合整體複習。</p>
+            <p>適合整體複習的小車與機構整合版教材。</p>
             <a class="button primary block" href="downloads/smart-fan-course-slides.pptx">下載簡報</a>
           </article>
           <article class="download-card">
             <span class="download-type">PDF</span>
             <h3>機器人程式設計實務(Robot Programming Practice)</h3>
-            <p>適合課後補充閱讀與搭配網站內容自學。</p>
+            <p>課後補充閱讀與教學延伸使用。</p>
             <a class="button secondary block" href="downloads/robot-programming-practice-python.pdf">下載 PDF</a>
           </article>
           <article class="download-card">
             <span class="download-type">PDF</span>
             <h3>Robot Code Jumpstart</h3>
-            <p>延伸閱讀與補充參考資料。</p>
+            <p>適合延伸參考與補充閱讀。</p>
             <a class="button secondary block" href="downloads/robot-code-jumpstart.pdf">下載 PDF</a>
           </article>
           <article class="download-card">
             <span class="download-type">ZIP</span>
             <h3>套件與資源(Libraries & Packages)</h3>
-            <p>包含 Mango、AmebaAI、AmebaNN 等壓縮檔。</p>
+            <p>包含 Mango、AmebaAI、AmebaNN 等課程用資源。</p>
             <div class="download-links">
               <a class="text-link" href="downloads/mango-library.zip">下載 Mango</a>
               <a class="text-link" href="downloads/ameba-ai.zip">下載 AmebaAI</a>
@@ -832,7 +518,7 @@ def turn_left():
 
     <footer class="site-footer">
       <p>機器人程式設計教學站</p>
-      <p>這一版特別強化了圖解教學，目標是讓學生更容易理解怎樣寫小車程式。</p>
+      <p>首頁已精簡成 1 小時 Boot Camp、教師區、學生區與下載區四大主區塊。</p>
     </footer>
   </div>
   <script src="script.js"></script>
