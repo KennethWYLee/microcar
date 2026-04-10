@@ -142,6 +142,7 @@ pre,
   border-radius: var(--radius-lg);
   background: var(--paper);
   box-shadow: var(--shadow);
+  scroll-margin-top: 104px;
 }
 
 .hero {
@@ -400,6 +401,10 @@ pre,
   gap: 18px;
 }
 
+.path-card {
+  background: linear-gradient(180deg, rgba(29, 79, 122, 0.08), rgba(255, 255, 255, 0.98));
+}
+
 .teacher-card {
   background: linear-gradient(180deg, rgba(234, 244, 251, 0.76), rgba(255, 255, 255, 0.98));
 }
@@ -418,8 +423,52 @@ pre,
   margin-bottom: 18px;
 }
 
+.student-start-card {
+  padding: 22px;
+  margin-bottom: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: linear-gradient(180deg, rgba(255, 244, 220, 0.9), rgba(255, 255, 255, 0.98));
+}
+
 .student-card {
   background: linear-gradient(180deg, rgba(255, 244, 220, 0.82), rgba(255, 255, 255, 0.98));
+}
+
+.path-steps,
+.student-path-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.path-step,
+.student-path-step {
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.path-step strong,
+.student-path-step strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.path-step p,
+.student-path-step p,
+.mission-next {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
 }
 
 .mission-card h3,
@@ -562,7 +611,9 @@ pre code {
 
   .bootcamp-grid,
   .student-lesson-layout,
-  .hero-points {
+  .hero-points,
+  .path-steps,
+  .student-path-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -590,12 +641,18 @@ pre code {
   .hero-actions,
   .bootcamp-grid,
   .student-lesson-layout,
-  .hero-points {
+  .hero-points,
+  .path-steps,
+  .student-path-grid {
     grid-template-columns: 1fr;
   }
 
   .hero-actions {
     margin-bottom: 20px;
+  }
+
+  .action-row {
+    flex-direction: column;
   }
 }
 
