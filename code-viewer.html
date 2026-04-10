@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>程式頁 | Raspberry Pi Pico 循跡小車教學站</title>
+  <meta name="description" content="在網頁中直接查看 Raspberry Pi Pico 小車教學用 Python 程式。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">MC</span>
+        <span class="brand-copy">
+          <strong>Raspberry Pi Pico 循跡小車教學站</strong>
+          <small>Line-following Car Teaching Site</small>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="網站導覽">
+        <a href="bootcamp.html">1 小時 Boot Camp</a>
+        <a href="teacher-zone.html">教師區(Teacher Zone)</a>
+        <a href="student-zone.html">學生區(Student Zone)</a>
+        <a href="downloads.html">下載區(Downloads)</a>
+      </nav>
+      <a class="button ghost" href="downloads.html">回下載區</a>
+    </header>
+
+    <main>
+      <section class="subpage-hero reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">Code Viewer</p>
+          <h1 id="code-title">程式載入中...</h1>
+          <p id="code-summary" class="hero-text">
+            請稍候，網站正在整理這份程式的內容。
+          </p>
+          <div class="action-row">
+            <a id="code-download" class="button primary" href="downloads.html">下載原始檔</a>
+            <a id="code-back" class="button secondary" href="bootcamp.html">回 Boot Camp</a>
+            <button id="copy-code" class="button ghost" type="button">複製程式</button>
+          </div>
+        </div>
+        <div class="subpage-aside">
+          <article class="aside-card">
+            <span class="zone-badge student">這頁怎麼用</span>
+            <ul class="detail-list" id="code-steps">
+              <li>先看上方說明，知道這份程式是做什麼的。</li>
+              <li>再往下看整份程式。</li>
+              <li>如果需要，最後再下載原始檔。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Python Code</p>
+          <h2>網站內直接看程式</h2>
+          <p>這裡顯示的是教學用的原始程式內容。你可以先在網頁閱讀，再決定要不要下載到電腦。</p>
+        </div>
+        <article class="code-viewer-card">
+          <div class="code-toolbar">
+            <span id="code-file-label" class="download-type">PY FILE</span>
+            <span id="code-stage" class="zone-badge teacher">教學程式</span>
+          </div>
+          <pre class="code-block"><code id="code-content">載入中...</code></pre>
+        </article>
+      </section>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
