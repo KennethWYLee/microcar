@@ -713,6 +713,17 @@ pre {
   background: linear-gradient(180deg, rgba(255, 252, 247, 0.98), rgba(249, 243, 235, 0.94));
 }
 
+.student-zone-layout {
+  display: grid;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.subsection-heading {
+  max-width: 680px;
+  margin-top: 6px;
+}
+
 .special-layout {
   display: grid;
   grid-template-columns: 1.08fr 0.92fr;
