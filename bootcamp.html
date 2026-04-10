@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>1 小時 Boot Camp | Raspberry Pi Pico 循跡小車教學站</title>
-  <meta name="description" content="60 分鐘國中生 Raspberry Pi Pico 小車入門教學頁。重點是電腦連上車子，並用鍵盤打字控制前進、後退、左轉、右轉、停止。">
+  <meta name="description" content="給國中生看的 Raspberry Pi Pico 小車 1 小時 Boot Camp。先用 Thonny 連上車子，再用鍵盤控制前進、後退、左轉、右轉、停止。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -32,132 +32,312 @@
     <main>
       <section class="subpage-hero reveal">
         <div class="hero-copy">
-          <p class="eyebrow">Boot Camp Teaching Page</p>
-          <h1>1 小時 Boot Camp 教學頁</h1>
+          <p class="eyebrow">Student Boot Camp</p>
+          <h1>1 小時 Boot Camp 學生版</h1>
           <p class="hero-text">
-            這一頁是給你教國中生用的 60 分鐘版本。這堂課不追求循跡，也不先碰感測器，
-            只先完成一件最重要的事：讓電腦和 Raspberry Pi Pico 小車成功串聯，
-            然後用電腦打字控制車子的前進、後退、左轉、右轉、停止。
+            這一頁是你上課時可以直接跟著看的版本。
+            今天先不要想循跡、感測器或藍牙，只做兩件事：
+            用 `Thonny` 讓電腦連上 Raspberry Pi Pico 小車，然後用鍵盤控制前進、後退、左轉、右轉、停止。
           </p>
           <div class="action-row">
-            <a class="button primary" href="downloads.html#download-teaching-plan">先下載教學建議</a>
-            <a class="button secondary" href="teacher-zone.html">看教師完整頁</a>
-            <a class="button ghost" href="student-zone.html">看學生任務頁</a>
+            <a class="button primary" href="downloads/keyboard-car-control.py">下載今天的程式</a>
+            <a class="button secondary" href="#thonny-steps">先看 Thonny 步驟</a>
+            <a class="button ghost" href="#code-walkthrough">從上到下讀程式</a>
           </div>
         </div>
         <div class="subpage-aside">
           <article class="aside-card">
-            <span class="zone-badge teacher">Boot Camp Goal</span>
-            <h3>這堂課要完成什麼</h3>
+            <span class="zone-badge student">Today</span>
+            <h3>今天完成這 3 件事就很棒</h3>
             <ul class="detail-list">
-              <li>學生知道如何把電腦和 Raspberry Pi Pico 小車連起來。</li>
-              <li>學生知道鍵盤輸入可以控制車子動作。</li>
-              <li>學生能用 `W / A / S / D / X` 控制前進、左轉、後退、右轉、停止。</li>
+              <li>把電腦和車子連起來。</li>
+              <li>看懂 `W / A / S / D / X` 代表什麼動作。</li>
+              <li>用鍵盤讓小車動起來，再安全地停下來。</li>
             </ul>
           </article>
           <article class="aside-card">
-            <img src="assets/control-board.png" alt="Boot Camp 使用的 Raspberry Pi Pico 小車控制板">
+            <img src="assets/control-board.png" alt="Raspberry Pi Pico 小車控制板">
           </article>
         </div>
       </section>
 
       <section class="section reveal">
         <div class="section-heading">
-          <p class="eyebrow">Teaching Flow</p>
-          <h2>60 分鐘建議節奏</h2>
-          <p>如果時間真的只剩 1 小時，建議只做最穩定、最有成就感的版本，不再加感測器與循跡。</p>
+          <p class="eyebrow">60-min Route</p>
+          <h2>1 小時可以怎麼學</h2>
+          <p>今天的版本先求穩定和成功感。你只要會控制小車，就已經完成這堂課最重要的目標。</p>
         </div>
         <div class="page-grid">
           <article class="content-card">
-            <span class="zone-badge teacher">0-10 分鐘</span>
-            <h3>連接電腦和小車</h3>
+            <span class="zone-badge student">0-10 分鐘</span>
+            <h3>先把電腦和小車連起來</h3>
             <ul class="detail-list">
-              <li>介紹 Raspberry Pi Pico 小車、USB 連線與電腦端操作方式。</li>
-              <li>確認學生知道哪裡插線、哪裡打字、哪裡會看到回應。</li>
-              <li>提醒今天的目標是「成功控制車子」，不是一次學完整個專案。</li>
+              <li>把 USB 線接好。</li>
+              <li>打開 `Thonny`。</li>
+              <li>確認老師的車和你的車都能被電腦看到。</li>
             </ul>
           </article>
           <article class="content-card">
-            <span class="zone-badge teacher">10-20 分鐘</span>
-            <h3>示範打字控制</h3>
+            <span class="zone-badge student">10-20 分鐘</span>
+            <h3>先看老師示範一次</h3>
             <ul class="detail-list">
-              <li>示範在電腦端輸入 `W / A / S / D / X`。</li>
-              <li>讓學生知道一個字元就能對應一個車子動作。</li>
-              <li>全程建議搭配 `小車鍵盤控制範例(Keyboard Control)`。</li>
+              <li>看老師在 `Thonny Shell` 輸入 `w / a / s / d / x`。</li>
+              <li>看懂每個字母對應什麼動作。</li>
+              <li>先記住 `x` 是停止。</li>
             </ul>
           </article>
           <article class="content-card">
-            <span class="zone-badge teacher">20-40 分鐘</span>
-            <h3>學生輪流操作五個動作</h3>
+            <span class="zone-badge student">20-40 分鐘</span>
+            <h3>換你自己操作</h3>
             <ul class="detail-list">
-              <li>先讓學生輪流操作前進、後退、左轉、右轉、停止。</li>
-              <li>讓學生把鍵盤字母和實際動作連起來。</li>
-              <li>這一段重點是熟悉操作，不需要加入更多功能。</li>
+              <li>先試 `w` 和 `x`。</li>
+              <li>再試 `a`、`d` 和 `s`。</li>
+              <li>每做完一個動作，都記得讓小車停下來。</li>
             </ul>
           </article>
           <article class="content-card">
-            <span class="zone-badge teacher">40-60 分鐘</span>
-            <h3>收尾與挑戰</h3>
+            <span class="zone-badge student">40-60 分鐘</span>
+            <h3>完成小挑戰</h3>
             <ul class="detail-list">
-              <li>可以請學生挑戰連續輸入一串動作，像是前進、左轉、停止。</li>
-              <li>最後請學生口頭說出每個按鍵控制什麼。</li>
-              <li>如果時間夠，再簡單介紹「之後還能學到循跡和感測器」。</li>
+              <li>讓小車完成「前進、左轉、停止」。</li>
+              <li>讓小車完成「前進、右轉、後退、停止」。</li>
+              <li>最後說出每個字母控制什麼動作。</li>
             </ul>
           </article>
         </div>
       </section>
 
-      <section class="section reveal">
+      <section id="thonny-steps" class="section reveal">
         <div class="section-heading">
-          <p class="eyebrow">What To Open</p>
-          <h2>這一頁推薦你先打開哪些檔案</h2>
-          <p>如果你時間很少，這堂 Boot Camp 其實只要先開兩份就夠了。</p>
-        </div>
-        <div class="resource-roadmap">
-          <article class="resource-step">
-            <strong>1. 先下載授課建議</strong>
-            <p>用來決定這堂課的節奏與停在哪裡。</p>
-            <a class="text-link" href="downloads.html#download-teaching-plan">前往教學建議</a>
-          </article>
-          <article class="resource-step">
-            <strong>2. 再開小車鍵盤控制範例</strong>
-            <p>這是這堂課最核心的檔案，整堂課主要就靠它完成。</p>
-            <a class="text-link" href="downloads.html#download-keyboard">前往鍵盤控制範例</a>
-          </article>
-          <article class="resource-step">
-            <strong>3. 馬達基本函式可選擇性補充</strong>
-            <p>如果學生吸收得快，再補充 `forward()`、`turn_left()` 這些函式的概念。</p>
-            <a class="text-link" href="downloads.html#download-motor">前往馬達函式範例</a>
-          </article>
-          <article class="resource-step">
-            <strong>4. 感測器範例留到下一堂</strong>
-            <p>這份不建議放進這次 1 小時 Boot Camp，可以當作之後的延伸。</p>
-            <a class="text-link" href="downloads.html#download-sensor">之後再看感測器範例</a>
-          </article>
-        </div>
-      </section>
-
-      <section class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">Teacher Tips</p>
-          <h2>老師現場可以怎麼問</h2>
+          <p class="eyebrow">Thonny Steps</p>
+          <h2>先照這個順序操作 Thonny</h2>
+          <p>你現在不用自己記全部，只要一個步驟一個步驟跟著做就可以。</p>
         </div>
         <div class="page-grid">
           <article class="content-card">
-            <h3>讓學生說出原因</h3>
+            <h3>Step 1. 接上 USB 線</h3>
             <ul class="detail-list">
-              <li>如果我打 `W`，車子會做什麼？</li>
-              <li>如果我打 `A` 或 `D`，車子會往哪邊轉？</li>
-              <li>為什麼 `X` 很重要？它代表什麼？</li>
+              <li>把 Raspberry Pi Pico 小車接到電腦。</li>
+              <li>先不要亂拔線，讓車子和電腦保持連線。</li>
             </ul>
           </article>
-          <article class="content-card callout-card">
-            <h3>第一堂課先不要做的事</h3>
+          <article class="content-card">
+            <h3>Step 2. 打開 Thonny</h3>
             <ul class="detail-list">
-              <li>不要一次講完藍牙(Bluetooth)與所有遙控方式。</li>
-              <li>不要把感測器、循跡、if 判斷都塞進同一堂課。</li>
-              <li>不要讓學生一開始就看完整大專案。</li>
+              <li>右下角確認解譯器是 `MicroPython (Raspberry Pi Pico)`。</li>
+              <li>如果還沒選到，請跟著老師一起設定。</li>
             </ul>
+          </article>
+          <article class="content-card">
+            <h3>Step 3. 開啟今天的程式</h3>
+            <ul class="detail-list">
+              <li>下載 `keyboard-car-control.py`。</li>
+              <li>在 Thonny 打開這份檔案。</li>
+              <li>按綠色 `Run` 執行。</li>
+            </ul>
+          </article>
+          <article class="content-card">
+            <h3>Step 4. 到 Shell 打字控制</h3>
+            <ul class="detail-list">
+              <li>在 Thonny 下方 `Shell` 輸入 `w` 後按 Enter。</li>
+              <li>要停車時輸入 `x` 後按 Enter。</li>
+              <li>如果車子不聽話，先輸入 `x`。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Action Map</p>
+          <h2>先記住這 5 個按鍵</h2>
+          <p>這是今天最重要的一張圖。先會控制，再慢慢學更長的程式。</p>
+        </div>
+        <div class="page-grid">
+          <article class="student-card mission-card">
+            <span class="zone-badge student">Keyboard Control</span>
+            <div class="keys-grid" aria-label="鍵盤控制小車">
+              <div class="key empty"></div>
+              <div class="key active">W<span>前進</span></div>
+              <div class="key empty"></div>
+              <div class="key">A<span>左轉</span></div>
+              <div class="key active">S<span>後退</span></div>
+              <div class="key">D<span>右轉</span></div>
+              <div class="key stop">X<span>停止</span></div>
+            </div>
+          </article>
+          <article class="content-card">
+            <h3>今天先記這 3 件事</h3>
+            <ul class="detail-list">
+              <li>一個按鍵，對應一個動作。</li>
+              <li>先會 `w` 和 `x`，就已經很厲害。</li>
+              <li>操作完一個動作，最好先停車再換下一個動作。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="code-walkthrough" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Code Walkthrough</p>
+          <h2>今天的程式，從上到下這樣看</h2>
+          <p>你不用一次看整份。跟著老師從上往下看，就會知道每一段在做什麼。</p>
+        </div>
+        <div class="student-lesson-layout">
+          <article class="lesson-card">
+            <div class="lesson-copy">
+              <p class="mini-label">Part 1</p>
+              <h3>先匯入模組，設定腳位</h3>
+              <p>這一段是在告訴小車：「等一下我要控制哪些腳位。」</p>
+            </div>
+            <pre><code>from machine import Pin
+import sys
+import time
+
+M1_A = Pin(12, Pin.OUT)
+M1_B = Pin(13, Pin.OUT)
+M2_A = Pin(10, Pin.OUT)
+M2_B = Pin(11, Pin.OUT)
+LED = Pin(25, Pin.OUT)</code></pre>
+          </article>
+
+          <article class="lesson-card">
+            <div class="lesson-copy">
+              <p class="mini-label">Part 2</p>
+              <h3>先做出「停車」和「往前」</h3>
+              <p>老師可以先帶你看 `stop()` 和 `forward()`，知道函式是拿來控制動作的。</p>
+            </div>
+            <pre><code>def _set_motor(pin_a, pin_b, direction):
+    if direction &gt; 0:
+        pin_a.value(1)
+        pin_b.value(0)
+    elif direction &lt; 0:
+        pin_a.value(0)
+        pin_b.value(1)
+    else:
+        pin_a.value(0)
+        pin_b.value(0)
+
+def stop():
+    _set_motor(M1_A, M1_B, 0)
+    _set_motor(M2_A, M2_B, 0)
+
+def forward():
+    _set_motor(M1_A, M1_B, 1)
+    _set_motor(M2_A, M2_B, 1)</code></pre>
+          </article>
+
+          <article class="lesson-card">
+            <div class="lesson-copy">
+              <p class="mini-label">Part 3</p>
+              <h3>再補齊後退、左轉、右轉</h3>
+              <p>當你看得懂方向怎麼改，小車的基本動作就差不多都完成了。</p>
+            </div>
+            <pre><code>def backward():
+    _set_motor(M1_A, M1_B, -1)
+    _set_motor(M2_A, M2_B, -1)
+
+def turn_left():
+    _set_motor(M1_A, M1_B, -1)
+    _set_motor(M2_A, M2_B, 1)
+
+def turn_right():
+    _set_motor(M1_A, M1_B, 1)
+    _set_motor(M2_A, M2_B, -1)</code></pre>
+          </article>
+
+          <article class="lesson-card">
+            <div class="lesson-copy">
+              <p class="mini-label">Part 4</p>
+              <h3>讀取鍵盤指令</h3>
+              <p>這一段是在等待你從 `Thonny Shell` 輸入一個字母。</p>
+            </div>
+            <pre><code>print("請在 Thonny Shell 輸入 w / a / s / d / x 後按 Enter")
+
+while True:
+    cmd = sys.stdin.read(1)
+    if not cmd:
+        continue
+
+    cmd = cmd.strip().lower()
+    if not cmd:
+        continue</code></pre>
+          </article>
+
+          <article class="lesson-card">
+            <div class="lesson-copy">
+              <p class="mini-label">Part 5</p>
+              <h3>把按鍵對應到動作</h3>
+              <p>這是今天最重要的一段。每個字母都會呼叫一個動作函式。</p>
+            </div>
+            <pre><code>    if cmd == "w":
+        forward()
+    elif cmd == "s":
+        backward()
+    elif cmd == "a":
+        turn_left()
+    elif cmd == "d":
+        turn_right()
+    else:
+        stop()</code></pre>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Practice Order</p>
+          <h2>實際操作時，建議這樣練</h2>
+          <p>先從最安全、最容易成功的開始。不要一開始就連續按很多指令。</p>
+        </div>
+        <div class="download-grid">
+          <article class="download-card">
+            <span class="download-type">練習 1</span>
+            <h3>先試 `x`</h3>
+            <p>先知道怎麼停車，這樣等一下比較安心。</p>
+          </article>
+          <article class="download-card">
+            <span class="download-type">練習 2</span>
+            <h3>再試 `w` 然後 `x`</h3>
+            <p>先讓車子前進一下，再停下來。</p>
+          </article>
+          <article class="download-card">
+            <span class="download-type">練習 3</span>
+            <h3>加入 `a` 和 `d`</h3>
+            <p>讓車子左轉、右轉，熟悉方向感。</p>
+          </article>
+          <article class="download-card">
+            <span class="download-type">練習 4</span>
+            <h3>最後試 `s`</h3>
+            <p>讓車子後退，再記得停車。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Today Files</p>
+          <h2>今天真的要用到的檔案</h2>
+          <p>這堂課先用一份主程式就夠了。其他檔案先當補充，不要一下子開太多。</p>
+        </div>
+        <div class="download-grid">
+          <article class="download-card">
+            <span class="download-type">MAIN</span>
+            <h3>小車鍵盤控制範例</h3>
+            <p>今天最主要的程式。請先下載這份，然後用 Thonny 開啟。</p>
+            <a class="button primary block" href="downloads/keyboard-car-control.py">下載今天的程式</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">EXTRA</span>
+            <h3>馬達基本函式</h3>
+            <p>如果你想再看一次前進、後退、左轉、右轉的函式，可以再開這份。</p>
+            <a class="button secondary block" href="downloads/basic-motor-functions.py">下載補充程式</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">TEACHER</span>
+            <h3>教師教學建議</h3>
+            <p>這份比較適合老師備課看，不是學生今天一定要開的檔案。</p>
+            <a class="button ghost block" href="downloads/one-hour-bootcamp-teaching-plan.txt">老師下載建議</a>
           </article>
         </div>
       </section>
