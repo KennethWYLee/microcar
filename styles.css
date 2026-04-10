@@ -1,15 +1,18 @@
 :root {
-  --bg: #f4efe6;
-  --surface: rgba(255, 251, 245, 0.9);
-  --surface-strong: #fffaf2;
-  --text: #18222b;
-  --muted: #58656f;
-  --line: rgba(24, 34, 43, 0.09);
-  --primary: #1f5d76;
-  --primary-deep: #123847;
-  --accent: #e47a2d;
-  --accent-soft: #ffd9b7;
-  --shadow: 0 24px 64px rgba(39, 49, 57, 0.12);
+  --bg: #f4efe5;
+  --surface: rgba(255, 251, 246, 0.92);
+  --surface-strong: #fffaf3;
+  --text: #17212b;
+  --muted: #5a6670;
+  --line: rgba(23, 33, 43, 0.08);
+  --primary: #1f5f7c;
+  --primary-deep: #133c4e;
+  --accent: #e07b33;
+  --accent-soft: #ffd7b6;
+  --success: #dff0e8;
+  --teacher: #e5f0fb;
+  --student: #fff0dd;
+  --shadow: 0 24px 64px rgba(35, 45, 54, 0.12);
   --radius: 24px;
 }
 
@@ -23,12 +26,12 @@ html {
 
 body {
   margin: 0;
-  font-family: "Space Grotesk", sans-serif;
+  font-family: "Noto Sans TC", sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at top left, rgba(228, 122, 45, 0.19), transparent 25%),
-    radial-gradient(circle at top right, rgba(31, 93, 118, 0.16), transparent 24%),
-    linear-gradient(180deg, #f8f3eb 0%, #f1e9dc 100%);
+    radial-gradient(circle at top left, rgba(224, 123, 51, 0.18), transparent 25%),
+    radial-gradient(circle at top right, rgba(31, 95, 124, 0.14), transparent 24%),
+    linear-gradient(180deg, #faf5ee 0%, #f0e8db 100%);
 }
 
 body::before {
@@ -36,8 +39,8 @@ body::before {
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(24, 34, 43, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(24, 34, 43, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(23, 33, 43, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23, 33, 43, 0.028) 1px, transparent 1px);
   background-size: 28px 28px;
   pointer-events: none;
   mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.85), transparent 84%);
@@ -70,7 +73,7 @@ img {
   padding: 14px 18px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: rgba(255, 250, 243, 0.84);
+  background: rgba(255, 250, 243, 0.86);
   backdrop-filter: blur(18px);
   box-shadow: 0 14px 40px rgba(28, 39, 48, 0.08);
 }
@@ -84,12 +87,12 @@ img {
 .brand-mark {
   display: grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 14px;
+  width: 44px;
+  height: 44px;
+  border-radius: 15px;
   background: linear-gradient(135deg, var(--primary), var(--accent));
   color: white;
-  font-weight: 700;
+  font-weight: 900;
 }
 
 .brand-copy {
@@ -99,22 +102,20 @@ img {
 }
 
 .brand-copy strong {
-  font-size: 0.96rem;
+  font-size: 1rem;
 }
 
 .brand-copy small,
 .site-nav a,
 .eyebrow,
-.meta-label,
-.signal-label {
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-size: 0.72rem;
+.signal-label,
+.download-type {
+  letter-spacing: 0.06em;
+  font-size: 0.76rem;
 }
 
 .brand-copy small,
 .site-nav a,
-.meta-label,
 .signal-label {
   color: var(--muted);
 }
@@ -155,22 +156,26 @@ img {
 .button.primary {
   background: linear-gradient(135deg, var(--primary-deep), var(--primary));
   color: white;
-  box-shadow: 0 16px 30px rgba(18, 56, 71, 0.2);
+  box-shadow: 0 16px 30px rgba(19, 60, 78, 0.18);
 }
 
 .button.secondary {
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.86);
   border-color: var(--line);
 }
 
 .button.ghost {
   border-color: var(--line);
-  background: rgba(255, 255, 255, 0.42);
+  background: rgba(255, 255, 255, 0.48);
+}
+
+.button.block {
+  width: 100%;
 }
 
 .hero {
   display: grid;
-  grid-template-columns: 1.08fr 0.92fr;
+  grid-template-columns: 1.06fr 0.94fr;
   gap: 40px;
   padding: 74px 0 40px;
   align-items: center;
@@ -178,69 +183,85 @@ img {
 
 .eyebrow {
   color: var(--primary);
-  font-weight: 700;
+  font-weight: 800;
   margin-bottom: 12px;
+  text-transform: uppercase;
 }
 
 .hero h1,
 .section-heading h2 {
   margin: 0;
-  line-height: 0.98;
-  letter-spacing: -0.04em;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
 }
 
 .hero h1 {
-  font-size: clamp(3rem, 6vw, 5.4rem);
+  font-size: clamp(2.4rem, 5vw, 4.7rem);
   max-width: 11ch;
 }
 
 .hero-text,
 .section-heading p,
 .overview-card p,
-.objective-card p,
+.teaching-card p,
+.teaching-card li,
 .lesson-copy p,
+.lesson-copy li,
 .hardware-card p,
 .concept-card p,
 .practice-card p,
 .flow-card p,
-.resource-copy p,
-.resource-card p,
+.download-card p,
 .site-footer p,
-.checklist li {
+.checklist li,
+.guide-card p,
+.hero-stats span {
   color: var(--muted);
-  line-height: 1.7;
+  line-height: 1.8;
 }
 
 .hero-text {
-  max-width: 62ch;
+  max-width: 60ch;
   margin: 22px 0 0;
-  font-size: 1.04rem;
+  font-size: 1.03rem;
 }
 
 .hero-actions {
   display: flex;
   gap: 14px;
-  margin: 28px 0;
+  margin: 28px 0 22px;
   flex-wrap: wrap;
 }
 
-.hero-stats {
+.hero-stats,
+.guide-grid,
+.overview-grid,
+.teaching-grid,
+.hardware-grid,
+.concept-grid,
+.practice-grid,
+.flow-grid,
+.download-grid {
   display: grid;
+  gap: 18px;
+}
+
+.hero-stats {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
   max-width: 560px;
 }
 
 .hero-stats div,
+.guide-card,
 .overview-card,
-.objective-card,
+.teaching-card,
 .lesson-card,
 .checklist-card,
 .hardware-card,
 .concept-card,
 .practice-card,
 .flow-card,
-.resource-card,
+.download-card,
 .signal-card {
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -257,8 +278,22 @@ img {
   font-size: 2rem;
 }
 
-.hero-stats span {
-  color: var(--muted);
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0;
+  margin: 20px 0 0;
+  list-style: none;
+}
+
+.hero-tags li {
+  padding: 10px 14px;
+  border: 1px solid rgba(31, 95, 124, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--primary-deep);
+  font-size: 0.92rem;
 }
 
 .hero-visual {
@@ -272,17 +307,17 @@ img {
 }
 
 .orb-a {
-  inset: 52px 8% auto auto;
+  inset: 54px 8% auto auto;
   width: 180px;
   height: 180px;
-  background: rgba(228, 122, 45, 0.24);
+  background: rgba(224, 123, 51, 0.24);
 }
 
 .orb-b {
-  inset: auto auto 52px 4%;
+  inset: auto auto 52px 5%;
   width: 220px;
   height: 220px;
-  background: rgba(31, 93, 118, 0.18);
+  background: rgba(31, 95, 124, 0.18);
 }
 
 .photo-card {
@@ -311,7 +346,7 @@ img {
   position: absolute;
   right: 24px;
   bottom: 4px;
-  width: min(76%, 330px);
+  width: min(76%, 340px);
   padding: 20px 22px;
 }
 
@@ -322,7 +357,7 @@ img {
 }
 
 .section {
-  padding: 36px 0;
+  padding: 38px 0;
 }
 
 .section-heading {
@@ -335,59 +370,79 @@ img {
 }
 
 .section-heading h2 {
-  font-size: clamp(2rem, 4vw, 3.15rem);
+  font-size: clamp(2rem, 4vw, 3rem);
   margin-bottom: 10px;
 }
 
-.overview-grid,
-.objective-grid,
-.concept-grid,
-.practice-grid,
-.flow-grid,
-.resource-grid,
-.hardware-grid {
-  display: grid;
-  gap: 18px;
+.guide-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.guide-card,
+.overview-card,
+.teaching-card,
+.concept-card,
+.flow-card,
+.download-card {
+  padding: 22px 24px;
+}
+
+.guide-card {
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.guide-card:hover,
+.guide-card:focus-visible {
+  transform: translateY(-4px);
+  border-color: rgba(31, 95, 124, 0.22);
+}
+
+.guide-card span {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 14px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--accent-soft), white);
+  color: var(--primary-deep);
+  font-weight: 800;
+}
+
+.guide-card h3,
+.overview-card h3,
+.teaching-card h3,
+.lesson-copy h3,
+.hardware-card h3,
+.concept-card h3,
+.practice-card h3,
+.download-card h3 {
+  margin: 0 0 10px;
 }
 
 .overview-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-.objective-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+.teaching-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.overview-card,
-.objective-card,
-.concept-card,
-.flow-card,
-.resource-card {
-  padding: 22px 24px;
+.teacher-card {
+  background: linear-gradient(180deg, rgba(229, 240, 251, 0.88), rgba(255, 251, 246, 0.92));
 }
 
-.overview-card h3,
-.objective-card h3,
-.lesson-copy h3,
-.hardware-card h3,
-.concept-card h3,
-.practice-card h3,
-.resource-card strong {
-  margin: 0 0 10px;
+.student-card {
+  background: linear-gradient(180deg, rgba(255, 240, 221, 0.92), rgba(255, 251, 246, 0.92));
 }
 
-.objective-step,
-.lesson-number {
-  display: inline-grid;
-  place-items: center;
-  min-width: 84px;
-  height: 42px;
-  padding: 0 14px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, var(--accent-soft), white);
-  color: var(--primary-deep);
-  font-weight: 700;
-  font-size: 0.86rem;
+.note-card {
+  background: linear-gradient(180deg, rgba(223, 240, 232, 0.88), rgba(255, 251, 246, 0.92));
+}
+
+.teaching-card ul {
+  margin: 12px 0 0;
+  padding-left: 18px;
 }
 
 .lesson-list {
@@ -402,11 +457,22 @@ img {
   padding: 22px 24px;
 }
 
+.lesson-number {
+  display: inline-grid;
+  place-items: center;
+  min-width: 90px;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent-soft), white);
+  color: var(--primary-deep);
+  font-weight: 800;
+  font-size: 0.92rem;
+}
+
 .lesson-copy ul {
   margin: 12px 0 0;
   padding-left: 18px;
-  color: var(--muted);
-  line-height: 1.7;
 }
 
 .split {
@@ -490,37 +556,37 @@ img {
   color: var(--primary-deep);
 }
 
-.flow-grid,
-.resource-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.flow-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .flow-card span {
   display: inline-block;
   margin-bottom: 10px;
   color: var(--primary);
-  font-weight: 700;
+  font-weight: 800;
 }
 
-.resource-band {
-  display: grid;
-  grid-template-columns: 0.86fr 1.14fr;
-  gap: 22px;
-  align-items: start;
+.download-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.resource-grid {
-  align-items: stretch;
+.download-type {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: var(--primary);
+  font-weight: 800;
+  text-transform: uppercase;
 }
 
-.resource-card strong {
-  display: block;
-  font-size: 1.08rem;
+.download-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
 }
 
 .text-link {
-  display: inline-block;
-  margin-top: 10px;
   color: var(--primary-deep);
   font-weight: 700;
 }
@@ -553,8 +619,7 @@ img {
 @media (max-width: 1080px) {
   .site-header,
   .hero,
-  .split,
-  .resource-band {
+  .split {
     grid-template-columns: 1fr;
   }
 
@@ -564,10 +629,15 @@ img {
     justify-content: center;
   }
 
+  .guide-grid,
   .overview-grid,
+  .teaching-grid,
   .concept-grid,
-  .flow-grid,
-  .resource-grid {
+  .download-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .flow-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -591,24 +661,22 @@ img {
   }
 
   .hero h1 {
-    max-width: 10ch;
+    max-width: 11ch;
   }
 
+  .hero-stats,
+  .guide-grid,
   .overview-grid,
-  .objective-grid,
+  .teaching-grid,
   .hardware-grid,
   .concept-grid,
   .practice-grid,
   .flow-grid,
-  .resource-grid {
+  .download-grid {
     grid-template-columns: 1fr;
   }
 
   .lesson-card {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-stats {
     grid-template-columns: 1fr;
   }
 

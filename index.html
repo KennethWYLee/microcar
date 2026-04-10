@@ -1,216 +1,263 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Microcar Robotics Classroom</title>
-  <meta name="description" content="A clearer teaching website for the robot-programming course, organized around the smart oscillating fan project, Raspberry Pi Pico control, mechanical structure, and classroom practice.">
+  <title>機器人程式設計教學站 | 智慧擺頭電風扇專題</title>
+  <meta name="description" content="以機器人課程既有教材與 PPT 為基礎，整理成老師授課版的教學網站，內容涵蓋控制電路、機構設計、感測器、Python 程式與智慧擺頭電風扇專題。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="page-shell">
     <header class="site-header">
       <a class="brand" href="#top">
-        <span class="brand-mark">M</span>
+        <span class="brand-mark">教</span>
         <span class="brand-copy">
-          <strong>Microcar Robotics Classroom</strong>
-          <small>Smart Oscillating Fan Course Site</small>
+          <strong>機器人程式設計教學站</strong>
+          <small>智慧擺頭電風扇專題網站</small>
         </span>
       </a>
-      <nav class="site-nav" aria-label="Primary">
-        <a href="#overview">Overview</a>
-        <a href="#objectives">Objectives</a>
-        <a href="#lessons">Lessons</a>
-        <a href="#build">Build</a>
-        <a href="#code">Code</a>
-        <a href="#resources">Resources</a>
+      <nav class="site-nav" aria-label="主要導覽">
+        <a href="#guide">導覽區</a>
+        <a href="#teaching">授課建議</a>
+        <a href="#lessons">單元地圖</a>
+        <a href="#code">程式練習</a>
+        <a href="#downloads">下載區</a>
       </nav>
-      <a class="button ghost" href="https://github.com/KennethWYLee/microcar" target="_blank" rel="noreferrer">GitHub Repo</a>
+      <a class="button ghost" href="https://github.com/KennethWYLee/microcar" target="_blank" rel="noreferrer">GitHub</a>
     </header>
 
     <main id="top">
       <section class="hero reveal">
         <div class="hero-copy">
-          <p class="eyebrow">Course website rebuilt from the existing PPT decks</p>
-          <h1>A teaching page that follows the real classroom sequence.</h1>
+          <p class="eyebrow">老師授課版 Teacher Edition</p>
+          <h1>把原本的課堂簡報，整理成更清楚、更好教、也更好自學的教學網站。</h1>
           <p class="hero-text">
-            This version is designed as a teaching website instead of a showcase page. It follows the lecture materials more
-            closely: first the board and firmware, then digital control, PWM and sensing, then mechanical structure, and
-            finally the full smart oscillating fan build.
+            本網站依照既有教材與簡報內容，將「智慧型可擺動調速電風扇」專題重新整理成課堂導向的教學網頁。
+            內容以中文為主，並在關鍵詞補上英文，例如：數位輸入(Digital Input)、脈衝寬度調變(PWM)、連桿機構(Four-bar Linkage)。
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="#lessons">Start with the lesson map</a>
-            <a class="button secondary" href="#resources">Jump to source materials</a>
+            <a class="button primary" href="#guide">先看導覽區</a>
+            <a class="button secondary" href="#downloads">直接下載教材</a>
           </div>
+
           <div class="hero-stats">
             <div>
               <strong>3</strong>
-              <span>source PPT decks</span>
+              <span>份簡報(PPT)</span>
             </div>
             <div>
-              <strong>25+</strong>
-              <span>teaching slides in the main deck</span>
+              <strong>93</strong>
+              <span>個程式檔(Python)</span>
             </div>
             <div>
               <strong>1</strong>
-              <span>integrated classroom project</span>
+              <span>整合專題(Project)</span>
             </div>
           </div>
+
+          <ul class="hero-tags" aria-label="課程關鍵詞">
+            <li>樹莓派 Pico(Raspberry Pi Pico)</li>
+            <li>數位輸入輸出(Digital I/O)</li>
+            <li>脈衝寬度調變(PWM)</li>
+            <li>齒輪傳動(Gear Transmission)</li>
+            <li>連桿機構(Linkage Mechanism)</li>
+            <li>藍牙遙控(Bluetooth Control)</li>
+          </ul>
         </div>
 
         <div class="hero-visual" aria-hidden="true">
           <div class="orb orb-a"></div>
           <div class="orb orb-b"></div>
           <div class="photo-card photo-board">
-            <img src="assets/control-board.png" alt="Robot control board with Raspberry Pi Pico and OLED display">
+            <img src="assets/control-board.png" alt="控制電路板與 Raspberry Pi Pico">
           </div>
           <div class="photo-card photo-mechanism">
-            <img src="assets/mechanism-rig.png" alt="Mechanical oscillating fan structure">
+            <img src="assets/mechanism-rig.png" alt="擺頭機構示意結構">
           </div>
           <div class="signal-card">
-            <span class="signal-label">Teaching spine</span>
-            <strong>Board setup -> control logic -> mechanism -> integrated build</strong>
-            <p>The page now reads like a course plan, not just a product landing page.</p>
+            <span class="signal-label">課程核心 Core Focus</span>
+            <strong>電路(Circuit) + 程式(Programming) + 機構(Mechanism)</strong>
+            <p>老師可以依照教學節奏授課，學生也可以依序回看網站完成自學。</p>
           </div>
+        </div>
+      </section>
+
+      <section id="guide" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">導覽區 Navigation</p>
+          <h2>如果你是老師，建議依照這個順序使用網站。</h2>
+          <p>
+            這一區是整個網站的入口。你可以把它當成授課流程表：先說明課程定位，再帶學生看單元，再進入實作，
+            最後讓學生自己回去從下載區與程式練習完成複習。
+          </p>
+        </div>
+
+        <div class="guide-grid">
+          <a class="guide-card" href="#overview">
+            <span>01</span>
+            <h3>課程定位(Overview)</h3>
+            <p>快速告訴學生這門課在做什麼、最後會完成什麼作品。</p>
+          </a>
+          <a class="guide-card" href="#teaching">
+            <span>02</span>
+            <h3>授課建議(Teaching Plan)</h3>
+            <p>整理課前、課中、課後的教學節奏，幫老師直接使用。</p>
+          </a>
+          <a class="guide-card" href="#lessons">
+            <span>03</span>
+            <h3>單元地圖(Lesson Map)</h3>
+            <p>把原始 PPT 內容改成更好教的順序與模組。</p>
+          </a>
+          <a class="guide-card" href="#build">
+            <span>04</span>
+            <h3>材料設備(Build Kit)</h3>
+            <p>上課前先確認材料、控制板、感測器與機構零件。</p>
+          </a>
+          <a class="guide-card" href="#code">
+            <span>05</span>
+            <h3>程式練習(Code Practice)</h3>
+            <p>從 LED、按鈕、感測器到馬達控制，逐步建立程式概念。</p>
+          </a>
+          <a class="guide-card" href="#downloads">
+            <span>06</span>
+            <h3>下載區(Downloads)</h3>
+            <p>老師與學生都可以直接下載簡報、PDF 和套件壓縮檔。</p>
+          </a>
         </div>
       </section>
 
       <section id="overview" class="section reveal">
         <div class="section-heading">
-          <p class="eyebrow">Overview</p>
-          <h2>What this course is actually trying to teach.</h2>
-          <p>
-            Across the three PPT decks, the course repeatedly combines electronics, mechanical structure, and programming.
-            The final project is a smart adjustable fan, but the deeper goal is to help students understand how sensing,
-            actuation, transmission, and code fit into one coherent system.
-          </p>
+          <p class="eyebrow">課程定位 Overview</p>
+          <h2>這門課不是只做電風扇，而是在教完整的機器人專題思維。</h2>
         </div>
 
         <div class="overview-grid">
           <article class="overview-card">
-            <h3>Project Theme</h3>
-            <p>Build a smart oscillating fan with Raspberry Pi Pico, a motor drive path, and simple sensing or remote interaction.</p>
+            <h3>主題作品(Project Theme)</h3>
+            <p>以智慧型可擺動調速電風扇作為專題，讓學生從作品中理解控制與結構。</p>
           </article>
           <article class="overview-card">
-            <h3>Core Disciplines</h3>
-            <p>Digital I/O, PWM, analog input, mechanism design, gear transmission, linkage motion, and hands-on assembly.</p>
+            <h3>控制能力(Control)</h3>
+            <p>學習數位輸入輸出(Digital Input/Output)、類比輸出(PWM)、感測器(Sensor)與藍牙遙控(Bluetooth Control)。</p>
           </article>
           <article class="overview-card">
-            <h3>Learning Style</h3>
-            <p>Short concept explanation, quick hardware demonstration, simple code practice, then integration into one classroom build.</p>
+            <h3>機構能力(Mechanism)</h3>
+            <p>理解齒輪傳動(Gear Transmission)、蝸桿蝸輪(Worm Gear)、連桿機構(Linkage Mechanism)與擺頭運動。</p>
           </article>
           <article class="overview-card">
-            <h3>End Result</h3>
-            <p>Students finish with a physical object they can explain: what moves, what senses, what controls, and why it works.</p>
+            <h3>整合能力(Integration)</h3>
+            <p>把電路、程式、感測與機構整合成可運作的實體作品，讓學生真的能解釋作品如何運作。</p>
           </article>
         </div>
       </section>
 
-      <section id="objectives" class="section reveal">
+      <section id="teaching" class="section reveal">
         <div class="section-heading">
-          <p class="eyebrow">Objectives</p>
-          <h2>The learning goals now read like a teaching checklist.</h2>
+          <p class="eyebrow">授課建議 Teaching Plan</p>
+          <h2>老師可以怎麼用這個網站上課，學生又可以怎麼自學。</h2>
         </div>
 
-        <div class="objective-grid">
-          <article class="objective-card">
-            <span class="objective-step">01</span>
-            <h3>Understand the board and wiring</h3>
-            <p>Learn the Pico X2 layout, power interfaces, sensor ports, OLED, and where digital or analog connections belong.</p>
+        <div class="teaching-grid">
+          <article class="teaching-card teacher-card">
+            <h3>老師授課建議(Teacher Flow)</h3>
+            <ul>
+              <li>先帶學生看控制板(Control Board)與材料清單，建立整體印象。</li>
+              <li>接著先做最簡單的 LED 與按鈕(Button) 程式，建立成功經驗。</li>
+              <li>再進入馬達(Motor)、PWM、感測器(Sensor) 與顯示(Display) 應用。</li>
+              <li>最後再講機構(Mechanism) 與組裝，學生會更容易理解作品為什麼會動。</li>
+            </ul>
           </article>
-          <article class="objective-card">
-            <span class="objective-step">02</span>
-            <h3>Practice foundational control</h3>
-            <p>Use LEDs, buttons, and motor direction logic to connect simple code with visible hardware behavior.</p>
+
+          <article class="teaching-card student-card">
+            <h3>學生自學建議(Self-study Flow)</h3>
+            <ul>
+              <li>先看「單元地圖(Lesson Map)」，知道每一節在學什麼。</li>
+              <li>再看「材料設備(Build Kit)」，認識每個元件的功能。</li>
+              <li>接著從程式練習(Code Practice) 依序操作，不要一開始就做整合專題。</li>
+              <li>最後回到下載區(Downloads) 把簡報與 PDF 打開對照複習。</li>
+            </ul>
           </article>
-          <article class="objective-card">
-            <span class="objective-step">03</span>
-            <h3>Learn mechanism principles</h3>
-            <p>Study worm gears, speed reduction, direction change, and four-bar linkage ideas behind fan oscillation.</p>
-          </article>
-          <article class="objective-card">
-            <span class="objective-step">04</span>
-            <h3>Integrate into a finished project</h3>
-            <p>Combine structure, circuit, sensing, and programming into a complete classroom artifact with a clear functional goal.</p>
+
+          <article class="teaching-card note-card">
+            <h3>課堂節奏建議(Class Rhythm)</h3>
+            <p>推薦節奏是「概念 5 分鐘 -> 接線 5 分鐘 -> 程式 10 分鐘 -> 展示 5 分鐘 -> 提問 5 分鐘」，讓學生每一小段都有看見、做出來、再理解的機會。</p>
           </article>
         </div>
       </section>
 
       <section id="lessons" class="section reveal">
         <div class="section-heading">
-          <p class="eyebrow">Lesson Map</p>
-          <h2>A clearer path from first setup to full project integration.</h2>
-          <p>
-            This sequence is based directly on the PPT flow. It is designed so an instructor can teach from top to bottom
-            without needing to mentally reorganize the original slides.
-          </p>
+          <p class="eyebrow">單元地圖 Lesson Map</p>
+          <h2>根據原始 PPT 重排後，更適合老師授課的單元順序。</h2>
         </div>
 
         <div class="lesson-list">
           <article class="lesson-card">
-            <div class="lesson-number">Lesson 1</div>
+            <div class="lesson-number">單元 1</div>
             <div class="lesson-copy">
-              <h3>Board setup and firmware</h3>
-              <p>Introduce the control board, explain the ports, then walk through firmware update and initial board preparation.</p>
+              <h3>控制板與韌體(Control Board & Firmware)</h3>
+              <p>先認識控制板、電源、馬達接口、感測器接口、OLED 顯示器與韌體更新流程。</p>
               <ul>
-                <li>Control board overview</li>
-                <li>Firmware update procedure</li>
-                <li>Pico X2 pin definitions</li>
+                <li>控制板介紹(Board Overview)</li>
+                <li>韌體安裝(Firmware Update)</li>
+                <li>Pico X2 腳位(Pin Mapping)</li>
               </ul>
             </div>
           </article>
 
           <article class="lesson-card">
-            <div class="lesson-number">Lesson 2</div>
+            <div class="lesson-number">單元 2</div>
             <div class="lesson-copy">
-              <h3>Digital input and output</h3>
-              <p>Use LED and button activities to establish the idea that code can read state and drive visible output.</p>
+              <h3>數位輸入輸出(Digital I/O)</h3>
+              <p>從 LED 與按鈕(Button) 開始，建立輸入(Input) 與輸出(Output) 的基本概念。</p>
               <ul>
-                <li>Built-in LED control</li>
-                <li>External LED wiring</li>
-                <li>Button-controlled output</li>
+                <li>內建 LED(Built-in LED)</li>
+                <li>外接 LED(External LED)</li>
+                <li>按鈕控制(Button Control)</li>
               </ul>
             </div>
           </article>
 
           <article class="lesson-card">
-            <div class="lesson-number">Lesson 3</div>
+            <div class="lesson-number">單元 3</div>
             <div class="lesson-copy">
-              <h3>PWM, analog input, and richer output</h3>
-              <p>Move from on/off control to variable behavior such as fading light, ADC reading, and RGB lighting with WS2812B.</p>
+              <h3>類比控制與感測(Analog Control & Sensing)</h3>
+              <p>進一步學習脈衝寬度調變(PWM)、類比輸入(ADC) 與感測器回饋。</p>
               <ul>
-                <li>PWM brightness control</li>
-                <li>Analog input with ADC</li>
-                <li>PIO-driven RGB LED work</li>
+                <li>PWM 漸亮漸暗(Brightness Control)</li>
+                <li>類比輸入(Analog Input)</li>
+                <li>RGB LED 與感測應用(RGB + Sensor)</li>
               </ul>
             </div>
           </article>
 
           <article class="lesson-card">
-            <div class="lesson-number">Lesson 4</div>
+            <div class="lesson-number">單元 4</div>
             <div class="lesson-copy">
-              <h3>Mechanism structure and motion conversion</h3>
-              <p>Explain how rotating motion becomes oscillating motion by combining worm gears, reduction, and a four-bar linkage.</p>
+              <h3>馬達與智慧控制(Motor & Smart Control)</h3>
+              <p>把輸入與輸出概念進一步延伸到馬達驅動(Motor Drive)、顯示(Display) 與藍牙遙控(Bluetooth Control)。</p>
               <ul>
-                <li>What a mechanism is</li>
-                <li>Worm gear direction and speed change</li>
-                <li>Linkage-driven oscillation</li>
+                <li>馬達方向控制(Direction Control)</li>
+                <li>調速控制(Speed Control)</li>
+                <li>藍牙遙控(Remote Control)</li>
               </ul>
             </div>
           </article>
 
           <article class="lesson-card">
-            <div class="lesson-number">Lesson 5</div>
+            <div class="lesson-number">單元 5</div>
             <div class="lesson-copy">
-              <h3>Assembly and smart control integration</h3>
-              <p>Bring together structure, code, and interaction features such as Bluetooth or sensor response into one finished build.</p>
+              <h3>機構設計與組裝(Mechanism & Assembly)</h3>
+              <p>最後再帶入齒輪(Gear)、蝸桿蝸輪(Worm Gear)、四連桿(Four-bar Linkage) 與整體組裝流程。</p>
               <ul>
-                <li>Material preparation</li>
-                <li>Assembly sequence</li>
-                <li>Final integrated demonstration</li>
+                <li>機構概念(Mechanism Concept)</li>
+                <li>連桿與擺頭(Linkage & Oscillation)</li>
+                <li>整合作品(Integrated Project)</li>
               </ul>
             </div>
           </article>
@@ -219,53 +266,54 @@
 
       <section id="build" class="section split reveal">
         <div class="section-heading compact">
-          <p class="eyebrow">Build Kit</p>
-          <h2>Materials and hardware should be visible early in the page.</h2>
-          <p>
-            The PPT objective slides list the course materials explicitly. This section turns that list into a clean checklist
-            so the site is useful before class starts, not only during a presentation.
-          </p>
+          <p class="eyebrow">材料設備 Build Kit</p>
+          <h2>這一區適合老師上課前點名，也適合學生回家確認零件。</h2>
+          <p>原始簡報已經列出主要材料，這裡整理成更容易使用的清單格式。</p>
 
           <div class="checklist-card">
-            <h3>Materials from the lecture decks</h3>
+            <h3>材料清單(Material Checklist)</h3>
             <ul class="checklist">
-              <li>Raspberry Pi Pico and control board</li>
-              <li>Breadboard, jumper wires, and lithium battery</li>
-              <li>Dual-shaft DC motor</li>
-              <li>Fan blades, worm gear, and reduction gears</li>
-              <li>Metal shaft, bearings, screws, and nuts</li>
-              <li>Base and frame structure pieces</li>
+              <li>樹莓派 Pico(Raspberry Pi Pico)</li>
+              <li>控制板(Control Board)</li>
+              <li>麵包板(Breadboard) 與跳線(Jumper Wires)</li>
+              <li>鋰電池(Lithium Battery)</li>
+              <li>雙出軸直流電機(DC Motor)</li>
+              <li>風扇葉片(Fan Blade)</li>
+              <li>蝸桿蝸輪(Worm Gear)</li>
+              <li>塑膠齒輪(Reduction Gear)</li>
+              <li>小軸承(Bearing)、螺絲(Screw)、螺母(Nut)</li>
+              <li>底座與支架(Frame Structure)</li>
             </ul>
           </div>
         </div>
 
         <div class="hardware-grid">
           <article class="hardware-card">
-            <img src="assets/control-board.png" alt="Control board">
+            <img src="assets/control-board.png" alt="控制板">
             <div>
-              <h3>Control Board</h3>
-              <p>Used to introduce power, sensor ports, display, and the basic connection points needed before any coding begins.</p>
+              <h3>控制板(Control Board)</h3>
+              <p>負責電源、感測器、顯示器與輸出控制，是整門課的核心平台。</p>
             </div>
           </article>
           <article class="hardware-card">
-            <img src="assets/mechanism-rig.png" alt="Mechanical rig">
+            <img src="assets/mechanism-rig.png" alt="機構組件">
             <div>
-              <h3>Mechanical Structure</h3>
-              <p>The structure deck explains how the physical build supports oscillation and why the final motion looks the way it does.</p>
+              <h3>機構組件(Mechanical Structure)</h3>
+              <p>用來說明擺頭運動、傳動減速與結構組裝，讓學生理解為什麼作品可以左右擺動。</p>
             </div>
           </article>
           <article class="hardware-card">
-            <img src="assets/motion-sensor.png" alt="Motion sensor">
+            <img src="assets/motion-sensor.png" alt="感測器">
             <div>
-              <h3>Interactive Inputs</h3>
-              <p>Sensors extend the project from a simple fan into a smart system that can react to the environment.</p>
+              <h3>感測器(Sensor)</h3>
+              <p>學生可透過感測值(Sensing Data) 練習互動控制與智慧反應。</p>
             </div>
           </article>
           <article class="hardware-card">
-            <img src="assets/ir-sensor.png" alt="Infrared sensor">
+            <img src="assets/ir-sensor.png" alt="紅外線模組">
             <div>
-              <h3>Signal Reading</h3>
-              <p>Small modules help students see how state, thresholds, and conditional logic work in a robotics context.</p>
+              <h3>輸入模組(Input Module)</h3>
+              <p>適合搭配條件判斷(Condition) 與邏輯控制(Control Logic) 教學。</p>
             </div>
           </article>
         </div>
@@ -273,39 +321,39 @@
 
       <section class="section reveal">
         <div class="section-heading">
-          <p class="eyebrow">Mechanism Concepts</p>
-          <h2>The mechanical idea is now taught in three simple blocks.</h2>
+          <p class="eyebrow">機構概念 Mechanism</p>
+          <h2>把原本比較分散的機構內容，整理成三個好講的重點。</h2>
         </div>
 
         <div class="concept-grid">
           <article class="concept-card">
-            <h3>Mechanism</h3>
-            <p>A mechanism is presented as two or more machine parts working together to produce a predictable motion path and function.</p>
+            <h3>機構(Mechanism)</h3>
+            <p>由兩個以上機件(Machine Parts) 組成，透過特定連結關係產生預期的運動。</p>
           </article>
           <article class="concept-card">
-            <h3>Worm Gear Transmission</h3>
-            <p>The decks emphasize two key purposes: changing motion direction and reducing speed before the linkage stage.</p>
+            <h3>齒輪傳動(Gear Transmission)</h3>
+            <p>負責改變方向(Direction Change) 與減速(Speed Reduction)，讓馬達輸出更適合帶動擺頭。</p>
           </article>
           <article class="concept-card">
-            <h3>Four-bar Linkage</h3>
-            <p>The fan oscillation example becomes easier to explain when the crank, connecting rod, and rocker are separated conceptually.</p>
+            <h3>四連桿(Four-bar Linkage)</h3>
+            <p>把旋轉運動(Rotary Motion) 轉成搖擺運動(Oscillating Motion)，這就是風扇擺頭的核心原理。</p>
           </article>
         </div>
       </section>
 
       <section id="code" class="section reveal">
         <div class="section-heading">
-          <p class="eyebrow">Programming Practice</p>
-          <h2>Examples are grouped by teaching purpose instead of by file name alone.</h2>
+          <p class="eyebrow">程式練習 Code Practice</p>
+          <h2>這一區老師可以直接示範，學生也可以照著做。</h2>
         </div>
 
         <div class="practice-grid">
           <article class="practice-card">
             <header>
-              <h3>Warm-up I/O</h3>
+              <h3>LED 基礎練習(LED Basics)</h3>
               <span>LED.py</span>
             </header>
-            <p>Best used as the first success moment. Students see immediate output and learn the feel of the environment.</p>
+            <p>最適合作為第一個成功案例，讓學生先看到控制輸出(Output) 的效果。</p>
             <pre><code>from machine import Pin
 import time
 
@@ -318,10 +366,10 @@ while True:
 
           <article class="practice-card">
             <header>
-              <h3>Input controls output</h3>
+              <h3>按鈕控制 LED(Button to LED)</h3>
               <span>btn control led.py</span>
             </header>
-            <p>This is where the class moves from passive output to conditional logic and simple interaction.</p>
+            <p>從按鈕(Button) 到 LED 的互動，是理解數位輸入輸出(Digital I/O) 最直覺的一步。</p>
             <pre><code>from machine import Pin
 from time import sleep
 
@@ -335,10 +383,10 @@ while True:
 
           <article class="practice-card">
             <header>
-              <h3>Sensor-driven feedback</h3>
+              <h3>距離感測與顏色回饋(Distance to RGB)</h3>
               <span>change sensor color by dist.py</span>
             </header>
-            <p>The project becomes more robotics-like once distance is mapped to behavior through clear thresholds.</p>
+            <p>這段非常適合教條件判斷(Condition) 與互動式回饋(Interactive Feedback)。</p>
             <pre><code>dist = sensor.ping()
 
 if dist &lt; 10:
@@ -351,10 +399,10 @@ else:
 
           <article class="practice-card">
             <header>
-              <h3>Motor control logic</h3>
+              <h3>馬達方向控制(Motor Direction)</h3>
               <span>moto.py</span>
             </header>
-            <p>This is the bridge between software commands and the fan's actual motion in the final build.</p>
+            <p>學生只要理解這一段，就更容易把程式和擺頭作品的動作連起來。</p>
             <pre><code>def forward():
     _set_motor(M1_A, M1_B, 1)
     _set_motor(M2_A, M2_B, 1)
@@ -368,80 +416,90 @@ def turn_left():
 
       <section class="section reveal">
         <div class="section-heading">
-          <p class="eyebrow">Teaching Use</p>
-          <h2>A cleaner classroom flow for instructors.</h2>
+          <p class="eyebrow">自學路徑 Self-study Path</p>
+          <h2>學生看完這個網站後，可以照這個順序自己練習。</h2>
         </div>
 
         <div class="flow-grid">
           <article class="flow-card">
-            <span>Before class</span>
-            <p>Prepare firmware, hardware kits, and the board connection test so setup time stays predictable.</p>
+            <span>Step 1</span>
+            <p>先看導覽區與課程定位，理解這門課最後要完成什麼專題。</p>
           </article>
           <article class="flow-card">
-            <span>During explanation</span>
-            <p>Alternate between one concept slide, one wiring idea, and one short code example to keep attention grounded.</p>
+            <span>Step 2</span>
+            <p>對照單元地圖，把 LED、按鈕、PWM、感測器依序練熟，不要一次跳到整合專題。</p>
           </article>
           <article class="flow-card">
-            <span>During build</span>
-            <p>Move from simple proof-of-concept tasks to subsystem integration, then demonstrate the full oscillating system.</p>
+            <span>Step 3</span>
+            <p>再回頭看機構概念，理解齒輪與連桿如何把程式控制變成實體動作。</p>
           </article>
           <article class="flow-card">
-            <span>After completion</span>
-            <p>Ask students to explain the full chain: input, control logic, motor action, transmission, and final mechanical motion.</p>
+            <span>Step 4</span>
+            <p>最後到下載區，把簡報與 PDF 打開對照學習，補齊細節並完成複習。</p>
           </article>
         </div>
       </section>
 
-      <section id="resources" class="section resource-band reveal">
-        <div class="resource-copy">
-          <p class="eyebrow">Resources</p>
-          <h2>Source materials and tools behind this site.</h2>
-          <p>
-            The page is built from the existing robot-course materials and reshaped into a more teachable sequence. It is ready
-            for GitHub Pages and can keep growing with downloadable handouts, source code links, or future lesson pages.
-          </p>
+      <section id="downloads" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">下載區 Downloads</p>
+          <h2>老師上課與學生自學需要的檔案，都放在這裡。</h2>
+          <p>這一區已經連到網站 repo 內的檔案，之後放上 GitHub Pages 也能直接下載。</p>
         </div>
 
-        <div class="resource-grid">
-          <article class="resource-card">
-            <span class="meta-label">Source deck</span>
-            <strong>Smart Control Programming</strong>
-            <p>Board functions, firmware, digital I/O, PWM, ADC, and practical coding examples.</p>
+        <div class="download-grid">
+          <article class="download-card">
+            <span class="download-type">PPT</span>
+            <h3>智慧控制程式設計(Smart Control Programming)</h3>
+            <p>適合用來教控制板、韌體、腳位、數位輸出、PWM、感測器與藍牙遙控。</p>
+            <a class="button primary block" href="downloads/smart-fan-smart-control-programming.pptx">下載簡報</a>
           </article>
-          <article class="resource-card">
-            <span class="meta-label">Source deck</span>
-            <strong>Mechanism Structure</strong>
-            <p>Linkages, worm gears, speed reduction, direction change, material list, and assembly logic.</p>
+
+          <article class="download-card">
+            <span class="download-type">PPT</span>
+            <h3>機構結構(Mechanism Structure)</h3>
+            <p>適合講解齒輪傳動、蝸桿蝸輪、連桿機構與擺頭原理。</p>
+            <a class="button primary block" href="downloads/smart-fan-mechanism-structure.pptx">下載簡報</a>
           </article>
-          <article class="resource-card">
-            <span class="meta-label">Source deck</span>
-            <strong>Integrated Course Slides</strong>
-            <p>A combined teaching path that mixes mechanism explanation and control examples.</p>
+
+          <article class="download-card">
+            <span class="download-type">PPT</span>
+            <h3>課程簡報(Integrated Course Slides)</h3>
+            <p>整合機構與控制內容，適合用作完整授課或學生回家複習。</p>
+            <a class="button primary block" href="downloads/smart-fan-course-slides.pptx">下載簡報</a>
           </article>
-          <article class="resource-card">
-            <span class="meta-label">Tool</span>
-            <strong>MangoBlock Desktop</strong>
-            <p>Used in the PPT materials as the visual programming environment for board interaction.</p>
-            <a class="text-link" href="https://github.com/cmlo/mangoblock-desktop/releases/download/v1.2/MangoBlock.1.2.19.msi" target="_blank" rel="noreferrer">Open download link</a>
+
+          <article class="download-card">
+            <span class="download-type">PDF</span>
+            <h3>機器人程式設計實務(Robot Programming Practice)</h3>
+            <p>適合搭配網站內容做補充閱讀與課後自學。</p>
+            <a class="button secondary block" href="downloads/robot-programming-practice-python.pdf">下載 PDF</a>
           </article>
-          <article class="resource-card">
-            <span class="meta-label">Repository</span>
-            <strong>GitHub Project</strong>
-            <p>The site is already structured as a static repository and ready for GitHub Pages deployment.</p>
-            <a class="text-link" href="https://github.com/KennethWYLee/microcar" target="_blank" rel="noreferrer">Open repository</a>
+
+          <article class="download-card">
+            <span class="download-type">PDF</span>
+            <h3>Robot Code Jumpstart</h3>
+            <p>可作為補充參考資料，協助學生擴展課後練習。</p>
+            <a class="button secondary block" href="downloads/robot-code-jumpstart.pdf">下載 PDF</a>
           </article>
-          <article class="resource-card">
-            <span class="meta-label">Hosting</span>
-            <strong>GitHub Pages Friendly</strong>
-            <p>Plain HTML, CSS, and JS make the site lightweight, easy to maintain, and simple to publish for teaching use.</p>
+
+          <article class="download-card">
+            <span class="download-type">ZIP</span>
+            <h3>Mango 套件與擴充資源(Libraries & Packages)</h3>
+            <p>包含 Mango、AmebaAI、AmebaNN 等壓縮檔，方便老師或學生延伸使用。</p>
+            <div class="download-links">
+              <a class="text-link" href="downloads/mango-library.zip">下載 Mango</a>
+              <a class="text-link" href="downloads/ameba-ai.zip">下載 AmebaAI</a>
+              <a class="text-link" href="downloads/ameba-nn.zip">下載 AmebaNN</a>
+            </div>
           </article>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>Microcar Robotics Classroom</p>
-      <p>Reorganized from the robot-course PPT decks into a clearer teaching-first website structure.</p>
+      <p>機器人程式設計教學站</p>
+      <p>以老師授課為主體設計，同時兼顧學生自學與教材下載。</p>
     </footer>
   </div>
   <script src="script.js"></script>
