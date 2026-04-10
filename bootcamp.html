@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>1 小時 Boot Camp | Raspberry Pi Pico 循跡小車教學站</title>
-  <meta name="description" content="60 分鐘 Raspberry Pi Pico 循跡小車入門教學頁。包含課程目標、時間分配、教學重點、提問方式與推薦下載順序。">
+  <meta name="description" content="60 分鐘國中生 Raspberry Pi Pico 小車入門教學頁。重點是電腦連上車子，並用鍵盤打字控制前進、後退、左轉、右轉、停止。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -35,8 +35,9 @@
           <p class="eyebrow">Boot Camp Teaching Page</p>
           <h1>1 小時 Boot Camp 教學頁</h1>
           <p class="hero-text">
-            這一頁是給老師快速開課用的完整版本。你可以直接依照這裡的節奏帶完一堂 60 分鐘的入門課，
-            不需要先翻很多檔案再自己組裝。
+            這一頁是給你教國中生用的 60 分鐘版本。這堂課不追求循跡，也不先碰感測器，
+            只先完成一件最重要的事：讓電腦和 Raspberry Pi Pico 小車成功串聯，
+            然後用電腦打字控制車子的前進、後退、左轉、右轉、停止。
           </p>
           <div class="action-row">
             <a class="button primary" href="downloads.html#download-teaching-plan">先下載教學建議</a>
@@ -49,9 +50,9 @@
             <span class="zone-badge teacher">Boot Camp Goal</span>
             <h3>這堂課要完成什麼</h3>
             <ul class="detail-list">
-              <li>學生知道 Raspberry Pi Pico 小車如何前進、後退、左轉、右轉、停止。</li>
-              <li>學生知道感測器的數值可以拿來做判斷。</li>
-              <li>學生能改一個簡單參數，看出差異。</li>
+              <li>學生知道如何把電腦和 Raspberry Pi Pico 小車連起來。</li>
+              <li>學生知道鍵盤輸入可以控制車子動作。</li>
+              <li>學生能用 `W / A / S / D / X` 控制前進、左轉、後退、右轉、停止。</li>
             </ul>
           </article>
           <article class="aside-card">
@@ -64,43 +65,43 @@
         <div class="section-heading">
           <p class="eyebrow">Teaching Flow</p>
           <h2>60 分鐘建議節奏</h2>
-          <p>如果時間真的只剩 1 小時，建議先求學生看得懂和做得出來，不求一次講到最深。</p>
+          <p>如果時間真的只剩 1 小時，建議只做最穩定、最有成就感的版本，不再加感測器與循跡。</p>
         </div>
         <div class="page-grid">
           <article class="content-card">
             <span class="zone-badge teacher">0-10 分鐘</span>
-            <h3>開場與認識硬體</h3>
+            <h3>連接電腦和小車</h3>
             <ul class="detail-list">
-              <li>介紹 Raspberry Pi Pico 小車、控制板(Control Board)、電池(Battery)、感測器(Sensor)。</li>
-              <li>提醒今天的目標是讓小車動起來，不是背全部零件。</li>
-              <li>先做安全提醒與桌面空間整理。</li>
+              <li>介紹 Raspberry Pi Pico 小車、USB 連線與電腦端操作方式。</li>
+              <li>確認學生知道哪裡插線、哪裡打字、哪裡會看到回應。</li>
+              <li>提醒今天的目標是「成功控制車子」，不是一次學完整個專案。</li>
             </ul>
           </article>
           <article class="content-card">
-            <span class="zone-badge teacher">10-25 分鐘</span>
-            <h3>五個基本動作</h3>
+            <span class="zone-badge teacher">10-20 分鐘</span>
+            <h3>示範打字控制</h3>
             <ul class="detail-list">
-              <li>示範 `W / A / S / D / X`。</li>
-              <li>讓學生先把動作和方向連起來。</li>
-              <li>建議搭配 `小車鍵盤控制範例(Keyboard Control)`。</li>
+              <li>示範在電腦端輸入 `W / A / S / D / X`。</li>
+              <li>讓學生知道一個字元就能對應一個車子動作。</li>
+              <li>全程建議搭配 `小車鍵盤控制範例(Keyboard Control)`。</li>
             </ul>
           </article>
           <article class="content-card">
-            <span class="zone-badge teacher">25-40 分鐘</span>
-            <h3>感測器與 if 判斷</h3>
+            <span class="zone-badge teacher">20-40 分鐘</span>
+            <h3>學生輪流操作五個動作</h3>
             <ul class="detail-list">
-              <li>先講「先讀值，再判斷，再反應」。</li>
-              <li>介紹 `if / elif / else` 的基本概念。</li>
-              <li>建議搭配 `距離感測範例(Distance Sensor)`。</li>
+              <li>先讓學生輪流操作前進、後退、左轉、右轉、停止。</li>
+              <li>讓學生把鍵盤字母和實際動作連起來。</li>
+              <li>這一段重點是熟悉操作，不需要加入更多功能。</li>
             </ul>
           </article>
           <article class="content-card">
             <span class="zone-badge teacher">40-60 分鐘</span>
-            <h3>組合成第一個互動效果</h3>
+            <h3>收尾與挑戰</h3>
             <ul class="detail-list">
-              <li>讓學生知道數值不同，反應也會不同。</li>
-              <li>鼓勵學生修改一個參數。</li>
-              <li>最後請學生說明他改了什麼、發生了什麼。</li>
+              <li>可以請學生挑戰連續輸入一串動作，像是前進、左轉、停止。</li>
+              <li>最後請學生口頭說出每個按鍵控制什麼。</li>
+              <li>如果時間夠，再簡單介紹「之後還能學到循跡和感測器」。</li>
             </ul>
           </article>
         </div>
@@ -110,7 +111,7 @@
         <div class="section-heading">
           <p class="eyebrow">What To Open</p>
           <h2>這一頁推薦你先打開哪些檔案</h2>
-          <p>如果你時間很少，照這個順序就夠了。</p>
+          <p>如果你時間很少，這堂 Boot Camp 其實只要先開兩份就夠了。</p>
         </div>
         <div class="resource-roadmap">
           <article class="resource-step">
@@ -120,18 +121,18 @@
           </article>
           <article class="resource-step">
             <strong>2. 再開小車鍵盤控制範例</strong>
-            <p>這是最適合第一個示範的檔案。</p>
+            <p>這是這堂課最核心的檔案，整堂課主要就靠它完成。</p>
             <a class="text-link" href="downloads.html#download-keyboard">前往鍵盤控制範例</a>
           </article>
           <article class="resource-step">
-            <strong>3. 再開馬達基本函式</strong>
-            <p>用來補充為什麼 `forward()`、`turn_left()` 會讓車子動作不同。</p>
+            <strong>3. 馬達基本函式可選擇性補充</strong>
+            <p>如果學生吸收得快，再補充 `forward()`、`turn_left()` 這些函式的概念。</p>
             <a class="text-link" href="downloads.html#download-motor">前往馬達函式範例</a>
           </article>
           <article class="resource-step">
-            <strong>4. 最後看距離感測範例</strong>
-            <p>把感測器和 if 判斷帶進來，就能自然接到後續循跡邏輯。</p>
-            <a class="text-link" href="downloads.html#download-sensor">前往距離感測範例</a>
+            <strong>4. 感測器範例留到下一堂</strong>
+            <p>這份不建議放進這次 1 小時 Boot Camp，可以當作之後的延伸。</p>
+            <a class="text-link" href="downloads.html#download-sensor">之後再看感測器範例</a>
           </article>
         </div>
       </section>
@@ -145,16 +146,16 @@
           <article class="content-card">
             <h3>讓學生說出原因</h3>
             <ul class="detail-list">
-              <li>這一行程式會讓車子做什麼動作？</li>
-              <li>為什麼距離太近時要停下來或變色？</li>
-              <li>如果把 10 改成 20，結果會怎麼變？</li>
+              <li>如果我打 `W`，車子會做什麼？</li>
+              <li>如果我打 `A` 或 `D`，車子會往哪邊轉？</li>
+              <li>為什麼 `X` 很重要？它代表什麼？</li>
             </ul>
           </article>
           <article class="content-card callout-card">
             <h3>第一堂課先不要做的事</h3>
             <ul class="detail-list">
               <li>不要一次講完藍牙(Bluetooth)與所有遙控方式。</li>
-              <li>不要把硬體接線細節講得太重。</li>
+              <li>不要把感測器、循跡、if 判斷都塞進同一堂課。</li>
               <li>不要讓學生一開始就看完整大專案。</li>
             </ul>
           </article>
