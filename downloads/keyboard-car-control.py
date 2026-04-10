@@ -1,42 +1,88 @@
-from machine import Pin, PWM
+from machine import Pin
+import sys
 import time
 
-# 左右馬達
-m1a = PWM(Pin(8))
-m1b = PWM(Pin(9))
-m2a = PWM(Pin(10))
-m2b = PWM(Pin(11))
+# Raspberry Pi Pico 小車 1 小時 Boot Camp
+# 在 Thonny 執行後，到 Shell 輸入 w / a / s / d / x 再按 Enter
+
+M1_A = Pin(12, Pin.OUT)
+M1_B = Pin(13, Pin.OUT)
+M2_A = Pin(10, Pin.OUT)
+M2_B = Pin(11, Pin.OUT)
+LED = Pin(25, Pin.OUT)
+
+
+def _set_motor(pin_a, pin_b, direction):
+    if direction > 0:
+        pin_a.value(1)
+        pin_b.value(0)
+    elif direction < 0:
+        pin_a.value(0)
+        pin_b.value(1)
+    else:
+        pin_a.value(0)
+        pin_b.value(0)
+
 
 def stop():
-    m1a.duty_u16(0)
-    m1b.duty_u16(0)
-    m2a.duty_u16(0)
-    m2b.duty_u16(0)
+    _set_motor(M1_A, M1_B, 0)
+    _set_motor(M2_A, M2_B, 0)
 
-def forward(speed=30):
-    duty = int(speed / 100 * 65535)
-    m1a.duty_u16(duty)
-    m1b.duty_u16(0)
-    m2a.duty_u16(duty)
-    m2b.duty_u16(0)
 
-def backward(speed=30):
-    duty = int(speed / 100 * 65535)
-    m1a.duty_u16(0)
-    m1b.duty_u16(duty)
-    m2a.duty_u16(0)
-    m2b.duty_u16(duty)
+def forward():
+    _set_motor(M1_A, M1_B, 1)
+    _set_motor(M2_A, M2_B, 1)
 
-def turn_left(speed=30):
-    duty = int(speed / 100 * 65535)
-    m1a.duty_u16(0)
-    m1b.duty_u16(duty)
-    m2a.duty_u16(duty)
-    m2b.duty_u16(0)
 
-def turn_right(speed=30):
-    duty = int(speed / 100 * 65535)
-    m1a.duty_u16(duty)
-    m1b.duty_u16(0)
-    m2a.duty_u16(0)
-    m2b.duty_u16(duty)
+def backward():
+    _set_motor(M1_A, M1_B, -1)
+    _set_motor(M2_A, M2_B, -1)
+
+
+def turn_left():
+    _set_motor(M1_A, M1_B, -1)
+    _set_motor(M2_A, M2_B, 1)
+
+
+def turn_right():
+    _set_motor(M1_A, M1_B, 1)
+    _set_motor(M2_A, M2_B, -1)
+
+
+print("Raspberry Pi Pico 小車 Boot Camp")
+print("請在 Thonny Shell 輸入 w / a / s / d / x 後按 Enter")
+print("w=前進, s=後退, a=左轉, d=右轉, x=停止")
+
+stop()
+LED.off()
+
+while True:
+    cmd = sys.stdin.read(1)
+    if not cmd:
+        continue
+
+    cmd = cmd.strip().lower()
+    if not cmd:
+        continue
+
+    if cmd == "w":
+        print("前進")
+        forward()
+    elif cmd == "s":
+        print("後退")
+        backward()
+    elif cmd == "a":
+        print("左轉")
+        turn_left()
+    elif cmd == "d":
+        print("右轉")
+        turn_right()
+    elif cmd == "x":
+        print("停止")
+        stop()
+    else:
+        print("未知指令:", cmd)
+        stop()
+
+    LED.toggle()
+    time.sleep(0.05)
