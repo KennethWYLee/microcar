@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>教師區 | Raspberry Pi Pico 循跡小車教學站</title>
-  <meta name="description" content="Raspberry Pi Pico 循跡小車教師區完整頁，整理老師的授課順序、下載順序、課前準備、現場提問與課後延伸。">
+  <meta name="description" content="Raspberry Pi Pico 循跡小車教師區完整頁，整理 1 小時國中生 Boot Camp 的授課順序、下載順序、課前準備與課後延伸。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -52,7 +52,7 @@
               <li>先看 Boot Camp 頁</li>
               <li>下載教學建議</li>
               <li>示範鍵盤控制範例</li>
-              <li>補充馬達函式與感測器</li>
+              <li>本堂課先停在基本動作控制</li>
             </ol>
           </article>
         </div>
@@ -68,16 +68,15 @@
             <h3>先確認課堂目標</h3>
             <ul class="detail-list">
               <li>今天是入門課，不是完整專案課。</li>
-              <li>先教會學生動作與簡單判斷。</li>
-              <li>不要急著講藍牙(Bluetooth)或太多延伸功能。</li>
+              <li>先讓電腦和車子連起來，再教會學生用鍵盤控制基本動作。</li>
+              <li>不要急著講藍牙(Bluetooth)、感測器或太多延伸功能。</li>
             </ul>
           </article>
           <article class="content-card">
-            <h3>先下載這三份</h3>
+            <h3>先下載這兩份就夠了</h3>
             <ol class="number-list">
               <li><a class="text-link" href="downloads.html#download-teaching-plan">1 小時授課建議</a></li>
               <li><a class="text-link" href="downloads.html#download-keyboard">小車鍵盤控制範例</a></li>
-              <li><a class="text-link" href="downloads.html#download-sensor">距離感測範例</a></li>
             </ol>
           </article>
         </div>
@@ -91,18 +90,18 @@
         <div class="page-grid-3">
           <article class="content-card">
             <span class="zone-badge teacher">Part 1</span>
-            <h3>先讓學生看到成功</h3>
-            <p>第一個畫面最好就是小車真的動起來。學生先看到效果，比先解釋原理更容易投入。</p>
+            <h3>先讓電腦和車子成功連線</h3>
+            <p>先讓學生看到電腦真的能把指令送到車子，這是整堂課最重要的第一步。</p>
           </article>
           <article class="content-card">
             <span class="zone-badge teacher">Part 2</span>
-            <h3>再補函式和方向</h3>
-            <p>等學生知道車子真的會前進和轉彎之後，再解釋 `forward()`、`turn_left()` 就更自然。</p>
+            <h3>再讓學生操作五個動作</h3>
+            <p>先把前進、後退、左轉、右轉、停止操作熟，不需要同一堂課再帶更多功能。</p>
           </article>
           <article class="content-card">
             <span class="zone-badge teacher">Part 3</span>
-            <h3>最後才帶感測器</h3>
-            <p>把 `if` 放在後段，學生會比較知道條件判斷是在解決什麼問題。</p>
+            <h3>收在鍵盤控制就好</h3>
+            <p>這堂 Boot Camp 的完成線，就是學生可以用鍵盤控制車子，不必再加感測器與循跡。</p>
           </article>
         </div>
       </section>
@@ -128,13 +127,13 @@
           <article class="download-card">
             <span class="download-type">STEP 3</span>
             <h3>馬達基本函式</h3>
-            <p>用來講函式和方向。</p>
+            <p>如果學生吸收很快，才當補充使用。</p>
             <a class="button secondary block" href="downloads.html#download-motor">前往下載</a>
           </article>
           <article class="download-card">
             <span class="download-type">STEP 4</span>
             <h3>距離感測範例</h3>
-            <p>帶進感測器與 if 判斷。</p>
+            <p>這堂課先不使用，留到下一次延伸課程。</p>
             <a class="button secondary block" href="downloads.html#download-sensor">前往下載</a>
           </article>
         </div>
@@ -150,8 +149,8 @@
             <h3>給學生的小延伸</h3>
             <ul class="detail-list">
               <li>把速度改快或改慢。</li>
-              <li>把距離門檻從 10 改成 15 或 20。</li>
-              <li>讓學生猜測程式結果，再實測。</li>
+              <li>設計一段自己的動作路線，例如前進、右轉、停止。</li>
+              <li>讓學生先猜按鍵結果，再實際操作驗證。</li>
             </ul>
           </article>
           <article class="content-card callout-card">

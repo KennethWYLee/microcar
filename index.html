@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Raspberry Pi Pico 循跡小車教學站 | 1 小時 Boot Camp</title>
-  <meta name="description" content="以國中與國小高年級為對象的 Raspberry Pi Pico 循跡小車入門網站。先學小車移動、感測器判斷與 if 條件，再走向循跡(Line Following)與進階控制。">
+  <meta name="description" content="以國中生為主的 Raspberry Pi Pico 小車入門網站。先讓電腦連上車子，再用鍵盤完成前進、後退、左轉、右轉、停止五個基本動作。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -33,11 +33,10 @@
       <section class="hero reveal">
         <div class="hero-copy">
           <p class="eyebrow">Beginner Robotics Course</p>
-          <h1>先學 Raspberry Pi Pico 小車控制，再走向循跡(Line Following)。</h1>
+          <h1>先讓電腦連上車，再用鍵盤控制 Raspberry Pi Pico 小車。</h1>
           <p class="hero-text">
-            這個網站是為國中與國小高年級設計的 Raspberry Pi Pico 小車入門教材。
-            我們先從最基礎的 Raspberry Pi Pico 小車移動、感測器(Sensor)、條件判斷(Condition)開始，
-            讓學生先建立成功經驗，再逐步走向循跡(Line Following)與後續進階主題。
+            這個網站先聚焦在國中生 1 小時 Boot Camp 會用到的內容。
+            第一堂課只做兩件事：把電腦和車子連起來，然後用鍵盤控制前進、後退、左轉、右轉、停止。
           </p>
           <div class="hero-actions">
             <a class="button primary" href="bootcamp.html">看 1 小時課程</a>
@@ -51,11 +50,11 @@
             </div>
             <div class="point-card">
               <strong>核心</strong>
-              <span>馬達(Motor) + 感測器(Sensor) + if 判斷</span>
+              <span>連線(Connection) + 鍵盤控制(Keyboard Control)</span>
             </div>
             <div class="point-card">
               <strong>目標</strong>
-              <span>讓學生能讀懂、改得動、說得出原因</span>
+              <span>讓學生完成 `W / A / S / D / X` 五個基本動作</span>
             </div>
           </div>
         </div>
@@ -69,17 +68,17 @@
             </div>
           </article>
           <article class="gallery-card">
-            <img src="assets/motion-sensor.png" alt="感測器照片">
+            <img src="assets/mechanism-rig.png" alt="小車結構照片">
             <div class="gallery-caption">
-              <strong>感測器(Sensor)</strong>
-              <span>看懂輸入(Input)怎麼影響動作</span>
+              <strong>小車結構(Car Body)</strong>
+              <span>先認識車體和動作方向</span>
             </div>
           </article>
           <article class="gallery-card">
-            <img src="assets/ir-sensor.png" alt="循跡感測模組照片">
+            <img src="assets/control-board.png" alt="Raspberry Pi Pico 控制板照片">
             <div class="gallery-caption">
-              <strong>循跡準備(Line Following Prep)</strong>
-              <span>先打好邏輯，再進到循跡</span>
+              <strong>控制指令(Control Commands)</strong>
+              <span>先學會把指令送到車子上</span>
             </div>
           </article>
         </div>
@@ -88,10 +87,10 @@
       <section id="may-course" class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">1 小時 Boot Camp</p>
-          <h2>60 分鐘內，帶學生完成第一台能動、能判斷的 Raspberry Pi Pico 小車。</h2>
+          <h2>60 分鐘內，帶學生完成第一台能連線、能用鍵盤控制的 Raspberry Pi Pico 小車。</h2>
           <p>
-            這是一堂偏「入門體驗 + 初階程式邏輯」的課，不追求一次教完所有功能。
-            第一堂課的重點是讓學生知道：按一個指令，車子會動；讀一個感測值，車子能做不同反應。
+            這是一堂偏「入門體驗 + 基本操作」的課，不追求一次教完所有功能。
+            第一堂課的重點只有兩件事：連線成功，以及用鍵盤控制前進、後退、左轉、右轉、停止。
           </p>
         </div>
         <div class="section-actions">
@@ -105,8 +104,8 @@
             <ul class="detail-list">
               <li>對象：國中生(Junior High)為主，也適合國小高年級。</li>
               <li>形式：2 到 4 人一組，邊看邊操作。</li>
-              <li>目標：完成小車基本移動與感測反應。</li>
-              <li>延伸：循跡(Line Following)與藍牙(Bluetooth)都放在後續單元。</li>
+              <li>目標：完成小車基本移動與鍵盤控制。</li>
+              <li>延伸：循跡(Line Following)、感測器(Sensor)與藍牙(Bluetooth)都放在後續單元。</li>
             </ul>
           </article>
 
@@ -116,19 +115,19 @@
             <div class="timeline">
               <div class="timeline-item">
                 <strong>0-10 分鐘</strong>
-                <span>認識 Raspberry Pi Pico 小車、Raspberry Pi Pico 控制板(Control Board)、安全提醒。</span>
+                <span>把電腦和 Raspberry Pi Pico 小車連起來，確認操作位置與安全提醒。</span>
               </div>
               <div class="timeline-item">
-                <strong>10-25 分鐘</strong>
-                <span>前進、後退、左轉、右轉、停止五個基本動作。</span>
+                <strong>10-20 分鐘</strong>
+                <span>示範 `W / A / S / D / X` 和前進、後退、左轉、右轉、停止五個基本動作。</span>
               </div>
               <div class="timeline-item">
-                <strong>25-40 分鐘</strong>
-                <span>看懂感測器(Sensor)讀值，練習 if / elif / else。</span>
+                <strong>20-40 分鐘</strong>
+                <span>讓學生輪流操作五個按鍵，確認每個人都能成功控制小車。</span>
               </div>
               <div class="timeline-item">
                 <strong>40-60 分鐘</strong>
-                <span>把小車動作和感測條件接在一起，做出第一個互動效果。</span>
+                <span>做簡單任務，例如前進、左轉、右轉、停止，然後口頭回顧今天學到的指令。</span>
               </div>
             </div>
           </article>
@@ -140,20 +139,19 @@
               <span>Pico 小車(Car)</span>
               <span>Pico 控制板(Board)</span>
               <span>電池(Battery)</span>
-              <span>感測器(Sensor)</span>
               <span>電腦或投影</span>
               <span>範例程式(Code)</span>
             </div>
-            <p>第一堂課盡量只準備最核心的零件，學生比較不會被額外元件分散注意力。</p>
+            <p>第一堂課盡量只準備最核心的零件，學生比較不會被額外元件或延伸功能分散注意力。</p>
           </article>
 
           <article class="bootcamp-card accent-card">
             <span class="zone-badge student">First Win</span>
             <h3>這堂課學生的成功感</h3>
             <ul class="detail-list">
-              <li>我知道 `forward()` 和 `stop()` 在做什麼。</li>
-              <li>我看得懂 `if` 會讓車子做不同動作。</li>
-              <li>我能改一個速度、方向或距離數值。</li>
+              <li>我知道 `W / A / S / D / X` 分別代表什麼。</li>
+              <li>我可以讓車子前進、後退、左轉、右轉、停止。</li>
+              <li>我知道遇到狀況時要先按停止。</li>
             </ul>
           </article>
         </div>
@@ -190,11 +188,11 @@
               </div>
               <div class="path-step">
                 <strong>Step 4</strong>
-                <p>接著再打開 `馬達基本函式(Basic Motor Functions)`，讓學生理解函式和方向的關係。</p>
+                <p>如果學生吸收很快，再打開 `馬達基本函式(Basic Motor Functions)` 當補充。</p>
               </div>
               <div class="path-step">
                 <strong>Step 5</strong>
-                <p>最後才用 `距離感測範例(Distance Sensor)` 帶入 if 判斷和感測器反應。</p>
+                <p>把 `距離感測範例(Distance Sensor)` 留到下一堂，不放進這次 Boot Camp。</p>
               </div>
             </div>
             <div class="action-row">
@@ -208,10 +206,10 @@
             <span class="zone-badge teacher">Learning Outcomes</span>
             <h3>建議學習目標</h3>
             <ul class="detail-list">
-              <li>學生能說出輸入(Input)、判斷(Condition)、輸出(Output)的基本概念。</li>
+              <li>學生能把電腦和 Raspberry Pi Pico 小車連起來。</li>
               <li>學生能操作至少 5 個小車基本動作：前進、後退、左轉、右轉、停止。</li>
-              <li>學生能看懂一段簡單的 `if / elif / else` 範例。</li>
-              <li>學生能描述感測器數值改變時，小車為什麼會做出不同反應。</li>
+              <li>學生能說出 `W / A / S / D / X` 分別對應的動作。</li>
+              <li>學生能理解停止指令為什麼重要。</li>
             </ul>
           </article>
 
@@ -219,10 +217,10 @@
             <span class="zone-badge teacher">Teaching Route</span>
             <h3>建議授課順序</h3>
             <ol class="number-list">
-              <li>先讓學生看到小車真的會動。</li>
-              <li>再介紹動作函式(Function)和方向。</li>
-              <li>接著讓學生看懂感測器數值。</li>
-              <li>最後才把動作和條件判斷接起來。</li>
+              <li>先完成電腦和車子的連線。</li>
+              <li>再示範鍵盤控制範例和五個基本動作。</li>
+              <li>接著讓學生輪流操作 `W / A / S / D / X`。</li>
+              <li>最後用簡單動作組合做收尾。</li>
             </ol>
           </article>
 
@@ -267,27 +265,27 @@
           <h3>學生進來後，就照這 4 步做</h3>
           <div class="student-path-grid">
             <div class="student-path-step">
-              <strong>1. 先認識動作</strong>
-              <p>先看前進、後退、左轉、右轉、停止，不急著記全部程式。</p>
-            </div>
-            <div class="student-path-step">
-              <strong>2. 再看短程式</strong>
-              <p>先看 `forward()`、`turn_left()` 這些小積木，知道它們代表什麼。</p>
-            </div>
+                <strong>1. 先接好車子</strong>
+                <p>先確認電腦和小車已經連好，再開始操作。</p>
+              </div>
+              <div class="student-path-step">
+                <strong>2. 先記住按鍵</strong>
+                <p>先看 `W / A / S / D / X` 對應的五個動作。</p>
+              </div>
             <div class="student-path-step">
               <strong>3. 下載第一份程式</strong>
               <p>先下載 `小車鍵盤控制範例`，跟著老師或網站一步一步試。</p>
             </div>
             <div class="student-path-step">
-              <strong>4. 做第一個挑戰</strong>
-              <p>再挑戰 `距離感測範例`，看看不同距離為什麼會有不同反應。</p>
+                <strong>4. 做第一個挑戰</strong>
+                <p>完成前進、左轉、右轉、停止這種簡單路線，就很成功。</p>
+              </div>
             </div>
-          </div>
-          <div class="action-row">
-            <a class="button secondary" href="student-zone.html#student-missions">先看任務</a>
-            <a class="button primary" href="downloads.html#download-keyboard">下載第一份程式</a>
-            <a class="button ghost" href="downloads.html#download-sensor">挑戰感測器</a>
-          </div>
+            <div class="action-row">
+              <a class="button secondary" href="student-zone.html#student-missions">先看任務</a>
+              <a class="button primary" href="downloads.html#download-keyboard">下載第一份程式</a>
+              <a class="button ghost" href="downloads.html#download-motor">看動作函式</a>
+            </div>
         </article>
 
         <div id="student-missions" class="student-grid">
@@ -308,22 +306,22 @@
 
           <article class="student-card mission-card">
             <span class="zone-badge student">任務 2</span>
-            <h3>看懂感測器怎麼幫忙判斷</h3>
-            <p>感測器會先給一個數值，程式再用 `if` 來決定要繼續前進，還是改變反應。</p>
+            <h3>看懂按鍵和動作的關係</h3>
+            <p>每一個按鍵都代表一個動作。你現在最重要的是知道按下去之後，小車會做什麼。</p>
             <div class="logic-strip">
-              <div>讀值(Read)</div>
-              <div>判斷(Check)</div>
-              <div>反應(React)</div>
+              <div>按鍵(Key)</div>
+              <div>指令(Command)</div>
+              <div>動作(Action)</div>
             </div>
           </article>
 
           <article class="student-card mission-card">
             <span class="zone-badge student">任務 3</span>
             <h3>自己改一點點，就能看到差別</h3>
-            <p>改速度、改距離、改顏色，都算是在學真正的程式設計。先能改小地方，就很棒了。</p>
+            <p>改速度、改按鍵、改動作順序，都算是在學真正的程式設計。先能改小地方，就很棒了。</p>
             <div class="chip-list playful">
               <span>改速度</span>
-              <span>改距離</span>
+              <span>改按鍵</span>
               <span>改方向</span>
             </div>
             <p class="mission-next">下一步：先下載 `小車鍵盤控制範例`，把一個按鍵對應的動作改掉試試看。</p>
@@ -352,18 +350,22 @@ def turn_right(speed=30):
 
           <article class="lesson-card">
             <div class="lesson-copy">
-              <p class="mini-label">感測邏輯(Sensor Logic)</p>
-              <h3>先讀值，再做判斷</h3>
-              <p>這段程式最重要的是順序：先量距離，再根據距離決定顏色或動作。這就是條件判斷(Condition)的概念。</p>
+              <p class="mini-label">鍵盤控制(Keyboard Control)</p>
+              <h3>先讀按鍵，再做動作</h3>
+              <p>這段程式最重要的是順序：先讀到按鍵，再決定小車要做什麼。這就是「指令對應動作」的概念。</p>
             </div>
-            <pre><code>dist = sensor.ping()
+            <pre><code>cmd = input("Command: ").strip().lower()
 
-if dist &lt; 10:
-    sensor.rgb_all(utils.COLOR_RED)
-elif dist &lt; 20:
-    sensor.rgb_all(utils.COLOR_BLUE)
+if cmd == "w":
+    forward()
+elif cmd == "s":
+    backward()
+elif cmd == "a":
+    turn_left()
+elif cmd == "d":
+    turn_right()
 else:
-    sensor.rgb_all(utils.COLOR_GREEN)</code></pre>
+    stop()</code></pre>
           </article>
         </div>
       </section>
@@ -405,7 +407,7 @@ else:
           <article id="download-sensor" class="download-card">
             <span class="download-type">PY</span>
             <h3>距離感測範例(Distance Sensor)</h3>
-            <p>讀取距離並改變 RGB 顏色，適合講 `if` 判斷。</p>
+            <p>這份先留到下一堂延伸課，再加入感測器和判斷。</p>
             <a class="button secondary block" href="downloads/distance-sensor-rgb.py">下載程式</a>
           </article>
 
@@ -435,8 +437,8 @@ else:
 
     <footer class="site-footer">
       <p>Raspberry Pi Pico 循跡小車教學站</p>
-      <p>先用簡單、穩定、可上手的內容建立學生信心，再走向循跡(Line Following)與進階控制。</p>
-    </footer>
+        <p>先用連線與鍵盤控制建立學生信心，再走向循跡(Line Following)與進階控制。</p>
+      </footer>
   </div>
   <script src="script.js"></script>
 </body>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>學生區 | Raspberry Pi Pico 循跡小車教學站</title>
-  <meta name="description" content="Raspberry Pi Pico 循跡小車學生區完整頁。帶學生先認識動作、再看短程式、再下載第一份程式，最後挑戰感測器。">
+  <meta name="description" content="Raspberry Pi Pico 循跡小車學生區完整頁。這一版先專注在電腦連上車子，再用鍵盤控制前進、後退、左轉、右轉、停止。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -35,25 +35,26 @@
           <p class="eyebrow">Student Zone</p>
           <h1>學生區完整頁</h1>
           <p class="hero-text">
-            這一頁是給學生一步一步跟著做的版本。你不用一次懂全部，只要先會看動作、看短程式，再自己改一點點，就很厲害了。
+            這一頁是給學生一步一步跟著做的版本。你不用一次懂全部，只要先把電腦和車子連起來，
+            再學會用鍵盤控制前進、後退、左轉、右轉、停止，就很棒了。
           </p>
           <div class="action-row">
             <a class="button primary" href="downloads.html#download-keyboard">下載第一份程式</a>
             <a class="button secondary" href="#student-missions">直接開始任務</a>
-            <a class="button ghost" href="downloads.html#download-sensor">挑戰感測器</a>
+            <a class="button ghost" href="downloads.html#download-motor">看動作函式</a>
           </div>
         </div>
         <div class="subpage-aside">
           <article class="aside-card">
-            <img src="assets/ir-sensor.png" alt="循跡感測模組">
+            <img src="assets/control-board.png" alt="Raspberry Pi Pico 小車控制板">
           </article>
           <article class="aside-card">
             <span class="zone-badge student">Today</span>
             <h3>今天先做到這樣就很好</h3>
             <ul class="detail-list">
-              <li>知道小車怎麼前進和停止。</li>
-              <li>知道感測器有數值。</li>
-              <li>知道 if 會幫車子做判斷。</li>
+              <li>知道怎麼把電腦和車子連起來。</li>
+              <li>知道 `W / A / S / D / X` 代表什麼動作。</li>
+              <li>知道 `X` 是停止，遇到狀況要先停車。</li>
             </ul>
           </article>
         </div>
@@ -67,19 +68,19 @@
         <div class="student-path-grid">
           <div class="student-path-step">
             <strong>任務 1</strong>
-            <p>先認識 5 個基本動作：前進、後退、左轉、右轉、停止。</p>
+            <p>先把電腦和車子接好，確認老師示範時車子真的會動。</p>
           </div>
           <div class="student-path-step">
             <strong>任務 2</strong>
-            <p>再看 4 個基本函式：`forward()`、`backward()`、`turn_left()`、`turn_right()`。</p>
+            <p>認識 5 個按鍵：`W / A / S / D / X`，知道它們分別代表什麼動作。</p>
           </div>
           <div class="student-path-step">
             <strong>任務 3</strong>
-            <p>下載第一份程式，先跟著打，不用急著自己寫全部。</p>
+            <p>下載第一份程式，先跟著老師按鍵盤控制，不用急著自己寫全部。</p>
           </div>
           <div class="student-path-step">
             <strong>任務 4</strong>
-            <p>最後挑戰感測器範例，看看距離不同時為什麼反應不同。</p>
+            <p>完成前進、後退、左轉、右轉、停止五個動作，就完成今天任務。</p>
           </div>
         </div>
       </section>
@@ -138,17 +139,21 @@ def turn_right(speed=30):
           </article>
           <article class="lesson-card">
             <div class="lesson-copy">
-              <p class="mini-label">感測器(Sensor)</p>
-              <h3>這就是 if 判斷</h3>
+              <p class="mini-label">鍵盤控制(Keyboard Control)</p>
+              <h3>按下按鍵，小車就做動作</h3>
             </div>
-            <pre><code>dist = sensor.ping()
+            <pre><code>cmd = input("Command: ").strip().lower()
 
-if dist &lt; 10:
-    sensor.rgb_all(utils.COLOR_RED)
-elif dist &lt; 20:
-    sensor.rgb_all(utils.COLOR_BLUE)
+if cmd == "w":
+    forward()
+elif cmd == "s":
+    backward()
+elif cmd == "a":
+    turn_left()
+elif cmd == "d":
+    turn_right()
 else:
-    sensor.rgb_all(utils.COLOR_GREEN)</code></pre>
+    stop()</code></pre>
           </article>
         </div>
       </section>
@@ -166,16 +171,16 @@ else:
             <a class="button primary block" href="downloads.html#download-keyboard">前往下載</a>
           </article>
           <article class="download-card">
-            <span class="download-type">再挑戰</span>
-            <h3>距離感測範例</h3>
-            <p>當你知道 if 在做什麼後，再來看這個。</p>
-            <a class="button secondary block" href="downloads.html#download-sensor">前往下載</a>
+            <span class="download-type">再看</span>
+            <h3>馬達基本函式</h3>
+            <p>想知道每個方向是怎麼寫出來時，再看這份。</p>
+            <a class="button secondary block" href="downloads.html#download-motor">前往下載</a>
           </article>
           <article class="download-card">
-            <span class="download-type">最後試試</span>
-            <h3>馬達基本函式</h3>
-            <p>如果你想知道每個方向怎麼寫出來，再看這份。</p>
-            <a class="button ghost block" href="downloads.html#download-motor">前往下載</a>
+            <span class="download-type">下一堂</span>
+            <h3>距離感測範例</h3>
+            <p>這份先留到之後延伸課，再慢慢加入判斷和感測器。</p>
+            <a class="button ghost block" href="downloads.html#download-sensor">前往下載</a>
           </article>
         </div>
       </section>
