@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>學生區 | Raspberry Pi Pico 小車入門教學站</title>
-  <meta name="description" content="Raspberry Pi Pico 循跡小車學生區完整頁。這一版先專注在電腦連上車子，再用鍵盤控制前進、後退、左轉、右轉、停止。">
+  <meta name="description" content="Raspberry Pi Pico 小車入門學生區，聚焦於電腦連線與鍵盤控制前進、後退、左轉、右轉、停止。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -35,8 +35,8 @@
           <p class="eyebrow">Student Zone</p>
           <h1>學生區完整頁</h1>
           <p class="hero-text">
-            這一頁是給學生一步一步跟著做的版本。你不用一次懂全部，只要先把電腦和車子連起來，
-            再學會用鍵盤控制前進、後退、左轉、右轉、停止，就很棒了。
+            本頁依學生操作順序整理學習內容，
+            聚焦於完成電腦與小車連線，以及以前進、後退、左轉、右轉、停止五個基本動作建立控制概念。
           </p>
           <div class="action-row">
             <a class="button primary" href="student-handout.html">先看學生講義</a>
@@ -47,11 +47,11 @@
         <div class="subpage-aside">
           <article class="aside-card">
             <img src="assets/photo-pico-car.jpg" alt="Raspberry Pi Pico 小車近照">
-            <p class="visual-note">你今天最後要讓這台小車動起來。先不用想太多，先會連線和按鍵控制就很棒。</p>
+            <p class="visual-note">本課操作對象為 Raspberry Pi Pico 小車，學習重點為完成連線與基本動作控制。</p>
           </article>
           <article class="aside-card">
             <span class="zone-badge student">Today</span>
-            <h3>今天先做到這樣就很好</h3>
+            <h3>本堂完成重點</h3>
             <ul class="detail-list">
               <li>知道怎麼把電腦和車子連起來。</li>
               <li>知道 `W / A / S / D / X` 代表什麼動作。</li>
@@ -64,8 +64,8 @@
       <section class="section student-mission-board reveal">
         <div class="section-heading">
           <p class="eyebrow">Mission Board</p>
-          <h2>學生先完成這 3 個任務就很棒</h2>
-          <p>這個區塊改成更像任務板的視覺，讓國中生一眼就知道現在該做什麼、下一步是什麼，不會被太多資訊嚇到。</p>
+          <h2>學生先完成這 3 個任務</h2>
+          <p>任務板依學習順序整理本堂課的三個核心任務，方便學生逐步完成操作。</p>
         </div>
         <div class="student-mission-track">
           <article class="student-mission-tile student-mission-start">
@@ -118,16 +118,16 @@
         <div class="section-heading">
           <p class="eyebrow">Real Study Scene</p>
           <h2>實際上課時，大概就是這樣</h2>
-          <p>先看一下真實學習畫面，你會更知道自己現在在做什麼，也比較不會被陌生的小車和電腦環境嚇到。</p>
+          <p>本區呈現實際學習畫面，協助學生理解課堂中的操作方式與環境。</p>
         </div>
         <div class="page-grid">
           <article class="content-card">
             <img class="teaching-visual" src="assets/photo-student-work.jpg" alt="學生和 Raspberry Pi Pico 小車一起操作">
-            <p>學生會一邊看電腦上的程式，一邊看桌上的小車反應，所以先認得 `Run`、`Shell` 和按鍵就很重要。</p>
+            <p>課堂操作需同時觀察程式畫面與小車反應，因此熟悉 `Run`、`Shell` 與按鍵指令十分重要。</p>
           </article>
           <article class="content-card">
             <img class="teaching-visual" src="assets/photo-classroom-overview.jpg" alt="Raspberry Pi Pico 小車課堂全景">
-            <p>整堂課不是考你背很多內容，而是讓你一步一步完成連線、輸入指令、讓車子動起來這三件事。</p>
+            <p>本堂課以連線、輸入指令與小車動作控制為主要任務，不要求一次掌握所有進階內容。</p>
           </article>
         </div>
       </section>
@@ -151,11 +151,11 @@
             </div>
           </article>
           <article class="content-card">
-            <h3>你現在要記住的事</h3>
+            <h3>本堂需要記住的事</h3>
             <ul class="detail-list">
               <li>每個按鍵都有一個動作。</li>
               <li>每個動作後面，通常都會對應一個函式(Function)。</li>
-              <li>你不用一開始背很多程式，只要先知道「哪個動作對哪個結果」。</li>
+              <li>本堂課先理解「哪個動作對應哪個結果」，再逐步閱讀完整程式。</li>
             </ul>
           </article>
         </div>
@@ -208,7 +208,7 @@ else:
       <section id="troubleshooting" class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">Troubleshooting</p>
-          <h2>如果卡住，先看這 4 個地方</h2>
+          <h2>操作卡住時，先檢查這 4 個地方</h2>
           <p>第一堂課最常卡在連線、執行和輸入的位置。先查這幾個地方，很多問題都能立刻解決。</p>
         </div>
         <div class="troubleshoot-grid">
@@ -218,7 +218,7 @@ else:
           </article>
           <article class="troubleshoot-card">
             <h3>按了 Run 沒反應</h3>
-            <p>確認你打開的是 `keyboard-car-control.py`，然後再按一次綠色 `Run`。</p>
+            <p>確認已開啟 `keyboard-car-control.py`，再按一次綠色 `Run`。</p>
           </article>
           <article class="troubleshoot-card">
             <h3>打字沒反應</h3>
@@ -234,13 +234,13 @@ else:
       <section class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">Next Step</p>
-          <h2>你現在該下載什麼</h2>
+          <h2>建議下載內容</h2>
         </div>
         <div class="download-grid">
           <article class="download-card">
             <span class="download-type">先下載</span>
             <h3>小車鍵盤控制範例</h3>
-            <p>第一個最適合學生開始的檔案。</p>
+            <p>適合作為學生第一個開啟的程式檔案。</p>
             <a class="button primary block" href="downloads.html#download-keyboard">前往下載</a>
           </article>
           <article class="download-card">
@@ -252,7 +252,7 @@ else:
           <article class="download-card">
             <span class="download-type">下一堂</span>
             <h3>距離感測範例</h3>
-            <p>這份先留到之後延伸課，再慢慢加入判斷和感測器。</p>
+            <p>本檔建議留待延伸課使用，再加入判斷與感測器主題。</p>
             <a class="button ghost block" href="downloads.html#download-sensor">前往下載</a>
           </article>
         </div>
@@ -261,8 +261,8 @@ else:
       <section class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">What Comes Next</p>
-          <h2>你之後還可以做到這些</h2>
-          <p>今天先學會連線和鍵盤控制就很好了。等你熟悉之後，就可以慢慢往循跡、感測器和更多挑戰前進。</p>
+          <h2>後續延伸主題</h2>
+          <p>完成連線與鍵盤控制後，課程可進一步延伸至循跡、感測器與其他控制模組。</p>
         </div>
         <div class="visual-story-grid">
           <article class="visual-story-card media-highlight">
@@ -272,7 +272,7 @@ else:
             <div class="visual-story-copy">
               <span class="zone-badge student">Video</span>
               <h3>真的會像這樣動起來</h3>
-              <p>當你先學會今天的鍵盤控制，之後就能挑戰讓小車沿著黑線自己走，這段影片就是下一步的真實樣子。</p>
+              <p>影片示範循跡活動的延伸樣貌，供後續學習參考。</p>
             </div>
           </article>
           <article class="visual-story-card">
@@ -280,7 +280,7 @@ else:
             <div class="visual-story-copy">
               <span class="zone-badge student">Next Challenge</span>
               <h3>紅外線感測器(IR Sensor)</h3>
-              <p>循跡小車常常會用到這類感測器來辨認黑線。等你會控制小車之後，就會慢慢學到它怎麼幫助小車自己判斷方向。</p>
+              <p>循跡小車常以紅外線感測器辨識黑線，後續課程將說明其在方向判斷中的作用。</p>
             </div>
           </article>
           <article class="visual-story-card">
@@ -288,7 +288,7 @@ else:
             <div class="visual-story-copy">
               <span class="zone-badge student">More Parts</span>
               <h3>控制板與模組(Board & Modules)</h3>
-              <p>之後你也會慢慢認識小車用到的控制板、按鈕和模組。先把今天的基本控制學會，後面就比較不容易亂掉。</p>
+              <p>控制板與模組屬於後續單元的重要內容，完成基本控制後再逐步加入較易掌握。</p>
             </div>
           </article>
         </div>
