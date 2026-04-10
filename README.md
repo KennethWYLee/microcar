@@ -90,7 +90,13 @@
 - 馬達基本函式範例
 - 距離感測範例
 - PDF 補充教材
-- Mango 套件
+
+另外也新增了 `延伸教材(Extension Materials)`，把目前不屬於主線的內容另外分區：
+
+- `AmebaAI / AmebaNN`
+  另外一台車的教材
+- `Board & Library`
+  和電路板、套件環境比較相關的資源
 
 ## 專案檔案結構
 
@@ -121,7 +127,12 @@ microcar/
    ├─ distance-sensor-rgb.py
    ├─ robot-programming-practice-python.pdf
    ├─ robot-code-jumpstart.pdf
-   └─ mango-library.zip
+   └─ extensions/
+      ├─ board-library/
+      │  └─ mango-library.zip
+      └─ other-car/
+         ├─ ameba-ai.zip
+         └─ ameba-nn.zip
 ```
 
 ## 使用方式
