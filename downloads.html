@@ -23,7 +23,7 @@
       <nav class="site-nav" aria-label="主題導覽">
         <a href="bootcamp.html">Boot Camp</a>
         <a href="sensor-control.html">感測器操控</a>
-        <a href="index.html#topic-roadmap">主題地圖</a>
+        <a href="line-following-intro.html">循跡入門</a>
         <a href="downloads.html">下載區</a>
       </nav>
       <a class="button ghost" href="index.html">回首頁</a>
@@ -35,13 +35,13 @@
           <p class="eyebrow">Downloads</p>
           <h1>所有資源都改成依主題整理</h1>
           <p class="hero-text">
-            下載區不再分教師或學生，而是直接依主題整理成 Boot Camp、感測器操控與延伸教材。
-            如果只是要上第一堂課，先看 Boot Camp 區塊就夠了。
+            下載區不再分教師或學生，而是直接依主題整理成 Boot Camp、感測器操控、循跡入門與延伸教材。
+            如果只是要上第一堂課，先看 Boot Camp；如果要接著進入第三堂課，就直接打開循跡入門主題。
           </p>
           <div class="action-row">
             <a class="button primary" href="#setup-thonny">先準備 Thonny</a>
             <a class="button secondary" href="#topic-bootcamp">主題 1 資源</a>
-            <a class="button ghost" href="#topic-sensor">主題 2 資源</a>
+            <a class="button ghost" href="#topic-line">主題 3 資源</a>
           </div>
         </div>
         <div class="subpage-aside">
@@ -50,8 +50,8 @@
             <ol class="number-list">
               <li>先安裝與確認 Thonny。</li>
               <li>再進入 Boot Camp 12 步驟。</li>
-              <li>需要時再看學生學習單。</li>
-              <li>下一堂再開感測器主題。</li>
+              <li>第二堂再開感測器主題。</li>
+              <li>第三堂接著進入循跡入門。</li>
             </ol>
           </article>
         </div>
@@ -149,6 +149,34 @@
             <h3>距離感測主程式</h3>
             <p>本主題的核心程式，會讀距離並切換 RGB LED 顏色。</p>
             <a class="button secondary block" href="code-viewer.html?file=distance-sensor-rgb">打開程式頁</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="topic-line" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Topic 3</p>
+          <h2>循跡入門主題資源</h2>
+          <p>第三個主題把感測器值轉成簡單循跡規則，作為進入循跡進階前的過渡版本。</p>
+        </div>
+        <div class="download-grid">
+          <article class="download-card">
+            <span class="download-type">TOPIC 3</span>
+            <h3>循跡入門主題頁</h3>
+            <p>包含主題步驟、暖身程式、主程式、真實循跡影片與重點解讀。</p>
+            <a class="button primary block" href="line-following-intro.html">打開主題頁</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">WARM-UP</span>
+            <h3>循跡感測器讀值程式</h3>
+            <p>先讀左、右循跡感測器的值，建立黑線與白底的基本判讀概念。</p>
+            <a class="button secondary block" href="code-viewer.html?file=line-sensor-read">打開程式頁</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">MAIN CODE</span>
+            <h3>循跡入門主程式</h3>
+            <p>使用四種基本規則，讓小車開始做出直走、左修正、右修正與停止。</p>
+            <a class="button secondary block" href="code-viewer.html?file=line-following-intro">打開程式頁</a>
           </article>
         </div>
       </section>

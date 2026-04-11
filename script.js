@@ -335,6 +335,166 @@ for _ in range(500):
 
 sensor.rgb_close()
 `
+  },
+  "line-sensor-read": {
+    path: "downloads/line-sensor-read.py",
+    title: "循跡感測器讀值程式",
+    summary: "這份暖身程式先把左右循跡感測器的值印到 Shell，幫助學生看懂黑線與白底的差異。",
+    stage: "主題 3：循跡入門暖身",
+    backHref: "line-following-intro.html",
+    steps: [
+      "先在 Thonny 開新檔。",
+      "把程式貼上後按 Run。",
+      "把感測器移到黑線和白底上，觀察左右兩邊輸出的 0 / 1。"
+    ],
+    highlights: [
+      {
+        title: "設定左右感測器",
+        summary: "先建立左、右兩個循跡感測器輸入腳位。",
+        range: "第 1-10 行",
+        lines: [1, 10],
+        tone: "teacher"
+      },
+      {
+        title: "持續讀值",
+        summary: "在迴圈裡反覆讀取左右感測值，並印到 Shell。",
+        range: "第 12-18 行",
+        lines: [12, 18],
+        tone: "student"
+      }
+    ],
+    fallbackText: `from machine import Pin
+import time
+
+# Topic 3 warm-up: read two line sensor values
+# Assumption:
+#   left sensor  -> GP15
+#   right sensor -> GP14
+# Black line = 1, white floor = 0
+
+LEFT_SENSOR = Pin(15, Pin.IN)
+RIGHT_SENSOR = Pin(14, Pin.IN)
+
+print("Line sensor warm-up")
+print("black = 1, white = 0")
+
+while True:
+    left_value = LEFT_SENSOR.value()
+    right_value = RIGHT_SENSOR.value()
+
+    print("left =", left_value, "right =", right_value)
+    time.sleep(0.1)
+`
+  },
+  "line-following-intro": {
+    path: "downloads/line-following-intro.py",
+    title: "循跡入門主程式",
+    summary: "這份主程式把左右循跡感測值直接轉成基本轉向規則，是進入進階循跡前的入門版本。",
+    stage: "主題 3：循跡入門",
+    backHref: "line-following-intro.html",
+    steps: [
+      "先讀取左右循跡感測器的值。",
+      "再用四種規則決定前進、左修正、右修正或停止。",
+      "先完成基本循跡，之後再往進階控制延伸。"
+    ],
+    highlights: [
+      {
+        title: "馬達與感測器設定",
+        summary: "先準備兩側馬達腳位，再定義左右循跡感測器腳位。",
+        range: "第 1-15 行",
+        lines: [1, 15],
+        tone: "teacher"
+      },
+      {
+        title: "基本動作函式",
+        summary: "這裡保留前進、左轉、右轉、停止四種最基本動作。",
+        range: "第 18-42 行",
+        lines: [18, 42],
+        tone: "student"
+      },
+      {
+        title: "四種循跡規則",
+        summary: "左右感測值不同時，小車就依照規則做修正。",
+        range: "第 50-64 行",
+        lines: [50, 64],
+        tone: "teacher"
+      }
+    ],
+    fallbackText: `from machine import Pin
+import time
+
+# Topic 3: line following intro
+# Assumption:
+#   left sensor  -> GP15
+#   right sensor -> GP14
+# Black line = 1, white floor = 0
+
+M1_A = Pin(12, Pin.OUT)
+M1_B = Pin(13, Pin.OUT)
+M2_A = Pin(10, Pin.OUT)
+M2_B = Pin(11, Pin.OUT)
+
+LEFT_SENSOR = Pin(15, Pin.IN)
+RIGHT_SENSOR = Pin(14, Pin.IN)
+
+
+def _set_motor(pin_a, pin_b, direction):
+    if direction > 0:
+        pin_a.value(1)
+        pin_b.value(0)
+    elif direction < 0:
+        pin_a.value(0)
+        pin_b.value(1)
+    else:
+        pin_a.value(0)
+        pin_b.value(0)
+
+
+def stop():
+    _set_motor(M1_A, M1_B, 0)
+    _set_motor(M2_A, M2_B, 0)
+
+
+def forward():
+    _set_motor(M1_A, M1_B, 1)
+    _set_motor(M2_A, M2_B, 1)
+
+
+def turn_left():
+    _set_motor(M1_A, M1_B, -1)
+    _set_motor(M2_A, M2_B, 1)
+
+
+def turn_right():
+    _set_motor(M1_A, M1_B, 1)
+    _set_motor(M2_A, M2_B, -1)
+
+
+print("Line following intro")
+print("left black + right black  -> forward")
+print("left black + right white  -> turn left")
+print("left white + right black  -> turn right")
+print("left white + right white  -> stop")
+
+while True:
+    left_value = LEFT_SENSOR.value()
+    right_value = RIGHT_SENSOR.value()
+
+    if left_value == 1 and right_value == 1:
+        forward()
+        print("forward", left_value, right_value)
+    elif left_value == 1 and right_value == 0:
+        turn_left()
+        print("left", left_value, right_value)
+    elif left_value == 0 and right_value == 1:
+        turn_right()
+        print("right", left_value, right_value)
+    else:
+        stop()
+        print("stop", left_value, right_value)
+
+    time.sleep(0.05)
+`
   }
 };
 
@@ -496,3 +656,4 @@ const attachInlineCodeBlock = (nodeId, buttonId, pageKey, useHighlights = false)
 
 attachInlineCodeBlock("bootcamp-full-code", "bootcamp-copy-code", "keyboard-car-control", false);
 attachInlineCodeBlock("sensor-full-code", "sensor-copy-code", "distance-sensor-rgb", true);
+attachInlineCodeBlock("line-following-full-code", "line-following-copy-code", "line-following-intro", true);

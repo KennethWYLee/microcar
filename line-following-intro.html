@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>循跡入門 | Raspberry Pi Pico 小車入門教學站</title>
+  <meta name="description" content="主題 3：循跡入門。先看兩個循跡感測值，再用簡單規則讓小車沿著黑線前進。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260411-topic3">
+</head>
+<body class="sensor-topic-page">
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">MC</span>
+        <span class="brand-copy">
+          <strong>Raspberry Pi Pico 小車入門教學站</strong>
+          <small>Beginner Microcar Course</small>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="主題導覽">
+        <a href="bootcamp.html">Boot Camp</a>
+        <a href="sensor-control.html">感測器操控</a>
+        <a href="line-following-intro.html">循跡入門</a>
+        <a href="downloads.html">下載區</a>
+      </nav>
+      <a class="button ghost" href="index.html">回首頁</a>
+    </header>
+
+    <main>
+      <section class="subpage-hero reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">Topic 3</p>
+          <h1>循跡入門</h1>
+          <p class="hero-text">
+            第三個主題把感測器數值轉成實際行動。這裡先不用 PID，也不講太複雜的調參，
+            只先學會看兩個循跡感測值，並用最基本的規則讓小車沿著黑線前進。
+          </p>
+          <div class="action-row">
+            <a class="button primary" href="#line-route">先看主題步驟</a>
+            <a class="button secondary" href="#line-full-code-section">再看主程式</a>
+            <a class="button ghost" href="code-viewer.html?file=line-following-intro">打開程式頁</a>
+          </div>
+        </div>
+        <div class="subpage-aside">
+          <article class="aside-card">
+            <span class="zone-badge student">Finish Line</span>
+            <h3>本主題的完成線</h3>
+            <ul class="detail-list">
+              <li>知道左、右循跡感測器會輸出 0 或 1。</li>
+              <li>能看懂黑線與白底對應的感測值。</li>
+              <li>知道直走、左修正、右修正、停止四種基本規則。</li>
+              <li>讓小車在簡單黑線路徑上做出基本循跡反應。</li>
+            </ul>
+          </article>
+          <article class="aside-card">
+            <img class="teaching-visual" src="assets/photo-line-following-scene.jpg" alt="循跡小車實拍照片">
+            <p class="visual-note">這個主題會從真實循跡畫面出發，再回到程式理解感測器與轉向規則。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="line-route" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Topic Route</p>
+          <h2>循跡入門先走完這 4 步</h2>
+          <p>先看感測器值，再理解規則，最後讓小車開始沿線前進。</p>
+        </div>
+        <div class="bootcamp-step-list">
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 1</span>
+              <h3>先看循跡感測器</h3>
+              <p>先知道左右兩個感測器分別在看哪裡，等一下程式才知道要用哪個值做判斷。</p>
+            </div>
+            <img class="teaching-visual" src="assets/ir-sensor.png" alt="循跡感測器示意圖">
+          </article>
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 2</span>
+              <h3>再看感測器數值</h3>
+              <p>先用暖身程式讀出左邊與右邊的值，確認黑線與白底時會看到什麼變化。</p>
+            </div>
+            <img class="teaching-visual" src="assets/photo-pico-car.jpg" alt="小車與感測器照片">
+          </article>
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 3</span>
+              <h3>把數值換成規則</h3>
+              <p>左黑右黑就直走，左黑右白就左修正，左白右黑就右修正，兩邊都白先停止。</p>
+            </div>
+            <img class="teaching-visual" src="assets/video-line-following-demo-poster.jpg" alt="循跡示意圖">
+          </article>
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 4</span>
+              <h3>最後讓小車循跡</h3>
+              <p>把感測器與馬達控制接在一起，小車就能開始做出最基本的循跡反應。</p>
+            </div>
+            <img class="teaching-visual" src="assets/video-line-following-students-poster.jpg" alt="學生循跡實作畫面">
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Two Programs</p>
+          <h2>先讀值，再上主程式</h2>
+          <p>這個主題先用暖身程式看懂兩個感測器值，再進入最簡單的循跡主程式。</p>
+        </div>
+        <div class="download-grid">
+          <article class="download-card">
+            <span class="download-type">WARM-UP</span>
+            <h3>循跡感測器讀值程式</h3>
+            <p>先在 Shell 觀察左右感測器的輸出，確認黑線與白底對應的數值。</p>
+            <a class="button secondary block" href="code-viewer.html?file=line-sensor-read">打開暖身程式</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">MAIN</span>
+            <h3>循跡入門主程式</h3>
+            <p>用最基本的四種規則，讓小車做出直走、左修正、右修正與停止。</p>
+            <a class="button primary block" href="#line-full-code-section">查看主程式</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">NEXT</span>
+            <h3>之後再進入循跡進階</h3>
+            <p>當學生已經會基本循跡後，下一題再談更細的轉向控制與穩定度調整。</p>
+            <a class="button ghost block" href="index.html#topic-roadmap">回主題地圖</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Real Demo</p>
+          <h2>先看真實循跡畫面，再回頭看程式</h2>
+          <p>這兩段影片可以先幫學生建立目標感，知道第三主題完成後，小車會做出什麼樣的效果。</p>
+        </div>
+        <div class="page-grid">
+          <article class="content-card tool-focus-card">
+            <span class="zone-badge teacher">Demo</span>
+            <h3>循跡示範影片</h3>
+            <video class="teaching-visual" controls playsinline preload="metadata" poster="assets/video-line-following-demo-poster.jpg">
+              <source src="assets/video-line-following-demo.mp4" type="video/mp4">
+            </video>
+          </article>
+          <article class="content-card tool-focus-card">
+            <span class="zone-badge student">Practice</span>
+            <h3>學生實作影片</h3>
+            <video class="teaching-visual" controls playsinline preload="metadata" poster="assets/video-line-following-students-poster.jpg">
+              <source src="assets/video-line-following-students.mp4" type="video/mp4">
+            </video>
+          </article>
+        </div>
+      </section>
+
+      <section id="line-full-code-section" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Main Program</p>
+          <h2>這份主程式把感測器值直接轉成轉向規則</h2>
+          <p>這是循跡入門版，只先做簡單規則控制，不加入 PID。目的不是追求最穩，而是讓學生先看懂循跡邏輯。</p>
+        </div>
+        <div class="action-row">
+          <button id="line-following-copy-code" class="button primary" type="button">複製主程式</button>
+          <a class="button secondary" href="code-viewer.html?file=line-sensor-read">看暖身程式</a>
+          <a class="button ghost" href="code-viewer.html?file=line-following-intro">打開程式頁</a>
+        </div>
+        <article class="code-viewer-card">
+          <div class="code-toolbar">
+            <span class="download-type">TOPIC 3 CODE</span>
+            <span class="zone-badge teacher">主題 3 主程式</span>
+          </div>
+          <pre class="code-block"><code id="line-following-full-code">載入中...</code></pre>
+        </article>
+      </section>
+
+      <section id="line-walkthrough" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Code Walkthrough</p>
+          <h2>循跡入門先看這 4 個重點</h2>
+          <p>這個主題最重要的不是程式行數，而是把「感測值」和「轉向動作」連在一起。</p>
+        </div>
+        <div class="code-highlight-grid">
+          <article class="code-highlight-card teacher-card">
+            <span class="download-type">STEP 1</span>
+            <h3>設定兩個循跡感測器</h3>
+            <p>先用左右兩個輸入腳位讀取黑線感測器值，作為後續判斷基礎。</p>
+          </article>
+          <article class="code-highlight-card student-card">
+            <span class="download-type">STEP 2</span>
+            <h3>讀左值與右值</h3>
+            <p>每次迴圈都先取得左右兩邊目前看到的是黑線還是白底。</p>
+          </article>
+          <article class="code-highlight-card teacher-card">
+            <span class="download-type">STEP 3</span>
+            <h3>四種基本規則</h3>
+            <p>左黑右黑直走，左黑右白左修正，左白右黑右修正，兩邊都白先停止。</p>
+          </article>
+          <article class="code-highlight-card student-card">
+            <span class="download-type">STEP 4</span>
+            <h3>之後才往 PID 延伸</h3>
+            <p>這份程式先理解基本循跡規則，下一個主題再談更細的控制調整。</p>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="script.js?v=20260411-topic3"></script>
+</body>
+</html>
