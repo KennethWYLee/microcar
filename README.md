@@ -4,7 +4,7 @@
 - [GitHub Pages 網站](https://kennethwylee.github.io/microcar/)
 - [GitHub Repository](https://github.com/KennethWYLee/microcar)
 
-這個網站以 `Raspberry Pi Pico` 小車為主軸，將原本分散的教材整理成「依主題學習」的教學網站。現在網站不再用身分區分，而是改成每個主題都帶著使用者完成一個明確功能，先做出結果，再理解程式。
+這個網站以 `Raspberry Pi Pico` 小車為主軸，將原本分散的教材整理成「依主題學習」的教學網站。網站不再以教師或學生身分區分，而是讓每一個主題都帶著使用者完成一個明確功能，先做出結果，再理解程式。
 
 ## 目前主題
 
@@ -15,10 +15,10 @@
 說明：讀取距離感測器數值，使用 `if / elif / else` 搭配 RGB LED 表現距離變化。
 
 3. `循跡入門`
-說明：規劃中，將從感測器讀值延伸到最基本的循跡反應。
+說明：從左右循跡感測值出發，先用最基本的四種規則讓小車沿著黑線前進。
 
 4. `循跡進階`
-說明：規劃中，會加入更細的控制調整與更穩定的循跡策略。
+說明：規劃中，會加入更細的轉向控制與穩定度調整。
 
 5. `PIT 演算法討論`
 說明：規劃中，作為循跡進階後的控制策略延伸主題。
@@ -34,6 +34,8 @@
   主題 1：1 小時 Boot Camp。
 - `sensor-control.html`
   主題 2：感測器的操控。
+- `line-following-intro.html`
+  主題 3：循跡入門。
 - `student-handout.html`
   Boot Camp 學習單，可投影或列印。
 - `downloads.html`
@@ -57,6 +59,10 @@
 - `sensor-rgb-warmup.py`
 - `distance-sensor-rgb.py`
 
+### 主題 3：循跡入門
+- `line-sensor-read.py`
+- `line-following-intro.py`
+
 ### 延伸教材
 - `AmebaAI / AmebaNN`
 - `Mango Library`
@@ -73,6 +79,8 @@
 5. 在 Shell 輸入 `W / A / S / D / X` 控制小車。
 
 第二堂課再進入 `sensor-control.html`，讓學生先觀察 RGB LED 的變化，再理解距離感測器與條件判斷。
+
+第三堂課可以接著打開 `line-following-intro.html`，讓學生把感測器值和小車轉向規則連在一起，開始做最基本的循跡。
 
 ## 備註
 

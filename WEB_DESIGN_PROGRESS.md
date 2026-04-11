@@ -8,9 +8,9 @@
 目前公開主線為：
 1. `1 hr Boot Camp`
 2. `感測器的操控`
+3. `循跡入門`
 
 後續主題規劃：
-3. `循跡入門`
 4. `循跡進階`
 5. `PIT 演算法討論`
 額外模組：`電路板入門`
@@ -21,7 +21,7 @@
 - 首頁導覽改為：
   - `Boot Camp`
   - `感測器操控`
-  - `主題地圖`
+  - `循跡入門`
   - `下載區`
 - 首頁移除教師支援與學生練習的公開主線定位。
 - README 與下載區同步改為依主題分類。
@@ -36,28 +36,42 @@
 - 12 個步驟已整理成由上到下的單一路徑，搭配對應 GIF。
 
 ### 3. 主題 2：感測器的操控
-- 新增 `sensor-control.html` 作為第二主題頁。
+- `sensor-control.html` 已作為第二主題頁上線。
 - 主題內容包含：
   - 感測器主題路線
   - RGB 暖身程式
   - 距離感測主程式
   - 主程式重點解讀
 
-### 4. 程式頁與下載區整理
+### 4. 主題 3：循跡入門
+- 新增 `line-following-intro.html` 作為第三主題頁。
+- 主題內容包含：
+  - 感測器讀值暖身
+  - 循跡入門主程式
+  - 真實循跡影片
+  - 循跡規則重點說明
+- 新增：
+  - `downloads/line-sensor-read.py`
+  - `downloads/line-following-intro.py`
+- `script.js` 已接上第三主題的程式頁與頁內複製功能。
+
+### 5. 程式頁與下載區整理
 - `code-viewer.html` 改為中性程式頁，不再使用身分導向文案。
-- `downloads.html` 改成：
+- `downloads.html` 目前分成：
   - `主題 1：Boot Camp`
   - `主題 2：感測器操控`
+  - `主題 3：循跡入門`
   - `延伸教材`
-- `keyboard-car-control.py`
-- `basic-motor-functions.py`
-- `sensor-rgb-warmup.py`
-- `distance-sensor-rgb.py`
-- `one-hour-bootcamp-teaching-plan.txt`
-  以上內容已重寫成乾淨版，方便直接展示與複製。
+- 目前網站可直接展示與複製的程式包含：
+  - `keyboard-car-control.py`
+  - `basic-motor-functions.py`
+  - `sensor-rgb-warmup.py`
+  - `distance-sensor-rgb.py`
+  - `line-sensor-read.py`
+  - `line-following-intro.py`
 
-### 5. 文件同步
-- `README.md` 改為主題式專案介紹。
+### 6. 文件同步
+- `README.md` 已改為主題式專案介紹。
 - 本進度檔同步更新為主題式網站架構。
 
 ## 目前保留但降級的內容
@@ -66,6 +80,6 @@
 
 ## 下一步建議
 
-1. 開始製作 `循跡入門` 主題頁。
-2. 將 `感測器的操控` 再補上更明確的步驟圖或動圖。
-3. 把首頁的主題卡與後續主題頁持續做成同一套教學節奏。
+1. 開始製作 `循跡進階` 主題頁。
+2. 將 `循跡入門` 的感測器接線圖再補得更清楚。
+3. 把第四、第五主題也接進同一套主題節奏。
