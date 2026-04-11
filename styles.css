@@ -604,6 +604,11 @@ button.button {
     linear-gradient(180deg, rgba(236, 246, 236, 0.92), rgba(255, 255, 255, 0.98));
 }
 
+.product-algorithm {
+  background:
+    linear-gradient(180deg, rgba(244, 239, 229, 0.92), rgba(255, 255, 255, 0.98));
+}
+
 .chip-list.compact {
   margin: 0;
   grid-template-columns: repeat(3, minmax(0, 1fr));

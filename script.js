@@ -731,6 +731,315 @@ while True:
   }
 };
 
+codePages["line-algorithm-rule"] = {
+  ...codePages["line-following-intro"],
+  title: "規則式循跡演算法",
+  summary: "這是最直觀的循跡寫法。看到黑線就照固定規則前進、左修正、右修正或停止。",
+  stage: "主題 5：循跡演算法",
+  backHref: "line-following-algorithms.html",
+  steps: [
+    "先看左右循跡感測值。",
+    "再用固定規則決定車子現在該做什麼。",
+    "這個版本最好懂，也最適合拿來當第一個比較基準。"
+  ]
+};
+
+codePages["line-algorithm-p"] = {
+  path: "downloads/line-following-p.py",
+  title: "P 循跡演算法",
+  summary: "這份程式把 error 直接轉成 correction，讓左右輪用速度差修正方向。",
+  stage: "主題 5：循跡演算法",
+  backHref: "line-following-algorithms.html",
+  steps: [
+    "先把左右感測值換成 error。",
+    "再用 correction = KP * error 算出修正量。",
+    "觀察比例控制如何讓小車比規則式更平順。"
+  ],
+  highlights: [
+    {
+      title: "PWM 與比例參數",
+      summary: "先準備 PWM 馬達腳位，再設定 BASE_SPEED 與 KP。",
+      range: "第 1-19 行",
+      lines: [1, 19],
+      tone: "teacher"
+    },
+    {
+      title: "error 轉換",
+      summary: "把左右感測器的黑白狀態轉成偏左、偏右或置中的 error。",
+      range: "第 46-64 行",
+      lines: [46, 64],
+      tone: "student"
+    },
+    {
+      title: "P 控制主迴圈",
+      summary: "每次都用 KP * error 更新左右速度差，這就是最基礎的比例控制。",
+      range: "第 70-88 行",
+      lines: [70, 88],
+      tone: "teacher"
+    }
+  ],
+  fallbackText: `from machine import Pin, PWM
+import time
+
+# Topic 5: proportional line following
+# Assumption:
+#   left sensor  -> GP15
+#   right sensor -> GP14
+# Black line = 1, white floor = 0
+
+FREQUENCY = 1000
+BASE_SPEED = 24000
+MAX_SPEED = 42000
+KP = 10000
+
+RIGHT_FORWARD = PWM(Pin(13))
+RIGHT_BACKWARD = PWM(Pin(12))
+LEFT_FORWARD = PWM(Pin(10))
+LEFT_BACKWARD = PWM(Pin(11))
+
+for motor in (RIGHT_FORWARD, RIGHT_BACKWARD, LEFT_FORWARD, LEFT_BACKWARD):
+    motor.freq(FREQUENCY)
+
+LEFT_SENSOR = Pin(15, Pin.IN)
+RIGHT_SENSOR = Pin(14, Pin.IN)
+
+last_error = 0.0
+
+
+def clamp_speed(value):
+    if value < 0:
+        return 0
+    if value > MAX_SPEED:
+        return MAX_SPEED
+    return int(value)
+
+
+def stop():
+    RIGHT_FORWARD.duty_u16(0)
+    RIGHT_BACKWARD.duty_u16(0)
+    LEFT_FORWARD.duty_u16(0)
+    LEFT_BACKWARD.duty_u16(0)
+
+
+def drive_forward(left_speed, right_speed):
+    LEFT_FORWARD.duty_u16(left_speed)
+    LEFT_BACKWARD.duty_u16(0)
+    RIGHT_FORWARD.duty_u16(right_speed)
+    RIGHT_BACKWARD.duty_u16(0)
+
+
+def read_error(previous_error):
+    left_value = LEFT_SENSOR.value()
+    right_value = RIGHT_SENSOR.value()
+
+    if left_value == 1 and right_value == 1:
+        error = 0.0
+    elif left_value == 1 and right_value == 0:
+        error = 1.0
+    elif left_value == 0 and right_value == 1:
+        error = -1.0
+    else:
+        if previous_error > 0:
+            error = 1.5
+        elif previous_error < 0:
+            error = -1.5
+        else:
+            error = 0.0
+
+    return left_value, right_value, error
+
+
+print("P line following")
+print("correction = KP * error")
+
+while True:
+    left_value, right_value, error = read_error(last_error)
+    correction = KP * error
+
+    left_speed = clamp_speed(BASE_SPEED - correction)
+    right_speed = clamp_speed(BASE_SPEED + correction)
+
+    if left_value == 0 and right_value == 0 and last_error == 0:
+        stop()
+        print("stop", left_value, right_value, "error =", error)
+    else:
+        drive_forward(left_speed, right_speed)
+        print(
+            "left =", left_value,
+            "right =", right_value,
+            "error =", error,
+            "left_speed =", left_speed,
+            "right_speed =", right_speed,
+        )
+
+    last_error = error
+    time.sleep(0.03)
+`
+};
+
+codePages["line-algorithm-pd"] = {
+  ...codePages["line-following-advanced"],
+  title: "PD 循跡演算法",
+  summary: "這份版本在比例控制之外再加入微分項，讓循跡反應更平順、也更不容易左右擺動。",
+  stage: "主題 5：循跡演算法",
+  backHref: "line-following-algorithms.html",
+  steps: [
+    "先把感測值轉成 error。",
+    "再算出 derivative，看誤差現在變化得多快。",
+    "最後用 PD 控制一起調整左右輪速度差。"
+  ]
+};
+
+codePages["line-algorithm-pid"] = {
+  path: "downloads/line-following-pid.py",
+  title: "PID 循跡演算法",
+  summary: "這份版本加入積分項與微分項，是目前網站裡最完整的循跡控制教學程式。",
+  stage: "主題 5：循跡演算法",
+  backHref: "line-following-algorithms.html",
+  steps: [
+    "先看 error 與 derivative。",
+    "再把過去偏差累積成 sum_error。",
+    "最後用 PID 同步決定修正量與左右輪速度差。"
+  ],
+  highlights: [
+    {
+      title: "PID 參數與積分上限",
+      summary: "先準備 KP、KI、KD，並用 INTEGRAL_LIMIT 避免積分項無限制累積。",
+      range: "第 1-23 行",
+      lines: [1, 23],
+      tone: "teacher"
+    },
+    {
+      title: "誤差與積分",
+      summary: "每次都更新 error、derivative 與 sum_error，這是 PID 的核心狀態。",
+      range: "第 58-87 行",
+      lines: [58, 87],
+      tone: "student"
+    },
+    {
+      title: "PID 修正量",
+      summary: "用 KP、KI、KD 三個項目一起決定 correction，讓小車依照誤差狀態持續修正。",
+      range: "第 89-109 行",
+      lines: [89, 109],
+      tone: "teacher"
+    }
+  ],
+  fallbackText: `from machine import Pin, PWM
+import time
+
+# Topic 5: simplified PID line following
+# Assumption:
+#   left sensor  -> GP15
+#   right sensor -> GP14
+# Black line = 1, white floor = 0
+# This is a teaching version for two digital sensors.
+
+FREQUENCY = 1000
+BASE_SPEED = 24000
+MAX_SPEED = 42000
+KP = 9500
+KI = 900
+KD = 4200
+INTEGRAL_LIMIT = 4.0
+
+RIGHT_FORWARD = PWM(Pin(13))
+RIGHT_BACKWARD = PWM(Pin(12))
+LEFT_FORWARD = PWM(Pin(10))
+LEFT_BACKWARD = PWM(Pin(11))
+
+for motor in (RIGHT_FORWARD, RIGHT_BACKWARD, LEFT_FORWARD, LEFT_BACKWARD):
+    motor.freq(FREQUENCY)
+
+LEFT_SENSOR = Pin(15, Pin.IN)
+RIGHT_SENSOR = Pin(14, Pin.IN)
+
+last_error = 0.0
+sum_error = 0.0
+
+
+def clamp_speed(value):
+    if value < 0:
+        return 0
+    if value > MAX_SPEED:
+        return MAX_SPEED
+    return int(value)
+
+
+def clamp_integral(value):
+    if value > INTEGRAL_LIMIT:
+        return INTEGRAL_LIMIT
+    if value < -INTEGRAL_LIMIT:
+        return -INTEGRAL_LIMIT
+    return value
+
+
+def stop():
+    RIGHT_FORWARD.duty_u16(0)
+    RIGHT_BACKWARD.duty_u16(0)
+    LEFT_FORWARD.duty_u16(0)
+    LEFT_BACKWARD.duty_u16(0)
+
+
+def drive_forward(left_speed, right_speed):
+    LEFT_FORWARD.duty_u16(left_speed)
+    LEFT_BACKWARD.duty_u16(0)
+    RIGHT_FORWARD.duty_u16(right_speed)
+    RIGHT_BACKWARD.duty_u16(0)
+
+
+def read_error(previous_error):
+    left_value = LEFT_SENSOR.value()
+    right_value = RIGHT_SENSOR.value()
+
+    if left_value == 1 and right_value == 1:
+        error = 0.0
+    elif left_value == 1 and right_value == 0:
+        error = 1.0
+    elif left_value == 0 and right_value == 1:
+        error = -1.0
+    else:
+        if previous_error > 0:
+            error = 1.5
+        elif previous_error < 0:
+            error = -1.5
+        else:
+            error = 0.0
+
+    return left_value, right_value, error
+
+
+print("PID line following")
+print("correction = KP * error + KI * sum_error + KD * derivative")
+
+while True:
+    left_value, right_value, error = read_error(last_error)
+    derivative = error - last_error
+    sum_error = clamp_integral(sum_error + error)
+
+    correction = KP * error + KI * sum_error + KD * derivative
+
+    left_speed = clamp_speed(BASE_SPEED - correction)
+    right_speed = clamp_speed(BASE_SPEED + correction)
+
+    if left_value == 0 and right_value == 0 and last_error == 0:
+        stop()
+        print("stop", left_value, right_value, "error =", error)
+    else:
+        drive_forward(left_speed, right_speed)
+        print(
+            "left =", left_value,
+            "right =", right_value,
+            "error =", error,
+            "sum_error =", round(sum_error, 2),
+            "left_speed =", left_speed,
+            "right_speed =", right_speed,
+        )
+
+    last_error = error
+    time.sleep(0.03)
+`
+};
+
 const escapeHtml = value =>
   value
     .replaceAll("&", "&amp;")
