@@ -120,6 +120,10 @@
             </ol>
           </article>
         </div>
+        <div class="section-actions">
+          <a class="button secondary" href="#full-code">先貼上完整程式</a>
+          <a class="button ghost" href="#code-walkthrough">貼上後，從這裡開始讀程式</a>
+        </div>
       </section>
 
       <section class="section reveal">
@@ -440,7 +444,7 @@
         </div>
         <div class="action-row">
           <button id="bootcamp-copy-code" class="button primary" type="button">複製完整程式</button>
-          <a class="button secondary" href="code-viewer.html?file=keyboard-car-control">看可標註版本</a>
+          <a class="button secondary" href="#code-walkthrough">貼上後從這裡開始看</a>
           <a class="button ghost" href="#thonny-steps">回 20 步驟</a>
         </div>
         <article class="code-viewer-card">
@@ -455,13 +459,16 @@
       <section id="code-walkthrough" class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">Code Walkthrough</p>
-          <h2>今天的程式，從上到下這樣看</h2>
-          <p>程式可依照段落逐步閱讀，先掌握結構，再理解各段功能。</p>
+          <h2>貼上程式後，就從這裡開始一步一步看</h2>
+          <p>完成前面的 20 個操作步驟後，接下來就照這 5 個閱讀步驟往下看。先掌握結構，再理解各段功能。</p>
+        </div>
+        <div class="section-actions">
+          <a class="button primary" href="#full-code">回完整程式</a>
         </div>
         <div class="student-lesson-layout">
           <article class="lesson-card">
             <div class="lesson-copy">
-              <p class="mini-label">Part 1</p>
+              <p class="mini-label">Step 1</p>
               <h3>先匯入模組，設定腳位</h3>
               <p>本段設定控制小車所需的腳位與模組。</p>
             </div>
@@ -478,7 +485,7 @@ LED = Pin(25, Pin.OUT)</code></pre>
 
           <article class="lesson-card">
             <div class="lesson-copy">
-              <p class="mini-label">Part 2</p>
+              <p class="mini-label">Step 2</p>
               <h3>先做出「停車」和「往前」</h3>
               <p>本段可先聚焦 `stop()` 與 `forward()`，理解函式如何控制小車動作。</p>
             </div>
@@ -504,7 +511,7 @@ def forward():
 
           <article class="lesson-card">
             <div class="lesson-copy">
-              <p class="mini-label">Part 3</p>
+              <p class="mini-label">Step 3</p>
               <h3>再補齊後退、左轉、右轉</h3>
               <p>本段補齊後退、左轉與右轉，構成小車的基本動作集合。</p>
             </div>
@@ -523,7 +530,7 @@ def turn_right():
 
           <article class="lesson-card">
             <div class="lesson-copy">
-              <p class="mini-label">Part 4</p>
+              <p class="mini-label">Step 4</p>
               <h3>讀取鍵盤指令</h3>
               <p>本段負責接收 `Thonny Shell` 輸入的單一指令。</p>
             </div>
@@ -541,7 +548,7 @@ while True:
 
           <article class="lesson-card">
             <div class="lesson-copy">
-              <p class="mini-label">Part 5</p>
+              <p class="mini-label">Step 5</p>
               <h3>把按鍵對應到動作</h3>
               <p>本段將每個按鍵對應到一個動作函式，是本堂課的核心控制邏輯。</p>
             </div>
