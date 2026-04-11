@@ -1,8 +1,6 @@
 from machine import Pin
 
 # Raspberry Pi Pico 小車基本動作函式
-# 這份適合在課堂上補充說明：
-# forward()、backward()、turn_left()、turn_right()、stop()
 
 M1_A = Pin(12, Pin.OUT)
 M1_B = Pin(13, Pin.OUT)

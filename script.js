@@ -21,45 +21,51 @@ if (revealNodes.length) {
 const codePages = {
   "keyboard-car-control": {
     path: "downloads/keyboard-car-control.py",
-    title: "Thonny 鍵盤控制範例",
-    summary:
-      "這份程式可直接從網頁整份複製到 Thonny 新檔。執行後可於 Thonny Shell 輸入 w / a / s / d / x 控制小車。",
-    stage: "Boot Camp 主程式",
+    title: "Boot Camp 鍵盤控制主程式",
+    summary: "這份程式是主題 1 的唯一主程式。學生把它貼到 Thonny 後，就可以用 W / A / S / D / X 控制小車。",
+    stage: "主題 1：1 hr Boot Camp",
     backHref: "bootcamp.html",
     steps: [
-      "先在 Thonny 建立一個新的 `.py` 檔。",
-      "回到本頁按「複製這份程式」，再貼到 Thonny。",
-      "按下 Run 後，到下方 Shell 輸入 w / a / s / d / x。"
+      "在 Thonny 建立新的 .py 檔案。",
+      "把這份程式完整複製並貼進去。",
+      "存成 keyboard_car.py，按下 Run。",
+      "到 Shell 輸入 w / a / s / d / x，再按 Enter。"
     ],
     highlights: [
       {
-        title: "接腳與 LED",
-        summary: "本段設定左右馬達與板上 LED 所需的控制腳位。",
-        range: "第 1-12 行",
-        lines: [1, 12],
+        title: "腳位設定",
+        summary: "一開始先準備四個馬達腳位與板上的 LED。",
+        range: "第 1-9 行",
+        lines: [1, 9],
         tone: "teacher"
       },
       {
-        title: "動作函式",
-        summary: "本段將前進、後退、左轉、右轉與停止封裝成函式，便於後續直接呼叫。",
-        range: "第 15-49 行",
-        lines: [15, 49],
+        title: "馬達方向函式",
+        summary: "_set_motor() 會決定馬達現在要前進、後退還是停止。",
+        range: "第 12-20 行",
+        lines: [12, 20],
         tone: "student"
       },
       {
-        title: "啟動與讀取按鍵",
-        summary: "本段先顯示提示訊息，再持續等待 Thonny Shell 輸入按鍵指令。",
-        range: "第 52-88 行",
-        lines: [52, 88],
+        title: "五個基本動作",
+        summary: "前進、後退、左轉、右轉、停止都是由前面的函式組合而成。",
+        range: "第 23-42 行",
+        lines: [23, 42],
         tone: "teacher"
+      },
+      {
+        title: "讀取指令",
+        summary: "主程式會一直等待輸入，再決定小車要做哪個動作。",
+        range: "第 45-64 行",
+        lines: [45, 64],
+        tone: "student"
       }
     ],
     fallbackText: `from machine import Pin
-import sys
 import time
 
-# Raspberry Pi Pico 小車 1 小時 Boot Camp
-# 在 Thonny 執行後，到 Shell 輸入 w / a / s / d / x 再按 Enter
+# Raspberry Pi Pico 小車 1 hr Boot Camp
+# 在 Thonny Shell 輸入 w / a / s / d / x 後按 Enter
 
 M1_A = Pin(12, Pin.OUT)
 M1_B = Pin(13, Pin.OUT)
@@ -107,37 +113,28 @@ def turn_right():
 
 print("Raspberry Pi Pico 小車 Boot Camp")
 print("請在 Thonny Shell 輸入 w / a / s / d / x 後按 Enter")
-print("w=前進, s=後退, a=左轉, d=右轉, x=停止")
+print("w=前進 s=後退 a=左轉 d=右轉 x=停止")
 
 stop()
 LED.off()
 
 while True:
-    cmd = sys.stdin.read(1)
-    if not cmd:
-        continue
+    command = input("Command (w/a/s/d/x): ").strip().lower()
 
-    cmd = cmd.strip().lower()
-    if not cmd:
-        continue
-
-    if cmd == "w":
+    if command == "w":
         print("前進")
         forward()
-    elif cmd == "s":
+    elif command == "s":
         print("後退")
         backward()
-    elif cmd == "a":
+    elif command == "a":
         print("左轉")
         turn_left()
-    elif cmd == "d":
+    elif command == "d":
         print("右轉")
         turn_right()
-    elif cmd == "x":
-        print("停止")
-        stop()
     else:
-        print("未知指令:", cmd)
+        print("停止")
         stop()
 
     LED.toggle()
@@ -146,84 +143,129 @@ while True:
   },
   "basic-motor-functions": {
     path: "downloads/basic-motor-functions.py",
-    title: "馬達基本函式",
-    summary:
-      "本程式適合用來補充說明 forward()、backward()、turn_left()、turn_right()、stop() 等基本函式。",
-    stage: "補充程式",
+    title: "基本動作函式",
+    summary: "這份程式把小車的五個基本動作拆成獨立函式，適合在 Boot Camp 後補充閱讀。",
+    stage: "主題 1：Boot Camp 補充",
     backHref: "bootcamp.html",
     steps: [
-      "建議先閱讀 stop() 與 forward()。",
-      "再閱讀 backward()、turn_left() 與 turn_right()。",
-      "將各函式與實際動作對應起來。"
+      "先看腳位設定。",
+      "再看 _set_motor() 如何控制方向。",
+      "最後看 forward()、backward()、turn_left()、turn_right()、stop()。"
     ],
     highlights: [
       {
-        title: "接腳設定",
-        summary: "本段設定控制左右馬達的 4 個腳位，作為後續函式的基礎。",
-        range: "第 1-11 行",
-        lines: [1, 11],
-        tone: "teacher"
-      },
-      {
-        title: "核心控制函式",
-        summary: "_set_motor() 為底層控制函式，其他動作函式皆會呼叫此函式。",
-        range: "第 13-22 行",
-        lines: [13, 22],
-        tone: "student"
-      },
-      {
-        title: "五個基本動作",
-        summary: "本段將停止、前進、後退、左轉與右轉整理成獨立函式。",
-        range: "第 25-50 行",
-        lines: [25, 50],
-        tone: "teacher"
-      }
-    ]
-  },
-  "sensor-rgb-warmup": {
-    path: "downloads/sensor-rgb-warmup.py",
-    title: "感測器暖身程式",
-    summary:
-      "第二主題的暖身程式。先確認感測器模組與 RGB LED 可以正常亮燈，再進入距離讀值與判斷。",
-    stage: "主題 2 暖身程式",
-    backHref: "sensor-control.html",
-    steps: [
-      "先在 Thonny 建立新檔，再把這份程式貼上。",
-      "按下 Run 後，觀察 RGB LED 是否依序亮紅、綠、藍。",
-      "暖身成功後，再進到距離感測主程式。"
-    ],
-    highlights: [
-      {
-        title: "建立感測器",
-        summary: "本段匯入 RUS04，並以 sensor_pin=15、rgb_pin=14 建立感測器物件。",
+        title: "腳位設定",
+        summary: "先定義左右馬達的四個輸出腳位。",
         range: "第 1-7 行",
         lines: [1, 7],
         tone: "teacher"
       },
       {
-        title: "RGB 顏色切換",
-        summary: "本段依序顯示紅、綠、藍三種顏色，幫助學生先確認燈號能正常工作。",
-        range: "第 9-17 行",
-        lines: [9, 17],
+        title: "共用控制函式",
+        summary: "_set_motor() 負責決定一個馬達的方向。",
+        range: "第 10-18 行",
+        lines: [10, 18],
         tone: "student"
       },
       {
-        title: "結束與關閉",
-        summary: "本段在程式最後關閉 RGB LED，避免結束後燈號持續亮著。",
-        range: "第 19-20 行",
-        lines: [19, 20],
+        title: "五個動作函式",
+        summary: "後面的函式就是 Boot Camp 五個基本動作的來源。",
+        range: "第 21-41 行",
+        lines: [21, 41],
+        tone: "teacher"
+      }
+    ],
+    fallbackText: `from machine import Pin
+
+# Raspberry Pi Pico 小車基本動作函式
+
+M1_A = Pin(12, Pin.OUT)
+M1_B = Pin(13, Pin.OUT)
+M2_A = Pin(10, Pin.OUT)
+M2_B = Pin(11, Pin.OUT)
+
+
+def _set_motor(pin_a, pin_b, direction):
+    if direction > 0:
+        pin_a.value(1)
+        pin_b.value(0)
+    elif direction < 0:
+        pin_a.value(0)
+        pin_b.value(1)
+    else:
+        pin_a.value(0)
+        pin_b.value(0)
+
+
+def stop():
+    _set_motor(M1_A, M1_B, 0)
+    _set_motor(M2_A, M2_B, 0)
+
+
+def forward():
+    _set_motor(M1_A, M1_B, 1)
+    _set_motor(M2_A, M2_B, 1)
+
+
+def backward():
+    _set_motor(M1_A, M1_B, -1)
+    _set_motor(M2_A, M2_B, -1)
+
+
+def turn_left():
+    _set_motor(M1_A, M1_B, -1)
+    _set_motor(M2_A, M2_B, 1)
+
+
+def turn_right():
+    _set_motor(M1_A, M1_B, 1)
+    _set_motor(M2_A, M2_B, -1)
+
+
+stop()
+`
+  },
+  "sensor-rgb-warmup": {
+    path: "downloads/sensor-rgb-warmup.py",
+    title: "感測器主題暖身程式",
+    summary: "這份暖身程式先讓學生看見 RGB LED 的變化，再進入距離感測與條件判斷。",
+    stage: "主題 2：感測器操控暖身",
+    backHref: "sensor-control.html",
+    steps: [
+      "先在 Thonny 開新檔。",
+      "把程式貼上後按 Run。",
+      "觀察 RGB LED 是否依序切換三種顏色。"
+    ],
+    highlights: [
+      {
+        title: "建立感測器物件",
+        summary: "先建立 RUS04 物件，包含感測器腳位與 RGB LED 腳位。",
+        range: "第 1-6 行",
+        lines: [1, 6],
+        tone: "teacher"
+      },
+      {
+        title: "顏色切換",
+        summary: "這一段會依序切換紅、綠、藍三種顏色。",
+        range: "第 8-15 行",
+        lines: [8, 15],
+        tone: "student"
+      },
+      {
+        title: "關閉 RGB",
+        summary: "程式最後會把 RGB LED 關掉，避免顏色一直亮著。",
+        range: "第 17-18 行",
+        lines: [17, 18],
         tone: "teacher"
       }
     ],
     fallbackText: `import time
 from mango import RUS04
 
-# 主題 2：感測器的操控
-# 先用最簡單的方式確認感測器模組與 RGB LED 可以正常工作
+# 主題 2：感測器操控暖身程式
 
 sensor = RUS04(sensor_pin=15, rgb_pin=14)
 
-# 依序顯示紅、綠、藍三種顏色
 sensor.rgb_all((255, 0, 0))
 time.sleep(1)
 
@@ -233,41 +275,40 @@ time.sleep(1)
 sensor.rgb_all((0, 0, 255))
 time.sleep(1)
 
-# 結束前關閉 RGB LED
 sensor.rgb_close()
 `
   },
   "distance-sensor-rgb": {
     path: "downloads/distance-sensor-rgb.py",
     title: "距離感測主程式",
-    summary: "第二主題的主程式，示範如何讀取距離、印出數值，並用 if / elif / else 控制 RGB LED。",
-    stage: "主題 2 主程式",
+    summary: "這份主程式會讀取距離數值，並透過 if / elif / else 切換 RGB LED 顏色。",
+    stage: "主題 2：感測器操控",
     backHref: "sensor-control.html",
     steps: [
-      "建議先完成感測器暖身程式，再閱讀這份主程式。",
-      "先看 sensor.ping() 與 print()，再看 if / elif / else 判斷。",
-      "可修改距離門檻或顏色設定，觀察小車反應。"
+      "先看如何建立感測器物件。",
+      "再看 sensor.ping() 如何讀取距離。",
+      "最後看 if / elif / else 如何切換顏色。"
     ],
     highlights: [
       {
-        title: "匯入與初始化",
-        summary: "本段載入距離感測器與顏色工具，並建立超音波感測器與 RGB LED。",
-        range: "第 1-8 行",
-        lines: [1, 8],
+        title: "建立感測器",
+        summary: "一開始先建立 RUS04 感測器與 RGB LED 物件。",
+        range: "第 1-6 行",
+        lines: [1, 6],
         tone: "teacher"
       },
       {
-        title: "重複量測",
-        summary: "本段以 for 迴圈持續量測距離，並更新感測結果。",
-        range: "第 9-21 行",
-        lines: [9, 21],
+        title: "讀取距離",
+        summary: "在迴圈中持續用 sensor.ping() 讀取目前距離。",
+        range: "第 9-11 行",
+        lines: [9, 11],
         tone: "student"
       },
       {
-        title: "距離判斷",
-        summary: "本段透過 if / elif / else 依照距離變化調整 RGB 燈號顏色。",
-        range: "第 14-19 行",
-        lines: [14, 19],
+        title: "條件判斷",
+        summary: "依據近、中、遠三種距離範圍，切換不同 RGB LED 顏色。",
+        range: "第 13-20 行",
+        lines: [13, 20],
         tone: "teacher"
       }
     ],
@@ -275,14 +316,13 @@ sensor.rgb_close()
 from mango import RUS04
 from mango import utils
 
-# 初始化超音波距離感測器與 RGB LED
+# 主題 2：距離感測主程式
 sensor = RUS04(sensor_pin=15, rgb_pin=14)
 sensor.rgb_all((255, 0, 0))
 
-# 重複量測 500 次
-for i in range(500):
+for _ in range(500):
     dist = sensor.ping()
-    print(f'distance = {dist} cm')
+    print(f"distance = {dist} cm")
 
     if dist < 10:
         sensor.rgb_all(utils.COLOR_RED)
@@ -291,9 +331,8 @@ for i in range(500):
     else:
         sensor.rgb_all(utils.COLOR_GREEN)
 
-    time.sleep(0.1)  # 100 毫秒
+    time.sleep(0.1)
 
-# 關閉感測器
 sensor.rgb_close()
 `
   }
@@ -401,11 +440,11 @@ if (codeContent) {
   const highlightGrid = document.getElementById("code-highlight-grid");
 
   if (!meta) {
-    titleNode.textContent = "找不到這份程式";
-    summaryNode.textContent = "請回到 Boot Camp 或下載區重新選擇要查看的程式。";
+    titleNode.textContent = "找不到對應的程式";
+    summaryNode.textContent = "請從 Boot Camp、感測器主題或下載區重新打開程式頁。";
     codeContent.textContent = "Unknown file key.";
     fileLabelNode.textContent = "UNKNOWN";
-    stageNode.textContent = "請重新選擇";
+    stageNode.textContent = "未指定主題";
     downloadNode.href = "downloads.html";
     backNode.href = "downloads.html";
   } else {
@@ -415,7 +454,7 @@ if (codeContent) {
     fileLabelNode.textContent = meta.path;
     stageNode.textContent = meta.stage;
     downloadNode.href = meta.path;
-    downloadNode.textContent = "原始檔備用";
+    downloadNode.textContent = "下載原始檔";
     backNode.href = meta.backHref;
     stepsNode.innerHTML = meta.steps.map(step => `<li>${step}</li>`).join("");
     renderHighlights(highlightGrid, meta.highlights);
@@ -426,7 +465,7 @@ if (codeContent) {
         attachCopyHandler(copyNode, () => text);
       })
       .catch(error => {
-        codeContent.textContent = `載入失敗: ${error.message}`;
+        codeContent.textContent = `程式載入失敗：${error.message}`;
       });
   }
 }
@@ -451,7 +490,7 @@ const attachInlineCodeBlock = (nodeId, buttonId, pageKey, useHighlights = false)
       attachCopyHandler(copyButton, () => text);
     })
     .catch(error => {
-      codeNode.textContent = `載入失敗: ${error.message}`;
+      codeNode.textContent = `程式載入失敗：${error.message}`;
     });
 };
 

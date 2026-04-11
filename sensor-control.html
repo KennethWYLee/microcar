@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>感測器的操控 | Raspberry Pi Pico 小車入門教學站</title>
-  <meta name="description" content="第二主題：感測器的操控。學習如何讓 Raspberry Pi Pico 小車讀取距離，並依照數值變化控制 RGB LED。">
+  <meta name="description" content="主題 2：學會讀取距離感測器數值，並用 RGB LED 觀察不同距離對應的變化。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20260411-topic">
 </head>
 <body class="sensor-topic-page">
   <div class="page-shell">
@@ -20,10 +20,10 @@
           <small>Beginner Microcar Course</small>
         </span>
       </a>
-      <nav class="site-nav" aria-label="網站導覽">
+      <nav class="site-nav" aria-label="主題導覽">
         <a href="bootcamp.html">Boot Camp</a>
-        <a href="teacher-zone.html">教師支援</a>
-        <a href="student-zone.html">學生練習</a>
+        <a href="sensor-control.html">感測器操控</a>
+        <a href="index.html#topic-roadmap">主題地圖</a>
         <a href="downloads.html">下載區</a>
       </nav>
       <a class="button ghost" href="index.html">回首頁</a>
@@ -35,29 +35,29 @@
           <p class="eyebrow">Topic 2</p>
           <h1>感測器的操控</h1>
           <p class="hero-text">
-            這是 `Boot Camp` 之後的第二個主題。這一頁先不急著做循跡，而是先讓學生學會
-            「讀距離」、「看數值變化」，再用 `if / elif / else` 讓 RGB LED 對距離做出反應。
+            第二個主題從「控制小車移動」往前走一步，學習如何讀取感測器數值。
+            這一題先不直接做循跡，而是先讓學生看見距離變化，再用 RGB LED 與條件判斷把變化表現出來。
           </p>
           <div class="action-row">
-            <a class="button primary" href="#sensor-route">先看學習路線</a>
-            <a class="button secondary" href="#sensor-full-code-section">直接看主程式</a>
-            <a class="button ghost" href="code-viewer.html?file=distance-sensor-rgb">用程式頁閱讀</a>
+            <a class="button primary" href="#sensor-route">先看主題步驟</a>
+            <a class="button secondary" href="#sensor-full-code-section">再看主程式</a>
+            <a class="button ghost" href="code-viewer.html?file=distance-sensor-rgb">打開程式頁</a>
           </div>
         </div>
         <div class="subpage-aside">
           <article class="aside-card">
-            <img class="teaching-visual" src="assets/real-bootcamp-car.jpg" alt="Raspberry Pi Pico 小車前方的超音波感測器">
-            <p class="visual-note">前方兩個圓形感測頭，就是這個主題要先認識的超音波距離感測器。</p>
+            <span class="zone-badge student">Finish Line</span>
+            <h3>本主題的完成線</h3>
+            <ul class="detail-list">
+              <li>知道距離感測器如何接到小車上。</li>
+              <li>會用 <code>sensor.ping()</code> 讀出距離數值。</li>
+              <li>知道不同距離會對應不同 RGB LED 顏色。</li>
+              <li>理解 <code>if / elif / else</code> 在這個主題中的用途。</li>
+            </ul>
           </article>
           <article class="aside-card">
-            <span class="zone-badge teacher">Finish Line</span>
-            <h3>本主題完成線</h3>
-            <ul class="detail-list">
-              <li>知道 `sensor.ping()` 會讀到距離。</li>
-              <li>能看懂 `distance = ... cm` 的輸出結果。</li>
-              <li>知道 `if / elif / else` 如何把距離分成三段。</li>
-              <li>能改一個門檻值或顏色，觀察小車反應。</li>
-            </ul>
+            <img class="teaching-visual" src="assets/photo-pico-car.jpg" alt="帶有感測器的小車照片">
+            <p class="visual-note">這個主題會先從真實小車與距離感測器開始，再延伸到程式與條件判斷。</p>
           </article>
         </div>
       </section>
@@ -65,41 +65,41 @@
       <section id="sensor-route" class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">Topic Route</p>
-          <h2>第二主題先照這 4 個步驟走</h2>
-          <p>這個主題的重點不是一次做很多功能，而是先把「感測器讀值」和「條件反應」建立起來。</p>
+          <h2>感測器主題先走完這 4 步</h2>
+          <p>先認識硬體，再看暖身程式，最後才進入完整程式與條件判斷。</p>
         </div>
         <div class="bootcamp-step-list">
           <article class="bootcamp-step-item">
             <div class="bootcamp-step-copy">
               <span class="download-type">STEP 1</span>
-              <h3>先認出感測器位置</h3>
-              <p>先看小車前方的超音波距離感測器，再知道這次主題要讀的是「距離」。</p>
+              <h3>先認識感測器位置</h3>
+              <p>先看小車上的距離感測器與 RGB LED，知道等一下程式控制的是哪個裝置。</p>
             </div>
-            <img class="teaching-visual" src="assets/real-bootcamp-car.jpg" alt="小車前方超音波感測器近照">
+            <img class="teaching-visual" src="assets/ir-sensor.png" alt="距離感測器示意圖">
           </article>
           <article class="bootcamp-step-item">
             <div class="bootcamp-step-copy">
               <span class="download-type">STEP 2</span>
-              <h3>先做 RGB 暖身</h3>
-              <p>先不用判斷距離，讓學生先看到 RGB LED 可以正常亮起來，建立成功感。</p>
+              <h3>再看接法與腳位</h3>
+              <p>先知道感測器接在哪裡，之後看程式才會知道為什麼用這些腳位。</p>
             </div>
-            <img class="teaching-visual diagram-visual" src="assets/ppt-pinout-sensors.png" alt="Pico 小車感測器接口說明">
+            <img class="teaching-visual diagram-visual" src="assets/ppt-pinout-sensors.png" alt="感測器腳位圖">
           </article>
           <article class="bootcamp-step-item">
             <div class="bootcamp-step-copy">
               <span class="download-type">STEP 3</span>
-              <h3>讀出距離數值</h3>
-              <p>開始使用 `sensor.ping()`，並在 Thonny Shell 看見 `distance = ... cm` 的變化。</p>
+              <h3>先跑暖身程式</h3>
+              <p>暖身程式只做一件事：讓學生看到 RGB LED 的顏色變化。</p>
             </div>
-            <img class="teaching-visual" src="assets/bootcamp-thonny-guide.png" alt="Thonny Shell 與執行位置示意圖">
+            <img class="teaching-visual" src="assets/bootcamp-thonny-guide.png" alt="在 Thonny 執行程式">
           </article>
           <article class="bootcamp-step-item">
             <div class="bootcamp-step-copy">
               <span class="download-type">STEP 4</span>
-              <h3>加入 if 判斷與燈號反應</h3>
-              <p>用三段距離區間控制紅、藍、綠三種燈號，讓學生理解感測器與條件判斷如何結合。</p>
+              <h3>最後看條件判斷</h3>
+              <p>把距離數值接到 <code>if / elif / else</code>，就能根據距離切換不同顏色。</p>
             </div>
-            <img class="teaching-visual" src="assets/photo-pico-car.jpg" alt="桌面上的 Raspberry Pi Pico 小車">
+            <img class="teaching-visual" src="assets/photo-line-following-scene.jpg" alt="感測器與小車延伸情境">
           </article>
         </div>
       </section>
@@ -107,27 +107,27 @@
       <section class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">Two Programs</p>
-          <h2>先做暖身程式，再進入主程式</h2>
-          <p>第二主題建議先讓學生看到燈號反應，再帶進距離讀值與條件判斷。這樣學習節奏會比較穩。</p>
+          <h2>先暖身，再進主程式</h2>
+          <p>這個主題分成兩份程式：先看顏色變化，再看距離感測與條件判斷。</p>
         </div>
         <div class="download-grid">
           <article class="download-card">
-            <span class="download-type">Warm-up</span>
-            <h3>感測器暖身程式</h3>
-            <p>先依序亮出紅、綠、藍三種顏色，用來確認感測器模組與 RGB LED 正常工作。</p>
-            <a class="button secondary block" href="code-viewer.html?file=sensor-rgb-warmup">查看暖身程式</a>
+            <span class="download-type">WARM-UP</span>
+            <h3>RGB 暖身程式</h3>
+            <p>先讓學生看見 RGB LED 顏色切換，建立感測器主題的第一個觀察點。</p>
+            <a class="button secondary block" href="code-viewer.html?file=sensor-rgb-warmup">打開暖身程式</a>
           </article>
           <article class="download-card">
-            <span class="download-type">Main Code</span>
+            <span class="download-type">MAIN</span>
             <h3>距離感測主程式</h3>
-            <p>這是第二主題的核心程式，會讀取距離，並依照數值變化控制 RGB 顏色。</p>
+            <p>這份主程式會讀取距離，並根據不同範圍改變 RGB LED 顏色。</p>
             <a class="button primary block" href="#sensor-full-code-section">查看主程式</a>
           </article>
           <article class="download-card">
-            <span class="download-type">Next Topic</span>
-            <h3>下一步接到循跡入門</h3>
-            <p>等學生熟悉感測器數值與條件判斷後，就能把這套邏輯帶進循跡控制。</p>
-            <a class="button ghost block" href="index.html#top">回首頁看主題路線</a>
+            <span class="download-type">NEXT</span>
+            <h3>之後再接循跡入門</h3>
+            <p>當學生會看懂感測器數值後，就更容易進入黑線與方向控制的主題。</p>
+            <a class="button ghost block" href="index.html#topic-roadmap">回主題地圖</a>
           </article>
         </div>
       </section>
@@ -135,17 +135,17 @@
       <section id="sensor-full-code-section" class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">Main Program</p>
-          <h2>主程式在這裡，可直接複製到 Thonny</h2>
-          <p>這一份程式會重複量測距離，並用 `if / elif / else` 控制 RGB 顏色。可直接複製後到 Thonny 測試。</p>
+          <h2>這份主程式會讀距離，並切換 RGB LED 顏色</h2>
+          <p>學生看懂 <code>sensor.ping()</code>、<code>print()</code> 和 <code>if / elif / else</code>，就完成這個主題最重要的學習目標。</p>
         </div>
         <div class="action-row">
           <button id="sensor-copy-code" class="button primary" type="button">複製主程式</button>
-          <a class="button secondary" href="code-viewer.html?file=sensor-rgb-warmup">先看暖身程式</a>
-          <a class="button ghost" href="code-viewer.html?file=distance-sensor-rgb">用程式頁閱讀</a>
+          <a class="button secondary" href="code-viewer.html?file=sensor-rgb-warmup">看暖身程式</a>
+          <a class="button ghost" href="code-viewer.html?file=distance-sensor-rgb">打開程式頁</a>
         </div>
         <article class="code-viewer-card">
           <div class="code-toolbar">
-            <span class="download-type">PY FILE</span>
+            <span class="download-type">TOPIC 2 CODE</span>
             <span class="zone-badge teacher">主題 2 主程式</span>
           </div>
           <pre class="code-block"><code id="sensor-full-code">載入中...</code></pre>
@@ -155,56 +155,34 @@
       <section id="sensor-walkthrough" class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">Code Walkthrough</p>
-          <h2>這份程式可以從上到下這樣讀</h2>
-          <p>學生先看功能，老師再補結構。這樣比較容易把感測器、數值和條件判斷接起來。</p>
+          <h2>主程式可以先看這 4 個重點</h2>
+          <p>這個主題的程式比 Boot Camp 多了一些感測器與條件判斷，但核心結構仍然很清楚。</p>
         </div>
         <div class="code-highlight-grid">
           <article class="code-highlight-card teacher-card">
             <span class="download-type">STEP 1</span>
-            <h3>先看建立感測器</h3>
-            <p>先認識 `RUS04(sensor_pin=15, rgb_pin=14)`，知道這份程式先建立了一個距離感測器和 RGB LED。</p>
+            <h3>建立感測器物件</h3>
+            <p>先用 <code>RUS04(sensor_pin=15, rgb_pin=14)</code> 建立距離感測器與 RGB LED。</p>
           </article>
           <article class="code-highlight-card student-card">
             <span class="download-type">STEP 2</span>
-            <h3>再看距離讀值</h3>
-            <p>重點先放在 `dist = sensor.ping()`，讓學生知道這一行是在讀目前量到的距離。</p>
+            <h3>讀取距離</h3>
+            <p>透過 <code>sensor.ping()</code> 讀出距離，並用 <code>print()</code> 把結果顯示在 Shell。</p>
           </article>
           <article class="code-highlight-card teacher-card">
             <span class="download-type">STEP 3</span>
-            <h3>讀懂 if / elif / else</h3>
-            <p>這一段把距離分成三區：近、中、遠，並分別對應紅、藍、綠三種燈號。</p>
+            <h3>判斷距離範圍</h3>
+            <p>用 <code>if / elif / else</code> 把距離分成近、中、遠三種範圍。</p>
           </article>
           <article class="code-highlight-card student-card">
             <span class="download-type">STEP 4</span>
-            <h3>最後鼓勵學生改數值</h3>
-            <p>最適合的練習是把 `10` 或 `20` 改掉，或改顏色順序，再觀察結果是不是跟預期一樣。</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">What Comes Next</p>
-          <h2>做完這一主題，就能接到循跡入門</h2>
-          <p>當學生已經能理解「感測器讀值 -> 條件判斷 -> 小車反應」，就可以把這個邏輯帶進下一個主題。</p>
-        </div>
-        <div class="page-grid">
-          <article class="content-card">
-            <h3>為什麼這一主題很重要</h3>
-            <ul class="detail-list">
-              <li>先學會看感測器數值，才能理解循跡不是魔法，而是根據感測結果做判斷。</li>
-              <li>先學會寫 `if / elif / else`，之後才能自然接到黑線、白線與左右修正。</li>
-              <li>第二主題會是循跡入門最重要的前置能力。</li>
-            </ul>
-          </article>
-          <article class="content-card">
-            <img class="teaching-visual" src="assets/photo-line-following-scene.jpg" alt="循跡小車示意照片">
-            <p>下一個主題將會把感測器的輸入，進一步轉成循跡控制，讓小車能跟著路線前進。</p>
+            <h3>對應不同顏色</h3>
+            <p>距離改變時，RGB LED 也跟著改變顏色，讓結果更容易看懂。</p>
           </article>
         </div>
       </section>
     </main>
   </div>
-  <script src="script.js"></script>
+  <script src="script.js?v=20260411-topic"></script>
 </body>
 </html>
