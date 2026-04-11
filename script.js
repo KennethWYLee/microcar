@@ -1,3 +1,5 @@
+document.documentElement.classList.add("js");
+
 const revealNodes = document.querySelectorAll(".reveal");
 
 if (revealNodes.length) {
