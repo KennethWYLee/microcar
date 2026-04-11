@@ -20,8 +20,8 @@
 4. `循跡進階`
 說明：把固定規則升級成速度差控制，並加入 PD / PID 與閉迴路控制的入門觀念。
 
-5. `PIT 演算法討論`
-說明：規劃中，作為循跡進階後的控制策略延伸主題。
+5. `循跡演算法`
+說明：把規則式、P、PD、PID 放在一起比較，並提供可直接複製到 Thonny 的程式版本。
 
 額外模組：
 - `電路板入門`
@@ -38,6 +38,8 @@
   主題 3：循跡入門。
 - `line-following-advanced.html`
   主題 4：循跡進階。
+- `line-following-algorithms.html`
+  主題 5：循跡演算法。
 - `student-handout.html`
   Boot Camp 學習單，可投影或列印。
 - `downloads.html`
@@ -69,6 +71,10 @@
 - `line-error-to-speed.py`
 - `line-following-advanced.py`
 
+### 主題 5：循跡演算法
+- `line-following-p.py`
+- `line-following-pid.py`
+
 ### 延伸教材
 - `AmebaAI / AmebaNN`
 - `Mango Library`
@@ -89,6 +95,8 @@
 第三堂課可以接著打開 `line-following-intro.html`，讓學生把感測器值和小車轉向規則連在一起，開始做最基本的循跡。
 
 第四堂課可以打開 `line-following-advanced.html`，讓學生從固定規則跨到速度差控制，開始理解 error、correction、PD / PID 這些進階觀念。
+
+第五堂課可以打開 `line-following-algorithms.html`，讓學生比較規則式、P、PD、PID 的差異，並直接從網站複製不同演算法的程式去測試。
 
 ## 備註
 

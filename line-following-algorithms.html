@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>循跡演算法 | Raspberry Pi Pico 小車入門教學站</title>
+  <meta name="description" content="主題 5：循跡演算法。比較規則式、P、PD、PID 四種方法，並讓使用者可直接複製程式到 Thonny 執行。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260411-topic5">
+</head>
+<body class="sensor-topic-page">
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">MC</span>
+        <span class="brand-copy">
+          <strong>Raspberry Pi Pico 小車入門教學站</strong>
+          <small>Beginner Microcar Course</small>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="主題導覽">
+        <a href="bootcamp.html">Boot Camp</a>
+        <a href="sensor-control.html">感測器操控</a>
+        <a href="line-following-intro.html">循跡入門</a>
+        <a href="line-following-advanced.html">循跡進階</a>
+        <a href="line-following-algorithms.html">演算法</a>
+        <a href="downloads.html">下載區</a>
+      </nav>
+      <a class="button ghost" href="index.html">回首頁</a>
+    </header>
+
+    <main>
+      <section class="subpage-hero reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">Topic 5</p>
+          <h1>循跡演算法</h1>
+          <p class="hero-text">
+            這個主題不只介紹一種控制法，而是把規則式、P、PD、PID 四種常見循跡做法排在一起比較。
+            使用者可以先看每種演算法適合什麼情境，再直接打開程式頁，把演算法貼到 Thonny 執行。
+          </p>
+          <div class="action-row">
+            <a class="button primary" href="#algorithm-route">先看學習路線</a>
+            <a class="button secondary" href="#algorithm-codes">再選一種演算法</a>
+            <a class="button ghost" href="downloads.html#topic-algorithms">打開下載區入口</a>
+          </div>
+        </div>
+        <div class="subpage-aside">
+          <article class="aside-card">
+            <span class="zone-badge teacher">Important Note</span>
+            <h3>先知道這台車的限制</h3>
+            <ul class="detail-list">
+              <li>目前這台車以兩個數位循跡感測器為主，所以演算法版本都採用簡化教學版。</li>
+              <li>規則式最容易上手，P 是第一個連續控制版本。</li>
+              <li>PD 常常已經能讓循跡更穩定。</li>
+              <li>PID 在這裡主要用來教控制思路與調參，不一定永遠比 PD 更好。</li>
+            </ul>
+          </article>
+          <article class="aside-card">
+            <img class="teaching-visual" src="assets/photo-line-following-scene.jpg" alt="循跡小車實際行走照片">
+            <p class="visual-note">這一頁的目標不是只背公式，而是看懂不同演算法會如何影響小車修正黑線的方式。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="algorithm-route" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Topic Route</p>
+          <h2>循跡演算法可以照這 4 步理解</h2>
+          <p>先從最直觀的規則式開始，再一路走到 P、PD、PID，理解控制想法如何逐步變細。</p>
+        </div>
+        <div class="bootcamp-step-list">
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 1</span>
+              <h3>規則式循跡</h3>
+              <p>先用「看到黑線就左修正、右修正、前進或停止」這種固定規則，建立最基本的循跡直覺。</p>
+            </div>
+            <img class="teaching-visual" src="assets/video-line-following-demo-poster.jpg" alt="規則式循跡示意">
+          </article>
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 2</span>
+              <h3>P 演算法</h3>
+              <p>先把感測器讀值換成 error，再用比例控制把 error 直接轉成左右輪速度差。</p>
+            </div>
+            <img class="teaching-visual" src="assets/ir-sensor.png" alt="P 演算法對應的循跡感測器">
+          </article>
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 3</span>
+              <h3>PD 演算法</h3>
+              <p>在 P 的基礎上再看 error 變化有多快，讓修正更平滑，也更不容易左右來回擺動。</p>
+            </div>
+            <img class="teaching-visual" src="assets/video-line-following-students-poster.jpg" alt="PD 循跡示意">
+          </article>
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 4</span>
+              <h3>PID 演算法</h3>
+              <p>再加入積分項，處理長時間偏差。這在教學上很重要，但也最需要耐心調參。</p>
+            </div>
+            <img class="teaching-visual" src="assets/photo-teacher-demo.jpg" alt="PID 演算法教學示意">
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Comparison</p>
+          <h2>四種循跡演算法怎麼選</h2>
+          <p>你不一定要一次教完四種。最實用的方式通常是：規則式 -> P -> PD，最後再把 PID 當進階概念。</p>
+        </div>
+        <div class="page-grid">
+          <article class="content-card tool-focus-card">
+            <span class="zone-badge student">Rule-based</span>
+            <h3>規則式</h3>
+            <p>最好懂、最好上手。很適合第一次做循跡，但轉向常會比較突然。</p>
+          </article>
+          <article class="content-card tool-focus-card">
+            <span class="zone-badge student">P</span>
+            <h3>比例控制</h3>
+            <p>第一次引入 error 與 correction 的概念，讓小車不只是硬轉，而是開始用速度差修正。</p>
+          </article>
+          <article class="content-card tool-focus-card">
+            <span class="zone-badge teacher">PD</span>
+            <h3>比例微分控制</h3>
+            <p>很多小型循跡車會從這裡得到最好教、最好調、也最容易看到平滑效果的版本。</p>
+          </article>
+          <article class="content-card tool-focus-card">
+            <span class="zone-badge teacher">PID</span>
+            <h3>比例積分微分控制</h3>
+            <p>最完整，也最適合補充正式控制概念；但在兩顆數位感測器的簡化場景裡，不一定每次都比 PD 更划算。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="algorithm-codes" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Algorithm Codes</p>
+          <h2>每一種演算法都可以直接貼到小車上執行</h2>
+          <p>打開程式頁之後，就能直接複製完整程式到 Thonny。這一區的重點是讓使用者可以快速比較不同演算法的差別。</p>
+        </div>
+        <div class="download-grid">
+          <article class="download-card">
+            <span class="download-type">ALGORITHM 1</span>
+            <h3>規則式循跡</h3>
+            <p>用四種固定規則完成最基本的循跡，是所有進階版本的起點。</p>
+            <a class="button ghost block" href="code-viewer.html?file=line-algorithm-rule">打開程式頁</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">ALGORITHM 2</span>
+            <h3>P 循跡</h3>
+            <p>用比例控制把偏差直接轉成修正量，讓車子開始出現速度差控制。</p>
+            <a class="button secondary block" href="code-viewer.html?file=line-algorithm-p">打開程式頁</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">ALGORITHM 3</span>
+            <h3>PD 循跡</h3>
+            <p>加入微分項後，轉向會更平順，也更適合示範 error 變化速度的意義。</p>
+            <a class="button primary block" href="code-viewer.html?file=line-algorithm-pd">打開程式頁</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">ALGORITHM 4</span>
+            <h3>PID 循跡</h3>
+            <p>加入積分項後，可以用來示範更完整的控制器，但也更需要調整參數。</p>
+            <a class="button secondary block" href="code-viewer.html?file=line-algorithm-pid">打開程式頁</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">How To Use</p>
+          <h2>把演算法貼到小車上執行的方式都一樣</h2>
+          <p>這一題不需要重新學新的操作流程，只要沿用 Boot Camp 的方式，把不同程式貼到 Thonny 執行即可。</p>
+        </div>
+        <div class="bootcamp-step-list">
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 1</span>
+              <h3>在網頁選一種演算法</h3>
+              <p>先決定今天要貼規則式、P、PD 或 PID 版本。</p>
+            </div>
+            <img class="teaching-visual" src="assets/bootcamp-thonny-guide.png" alt="選擇演算法後使用 Thonny">
+          </article>
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 2</span>
+              <h3>打開程式頁並複製完整程式</h3>
+              <p>進入程式頁後，直接按複製按鈕，把整份程式帶到剪貼簿。</p>
+            </div>
+            <img class="teaching-visual" src="assets/bootcamp-step-10.gif" alt="複製程式動圖">
+          </article>
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 3</span>
+              <h3>貼到 Thonny 並按 Run</h3>
+              <p>把程式貼到新的 `.py` 檔，存檔後按下 Run 讓 Pico 小車開始執行。</p>
+            </div>
+            <img class="teaching-visual" src="assets/bootcamp-step-13.gif" alt="在 Thonny 執行程式">
+          </article>
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 4</span>
+              <h3>觀察不同演算法的差別</h3>
+              <p>注意轉向平順度、回到黑線的速度，以及是否容易左右擺動。</p>
+            </div>
+            <img class="teaching-visual" src="assets/video-line-following-demo-poster.jpg" alt="觀察循跡差異">
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Professional Supplement</p>
+          <h2>專業補充：控制理論與循跡實務</h2>
+          <p>這一區把演算法比較和正式控制資料接起來，讓教學網站不只有程式，也有更完整的概念背景。</p>
+        </div>
+        <div class="page-grid">
+          <article class="content-card tool-focus-card">
+            <span class="zone-badge teacher">PID Theory</span>
+            <h3>NI：PID 與閉迴路控制</h3>
+            <p>NI 的教學資料很適合補充 PID 的基礎觀念，特別是誤差如何透過控制器回頭調整輸出。</p>
+            <a class="text-link" href="https://www.ni.com/pdf/academic/us/me104_lab6_2003.pdf" target="_blank" rel="noreferrer">查看 NI 參考資料</a>
+          </article>
+          <article class="content-card tool-focus-card">
+            <span class="zone-badge student">MathWorks</span>
+            <h3>MathWorks：P、I、D 的角色</h3>
+            <p>這份資料很適合拿來說明比例、積分、微分三個項目各自是在處理什麼問題。</p>
+            <a class="text-link" href="https://www.mathworks.com/discovery/pid-controller.html" target="_blank" rel="noreferrer">查看 MathWorks 說明</a>
+          </article>
+          <article class="content-card tool-focus-card">
+            <span class="zone-badge teacher">Pololu</span>
+            <h3>Pololu：循跡常從 PD 開始</h3>
+            <p>Pololu 的官方循跡教材提到，進階循跡會用連續函數控制速度，而 PD 常是實務上很好調整的起點。</p>
+            <a class="text-link" href="https://www.pololu.com/docs/0J21/all" target="_blank" rel="noreferrer">查看 Pololu 說明</a>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="script.js?v=20260411-topic5"></script>
+</body>
+</html>

@@ -25,6 +25,7 @@
         <a href="sensor-control.html">感測器操控</a>
         <a href="line-following-intro.html">循跡入門</a>
         <a href="line-following-advanced.html">循跡進階</a>
+        <a href="line-following-algorithms.html">演算法</a>
         <a href="downloads.html">下載區</a>
       </nav>
       <a class="button ghost" href="index.html">回首頁</a>
@@ -36,13 +37,13 @@
           <p class="eyebrow">Downloads</p>
           <h1>所有資源都改成依主題整理</h1>
           <p class="hero-text">
-            下載區不再分教師或學生，而是直接依主題整理成 Boot Camp、感測器操控、循跡入門、循跡進階與延伸教材。
-            如果只是要上第一堂課，先看 Boot Camp；如果要接著往後學，就可以依序打開感測器、循跡入門和循跡進階主題。
+            下載區不再分教師或學生，而是直接依主題整理成 Boot Camp、感測器操控、循跡入門、循跡進階、循跡演算法與延伸教材。
+            如果只是要上第一堂課，先看 Boot Camp；如果要接著往後學，就可以依序打開感測器、循跡入門、循跡進階和循跡演算法主題。
           </p>
           <div class="action-row">
             <a class="button primary" href="#setup-thonny">先準備 Thonny</a>
             <a class="button secondary" href="#topic-bootcamp">主題 1 資源</a>
-            <a class="button ghost" href="#topic-line-advanced">主題 4 資源</a>
+            <a class="button ghost" href="#topic-algorithms">主題 5 資源</a>
           </div>
         </div>
         <div class="subpage-aside">
@@ -54,6 +55,7 @@
               <li>第二堂再開感測器主題。</li>
               <li>第三堂接著進入循跡入門。</li>
               <li>第四堂再進入循跡進階。</li>
+              <li>第五堂再比較不同循跡演算法。</li>
             </ol>
           </article>
         </div>
@@ -207,6 +209,34 @@
             <h3>循跡進階主程式</h3>
             <p>使用 base speed、correction 與 last_error，讓小車做出更平滑的循跡反應。</p>
             <a class="button secondary block" href="code-viewer.html?file=line-following-advanced">打開程式頁</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="topic-algorithms" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Topic 5</p>
+          <h2>循跡演算法主題資源</h2>
+          <p>把規則式、P、PD、PID 四種方法排在一起比較，並提供可直接貼到 Thonny 的程式頁。</p>
+        </div>
+        <div class="download-grid">
+          <article class="download-card">
+            <span class="download-type">TOPIC 5</span>
+            <h3>循跡演算法主題頁</h3>
+            <p>一頁看懂各類循跡演算法，知道哪一種適合當前教學階段與車體配置。</p>
+            <a class="button primary block" href="line-following-algorithms.html">打開主題頁</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">ALGORITHM</span>
+            <h3>P 循跡演算法</h3>
+            <p>用比例控制把 error 直接轉成左右速度差，是規則式進入連續控制的第一步。</p>
+            <a class="button secondary block" href="code-viewer.html?file=line-algorithm-p">打開程式頁</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">ALGORITHM</span>
+            <h3>PID 循跡演算法</h3>
+            <p>加入積分項與微分項，適合用來示範更完整的控制思路與調參概念。</p>
+            <a class="button secondary block" href="code-viewer.html?file=line-algorithm-pid">打開程式頁</a>
           </article>
         </div>
       </section>
