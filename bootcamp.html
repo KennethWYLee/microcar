@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>1 小時 Boot Camp | Raspberry Pi Pico 小車入門教學站</title>
-  <meta name="description" content="給國中生看的 Raspberry Pi Pico 小車 1 小時 Boot Camp。先用 Thonny 連上車子，再用鍵盤控制前進、後退、左轉、右轉、停止。">
+  <title>1 hr Boot Camp | Raspberry Pi Pico 小車入門教學站</title>
+  <meta name="description" content="用 12 個步驟完成 Raspberry Pi Pico 小車 1 小時 Boot Camp，從開新檔、貼程式到用鍵盤控制小車。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260411-bootcamp-12steps">
+  <link rel="stylesheet" href="styles.css?v=20260411-topic">
 </head>
 <body class="bootcamp-page">
   <div class="page-shell">
@@ -20,10 +20,10 @@
           <small>Beginner Microcar Course</small>
         </span>
       </a>
-      <nav class="site-nav" aria-label="主要導覽">
+      <nav class="site-nav" aria-label="主題導覽">
         <a href="bootcamp.html">Boot Camp</a>
-        <a href="teacher-zone.html">教師支援</a>
-        <a href="student-zone.html">學生練習</a>
+        <a href="sensor-control.html">感測器操控</a>
+        <a href="index.html#topic-roadmap">主題地圖</a>
         <a href="downloads.html">下載區</a>
       </nav>
       <a class="button ghost" href="index.html">回首頁</a>
@@ -32,163 +32,160 @@
     <main>
       <section class="subpage-hero reveal">
         <div class="hero-copy">
-          <p class="eyebrow">Student Boot Camp</p>
-          <h1>1 小時 Boot Camp 學習頁</h1>
+          <p class="eyebrow">Topic 1</p>
+          <h1>1 hr Boot Camp</h1>
           <p class="hero-text">
-            這一頁只保留第一堂課真正要用到的內容。
-            先做完 12 個步驟，再把完整程式貼到 Thonny，
-            最後從下方一步一步讀懂程式。
+            這個主題只做一件事：讓學生在 1 小時內，成功用 Thonny 控制 Raspberry Pi Pico 小車。
+            學生不需要先下載新的程式，只要跟著下面 12 個步驟，把網站上的完整程式貼到 Thonny，就可以讓小車動起來。
           </p>
           <div class="action-row">
-            <a class="button primary" href="#thonny-steps">先做 12 步</a>
-            <a class="button secondary" href="#full-code">直接看程式</a>
-            <a class="button ghost" href="student-handout.html">學生講義</a>
+            <a class="button primary" href="#thonny-steps">先看 12 步驟</a>
+            <a class="button secondary" href="#full-code">再看完整程式</a>
+            <a class="button ghost" href="student-handout.html">學生學習單</a>
           </div>
         </div>
         <div class="subpage-aside">
           <article class="aside-card">
-            <span class="zone-badge student">Today</span>
-            <h3>今天要完成</h3>
+            <span class="zone-badge student">Finish Line</span>
+            <h3>完成這 3 件事就算成功</h3>
             <ul class="detail-list">
-              <li>電腦和小車連線。</li>
-              <li>用 `W / A / S / D / X` 控制小車。</li>
-              <li>把網頁程式貼到 Thonny 執行。</li>
+              <li>電腦和 Raspberry Pi Pico 小車成功連線。</li>
+              <li>在 Thonny 開新檔並貼上完整程式。</li>
+              <li>在 Shell 輸入 W / A / S / D / X 後，小車能做出對應動作。</li>
             </ul>
           </article>
           <article class="aside-card">
-            <img class="asset-preview" src="assets/real-bootcamp-car.jpg" alt="真實 Raspberry Pi Pico 小車近照">
-            <p class="visual-note">先認出 Pico 板、USB 線和輪子，等一下會更容易跟上。</p>
+            <img class="asset-preview" src="assets/real-bootcamp-car.jpg" alt="Boot Camp 真實小車照片">
+            <p class="visual-note">本主題使用真實 Raspberry Pi Pico 小車與 Thonny 操作流程作為教學基礎。</p>
           </article>
         </div>
       </section>
 
       <section id="thonny-steps" class="section">
         <div class="section-heading">
-          <p class="eyebrow">12 步驟學習路線</p>
+          <p class="eyebrow">12 Steps</p>
           <h2>學生請照著下面 12 個步驟，從上往下完成</h2>
-          <p>一列就是一個步驟。左邊看文字，右邊看動圖，做完再往下走。</p>
+          <p>每一步都只有一個明確任務。先完成操作，再往下看下一步，不需要一次記住全部內容。</p>
         </div>
         <div class="bootcamp-step-list">
           <article class="bootcamp-step-item">
             <div class="bootcamp-step-copy">
               <span class="download-type">STEP 1</span>
-              <h3>放好小車</h3>
-              <p>放在平坦桌面。</p>
+              <h3>把小車放好</h3>
+              <p>把小車放在平坦桌面，先不要讓它一開始就滑出去。</p>
             </div>
-            <img class="teaching-visual" src="assets/bootcamp-step-01.gif?v=20260411-school3" alt="步驟 1 小車準備動圖">
+            <img class="teaching-visual" src="assets/bootcamp-step-01.gif" alt="步驟 1：把小車放在桌面上">
           </article>
           <article class="bootcamp-step-item">
             <div class="bootcamp-step-copy">
               <span class="download-type">STEP 2</span>
-              <h3>接 USB 線</h3>
-              <p>小車接到電腦。</p>
+              <h3>接上 USB 線</h3>
+              <p>把 Raspberry Pi Pico 小車和電腦用 USB 線連起來。</p>
             </div>
-            <img class="teaching-visual" src="assets/bootcamp-step-03.gif?v=20260411-school3" alt="步驟 2 連接 USB 動圖">
+            <img class="teaching-visual" src="assets/bootcamp-step-03.gif" alt="步驟 2：接上 USB 線">
           </article>
           <article class="bootcamp-step-item">
             <div class="bootcamp-step-copy">
               <span class="download-type">STEP 3</span>
               <h3>打開 Thonny</h3>
-              <p>準備開始寫程式。</p>
+              <p>在電腦上開啟 Thonny，準備寫今天的程式。</p>
             </div>
-            <img class="teaching-visual" src="assets/bootcamp-step-05.gif?v=20260411-school3" alt="步驟 3 打開 Thonny 動圖">
+            <img class="teaching-visual" src="assets/bootcamp-step-05.gif" alt="步驟 3：打開 Thonny">
           </article>
           <article class="bootcamp-step-item">
             <div class="bootcamp-step-copy">
               <span class="download-type">STEP 4</span>
-              <h3>確認 Pico</h3>
-              <p>不是就請老師幫忙。</p>
+              <h3>確認直譯器</h3>
+              <p>確認右下角已經選到 MicroPython (Raspberry Pi Pico)。</p>
             </div>
-            <img class="teaching-visual" src="assets/bootcamp-step-07.gif?v=20260411-school3" alt="步驟 4 確認 Pico 解譯器動圖">
+            <img class="teaching-visual" src="assets/bootcamp-step-07.gif" alt="步驟 4：確認 Pico 直譯器">
           </article>
-
           <article class="bootcamp-step-item">
             <div class="bootcamp-step-copy">
               <span class="download-type">STEP 5</span>
-              <h3>開新檔</h3>
-              <p>按 `File &gt; New`。</p>
+              <h3>建立新檔</h3>
+              <p>按 File &gt; New，先開一個新的 Python 檔案。</p>
             </div>
-            <img class="teaching-visual" src="assets/bootcamp-step-08.gif?v=20260411-school3" alt="步驟 5 建立新檔案動圖">
+            <img class="teaching-visual" src="assets/bootcamp-step-08.gif" alt="步驟 5：建立新檔">
           </article>
           <article class="bootcamp-step-item">
             <div class="bootcamp-step-copy">
               <span class="download-type">STEP 6</span>
-              <h3>找到程式區</h3>
-              <p>往下滑到完整程式。</p>
+              <h3>往下找到完整程式</h3>
+              <p>滑到本頁下面的完整程式區塊，準備把程式複製起來。</p>
             </div>
-            <img class="teaching-visual" src="assets/bootcamp-step-09.gif?v=20260411-school3" alt="步驟 6 找到完整程式區動圖">
+            <img class="teaching-visual" src="assets/bootcamp-step-09.gif" alt="步驟 6：找到完整程式">
           </article>
           <article class="bootcamp-step-item">
             <div class="bootcamp-step-copy">
               <span class="download-type">STEP 7</span>
-              <h3>按複製</h3>
-              <p>先把程式複製起來。</p>
+              <h3>複製程式</h3>
+              <p>按下複製按鈕，把完整程式複製到剪貼簿。</p>
             </div>
-            <img class="teaching-visual" src="assets/bootcamp-step-10.gif?v=20260411-school3" alt="步驟 7 複製完整程式動圖">
+            <img class="teaching-visual" src="assets/bootcamp-step-10.gif" alt="步驟 7：複製程式">
           </article>
           <article class="bootcamp-step-item">
             <div class="bootcamp-step-copy">
               <span class="download-type">STEP 8</span>
-              <h3>貼上程式</h3>
-              <p>貼到 Thonny 新檔。</p>
+              <h3>貼到新檔裡</h3>
+              <p>回到 Thonny，把剛剛複製的程式貼到新檔內。</p>
             </div>
-            <img class="teaching-visual" src="assets/bootcamp-step-11.gif?v=20260411-school3" alt="步驟 8 貼上程式動圖">
+            <img class="teaching-visual" src="assets/bootcamp-step-11.gif" alt="步驟 8：貼上程式">
           </article>
-
           <article class="bootcamp-step-item">
             <div class="bootcamp-step-copy">
               <span class="download-type">STEP 9</span>
-              <h3>先存檔</h3>
-              <p>存成 `keyboard_car.py`。</p>
+              <h3>存成 keyboard_car.py</h3>
+              <p>按 Ctrl + S，把檔案存成 <code>keyboard_car.py</code>。</p>
             </div>
-            <img class="teaching-visual" src="assets/bootcamp-step-12.gif?v=20260411-school3" alt="步驟 9 存檔動圖">
+            <img class="teaching-visual" src="assets/bootcamp-step-12.gif" alt="步驟 9：存檔">
           </article>
           <article class="bootcamp-step-item">
             <div class="bootcamp-step-copy">
               <span class="download-type">STEP 10</span>
-              <h3>按 Run</h3>
-              <p>讓程式開始跑。</p>
+              <h3>按下 Run</h3>
+              <p>按 Run 執行程式，讓小車開始等待你的指令。</p>
             </div>
-            <img class="teaching-visual" src="assets/bootcamp-step-13.gif?v=20260411-school3" alt="步驟 10 執行程式動圖">
+            <img class="teaching-visual" src="assets/bootcamp-step-13.gif" alt="步驟 10：按下 Run">
           </article>
           <article class="bootcamp-step-item">
             <div class="bootcamp-step-copy">
               <span class="download-type">STEP 11</span>
-              <h3>點 Shell，先打 x</h3>
-              <p>先學會停車。</p>
+              <h3>先試 x 停止</h3>
+              <p>先在 Thonny Shell 輸入 <code>x</code> 再按 Enter，確認你知道怎麼讓車子停下來。</p>
             </div>
-            <img class="teaching-visual" src="assets/bootcamp-step-15.gif?v=20260411-school3" alt="步驟 11 點 Shell 並輸入 x 動圖">
+            <img class="teaching-visual" src="assets/bootcamp-step-15.gif" alt="步驟 11：先試 x 停止">
           </article>
           <article class="bootcamp-step-item">
             <div class="bootcamp-step-copy">
               <span class="download-type">STEP 12</span>
               <h3>再試 w a d s</h3>
-              <p>完成基本控制。</p>
+              <p>依序輸入 <code>w</code>、<code>a</code>、<code>d</code>、<code>s</code>，觀察小車動作，最後記得再輸入 <code>x</code>。</p>
             </div>
-            <img class="teaching-visual" src="assets/bootcamp-step-16.gif?v=20260411-school3" alt="步驟 12 測試按鍵動圖">
+            <img class="teaching-visual" src="assets/bootcamp-step-16.gif" alt="步驟 12：測試四個方向">
           </article>
         </div>
         <div class="section-actions">
-          <a class="button secondary" href="#full-code">先貼上程式</a>
-          <a class="button ghost" href="#code-walkthrough">再看程式解說</a>
+          <a class="button secondary" href="#full-code">往下看完整程式</a>
+          <a class="button ghost" href="#code-walkthrough">往下看程式解讀</a>
         </div>
       </section>
 
       <section id="full-code" class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">Full Code</p>
-          <h2>完整程式在這裡，直接複製到 Thonny</h2>
-          <p>本堂課不用先下載檔案，直接從這裡複製就可以。</p>
+          <h2>把這份完整程式貼到 Thonny 就可以開始操作</h2>
+          <p>這裡是本主題唯一需要的主程式。複製後貼到 Thonny，存檔並按下 Run 即可。</p>
         </div>
         <div class="action-row">
           <button id="bootcamp-copy-code" class="button primary" type="button">複製完整程式</button>
-          <a class="button secondary" href="#code-walkthrough">貼上後從這裡開始看</a>
-          <a class="button ghost" href="#thonny-steps">回 12 步驟</a>
+          <a class="button secondary" href="student-handout.html">查看學生學習單</a>
+          <a class="button ghost" href="#code-walkthrough">看程式解讀</a>
         </div>
         <article class="code-viewer-card">
           <div class="code-toolbar">
             <span class="download-type">BOOT CAMP CODE</span>
-            <span class="zone-badge teacher">直接貼到 Thonny</span>
+            <span class="zone-badge teacher">主題 1 主程式</span>
           </div>
           <pre class="code-block"><code id="bootcamp-full-code">載入中...</code></pre>
         </article>
@@ -198,20 +195,16 @@
         <div class="section-heading">
           <p class="eyebrow">Code Walkthrough</p>
           <h2>貼上程式後，就從這裡開始一步一步看</h2>
-          <p>先掌握結構，再理解各段功能。</p>
-        </div>
-        <div class="section-actions">
-          <a class="button primary" href="#full-code">回完整程式</a>
+          <p>先掌握程式結構，再看每一段在做什麼。Boot Camp 只需要看懂最重要的幾段。</p>
         </div>
         <div class="student-lesson-layout">
           <article class="lesson-card">
             <div class="lesson-copy">
               <p class="mini-label">Step 1</p>
-              <h3>先看匯入和腳位</h3>
-              <p>先知道小車接在哪裡。</p>
+              <h3>先看腳位設定</h3>
+              <p>這一段先把四個馬達腳位和板上的 LED 準備好。</p>
             </div>
             <pre><code>from machine import Pin
-import sys
 import time
 
 M1_A = Pin(12, Pin.OUT)
@@ -220,12 +213,11 @@ M2_A = Pin(10, Pin.OUT)
 M2_B = Pin(11, Pin.OUT)
 LED = Pin(25, Pin.OUT)</code></pre>
           </article>
-
           <article class="lesson-card">
             <div class="lesson-copy">
               <p class="mini-label">Step 2</p>
-              <h3>再看前進和停止</h3>
-              <p>先抓最常用兩個動作。</p>
+              <h3>再看馬達方向函式</h3>
+              <p><code>_set_motor()</code> 決定一個馬達要前進、後退還是停止。</p>
             </div>
             <pre><code>def _set_motor(pin_a, pin_b, direction):
     if direction &gt; 0:
@@ -236,75 +228,52 @@ LED = Pin(25, Pin.OUT)</code></pre>
         pin_b.value(1)
     else:
         pin_a.value(0)
-        pin_b.value(0)
-
-def stop():
-    _set_motor(M1_A, M1_B, 0)
-    _set_motor(M2_A, M2_B, 0)
-
-def forward():
-    _set_motor(M1_A, M1_B, 1)
-    _set_motor(M2_A, M2_B, 1)</code></pre>
+        pin_b.value(0)</code></pre>
           </article>
-
           <article class="lesson-card">
             <div class="lesson-copy">
               <p class="mini-label">Step 3</p>
-              <h3>補齊其他動作</h3>
-              <p>後退、左轉、右轉都在這裡。</p>
+              <h3>五個基本動作都在這裡</h3>
+              <p>前進、後退、左轉、右轉、停止，都是用前面的函式組合出來的。</p>
             </div>
-            <pre><code>def backward():
-    _set_motor(M1_A, M1_B, -1)
-    _set_motor(M2_A, M2_B, -1)
+            <pre><code>def forward():
+    ...
+
+def backward():
+    ...
 
 def turn_left():
-    _set_motor(M1_A, M1_B, -1)
-    _set_motor(M2_A, M2_B, 1)
+    ...
 
 def turn_right():
-    _set_motor(M1_A, M1_B, 1)
-    _set_motor(M2_A, M2_B, -1)</code></pre>
-          </article>
+    ...
 
+def stop():
+    ...</code></pre>
+          </article>
           <article class="lesson-card">
             <div class="lesson-copy">
               <p class="mini-label">Step 4</p>
-              <h3>看怎麼讀指令</h3>
-              <p>等你在 Shell 打字。</p>
+              <h3>主程式在等你的輸入</h3>
+              <p>這裡會讀取 Shell 裡輸入的字母，再決定小車要做哪個動作。</p>
             </div>
-            <pre><code>print("請在 Thonny Shell 輸入 w / a / s / d / x 後按 Enter")
+            <pre><code>command = input("Command (w/a/s/d/x): ").strip().lower()
 
-while True:
-    cmd = sys.stdin.read(1)
-    if not cmd:
-        continue
-
-    cmd = cmd.strip().lower()
-    if not cmd:
-        continue</code></pre>
-          </article>
-
-          <article class="lesson-card">
-            <div class="lesson-copy">
-              <p class="mini-label">Step 5</p>
-              <h3>最後看按鍵對應</h3>
-              <p>字母和動作在這裡接起來。</p>
-            </div>
-            <pre><code>    if cmd == "w":
-        forward()
-    elif cmd == "s":
-        backward()
-    elif cmd == "a":
-        turn_left()
-    elif cmd == "d":
-        turn_right()
-    else:
-        stop()</code></pre>
+if command == "w":
+    forward()
+elif command == "s":
+    backward()
+elif command == "a":
+    turn_left()
+elif command == "d":
+    turn_right()
+else:
+    stop()</code></pre>
           </article>
         </div>
       </section>
     </main>
   </div>
-  <script src="script.js?v=20260411-bootcamp-12steps"></script>
+  <script src="script.js?v=20260411-topic"></script>
 </body>
 </html>

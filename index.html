@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Raspberry Pi Pico 小車入門教學站 | 1 小時 Boot Camp</title>
-  <meta name="description" content="以國中生為主的 Raspberry Pi Pico 小車入門網站。先讓電腦連上車子，再用鍵盤完成前進、後退、左轉、右轉、停止五個基本動作。">
+  <title>Raspberry Pi Pico 小車入門教學站</title>
+  <meta name="description" content="以主題方式整理 Raspberry Pi Pico 小車教學，從 1 小時 Boot Camp、感測器操控、循跡入門一路延伸到進階主題。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20260411-topic">
 </head>
 <body class="home-page">
   <div class="page-shell">
@@ -20,10 +20,10 @@
           <small>Beginner Microcar Course</small>
         </span>
       </a>
-      <nav class="site-nav" aria-label="網站導覽">
+      <nav class="site-nav" aria-label="主題導覽">
         <a href="bootcamp.html">Boot Camp</a>
-        <a href="teacher-zone.html">教師支援</a>
-        <a href="student-zone.html">學生練習</a>
+        <a href="sensor-control.html">感測器操控</a>
+        <a href="#topic-roadmap">主題地圖</a>
         <a href="downloads.html">下載區</a>
       </nav>
       <a class="button ghost" href="https://github.com/KennethWYLee/microcar" target="_blank" rel="noreferrer">GitHub</a>
@@ -32,53 +32,53 @@
     <main id="top">
       <section class="hero reveal">
         <div class="hero-copy">
-          <p class="eyebrow">1 hr Boot Camp</p>
-          <h1>60 分鐘完成 Raspberry Pi Pico 小車連線與鍵盤控制。</h1>
+          <p class="eyebrow">Topic-based Learning</p>
+          <h1>用主題一步一步學會操作 Raspberry Pi Pico 小車</h1>
           <p class="hero-text">
-            本網站目前先以 `主題` 當主線，而第一個完成的主題就是 `1 hr Boot Camp`。
-            教師支援與學生練習都是配合這個主題的支援頁，不是另外兩條分開的課程。
+            這個網站把教材改成主題式學習，不再分成教師版和學生版。
+            每一個主題都會帶著使用者完成一個明確功能，先做出結果，再理解程式。
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="bootcamp.html">直接進入 Boot Camp</a>
-            <a class="button secondary" href="student-handout.html">先開學生講義</a>
-            <a class="button ghost" href="downloads.html#starter-pack">看第一堂必用檔案</a>
+            <a class="button primary" href="bootcamp.html">進入主題 1：Boot Camp</a>
+            <a class="button secondary" href="sensor-control.html">進入主題 2：感測器操控</a>
+            <a class="button ghost" href="#topic-roadmap">查看主題地圖</a>
           </div>
           <div class="hero-points">
             <div class="point-card">
-              <strong>時間</strong>
-              <span>1 小時完成入門操作</span>
+              <strong>現在學</strong>
+              <span>用 Thonny 讓小車前進、後退、左轉、右轉、停止</span>
             </div>
             <div class="point-card">
-              <strong>主程式</strong>
-              <span>`keyboard-car-control.py`</span>
+              <strong>下一步</strong>
+              <span>讀取感測器數值，讓 RGB LED 跟著變化</span>
             </div>
             <div class="point-card">
-              <strong>成果</strong>
-              <span>完成 `W / A / S / D / X` 五個基本動作</span>
+              <strong>之後延伸</strong>
+              <span>循跡入門、循跡進階、PIT 演算法與電路板入門</span>
             </div>
           </div>
         </div>
 
         <div class="hero-gallery" aria-hidden="true">
           <article class="gallery-card">
-            <img class="asset-preview" src="assets/real-bootcamp-car.jpg" alt="真實 Raspberry Pi Pico 小車近照">
+            <img class="asset-preview" src="assets/real-bootcamp-car.jpg" alt="Raspberry Pi Pico 小車實拍">
             <div class="gallery-caption">
-              <strong>真實小車近照(Real Car)</strong>
-              <span>先認出 Pico 板、USB 線、感測器與輪子位置</span>
+              <strong>真實小車</strong>
+              <span>先完成電腦與小車連線，再開始操作。</span>
             </div>
           </article>
           <article class="gallery-card">
-            <img src="assets/bootcamp-thonny-guide.png" alt="Thonny 操作圖解">
+            <img src="assets/bootcamp-thonny-guide.png" alt="Thonny 操作示意圖">
             <div class="gallery-caption">
-              <strong>Thonny 圖解(Thonny Guide)</strong>
-              <span>先找到 Run、Pico、Shell 三個位置</span>
+              <strong>Thonny 操作</strong>
+              <span>本課程預設使用 Thonny 進行編輯與執行。</span>
             </div>
           </article>
           <article class="gallery-card">
-            <img src="assets/bootcamp-keyboard-guide.png" alt="鍵盤控制小車圖解">
+            <img src="assets/bootcamp-keyboard-guide.png" alt="鍵盤控制小車示意圖">
             <div class="gallery-caption">
-              <strong>按鍵動作(Keyboard Control)</strong>
-              <span>先背 5 個鍵，學生就能操作小車</span>
+              <strong>鍵盤控制</strong>
+              <span>Boot Camp 先熟悉 W / A / S / D / X 五個指令。</span>
             </div>
           </article>
         </div>
@@ -86,28 +86,32 @@
 
       <section class="section reveal">
         <div class="section-heading">
-          <p class="eyebrow">Today’s App</p>
-          <h2>今天用的軟體是 Thonny。</h2>
-          <p>本課程使用 <a class="text-link" href="https://thonny.org/" target="_blank" rel="noreferrer">Thonny 官方網站</a> 提供的 Python IDE。頁面內容依據課程需求整理為適合入門教學的操作重點。</p>
+          <p class="eyebrow">Core Tool</p>
+          <h2>第一個主題先學會用 Thonny 操作小車</h2>
+          <p>
+            這套課程以 <a class="text-link" href="https://thonny.org/" target="_blank" rel="noreferrer">Thonny</a> 作為主要開發工具。
+            學生只要能開新檔、貼上程式、按下 Run、回到 Shell 輸入指令，就可以完成第一個主題。
+          </p>
         </div>
         <div class="page-grid">
           <article class="content-card tool-focus-card">
-            <span class="zone-badge teacher">Thonny</span>
-            <h3>為什麼第一堂課用它</h3>
-            <p>Thonny 是專為初學者設計的 Python IDE。應用於 Pico 小車入門課時，可直接完成檔案開啟、程式執行與 Shell 輸入，適合作為第一堂課的主要工具。</p>
+            <span class="zone-badge teacher">Main Tool</span>
+            <h3>Thonny 是第一堂課最重要的工具</h3>
+            <p>Boot Camp 不需要先下載新的程式檔，學生直接把網站上的程式貼到 Thonny，就能讓小車動起來。</p>
             <ul class="detail-list">
-              <li>先安裝，再開啟，就能開始操作。</li>
-              <li>今天只要先找到 `Open`、`Run`、`Shell`。</li>
-              <li>解譯器切到 `MicroPython (Raspberry Pi Pico)` 就能接上小車。</li>
+              <li>開啟 Thonny。</li>
+              <li>確認直譯器為 MicroPython (Raspberry Pi Pico)。</li>
+              <li>建立新檔，貼上網站上的完整程式。</li>
+              <li>按下 Run，到 Shell 輸入指令。</li>
             </ul>
             <div class="action-row tool-link-row">
-              <a class="button primary" href="https://thonny.org/" target="_blank" rel="noreferrer">前往 Thonny 官網</a>
-              <a class="button ghost" href="bootcamp.html#thonny-steps">看課堂操作順序</a>
+              <a class="button primary" href="bootcamp.html#thonny-steps">看 Boot Camp 步驟</a>
+              <a class="button ghost" href="https://thonny.org/" target="_blank" rel="noreferrer">前往 Thonny 官網</a>
             </div>
           </article>
           <article class="content-card tool-focus-card">
-            <span class="zone-badge student">Starter View</span>
-            <h3>本課主要操作區域</h3>
+            <span class="zone-badge student">Quick Preview</span>
+            <h3>Boot Camp 的完成線很清楚</h3>
             <div class="thonny-window">
               <div class="thonny-topbar">
                 <span class="thonny-dot"></span>
@@ -121,9 +125,9 @@
                 <span class="ui-pill">Stop</span>
               </div>
               <div class="thonny-editor">
-                <p class="mini-label">Editor</p>
-                <strong>keyboard-car-control.py</strong>
-                <span>先打開今天的程式，再按 `Run`。</span>
+                <p class="mini-label">Goal</p>
+                <strong>keyboard_car.py</strong>
+                <span>把網站上的程式貼進去，按下 Run。</span>
               </div>
               <div class="thonny-shell">
                 <span>&gt;&gt;&gt; w</span>
@@ -132,116 +136,91 @@
                 <span>car: stop</span>
               </div>
             </div>
-            <p class="tool-note">第一堂課的重點為完成檔案開啟、按下 Run，以及在 Shell 輸入控制指令。</p>
+            <p class="tool-note">第一個主題先不碰複雜感測器或循跡，只完成最基本的五個動作。</p>
           </article>
         </div>
       </section>
 
       <section class="section product-band reveal">
         <div class="section-heading">
-          <p class="eyebrow">Topic-first Structure</p>
-          <h2>網站先依主題學習，再依需要進入教師支援或學生練習。</h2>
-          <p>目前唯一完整主題是 `1 小時 Boot Camp`。之後每一個新主題，也都會沿用相同結構：主題頁、教師支援、學生練習。</p>
+          <p class="eyebrow">Current Topics</p>
+          <h2>目前網站先聚焦兩個主題：Boot Camp 與感測器操控</h2>
+          <p>兩個主題都沿用相同學習邏輯：先跟著做出功能，再透過完整程式與程式解讀理解背後做法。</p>
         </div>
         <div class="product-rail">
           <article class="product-panel product-primary">
             <span class="zone-badge teacher">主題 1</span>
-            <h3>1 小時 Boot Camp</h3>
-            <p>這是目前網站最完整的主題頁，集中整理 60 分鐘內的操作步驟、程式、動圖與閱讀順序。</p>
+            <h3>1 hr Boot Camp</h3>
+            <p>用 12 個步驟完成第一堂課，讓學生從開新檔、貼程式到控制小車移動，完整走過一次操作流程。</p>
             <div class="chip-list compact">
-              <span>1 小時</span>
-              <span>5 個指令</span>
+              <span>60 分鐘</span>
               <span>Thonny</span>
+              <span>W / A / S / D / X</span>
             </div>
             <a class="button primary" href="bootcamp.html">進入 Boot Camp</a>
           </article>
           <article class="product-panel product-teacher">
-            <span class="zone-badge teacher">教師支援</span>
-            <h3>教師版輔助模組</h3>
-            <p>用來備課、確認內容邊界、掌握教學節奏。它服務的是同一個 Boot Camp 主題，而不是另一條獨立課程。</p>
-            <a class="button ghost" href="teacher-zone.html">開啟教師支援</a>
+            <span class="zone-badge teacher">主題 2</span>
+            <h3>感測器的操控</h3>
+            <p>進一步讀取距離感測器數值，並用 RGB LED 觀察不同距離的變化，作為進入循跡前的過渡主題。</p>
+            <div class="chip-list compact">
+              <span>RUS04</span>
+              <span>RGB LED</span>
+              <span>if / elif / else</span>
+            </div>
+            <a class="button secondary" href="sensor-control.html">進入感測器主題</a>
           </article>
           <article class="product-panel product-student">
-            <span class="zone-badge student">學生練習</span>
-            <h3>學生版練習模組</h3>
-            <p>用來補看任務、對照動作、排除卡關。它也屬於 Boot Camp 這個主題，不是另外一條學習主線。</p>
-            <a class="button secondary" href="student-zone.html">開啟學生練習</a>
+            <span class="zone-badge student">後續主題</span>
+            <h3>沿著主題一路往下學</h3>
+            <p>之後網站會延伸到循跡入門、循跡進階、PIT 演算法與電路板入門，每一個主題都維持同樣的教學結構。</p>
+            <a class="button ghost" href="#topic-roadmap">看完整主題地圖</a>
           </article>
         </div>
       </section>
 
-      <section class="section reveal">
+      <section id="topic-roadmap" class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">Topic Roadmap</p>
-          <h2>後續課程主題已先排好順序，會沿用 Boot Camp 的教學模式逐步擴充。</h2>
-          <p>也就是說，之後每個主題都會有清楚步驟、示意圖、程式解說，以及對應的教師支援與學生練習模組。</p>
+          <h2>整個課程將依照主題逐步展開</h2>
+          <p>每個主題都會有自己的主題頁、完整程式、操作步驟與程式解讀，讓使用者可以一個主題一個主題完成。</p>
         </div>
         <div class="page-grid-3">
           <article class="content-card">
             <span class="zone-badge teacher">Now</span>
-            <h3>主題 1：1 小時 Boot Camp</h3>
-            <p>完成電腦與小車連線，並用 Thonny 操作 `W / A / S / D / X` 五個基本動作。</p>
-            <div class="chip-list compact">
-              <span>連線</span>
-              <span>Thonny</span>
-              <span>鍵盤控制</span>
-            </div>
+            <h3>主題 1：1 hr Boot Camp</h3>
+            <p>完成電腦連線、Thonny 操作與小車五個基本動作。</p>
             <div class="action-row">
-              <a class="button ghost" href="bootcamp.html">回到主題 1</a>
+              <a class="button ghost" href="bootcamp.html">打開主題 1</a>
             </div>
           </article>
           <article class="content-card">
             <span class="zone-badge teacher">Next</span>
             <h3>主題 2：感測器的操控</h3>
-            <p>讓學生學會讀取感測器、看懂數值變化，並用簡單條件判斷讓小車做出反應。</p>
-            <div class="chip-list compact">
-              <span>感測器</span>
-              <span>讀值</span>
-              <span>if 判斷</span>
-            </div>
+            <p>讀取距離數值，透過 RGB LED 與條件判斷理解感測器程式。</p>
             <div class="action-row">
-              <a class="button secondary" href="sensor-control.html">開始第二主題</a>
+              <a class="button secondary" href="sensor-control.html">打開主題 2</a>
             </div>
           </article>
           <article class="content-card">
-            <span class="zone-badge teacher">Then</span>
+            <span class="zone-badge teacher">Planned</span>
             <h3>主題 3：循跡入門</h3>
-            <p>從感測器讀值走向黑線與白線判斷，建立最基本的循跡控制概念。</p>
-            <div class="chip-list compact">
-              <span>黑線</span>
-              <span>白線</span>
-              <span>基本循跡</span>
-            </div>
+            <p>把感測器讀值轉成基本循跡反應，建立黑線與移動邏輯的連結。</p>
           </article>
           <article class="content-card">
-            <span class="zone-badge teacher">Advanced</span>
+            <span class="zone-badge teacher">Planned</span>
             <h3>主題 4：循跡進階</h3>
-            <p>進一步討論轉彎、速度、穩定性與校正，讓循跡結果更平順、更可靠。</p>
-            <div class="chip-list compact">
-              <span>轉彎</span>
-              <span>校正</span>
-              <span>穩定控制</span>
-            </div>
+            <p>加入更細的調整方式，改善轉向與速度控制，讓循跡更穩定。</p>
           </article>
           <article class="content-card">
-            <span class="zone-badge teacher">Discussion</span>
+            <span class="zone-badge teacher">Planned</span>
             <h3>主題 5：PIT 演算法討論</h3>
-            <p>作為循跡進階後的延伸討論主題，集中整理演算法概念與調整思路。</p>
-            <div class="chip-list compact">
-              <span>演算法</span>
-              <span>進階討論</span>
-              <span>控制策略</span>
-            </div>
+            <p>從主題 4 再往上延伸，討論進階控制策略如何提升循跡表現。</p>
           </article>
           <article class="content-card">
-            <span class="zone-badge student">Extra Module</span>
-            <h3>加開模組：電路板入門</h3>
-            <p>另外做成一個硬體認識主題，聚焦於控制板、接腳、接線與功能位置的入門理解。</p>
-            <div class="chip-list compact">
-              <span>Pico 板</span>
-              <span>接腳</span>
-              <span>接線</span>
-            </div>
+            <span class="zone-badge student">Extra</span>
+            <h3>電路板入門</h3>
+            <p>補充 Raspberry Pi Pico 控制板、接腳與常用模組，幫助學生認識硬體基礎。</p>
           </article>
         </div>
       </section>
@@ -249,386 +228,66 @@
       <section class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">Real Class Moments</p>
-          <h2>這堂課真的會長這樣</h2>
-          <p>本區展示實際課堂情境，協助教師與學生理解本課程的教學場景與操作方式。</p>
+          <h2>網站內容以真實授課情境為基礎</h2>
+          <p>這些照片來自實際上課與學生操作情境，讓網站不只是程式教學，也能呈現課堂中的真實學習樣貌。</p>
         </div>
         <div class="visual-story-grid">
           <article class="visual-story-card">
-            <img class="teaching-visual" src="assets/photo-classroom-overview.jpg" alt="Raspberry Pi Pico 小車課堂全景">
+            <img class="teaching-visual" src="assets/photo-classroom-overview.jpg" alt="課堂全景">
             <div class="visual-story-copy">
               <span class="zone-badge teacher">Classroom</span>
-              <h3>教室裡的 Boot Camp</h3>
-              <p>老師投影示範，學生跟著在電腦前操作，這就是網站目前對應的第一堂課情境。</p>
+              <h3>一進教室先完成設備連線</h3>
+              <p>第一個主題最重要的不是複雜程式，而是確保每一組都能順利連線與啟動。</p>
             </div>
           </article>
           <article class="visual-story-card">
-            <img class="teaching-visual" src="assets/photo-teacher-demo.jpg" alt="老師在教室示範程式操作">
+            <img class="teaching-visual" src="assets/photo-teacher-demo.jpg" alt="教師示範照片">
             <div class="visual-story-copy">
               <span class="zone-badge teacher">Demo</span>
-              <h3>先看老師示範，再輪到學生</h3>
-              <p>Boot Camp 頁面依照示範順序整理課堂流程，便於教師投影說明與學生跟做。</p>
+              <h3>先示範，再讓學生自己做</h3>
+              <p>網站上的每一個主題都先提供示範流程，再把操作拆成步驟讓學生跟做。</p>
             </div>
           </article>
           <article class="visual-story-card">
-            <img class="teaching-visual" src="assets/photo-pico-car.jpg" alt="Raspberry Pi Pico 小車近照">
+            <img class="teaching-visual" src="assets/photo-student-work.jpg" alt="學生操作照片">
             <div class="visual-story-copy">
-              <span class="zone-badge student">Microcar</span>
-              <h3>真實的小車長這樣</h3>
-              <p>課堂實作以實體小車為操作對象，目標是完成基本動作控制與安全停止。</p>
+              <span class="zone-badge student">Practice</span>
+              <h3>每個主題都要做出一個成果</h3>
+              <p>從 Boot Camp 到感測器操控，每個主題都會以一個明確功能作為完成線。</p>
             </div>
           </article>
         </div>
       </section>
 
-      <section id="may-course" class="section reveal">
+      <section class="section reveal">
         <div class="section-heading">
-          <p class="eyebrow">1 小時 Boot Camp</p>
-          <h2>60 分鐘內，帶學生完成第一台能連線、能用鍵盤控制的 Raspberry Pi Pico 小車。</h2>
-          <p>
-            這是一堂偏「入門體驗 + 基本操作」的課，不追求一次教完所有功能。
-            第一堂課的重點只有兩件事：連線成功，以及用鍵盤控制前進、後退、左轉、右轉、停止。
-          </p>
+          <p class="eyebrow">Download Hub</p>
+          <h2>所有教材已改成依主題整理</h2>
+          <p>下載區也不再分身分，而是改成以主題為主：Boot Camp 必用、感測器主題、以及延伸教材。</p>
         </div>
-        <div class="section-actions">
-          <a class="button primary" href="bootcamp.html">進入完整 Boot Camp 頁</a>
-        </div>
-
-        <div class="bootcamp-grid bootcamp-home-grid">
-          <article class="bootcamp-card feature-card">
-            <span class="zone-badge teacher">Boot Camp Snapshot</span>
-            <h3>課程定位</h3>
-            <ul class="detail-list">
-              <li>對象：國中生(Junior High)為主，也適合國小高年級。</li>
-              <li>形式：2 到 4 人一組，邊看邊操作。</li>
-              <li>目標：完成小車基本移動與鍵盤控制。</li>
-              <li>延伸：循跡(Line Following)、感測器(Sensor)與藍牙(Bluetooth)都放在後續單元。</li>
-            </ul>
-          </article>
-
-          <article class="bootcamp-card product-spotlight">
-            <span class="zone-badge teacher">60-min Plan</span>
-            <h3>建議節奏</h3>
-            <div class="timeline">
-              <div class="timeline-item">
-                <strong>0-10 分鐘</strong>
-                <span>把電腦和 Raspberry Pi Pico 小車連起來，確認操作位置與安全提醒。</span>
-              </div>
-              <div class="timeline-item">
-                <strong>10-20 分鐘</strong>
-                <span>示範 `W / A / S / D / X` 和前進、後退、左轉、右轉、停止五個基本動作。</span>
-              </div>
-              <div class="timeline-item">
-                <strong>20-40 分鐘</strong>
-                <span>讓學生輪流操作五個按鍵，確認每個人都能成功控制小車。</span>
-              </div>
-              <div class="timeline-item">
-                <strong>40-60 分鐘</strong>
-                <span>做簡單任務，例如前進、左轉、右轉、停止，然後口頭回顧今天學到的指令。</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="bootcamp-card">
-            <span class="zone-badge teacher">Materials</span>
-            <h3>老師課前準備</h3>
-            <div class="chip-list">
-              <span>Pico 小車(Car)</span>
-              <span>Pico 控制板(Board)</span>
-              <span>電池(Battery)</span>
-              <span>電腦或投影</span>
-              <span>範例程式(Code)</span>
-            </div>
-            <p>第一堂課建議僅使用核心零件與必要軟體，以維持教學節奏並降低操作負擔。</p>
-          </article>
-
-          <article class="bootcamp-card accent-card">
-            <span class="zone-badge student">First Win</span>
-            <h3>本堂學習成果</h3>
-            <ul class="detail-list">
-              <li>能說出 `W / A / S / D / X` 所對應的動作。</li>
-              <li>能完成前進、後退、左轉、右轉與停止操作。</li>
-              <li>能在發生狀況時先執行停止指令。</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <section id="teacher-zone" class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">教師支援(Teacher Support)</p>
-          <h2>教師支援頁是 Boot Camp 主題下的教師模組。</h2>
-          <p>這一頁不是另一條主線，而是幫老師更快完成同一個 Boot Camp 主題的備課、示範與節奏控制。</p>
-        </div>
-        <div class="section-actions">
-          <a class="button primary" href="teacher-zone.html">進入教師支援頁</a>
-        </div>
-
-        <div class="teacher-grid">
-          <article class="teacher-card teacher-card-wide path-card">
-            <span class="zone-badge teacher">Teacher Path</span>
-            <h3>建議瀏覽順序</h3>
-            <div class="path-steps">
-              <div class="path-step">
-                <strong>Step 1</strong>
-                <p>先看上方的 `1 小時 Boot Camp`，確認這堂課的時間、目標和材料。</p>
-              </div>
-              <div class="path-step">
-                <strong>Step 2</strong>
-                <p>先下載 `1 小時授課建議(Teaching Plan)`，用它決定這堂課要帶到哪裡就好。</p>
-              </div>
-              <div class="path-step">
-                <strong>Step 3</strong>
-                <p>上課示範時，先用 `小車鍵盤控制範例(Keyboard Control)` 帶學生看懂動作。</p>
-              </div>
-              <div class="path-step">
-                <strong>Step 4</strong>
-                <p>如果學生吸收很快，再打開 `馬達基本函式(Basic Motor Functions)` 當補充。</p>
-              </div>
-              <div class="path-step">
-                <strong>Step 5</strong>
-                <p>把 `距離感測範例(Distance Sensor)` 留到下一堂，不放進這次 Boot Camp。</p>
-              </div>
-            </div>
-            <div class="action-row">
-              <a class="button primary" href="bootcamp.html">先看 Boot Camp</a>
-              <a class="button secondary" href="downloads.html#download-teaching-plan">先下載教學建議</a>
-              <a class="button ghost" href="downloads.html#download-keyboard">第一個示範程式</a>
-            </div>
-          </article>
-
-          <article class="teacher-card teacher-card-wide">
-            <span class="zone-badge teacher">Learning Outcomes</span>
-            <h3>建議學習目標</h3>
-            <ul class="detail-list">
-              <li>學生能把電腦和 Raspberry Pi Pico 小車連起來。</li>
-              <li>學生能操作至少 5 個小車基本動作：前進、後退、左轉、右轉、停止。</li>
-              <li>學生能說出 `W / A / S / D / X` 分別對應的動作。</li>
-              <li>學生能理解停止指令為什麼重要。</li>
-            </ul>
-          </article>
-
-          <article class="teacher-card">
-            <span class="zone-badge teacher">Teaching Route</span>
-            <h3>建議授課順序</h3>
-            <ol class="number-list">
-              <li>先完成電腦和車子的連線。</li>
-              <li>再示範鍵盤控制範例和五個基本動作。</li>
-              <li>接著讓學生輪流操作 `W / A / S / D / X`。</li>
-              <li>最後用簡單動作組合做收尾。</li>
-            </ol>
-          </article>
-
-          <article class="teacher-card">
-            <span class="zone-badge teacher">Do Not Rush</span>
-            <h3>第一堂課暫不納入</h3>
-            <ul class="detail-list">
-              <li>藍牙遙控(Bluetooth Control)</li>
-              <li>過多硬體接線細節</li>
-              <li>太長的完整專案程式</li>
-              <li>一次講完所有感測器種類</li>
-            </ul>
-          </article>
-
-          <article class="teacher-card">
-            <span class="zone-badge teacher">Assessment</span>
-            <h3>簡單評量方式</h3>
-            <ul class="detail-list">
-              <li>請學生口頭說明一段程式會讓車子怎麼動。</li>
-              <li>請學生改一個參數，觀察結果是否改變。</li>
-              <li>請學生回答「為什麼距離太近時要停下來？」</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <section id="student-zone" class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">學生練習(Student Practice)</p>
-          <h2>學生練習頁是 Boot Camp 主題下的學生模組。</h2>
-          <p>這一頁把同一個主題拆成更容易跟做的任務、圖解與排錯步驟，適合學生課中或課後再回來複習。</p>
-        </div>
-        <div class="section-actions">
-          <a class="button primary" href="student-zone.html">進入學生練習頁</a>
-        </div>
-
-        <article class="student-start-card">
-          <span class="zone-badge student">Student Path</span>
-          <h3>建議學習順序</h3>
-          <div class="student-path-grid">
-            <div class="student-path-step">
-                <strong>1. 先接好車子</strong>
-                <p>先確認電腦和小車已經連好，再開始操作。</p>
-              </div>
-              <div class="student-path-step">
-                <strong>2. 先記住按鍵</strong>
-                <p>先看 `W / A / S / D / X` 對應的五個動作。</p>
-              </div>
-            <div class="student-path-step">
-              <strong>3. 下載第一份程式</strong>
-              <p>先下載 `小車鍵盤控制範例`，跟著老師或網站一步一步試。</p>
-            </div>
-            <div class="student-path-step">
-                <strong>4. 做第一個挑戰</strong>
-                <p>完成前進、左轉、右轉、停止這種簡單路線，就很成功。</p>
-              </div>
-            </div>
-            <div class="action-row">
-              <a class="button secondary" href="student-zone.html#student-missions">先看任務</a>
-              <a class="button primary" href="downloads.html#download-keyboard">下載第一份程式</a>
-              <a class="button ghost" href="downloads.html#download-motor">看動作函式</a>
-            </div>
-        </article>
-
-        <div id="student-missions" class="student-grid">
-          <article class="student-card mission-card">
-            <span class="zone-badge student">任務 1</span>
-            <h3>認識 5 個基本動作</h3>
-            <p>先記住 `W / A / S / D / X` 對應什麼動作，這是控制小車最直覺的第一步。</p>
-            <div class="keys-grid" aria-label="鍵盤控制小車">
-              <div class="key empty"></div>
-              <div class="key active">W<span>前進</span></div>
-              <div class="key empty"></div>
-              <div class="key">A<span>左轉</span></div>
-              <div class="key active">S<span>後退</span></div>
-              <div class="key">D<span>右轉</span></div>
-              <div class="key stop">X<span>停止</span></div>
-            </div>
-          </article>
-
-          <article class="student-card mission-card">
-            <span class="zone-badge student">任務 2</span>
-            <h3>看懂按鍵和動作的關係</h3>
-            <p>每一個按鍵都對應一個動作。學習重點為理解按鍵輸入與小車反應之間的關係。</p>
-            <div class="logic-strip">
-              <div>按鍵(Key)</div>
-              <div>指令(Command)</div>
-              <div>動作(Action)</div>
-            </div>
-          </article>
-
-          <article class="student-card mission-card">
-            <span class="zone-badge student">任務 3</span>
-            <h3>自己改一點點，就能看到差別</h3>
-            <p>調整速度、按鍵或動作順序，即可觀察程式行為的變化，建立基本的程式設計概念。</p>
-            <div class="chip-list playful">
-              <span>改速度</span>
-              <span>改按鍵</span>
-              <span>改方向</span>
-            </div>
-            <p class="mission-next">練習建議：下載 `小車鍵盤控制範例`，嘗試修改其中一個按鍵對應的動作。</p>
-          </article>
-        </div>
-
-        <div class="student-lesson-layout">
-          <article class="lesson-card">
-            <div class="lesson-copy">
-              <p class="mini-label">小車移動(Car Motion)</p>
-              <h3>先理解這 4 個基本函式</h3>
-              <p>這些函式(Function)構成小車的基本動作模組，先理解其功能，有助於後續閱讀完整程式。</p>
-            </div>
-            <pre><code>def forward(speed=30):
-    ...
-
-def backward(speed=30):
-    ...
-
-def turn_left(speed=30):
-    ...
-
-def turn_right(speed=30):
-    ...</code></pre>
-          </article>
-
-          <article class="lesson-card">
-            <div class="lesson-copy">
-              <p class="mini-label">鍵盤控制(Keyboard Control)</p>
-              <h3>先讀按鍵，再做動作</h3>
-              <p>這段程式最重要的是順序：先讀到按鍵，再決定小車要做什麼。這就是「指令對應動作」的概念。</p>
-            </div>
-            <pre><code>cmd = input("Command: ").strip().lower()
-
-if cmd == "w":
-    forward()
-elif cmd == "s":
-    backward()
-elif cmd == "a":
-    turn_left()
-elif cmd == "d":
-    turn_right()
-else:
-    stop()</code></pre>
-          </article>
-        </div>
-      </section>
-
-      <section id="downloads" class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">下載區(Downloads)</p>
-          <h2>這裡只放和初階小車教學直接相關的教材與程式。</h2>
-          <p>下載區僅保留初階小車教學直接使用的教材與程式，其餘內容另行歸入延伸教材。</p>
-        </div>
-        <div class="section-actions">
-          <a class="button primary" href="downloads.html">進入完整下載頁</a>
-        </div>
-
         <div class="download-grid">
-          <article id="download-teaching-plan" class="download-card">
-            <span class="download-type">TXT</span>
-            <h3>1 小時授課建議(Teaching Plan)</h3>
-            <p>給老師快速掌握這一堂課的節奏、目標與提醒。</p>
-            <a class="button primary block" href="downloads/one-hour-bootcamp-teaching-plan.txt">下載教學建議</a>
-          </article>
-
-          <article id="download-keyboard" class="download-card">
-            <span class="download-type">PY</span>
-            <h3>小車鍵盤控制範例(Keyboard Control)</h3>
-            <p>用最直覺的方式理解指令和動作的關係。</p>
-            <a class="button secondary block" href="code-viewer.html?file=keyboard-car-control">查看程式</a>
-          </article>
-
-          <article id="download-motor" class="download-card">
-            <span class="download-type">PY</span>
-            <h3>馬達基本函式(Basic Motor Functions)</h3>
-            <p>前進、後退、左轉、右轉的入門函式版本。</p>
-            <a class="button secondary block" href="code-viewer.html?file=basic-motor-functions">查看程式</a>
-          </article>
-
-          <article id="download-sensor" class="download-card">
-            <span class="download-type">PY</span>
-            <h3>距離感測範例(Distance Sensor)</h3>
-            <p>這份先留到下一堂延伸課，再加入感測器和判斷。</p>
-            <a class="button secondary block" href="code-viewer.html?file=distance-sensor-rgb">查看程式</a>
-          </article>
-
           <article class="download-card">
-            <span class="download-type">PDF</span>
-            <h3>機器人程式設計實務(Python)</h3>
-            <p>可做為老師備課與課後複習的補充教材。</p>
-            <a class="button ghost block" href="downloads/robot-programming-practice-python.pdf">下載 PDF</a>
+            <span class="download-type">TOPIC 1</span>
+            <h3>Boot Camp 必用資源</h3>
+            <p>包含 12 步驟、可直接複製的完整程式、學生學習單與簡短教學建議。</p>
+            <a class="button primary block" href="downloads.html#topic-bootcamp">查看主題 1 資源</a>
           </article>
-
           <article class="download-card">
-            <span class="download-type">PDF</span>
-            <h3>Robot Code Jumpstart</h3>
-            <p>適合搭配入門教學使用的程式參考資料。</p>
-            <a class="button ghost block" href="downloads/robot-code-jumpstart.pdf">下載 PDF</a>
+            <span class="download-type">TOPIC 2</span>
+            <h3>感測器操控資源</h3>
+            <p>包含暖身程式、主程式、感測器主題頁與程式解讀。</p>
+            <a class="button secondary block" href="downloads.html#topic-sensor">查看主題 2 資源</a>
           </article>
-
           <article class="download-card">
-            <span class="download-type">EXT</span>
-            <h3>延伸教材(Extension Materials)</h3>
-            <p>另一台車的 `AmebaAI / AmebaNN` 和電路板相關套件，已另外整理到延伸教材區。</p>
-            <a class="button ghost block" href="downloads.html#extension-materials">前往延伸教材</a>
+            <span class="download-type">EXTENSION</span>
+            <h3>延伸教材</h3>
+            <p>其他車型、套件與板子相關教材會集中放在延伸教材，不干擾目前主線。</p>
+            <a class="button ghost block" href="downloads.html#extension-materials">查看延伸教材</a>
           </article>
         </div>
       </section>
     </main>
-
-    <footer class="site-footer">
-      <p>Raspberry Pi Pico 循跡小車教學站</p>
-        <p>先用連線與鍵盤控制建立學生信心，再走向循跡(Line Following)與進階控制。</p>
-      </footer>
   </div>
-  <script src="script.js"></script>
+  <script src="script.js?v=20260411-topic"></script>
 </body>
 </html>

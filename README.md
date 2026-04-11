@@ -1,183 +1,81 @@
 # Raspberry Pi Pico 小車入門教學站
 
-網站連結：
-
+網站入口：
 - [GitHub Pages 網站](https://kennethwylee.github.io/microcar/)
 - [GitHub Repository](https://github.com/KennethWYLee/microcar)
 
-這個專案是一個以機器人課程教材為基礎重新整理的教學網站，主題聚焦在 `Raspberry Pi Pico` 小車入門教學。
+這個網站以 `Raspberry Pi Pico` 小車為主軸，將原本分散的教材整理成「依主題學習」的教學網站。現在網站不再用身分區分，而是改成每個主題都帶著使用者完成一個明確功能，先做出結果，再理解程式。
 
-網站不是把原始教材直接堆上來，而是重新篩選成適合老師授課、也適合學生自學的版本。  
-目前已完成的主題與主線如下：
+## 目前主題
 
-- 電腦與小車連線(Connection)
-- `Thonny` 操作與執行
-- 鍵盤控制(Keyboard Control)
-- 小車基本移動(Car Motion)
+1. `1 hr Boot Camp`
+說明：在 1 小時內完成電腦與小車連線，使用 Thonny 貼上完整程式，並透過 `W / A / S / D / X` 控制小車。
 
-並且已開始展開第二主題：
+2. `感測器的操控`
+說明：讀取距離感測器數值，使用 `if / elif / else` 搭配 RGB LED 表現距離變化。
 
-- 感測器的操控(Sensor Control)
+3. `循跡入門`
+說明：規劃中，將從感測器讀值延伸到最基本的循跡反應。
 
-藍牙遙控(Bluetooth Control)、循跡進階與其他專題內容，仍視為後續主題。
+4. `循跡進階`
+說明：規劃中，會加入更細的控制調整與更穩定的循跡策略。
 
-## 這個網站適合誰
+5. `PIT 演算法討論`
+說明：規劃中，作為循跡進階後的控制策略延伸主題。
 
-- 國中生
-- 國小高年級學生
-- 想帶 1 小時入門課的老師
+額外模組：
+- `電路板入門`
 
-## 目前首頁核心入口
-
-- `1 小時 Boot Camp`
-- `教師支援(Teacher Support)`
-- `學生練習(Student Practice)`
-- `下載區(Downloads)`
-
-這樣的設計是為了讓首頁保持清楚，不把內部設計訊息或與主線無關的素材塞進首頁。
-
-## 目前網站結構
-
-網站現在不是只有首頁，而是：
+## 網站結構
 
 - `index.html`
-  首頁入口，提供四個主題的概覽。
+  網站首頁與主題地圖。
 - `bootcamp.html`
-  1 小時 Boot Camp 的完整教學頁。
+  主題 1：1 小時 Boot Camp。
 - `sensor-control.html`
-  第二主題「感測器的操控」主頁。
-- `teacher-zone.html`
-  教師支援完整頁。
-- `student-zone.html`
-  學生練習完整頁。
+  主題 2：感測器的操控。
 - `student-handout.html`
-  學生版單頁講義，可直接投影或列印。
+  Boot Camp 學習單，可投影或列印。
 - `downloads.html`
-  下載區完整頁，並依使用順序整理檔案。
+  依主題整理的下載區。
+- `code-viewer.html`
+  在網站中直接查看與複製程式。
+- `styles.css`
+  網站樣式。
+- `script.js`
+  動畫、程式載入與複製按鈕邏輯。
 
-## 內容特色
+## 下載區分類
 
-### 1. 1 小時 Boot Camp
+### 主題 1：Boot Camp
+- `student-handout.html`
+- `one-hour-bootcamp-teaching-plan.txt`
+- `keyboard-car-control.py`
+- `basic-motor-functions.py`
 
-給老師快速掌握一堂 60 分鐘小車入門課可以怎麼帶，包括：
+### 主題 2：感測器的操控
+- `sensor-rgb-warmup.py`
+- `distance-sensor-rgb.py`
 
-- 課程定位
-- 建議節奏
-- 材料準備
-- 學生的第一個成功目標
-
-### 2. 感測器的操控(Sensor Control)
-
-第二主題已開始製作，內容會聚焦在：
-
-- 感測器讀值
-- RGB 反應
-- `if / elif / else` 條件判斷
-- 從感測器主題接到循跡入門
-
-### 3. 教師支援(Teacher Support)
-
-這一區偏備課與授課使用，內容較完整，包含：
-
-- 學習目標(Learning Outcomes)
-- 建議授課順序(Teaching Route)
-- 第一堂課不建議先放進來的內容
-- 簡單評量方式(Assessment)
-
-### 4. 學生練習(Student Practice)
-
-這一區偏國中與國小高年級的閱讀習慣，做法是：
-
-- 先看圖
-- 再看短程式
-- 最後自己改一點點
-
-目前學生區的重點有：
-
-- 鍵盤控制與動作對照
-- `Thonny` 操作圖解
-- 小車移動函式
-- 常見問題排除
-
-### 5. 下載區(Downloads)
-
-下載區現在先把第一堂必用資源排在最前面，例如：
-
-- 學生講義頁
-- 1 小時授課建議
-- 小車鍵盤控制範例
-- 感測器暖身程式
-- 馬達基本函式範例
-- 距離感測範例
-- PDF 補充教材
-
-另外也新增了 `延伸教材(Extension Materials)`，把目前不屬於主線的內容另外分區：
-
+### 延伸教材
 - `AmebaAI / AmebaNN`
-  另外一台車的教材
-- `Board & Library`
-  和電路板、套件環境比較相關的資源
+- `Mango Library`
+- 其他 PDF 與板子相關資源
 
-## 專案檔案結構
+## 教學使用方式
 
-```text
-microcar/
-├─ archive/
-│  ├─ legacy-extra-packages/
-│  └─ legacy-smart-fan/
-├─ bootcamp.html
-├─ downloads.html
-├─ index.html
-├─ styles.css
-├─ script.js
-├─ student-handout.html
-├─ student-zone.html
-├─ teacher-zone.html
-├─ README.md
-├─ WEB_DESIGN_PROGRESS.md
-├─ .nojekyll
-├─ assets/
-│  ├─ control-board.png
-│  ├─ mechanism-rig.png
-│  ├─ motion-sensor.png
-│  └─ ir-sensor.png
-└─ downloads/
-   ├─ one-hour-bootcamp-teaching-plan.txt
-   ├─ keyboard-car-control.py
-   ├─ basic-motor-functions.py
-   ├─ distance-sensor-rgb.py
-   ├─ robot-programming-practice-python.pdf
-   ├─ robot-code-jumpstart.pdf
-   └─ extensions/
-      ├─ board-library/
-      │  └─ mango-library.zip
-      └─ other-car/
-         ├─ ameba-ai.zip
-         └─ ameba-nn.zip
-```
+第一堂課建議直接從 `bootcamp.html` 開始，讓學生：
 
-## 使用方式
+1. 接上 Raspberry Pi Pico 小車。
+2. 打開 Thonny。
+3. 在 Boot Camp 頁面照著 12 個步驟完成操作。
+4. 把完整程式貼到 Thonny，按下 Run。
+5. 在 Shell 輸入 `W / A / S / D / X` 控制小車。
 
-### 給老師
+第二堂課再進入 `sensor-control.html`，讓學生先觀察 RGB LED 的變化，再理解距離感測器與條件判斷。
 
-建議從 `教師區(Teacher Zone)` 開始：
+## 備註
 
-1. 先看 `1 小時 Boot Camp`
-2. 再看 `student-handout.html`，確認學生會看到的版本
-3. 再看 `教師區(Teacher Zone)` 的授課重點
-4. 最後到 `下載區(Downloads)` 取用需要的程式或教材
-
-### 給學生
-
-建議從 `學生區(Student Zone)` 開始：
-
-1. 先看 `student-handout.html`
-2. 再看動作和按鍵圖解
-3. 再讀短程式
-4. 最後下載範例程式自己試改
-
-## 進度紀錄
-
-如果要看網站目前的設計決策與後續規劃，請看：
-
-- [WEB_DESIGN_PROGRESS.md](./WEB_DESIGN_PROGRESS.md)
+- 目前公開導覽已全面改成主題式結構。
+- 舊版身分分流頁面僅保留作為歷史參考，不再作為網站主線。
+- 網站設計進度請見 [WEB_DESIGN_PROGRESS.md](./WEB_DESIGN_PROGRESS.md)。

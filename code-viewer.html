@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>程式頁 | Raspberry Pi Pico 小車入門教學站</title>
-  <meta name="description" content="在網頁中直接查看 Raspberry Pi Pico 小車教學用 Python 程式。">
+  <meta name="description" content="在網站中直接查看、複製與理解 Raspberry Pi Pico 小車教學程式。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20260411-topic">
 </head>
 <body>
   <div class="page-shell">
@@ -20,10 +20,10 @@
           <small>Beginner Microcar Course</small>
         </span>
       </a>
-      <nav class="site-nav" aria-label="網站導覽">
+      <nav class="site-nav" aria-label="主題導覽">
         <a href="bootcamp.html">Boot Camp</a>
-        <a href="teacher-zone.html">教師支援</a>
-        <a href="student-zone.html">學生練習</a>
+        <a href="sensor-control.html">感測器操控</a>
+        <a href="index.html#topic-roadmap">主題地圖</a>
         <a href="downloads.html">下載區</a>
       </nav>
       <a class="button ghost" href="downloads.html">回下載區</a>
@@ -34,22 +34,20 @@
         <div class="hero-copy">
           <p class="eyebrow">Code Viewer</p>
           <h1 id="code-title">程式載入中...</h1>
-          <p id="code-summary" class="hero-text">
-            系統正在載入程式內容與教學重點。
-          </p>
+          <p id="code-summary" class="hero-text">這裡會顯示目前主題對應的程式、重點提示與可複製的完整內容。</p>
           <div class="action-row">
             <button id="copy-code" class="button primary" type="button">複製這份程式</button>
-            <a id="code-back" class="button secondary" href="bootcamp.html">回 Boot Camp</a>
-            <a id="code-download" class="button ghost" href="downloads.html">原始檔備用</a>
+            <a id="code-back" class="button secondary" href="bootcamp.html">回主題頁</a>
+            <a id="code-download" class="button ghost" href="downloads.html">下載原始檔</a>
           </div>
         </div>
         <div class="subpage-aside">
           <article class="aside-card">
-            <span class="zone-badge student">閱讀方式</span>
+            <span class="zone-badge student">使用方式</span>
             <ul class="detail-list" id="code-steps">
-              <li>先在 Thonny 新增一個新的 `.py` 檔。</li>
-              <li>再按上方「複製這份程式」，貼到 Thonny。</li>
-              <li>如需備份，才再使用原始檔連結。</li>
+              <li>先打開對應主題頁，確認你現在要完成哪個功能。</li>
+              <li>如果要在 Thonny 使用，先複製這份程式，再貼到新的 <code>.py</code> 檔案。</li>
+              <li>看不懂整份程式時，先看下面的重點說明。</li>
             </ul>
           </article>
         </div>
@@ -58,26 +56,26 @@
       <section class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">Python Code</p>
-          <h2>先整份複製，再對照重點閱讀</h2>
-          <p>本頁可直接複製完整程式到 Thonny 新檔，再依照重點區塊閱讀程式結構與動作控制邏輯。</p>
+          <h2>先看重點，再看完整程式</h2>
+          <p>每份程式頁都會先列出幾個最重要的區塊，幫助使用者先掌握程式結構，再往下看完整內容。</p>
         </div>
         <div id="code-highlight-grid" class="code-highlight-grid">
           <article class="code-highlight-card">
             <span class="download-type">HIGHLIGHT</span>
-              <h3>程式重點載入中</h3>
-              <p>系統正在整理本程式的重點段落。</p>
+            <h3>程式重點載入中</h3>
+            <p>這裡會顯示程式中最值得先理解的幾個段落。</p>
           </article>
         </div>
         <article class="code-viewer-card">
           <div class="code-toolbar">
             <span id="code-file-label" class="download-type">PY FILE</span>
-            <span id="code-stage" class="zone-badge teacher">教學程式</span>
+            <span id="code-stage" class="zone-badge teacher">主題程式</span>
           </div>
           <pre class="code-block"><code id="code-content">載入中...</code></pre>
         </article>
       </section>
     </main>
   </div>
-  <script src="script.js"></script>
+  <script src="script.js?v=20260411-topic"></script>
 </body>
 </html>

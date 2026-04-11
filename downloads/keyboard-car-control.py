@@ -1,9 +1,8 @@
 from machine import Pin
-import sys
 import time
 
-# Raspberry Pi Pico 小車 1 小時 Boot Camp
-# 在 Thonny 執行後，到 Shell 輸入 w / a / s / d / x 再按 Enter
+# Raspberry Pi Pico 小車 1 hr Boot Camp
+# 在 Thonny Shell 輸入 w / a / s / d / x 後按 Enter
 
 M1_A = Pin(12, Pin.OUT)
 M1_B = Pin(13, Pin.OUT)
@@ -51,37 +50,28 @@ def turn_right():
 
 print("Raspberry Pi Pico 小車 Boot Camp")
 print("請在 Thonny Shell 輸入 w / a / s / d / x 後按 Enter")
-print("w=前進, s=後退, a=左轉, d=右轉, x=停止")
+print("w=前進 s=後退 a=左轉 d=右轉 x=停止")
 
 stop()
 LED.off()
 
 while True:
-    cmd = sys.stdin.read(1)
-    if not cmd:
-        continue
+    command = input("Command (w/a/s/d/x): ").strip().lower()
 
-    cmd = cmd.strip().lower()
-    if not cmd:
-        continue
-
-    if cmd == "w":
+    if command == "w":
         print("前進")
         forward()
-    elif cmd == "s":
+    elif command == "s":
         print("後退")
         backward()
-    elif cmd == "a":
+    elif command == "a":
         print("左轉")
         turn_left()
-    elif cmd == "d":
+    elif command == "d":
         print("右轉")
         turn_right()
-    elif cmd == "x":
-        print("停止")
-        stop()
     else:
-        print("未知指令:", cmd)
+        print("停止")
         stop()
 
     LED.toggle()
