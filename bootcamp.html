@@ -68,56 +68,170 @@
           <h2>學生請先從這 20 個步驟開始</h2>
           <p>本堂課不需要先下載程式。學生只要在 Thonny 開一個新檔，從網頁複製完整程式貼上，再照著步驟操作即可。</p>
         </div>
-        <div class="bootcamp-step-track">
-          <article class="bootcamp-step-card">
-            <span class="zone-badge teacher">Stage 1</span>
-            <h3>先把桌面準備好</h3>
-            <ol class="number-list" start="1">
-              <li>把小車放在平坦桌面或地面，避免一開始就撞出去。</li>
-              <li>確認電腦、滑鼠和小車都在自己看得到的位置。</li>
-              <li>把 USB 線接上 Raspberry Pi Pico 小車與電腦。</li>
-              <li>等老師確認每一組都連線成功。</li>
-            </ol>
+        <div class="bootcamp-step-list">
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 1</span>
+              <h3>先把小車放好</h3>
+              <p>把小車放在平坦桌面或地面，避免一開始就撞出去。</p>
+            </div>
+            <img class="teaching-visual" src="assets/real-bootcamp-car.jpg" alt="Raspberry Pi Pico 小車近照">
           </article>
-          <article class="bootcamp-step-card">
-            <span class="zone-badge teacher">Stage 2</span>
-            <h3>打開 Thonny，建立新檔</h3>
-            <ol class="number-list" start="5">
-              <li>打開 `Thonny`。</li>
-              <li>看右下角是否為 `MicroPython (Raspberry Pi Pico)`。</li>
-              <li>如果不是，跟著老師一起切換解譯器。</li>
-              <li>按 `File > New` 建立新的 Python 檔。</li>
-            </ol>
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 2</span>
+              <h3>確認桌面空間</h3>
+              <p>確認電腦、滑鼠和小車都在自己看得到的位置，操作時不要被線材卡住。</p>
+            </div>
+            <img class="teaching-visual" src="assets/real-bootcamp-desk.jpg" alt="Boot Camp 桌面操作畫面">
           </article>
-          <article class="bootcamp-step-card">
-            <span class="zone-badge student">Stage 3</span>
-            <h3>從網頁複製完整程式</h3>
-            <ol class="number-list" start="9">
-              <li>往下滑到「完整程式」區塊。</li>
-              <li>按下「複製完整程式」。</li>
-              <li>回到 Thonny，把整份程式貼到新檔裡。</li>
-              <li>按 `Ctrl + S`，存成 `keyboard_car.py`。</li>
-            </ol>
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 3</span>
+              <h3>接上 USB 線</h3>
+              <p>把 USB 線接上 Raspberry Pi Pico 小車與電腦。</p>
+            </div>
+            <img class="teaching-visual" src="assets/real-bootcamp-car.jpg" alt="Raspberry Pi Pico 小車與連接線">
           </article>
-          <article class="bootcamp-step-card">
-            <span class="zone-badge student">Stage 4</span>
-            <h3>執行並測試基本動作</h3>
-            <ol class="number-list" start="13">
-              <li>按綠色 `Run` 執行程式。</li>
-              <li>把滑鼠點到下方 `Shell`。</li>
-              <li>先輸入 `x` 後按 Enter，確認知道怎麼停車。</li>
-              <li>再依序輸入 `w`、`a`、`d`、`s` 測試動作。</li>
-            </ol>
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 4</span>
+              <h3>等老師確認連線成功</h3>
+              <p>先等老師確認每一組都連線成功，再一起往下操作。</p>
+            </div>
+            <img class="teaching-visual" src="assets/real-bootcamp-classroom.jpg" alt="Boot Camp 電腦教室全景">
           </article>
-          <article class="bootcamp-step-card">
-            <span class="zone-badge student">Stage 5</span>
-            <h3>完成今天的小挑戰</h3>
-            <ol class="number-list" start="17">
-              <li>做完一個動作後，記得先按 `x` 停車。</li>
-              <li>完成 `w -> x`，確認前進與停止都成功。</li>
-              <li>完成 `w -> a -> x` 或 `w -> d -> x`。</li>
-              <li>能說出 `W / A / S / D / X` 各自代表的動作。</li>
-            </ol>
+
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 5</span>
+              <h3>打開 Thonny</h3>
+              <p>在電腦上打開 `Thonny`，準備開始今天的程式操作。</p>
+            </div>
+            <img class="teaching-visual" src="assets/bootcamp-thonny-guide.png" alt="Thonny 操作圖解">
+          </article>
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 6</span>
+              <h3>先看右下角解譯器</h3>
+              <p>確認右下角是否為 `MicroPython (Raspberry Pi Pico)`。</p>
+            </div>
+            <img class="teaching-visual" src="assets/bootcamp-thonny-guide.png" alt="Thonny 解譯器位置圖解">
+          </article>
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 7</span>
+              <h3>如果不是，就跟老師一起切換</h3>
+              <p>若解譯器不是 Pico，先跟著老師一起切換，不要自己亂按其他設定。</p>
+            </div>
+            <img class="teaching-visual" src="assets/bootcamp-thonny-guide.png" alt="Thonny 解譯器切換提示圖">
+          </article>
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 8</span>
+              <h3>建立新的 Python 檔</h3>
+              <p>按 `File > New`，建立一個新的 `.py` 檔案。</p>
+            </div>
+            <img class="teaching-visual" src="assets/photo-student-work.jpg" alt="學生在電腦前操作程式">
+          </article>
+
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 9</span>
+              <h3>往下滑到完整程式區</h3>
+              <p>找到本頁稍後的「完整程式」區塊。</p>
+            </div>
+            <img class="teaching-visual" src="assets/photo-teacher-demo.jpg" alt="老師在教室示範程式畫面">
+          </article>
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 10</span>
+              <h3>按下複製完整程式</h3>
+              <p>按下「複製完整程式」，把今天要用的程式先複製起來。</p>
+            </div>
+            <img class="teaching-visual" src="assets/real-bootcamp-desk.jpg" alt="桌面操作與複製程式示意">
+          </article>
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 11</span>
+              <h3>回到 Thonny 貼上</h3>
+              <p>切回 Thonny，把整份程式貼到剛剛建立的新檔裡。</p>
+            </div>
+            <img class="teaching-visual" src="assets/photo-student-work.jpg" alt="學生在電腦前貼上程式">
+          </article>
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 12</span>
+              <h3>先存檔</h3>
+              <p>按 `Ctrl + S`，將檔案存成 `keyboard_car.py`。</p>
+            </div>
+            <img class="teaching-visual" src="assets/bootcamp-thonny-guide.png" alt="Thonny 存檔操作圖解">
+          </article>
+
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 13</span>
+              <h3>按下綠色 Run</h3>
+              <p>按綠色 `Run` 執行程式，讓小車開始等待指令。</p>
+            </div>
+            <img class="teaching-visual" src="assets/bootcamp-thonny-guide.png" alt="Thonny Run 按鈕圖解">
+          </article>
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 14</span>
+              <h3>把滑鼠點到 Shell</h3>
+              <p>將滑鼠點到下方 `Shell`，接下來所有指令都在這裡輸入。</p>
+            </div>
+            <img class="teaching-visual" src="assets/bootcamp-thonny-guide.png" alt="Thonny Shell 位置圖解">
+          </article>
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 15</span>
+              <h3>先輸入 x</h3>
+              <p>先輸入 `x` 後按 Enter，確認知道怎麼停車，這是最安全的開始。</p>
+            </div>
+            <img class="teaching-visual" src="assets/bootcamp-keyboard-guide.png" alt="鍵盤 x 停止圖解">
+          </article>
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 16</span>
+              <h3>再測試 w、a、d、s</h3>
+              <p>依序輸入 `w`、`a`、`d`、`s` 測試小車前進、左轉、右轉與後退。</p>
+            </div>
+            <img class="teaching-visual" src="assets/bootcamp-keyboard-guide.png" alt="鍵盤控制小車圖解">
+          </article>
+
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 17</span>
+              <h3>每次動完先停車</h3>
+              <p>做完一個動作後，記得先按 `x` 停車，再換下一個指令。</p>
+            </div>
+            <img class="teaching-visual" src="assets/bootcamp-keyboard-guide.png" alt="停止鍵與安全操作圖解">
+          </article>
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 18</span>
+              <h3>完成 w -> x</h3>
+              <p>先完成 `w -> x`，確認前進與停止都成功。</p>
+            </div>
+            <img class="teaching-visual" src="assets/real-bootcamp-car.jpg" alt="小車前進與停止練習">
+          </article>
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 19</span>
+              <h3>完成轉向挑戰</h3>
+              <p>完成 `w -> a -> x` 或 `w -> d -> x`，練習方向控制。</p>
+            </div>
+            <img class="teaching-visual" src="assets/real-bootcamp-desk.jpg" alt="桌面操作小車轉向練習">
+          </article>
+          <article class="bootcamp-step-item">
+            <div class="bootcamp-step-copy">
+              <span class="download-type">STEP 20</span>
+              <h3>說出 5 個按鍵的意思</h3>
+              <p>最後能說出 `W / A / S / D / X` 各自代表的動作，就完成今天的課。</p>
+            </div>
+            <img class="teaching-visual" src="assets/bootcamp-keyboard-guide.png" alt="五個按鍵對應動作圖解">
           </article>
         </div>
         <div class="section-actions">
