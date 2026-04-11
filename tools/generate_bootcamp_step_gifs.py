@@ -5,8 +5,8 @@ import math
 
 BASE = Path(r"C:\Users\User\Documents\Lecture materials\microcar\assets")
 W, H = 1280, 800
-BG = "#f7f1e8"
-PANEL = "#fffaf2"
+BG = "#f4efe7"
+PANEL = "#fffaf4"
 NAVY = "#1d4f7a"
 TEAL = "#227c74"
 GOLD = "#f2b544"
@@ -18,6 +18,26 @@ GREEN = "#dff2e2"
 RED = "#e67c73"
 ROSE = "#fde6e3"
 LIGHT = "#dde7f1"
+
+THEMES = {
+    "setup": {"pill": "#dcecff", "panel": "#eef7ff", "label": "#9cc7ff", "spark": "#b7d7ff"},
+    "thonny": {"pill": "#dcf4ea", "panel": "#edf9f3", "label": "#8ed7b5", "spark": "#bfe9d3"},
+    "code": {"pill": "#ffe9c8", "panel": "#fff5e4", "label": "#ffc96f", "spark": "#ffe0aa"},
+    "drive": {"pill": "#ffe0d8", "panel": "#fff1ed", "label": "#f5ad9c", "spark": "#ffd1c5"},
+    "challenge": {"pill": "#efe3ff", "panel": "#f7f0ff", "label": "#cab1f3", "spark": "#e1d3fb"},
+}
+
+
+def step_theme(step_no: int):
+    if step_no <= 4:
+        return THEMES["setup"]
+    if step_no <= 8:
+        return THEMES["thonny"]
+    if step_no <= 12:
+        return THEMES["code"]
+    if step_no <= 17:
+        return THEMES["drive"]
+    return THEMES["challenge"]
 
 
 def load_font(size: int):
@@ -40,16 +60,35 @@ MINI_FONT = load_font(22)
 def base_card(step_no: int, title: str, subtitle: str):
     img = Image.new("RGBA", (W, H), BG)
     d = ImageDraw.Draw(img)
+    theme = step_theme(step_no)
     d.rounded_rectangle((36, 36, W - 36, H - 36), radius=36, fill=PANEL, outline=LINE, width=3)
-    d.rounded_rectangle((72, 72, 260, 130), radius=28, fill=ACCENT)
-    d.text((104, 88), f"STEP {step_no}", font=SMALL_FONT, fill=NAVY)
-    d.text((72, 170), title, font=TITLE_FONT, fill=TEXT)
-    d.text((72, 245), subtitle, font=BODY_FONT, fill=MUTED)
+
+    # notebook-style guide lines
+    for y in range(74, H - 70, 40):
+        d.line((56, y, W - 56, y), fill="#f1ece4", width=1)
+
+    # left teaching panel
+    d.rounded_rectangle((56, 146, 540, 464), radius=34, fill="#fffdf9", outline="#efe5d8", width=2)
+    d.rounded_rectangle((72, 72, 286, 130), radius=28, fill=theme["pill"])
+    d.text((108, 88), f"STEP {step_no}", font=SMALL_FONT, fill=NAVY)
+    d.text((72, 174), title, font=TITLE_FONT, fill=TEXT)
+    d.text((72, 252), subtitle, font=BODY_FONT, fill=MUTED)
+
+    # right illustration panel
+    d.rounded_rectangle((584, 120, 1188, 684), radius=38, fill=theme["panel"], outline="#e4dacb", width=3)
+    d.rounded_rectangle((606, 142, 1166, 662), radius=30, fill="#fffaf3", outline="#f0e7d9", width=2)
+
+    # playful decoration
+    d.ellipse((1090, 82, 1132, 124), fill=theme["spark"])
+    d.ellipse((1138, 96, 1164, 122), fill=theme["spark"])
+    d.rounded_rectangle((994, 88, 1076, 118), radius=14, fill=theme["pill"])
+    d.text((1014, 94), "LOOK", font=MINI_FONT, fill=TEXT)
     return img, d
 
 
 def draw_label(d, x, y, w, h, text, fill):
-    d.rounded_rectangle((x, y, x + w, y + h), radius=18, fill=fill)
+    d.rounded_rectangle((x + 6, y + 8, x + w + 6, y + h + 8), radius=18, fill="#e9ddd0")
+    d.rounded_rectangle((x, y, x + w, y + h), radius=18, fill=fill, outline="#dfd1c0", width=2)
     bbox = d.textbbox((0, 0), text, font=MINI_FONT)
     tw = bbox[2] - bbox[0]
     th = bbox[3] - bbox[1]
