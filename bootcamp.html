@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260411-bootcamp-fix">
+  <link rel="stylesheet" href="styles.css?v=20260411-bootcamp-clean1">
 </head>
 <body class="bootcamp-page">
   <div class="page-shell">
@@ -20,7 +20,7 @@
           <small>Beginner Microcar Course</small>
         </span>
       </a>
-      <nav class="site-nav" aria-label="網站導覽">
+      <nav class="site-nav" aria-label="主要導覽">
         <a href="bootcamp.html">Boot Camp</a>
         <a href="teacher-zone.html">教師區</a>
         <a href="student-zone.html">學生區</a>
@@ -35,14 +35,14 @@
           <p class="eyebrow">Student Boot Camp</p>
           <h1>1 小時 Boot Camp 學習頁</h1>
           <p class="hero-text">
-            本頁整理第一堂課的操作重點。
-            課堂目標分為兩部分：
-            使用 `Thonny` 連接 Raspberry Pi Pico 小車，並以鍵盤控制前進、後退、左轉、右轉與停止。
+            這一頁只保留第一堂課真正要用到的內容。
+            學生先照著 20 個步驟完成連線與操作，再把完整程式貼到 Thonny，
+            最後從下方的 Code Walkthrough 一段一段看懂程式。
           </p>
           <div class="action-row">
             <a class="button primary" href="#thonny-steps">學生從這 20 步開始</a>
-            <a class="button secondary" href="#full-code">直接複製程式</a>
-            <a class="button ghost" href="student-handout.html">再看學生講義</a>
+            <a class="button secondary" href="#full-code">直接看完整程式</a>
+            <a class="button ghost" href="student-handout.html">學生講義頁</a>
           </div>
         </div>
         <div class="subpage-aside">
@@ -50,14 +50,14 @@
             <span class="zone-badge student">Today</span>
             <h3>本堂完成重點</h3>
             <ul class="detail-list">
-              <li>把電腦和車子連起來。</li>
-              <li>看懂 `W / A / S / D / X` 代表什麼動作。</li>
-              <li>用鍵盤讓小車動起來，再安全地停下來。</li>
+              <li>會把電腦和小車連線。</li>
+              <li>會用 `W / A / S / D / X` 控制小車。</li>
+              <li>會把網頁上的程式貼到 Thonny 執行。</li>
             </ul>
           </article>
           <article class="aside-card">
             <img class="asset-preview" src="assets/real-bootcamp-car.jpg" alt="真實 Raspberry Pi Pico 小車近照">
-            <p class="visual-note">先認出 Pico 板、USB 線、超音波模組與輪子位置，等一下在桌面上比較不會找不到。</p>
+            <p class="visual-note">先認出 Pico 板、USB 線、感測器和輪子位置，等一下比較不會找不到。</p>
           </article>
         </div>
       </section>
@@ -66,7 +66,7 @@
         <div class="section-heading">
           <p class="eyebrow">20-step Route</p>
           <h2>學生請照著下面 20 個步驟，從上往下完成</h2>
-          <p>本區是本堂課的正式操作流程。每一列就是一個 step，左邊看文字，右邊看對應圖片，再一路往下做。</p>
+          <p>這一區就是本堂課的正式操作流程。左邊看文字，右邊看對應動圖，做完一列再往下走。</p>
         </div>
         <div class="bootcamp-step-list">
           <article class="bootcamp-step-item">
@@ -130,7 +130,7 @@
             <div class="bootcamp-step-copy">
               <span class="download-type">STEP 8</span>
               <h3>建立新的 Python 檔</h3>
-              <p>按 `File > New`，建立一個新的 `.py` 檔案。</p>
+              <p>按 `File &gt; New`，建立一個新的 `.py` 檔案。</p>
             </div>
             <img class="teaching-visual" src="assets/bootcamp-step-08.gif?v=20260411-school3" alt="步驟 8 建立新檔案動圖">
           </article>
@@ -212,8 +212,8 @@
           <article class="bootcamp-step-item">
             <div class="bootcamp-step-copy">
               <span class="download-type">STEP 18</span>
-              <h3>完成 w -> x</h3>
-              <p>先完成 `w -> x`，確認前進與停止都成功。</p>
+              <h3>完成 w -&gt; x</h3>
+              <p>先完成 `w -&gt; x`，確認前進與停止都成功。</p>
             </div>
             <img class="teaching-visual" src="assets/bootcamp-step-18.gif?v=20260411-school3" alt="步驟 18 前進與停止練習動圖">
           </article>
@@ -221,7 +221,7 @@
             <div class="bootcamp-step-copy">
               <span class="download-type">STEP 19</span>
               <h3>完成轉向挑戰</h3>
-              <p>完成 `w -> a -> x` 或 `w -> d -> x`，練習方向控制。</p>
+              <p>完成 `w -&gt; a -&gt; x` 或 `w -&gt; d -&gt; x`，練習方向控制。</p>
             </div>
             <img class="teaching-visual" src="assets/bootcamp-step-19.gif?v=20260411-school3" alt="步驟 19 轉向挑戰動圖">
           </article>
@@ -237,316 +237,6 @@
         <div class="section-actions">
           <a class="button secondary" href="#full-code">先貼上完整程式</a>
           <a class="button ghost" href="#code-walkthrough">貼上後，從這裡開始讀程式</a>
-        </div>
-      </section>
-
-      <section class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">Quick Visual Start</p>
-          <h2>先看這 3 張圖，再開始操作</h2>
-          <p>本區整理課堂開始前最需要掌握的 3 個重點：連線位置、Thonny 操作位置，以及鍵盤控制按鍵。</p>
-        </div>
-        <div class="visual-story-grid">
-          <article class="visual-story-card">
-            <img class="teaching-visual" src="assets/real-bootcamp-desk.jpg" alt="學生在桌面上操作 Raspberry Pi Pico 小車">
-            <div class="visual-story-copy">
-              <span class="zone-badge teacher">Step 1</span>
-              <h3>先看真實桌面配置</h3>
-              <p>電腦開啟 Thonny，小車放在桌面前方，學生需要同時看螢幕與小車反應。</p>
-            </div>
-          </article>
-          <article class="visual-story-card">
-            <img class="teaching-visual" src="assets/bootcamp-thonny-guide.png" alt="Thonny 操作區域圖解">
-            <div class="visual-story-copy">
-              <span class="zone-badge teacher">Step 2</span>
-              <h3>只找 3 個 Thonny 位置</h3>
-              <p>本堂課主要使用 `Run`、右下角的 Pico 解譯器與下方 `Shell`。</p>
-            </div>
-          </article>
-          <article class="visual-story-card">
-            <img class="teaching-visual" src="assets/bootcamp-keyboard-guide.png" alt="鍵盤控制小車動作圖解">
-            <div class="visual-story-copy">
-              <span class="zone-badge teacher">Step 3</span>
-              <h3>先熟悉 5 個按鍵</h3>
-              <p>只要能將 `W / A / S / D / X` 與小車動作對應起來，即可完成第一堂課的核心任務。</p>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">Real Equipment View</p>
-          <h2>先看真實設備，再開始操作</h2>
-          <p>以下照片來自實際課堂素材，先用真實畫面認出今天會看到的小車、桌面與教室配置。</p>
-        </div>
-        <div class="visual-story-grid">
-          <article class="visual-story-card">
-            <img class="teaching-visual" src="assets/real-bootcamp-car.jpg" alt="真實 Raspberry Pi Pico 小車近照">
-            <div class="visual-story-copy">
-              <span class="zone-badge student">Car</span>
-              <h3>真實小車近照</h3>
-              <p>從這張照片可先認出 Pico 板、超音波模組、輪子與連接線，知道程式會控制的是哪一台車。</p>
-            </div>
-          </article>
-          <article class="visual-story-card">
-            <img class="teaching-visual" src="assets/real-bootcamp-desk.jpg" alt="Boot Camp 桌面操作畫面">
-            <div class="visual-story-copy">
-              <span class="zone-badge teacher">Desk</span>
-              <h3>桌面操作畫面</h3>
-              <p>上課時可讓學生把小車放在筆電前方，按下 Run 後在 Thonny Shell 輸入指令觀察動作。</p>
-            </div>
-          </article>
-          <article class="visual-story-card">
-            <img class="teaching-visual" src="assets/real-bootcamp-classroom.jpg" alt="Boot Camp 教室全景">
-            <div class="visual-story-copy">
-              <span class="zone-badge teacher">Room</span>
-              <h3>教室全景</h3>
-              <p>教師可先投影示範，再讓學生分組操作，整體節奏會比一開始就拆解硬體更順暢。</p>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">Meet Thonny</p>
-          <h2>先認識今天會用到的 Thonny</h2>
-          <p>本區整理本堂課最需要辨識的 Thonny 位置，不必完整學會所有功能，只需先掌握操作小車所需的三個重點區域。</p>
-        </div>
-        <div class="page-grid">
-          <article class="content-card tool-focus-card">
-            <span class="zone-badge teacher">For Class</span>
-              <h3>課堂提示重點</h3>
-            <ul class="detail-list">
-                <li>本堂課使用的 Python 工具為 Thonny。</li>
-              <li>今天只找 `Open`、`Run`、`Shell`。</li>
-              <li>右下角記得選 `MicroPython (Raspberry Pi Pico)`。</li>
-            </ul>
-            <div class="action-row tool-link-row">
-              <a class="button primary" href="https://thonny.org/" target="_blank" rel="noreferrer">打開 Thonny 官網</a>
-              <a class="button secondary" href="downloads.html#setup-thonny">看下載與安裝</a>
-            </div>
-          </article>
-          <article class="content-card tool-focus-card">
-            <span class="zone-badge student">Starter Layout</span>
-            <h3>今天在 Thonny 只看這 3 個區塊</h3>
-            <div class="thonny-window">
-              <div class="thonny-topbar">
-                <span class="thonny-dot"></span>
-                <span class="thonny-dot"></span>
-                <span class="thonny-dot"></span>
-                <strong>Thonny</strong>
-              </div>
-              <div class="thonny-toolbar">
-                <span class="ui-pill">Open</span>
-                <span class="ui-pill active">Run</span>
-                <span class="ui-pill">Shell</span>
-              </div>
-              <div class="thonny-editor">
-                <p class="mini-label">Interpreter</p>
-                <strong>MicroPython (Raspberry Pi Pico)</strong>
-                <span>這一格選對，小車才會連上。</span>
-              </div>
-              <div class="thonny-shell">
-                <span>&gt;&gt;&gt; w</span>
-                <span>&gt;&gt;&gt; a</span>
-                <span>&gt;&gt;&gt; x</span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">4-stage Overview</p>
-          <h2>這 4 格是課程階段總覽，不是學生實際操作步驟</h2>
-          <p>學生真正要照著做的是下一區的 `20 個步驟`。這一區只用來幫老師掌握 1 小時課程節奏。</p>
-        </div>
-        <div class="section-actions">
-          <a class="button primary" href="#thonny-steps">直接跳到 20 步驟</a>
-        </div>
-        <div class="flow-stage-grid">
-          <article class="flow-stage-card flow-connect">
-            <div class="flow-stage-top">
-              <span class="flow-no">01</span>
-              <span class="flow-time">0-10 分鐘</span>
-            </div>
-            <h3>連線成功</h3>
-            <p>先讓每一組都把電腦和小車接好，這是整堂課最重要的起點。</p>
-            <ul class="detail-list">
-              <li>老師做：示範 USB 線和 Thonny 的位置。</li>
-              <li>學生做：確認自己的車有成功連上。</li>
-              <li>完成線：知道等一下要在哪裡輸入指令。</li>
-            </ul>
-          </article>
-          <article class="flow-stage-card flow-demo">
-            <div class="flow-stage-top">
-              <span class="flow-no">02</span>
-              <span class="flow-time">10-20 分鐘</span>
-            </div>
-            <h3>老師示範</h3>
-            <p>先由教師示範輸入指令，建立按鍵與小車動作的對應關係。</p>
-            <ul class="detail-list">
-              <li>老師做：在 Thonny Shell 輸入 `w / a / s / d / x`。</li>
-              <li>學生做：口頭說出每個字母控制什麼。</li>
-              <li>完成線：知道 `x` 是停止鍵。</li>
-            </ul>
-          </article>
-          <article class="flow-stage-card flow-practice">
-            <div class="flow-stage-top">
-              <span class="flow-no">03</span>
-              <span class="flow-time">20-40 分鐘</span>
-            </div>
-            <h3>輪流操作</h3>
-            <p>每個學生都要真的摸到一次操作，不只是看老師演示。</p>
-            <ul class="detail-list">
-              <li>老師做：提醒每做完一個動作先停車。</li>
-              <li>學生做：依序試 `w`、`a`、`s`、`d`、`x`。</li>
-              <li>完成線：每個人都能讓車子成功動一次。</li>
-            </ul>
-          </article>
-          <article class="flow-stage-card flow-finish">
-            <div class="flow-stage-top">
-              <span class="flow-no">04</span>
-              <span class="flow-time">40-60 分鐘</span>
-            </div>
-            <h3>完成任務</h3>
-            <p>最後用一個簡單小挑戰收尾，讓學生有完成感。</p>
-            <ul class="detail-list">
-              <li>老師做：出一段簡單動作題。</li>
-              <li>學生做：完成「前進、左轉、停止」或「前進、右轉、後退、停止」。</li>
-              <li>完成線：能說出 `W / A / S / D / X` 對應的動作。</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <section id="thonny-visuals" class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">Thonny Visual Guide</p>
-          <h2>用圖解看懂 Thonny 要按哪裡</h2>
-          <p>本圖解整理出 Thonny 中最需要辨識的操作位置，適合課堂投影與學生對照使用。</p>
-        </div>
-        <div class="thonny-visual-grid">
-          <article class="thonny-visual-card">
-            <span class="zone-badge teacher">Step A</span>
-            <h3>先確認解譯器</h3>
-            <div class="thonny-window">
-              <div class="thonny-topbar">
-                <span class="thonny-dot"></span>
-                <span class="thonny-dot"></span>
-                <span class="thonny-dot"></span>
-                <strong>Thonny</strong>
-              </div>
-              <div class="thonny-toolbar">
-                <span class="ui-pill">Open</span>
-                <span class="ui-pill active">Run</span>
-                <span class="ui-pill">Stop</span>
-              </div>
-              <div class="thonny-editor">
-                <p class="mini-label">Interpreter</p>
-                <strong>MicroPython (Raspberry Pi Pico)</strong>
-                <span>如果不是這個，請跟著老師一起切換。</span>
-              </div>
-            </div>
-          </article>
-          <article class="thonny-visual-card">
-            <span class="zone-badge student">Step B</span>
-            <h3>打開檔案後按 Run</h3>
-            <div class="thonny-window">
-              <div class="thonny-topbar">
-                <span class="thonny-dot"></span>
-                <span class="thonny-dot"></span>
-                <span class="thonny-dot"></span>
-                <strong>keyboard-car-control.py</strong>
-              </div>
-              <div class="thonny-toolbar">
-                <span class="ui-pill">Open</span>
-                <span class="ui-pill active">Run</span>
-                <span class="ui-pill">Save</span>
-              </div>
-              <div class="thonny-editor code-surface">
-                <span>print("請在 Thonny Shell 輸入指令")</span>
-                <span>while True:</span>
-                <span>    cmd = sys.stdin.read(1)</span>
-              </div>
-            </div>
-          </article>
-          <article class="thonny-visual-card">
-            <span class="zone-badge student">Step C</span>
-            <h3>到 Shell 打字控制</h3>
-            <div class="thonny-window">
-              <div class="thonny-topbar">
-                <span class="thonny-dot"></span>
-                <span class="thonny-dot"></span>
-                <span class="thonny-dot"></span>
-                <strong>Shell</strong>
-              </div>
-              <div class="thonny-shell">
-                <span>&gt;&gt;&gt; w</span>
-                <span>car: forward</span>
-                <span>&gt;&gt;&gt; x</span>
-                <span>car: stop</span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">Action Map</p>
-          <h2>先記住這 5 個按鍵</h2>
-          <p>本堂課先完成鍵盤控制，再逐步理解程式結構。</p>
-        </div>
-        <div class="page-grid">
-          <article class="student-card mission-card">
-            <span class="zone-badge student">Keyboard Control</span>
-            <div class="keys-grid" aria-label="鍵盤控制小車">
-              <div class="key empty"></div>
-              <div class="key active">W<span>前進</span></div>
-              <div class="key empty"></div>
-              <div class="key">A<span>左轉</span></div>
-              <div class="key active">S<span>後退</span></div>
-              <div class="key">D<span>右轉</span></div>
-              <div class="key stop">X<span>停止</span></div>
-            </div>
-          </article>
-          <article class="content-card">
-            <h3>本堂操作原則</h3>
-            <ul class="detail-list">
-              <li>一個按鍵，對應一個動作。</li>
-              <li>先熟悉 `w` 與 `x`，即可完成最基本的前進與停止。</li>
-              <li>操作完一個動作，最好先停車再換下一個動作。</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <section class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">Teaching Sequence</p>
-          <h2>建議教學順序</h2>
-          <p>課堂投影可依照以下順序進行，每一步聚焦一個重點，較有利於學生跟上操作。</p>
-        </div>
-        <div class="product-rail lesson-sequence-rail">
-          <article class="product-panel product-primary">
-            <span class="zone-badge teacher">Step A</span>
-            <h3>先講操作，不先講理論</h3>
-              <p>先完成操作示範，再回頭說明函式與指令，可提高學習動機與理解度。</p>
-          </article>
-          <article class="product-panel product-teacher">
-            <span class="zone-badge teacher">Step B</span>
-            <h3>先讀主程式的前半段</h3>
-              <p>建議先閱讀匯入模組、設定腳位，以及 `stop()` 和 `forward()` 相關內容。</p>
-          </article>
-          <article class="product-panel product-student">
-            <span class="zone-badge student">Step C</span>
-            <h3>最後才看按鍵對應</h3>
-              <p>學生先理解小車動作後，再閱讀 `if cmd == "w"` 這段，較容易建立對應關係。</p>
-          </article>
         </div>
       </section>
 
@@ -583,8 +273,8 @@
           <article class="lesson-card">
             <div class="lesson-copy">
               <p class="mini-label">Step 1</p>
-              <h3>先匯入模組，設定腳位</h3>
-              <p>本段設定控制小車所需的腳位與模組。</p>
+              <h3>先看匯入和腳位</h3>
+              <p>這一段會先告訴小車要使用哪些模組，還有馬達接在哪些腳位上。</p>
             </div>
             <pre><code>from machine import Pin
 import sys
@@ -600,8 +290,8 @@ LED = Pin(25, Pin.OUT)</code></pre>
           <article class="lesson-card">
             <div class="lesson-copy">
               <p class="mini-label">Step 2</p>
-              <h3>先做出「停車」和「往前」</h3>
-              <p>本段可先聚焦 `stop()` 與 `forward()`，理解函式如何控制小車動作。</p>
+              <h3>再看前進和停止函式</h3>
+              <p>先記住 `stop()` 和 `forward()`。這兩個函式是今天最重要的基本動作。</p>
             </div>
             <pre><code>def _set_motor(pin_a, pin_b, direction):
     if direction &gt; 0:
@@ -626,8 +316,8 @@ def forward():
           <article class="lesson-card">
             <div class="lesson-copy">
               <p class="mini-label">Step 3</p>
-              <h3>再補齊後退、左轉、右轉</h3>
-              <p>本段補齊後退、左轉與右轉，構成小車的基本動作集合。</p>
+              <h3>接著看後退和轉彎</h3>
+              <p>這一段把後退、左轉、右轉都準備好，等等按鍵就會對到這些動作。</p>
             </div>
             <pre><code>def backward():
     _set_motor(M1_A, M1_B, -1)
@@ -645,8 +335,8 @@ def turn_right():
           <article class="lesson-card">
             <div class="lesson-copy">
               <p class="mini-label">Step 4</p>
-              <h3>讀取鍵盤指令</h3>
-              <p>本段負責接收 `Thonny Shell` 輸入的單一指令。</p>
+              <h3>再看怎麼讀取指令</h3>
+              <p>這一段會一直等待你在 `Thonny Shell` 輸入的字母。</p>
             </div>
             <pre><code>print("請在 Thonny Shell 輸入 w / a / s / d / x 後按 Enter")
 
@@ -663,8 +353,8 @@ while True:
           <article class="lesson-card">
             <div class="lesson-copy">
               <p class="mini-label">Step 5</p>
-              <h3>把按鍵對應到動作</h3>
-              <p>本段將每個按鍵對應到一個動作函式，是本堂課的核心控制邏輯。</p>
+              <h3>最後看按鍵對應動作</h3>
+              <p>這裡會把輸入的按鍵和對應動作接起來，所以 `w`、`a`、`s`、`d`、`x` 才會真的讓車子動。</p>
             </div>
             <pre><code>    if cmd == "w":
         forward()
@@ -679,72 +369,8 @@ while True:
           </article>
         </div>
       </section>
-
-      <section class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">Practice Order</p>
-          <h2>實際操作時，建議這樣練</h2>
-          <p>先從最安全、最容易成功的開始。不要一開始就連續按很多指令。</p>
-        </div>
-        <div class="download-grid">
-          <article class="download-card">
-            <span class="download-type">練習 1</span>
-            <h3>先試 `x`</h3>
-            <p>先知道怎麼停車，這樣等一下比較安心。</p>
-          </article>
-          <article class="download-card">
-            <span class="download-type">練習 2</span>
-            <h3>再試 `w` 然後 `x`</h3>
-            <p>先讓車子前進一下，再停下來。</p>
-          </article>
-          <article class="download-card">
-            <span class="download-type">練習 3</span>
-            <h3>加入 `a` 和 `d`</h3>
-            <p>讓車子左轉、右轉，熟悉方向感。</p>
-          </article>
-          <article class="download-card">
-            <span class="download-type">練習 4</span>
-            <h3>最後試 `s`</h3>
-            <p>讓車子後退，再記得停車。</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">Today Files</p>
-          <h2>今天不用先下載程式</h2>
-          <p>第一堂課以網頁上的完整程式為主。若要補充閱讀，再開其他頁面或備用檔案即可。</p>
-        </div>
-        <div class="download-grid compact-grid">
-          <article class="download-card">
-            <span class="download-type">START</span>
-            <h3>學生講義頁</h3>
-              <p>建議先開啟學生講義頁，建立課堂操作方向。</p>
-            <a class="button primary block" href="student-handout.html">前往學生講義</a>
-          </article>
-          <article class="download-card">
-            <span class="download-type">MAIN</span>
-            <h3>完整程式頁</h3>
-              <p>本堂課的主程式可直接從網頁複製，不需要先下載檔案。</p>
-            <a class="button primary block" href="#full-code">前往完整程式</a>
-          </article>
-          <article class="download-card">
-            <span class="download-type">EXTRA</span>
-            <h3>馬達基本函式</h3>
-              <p>本檔可作為前進、後退、左轉、右轉函式的補充說明。</p>
-            <a class="button secondary block" href="code-viewer.html?file=basic-motor-functions">查看補充程式</a>
-          </article>
-          <article class="download-card">
-            <span class="download-type">TEACHER</span>
-            <h3>教師教學建議</h3>
-              <p>本檔主要供教師備課使用，學生不需在第一堂課同步開啟。</p>
-            <a class="button ghost block" href="downloads/one-hour-bootcamp-teaching-plan.txt">老師下載建議</a>
-          </article>
-        </div>
-      </section>
     </main>
   </div>
-  <script src="script.js?v=20260411-bootcamp-fix"></script>
+  <script src="script.js?v=20260411-bootcamp-clean1"></script>
 </body>
 </html>
