@@ -559,7 +559,7 @@ button.button {
 
 .product-rail {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
 }
 
@@ -597,6 +597,11 @@ button.button {
 .product-student {
   background:
     linear-gradient(180deg, rgba(255, 244, 220, 0.92), rgba(255, 255, 255, 0.98));
+}
+
+.product-advanced {
+  background:
+    linear-gradient(180deg, rgba(236, 246, 236, 0.92), rgba(255, 255, 255, 0.98));
 }
 
 .chip-list.compact {
