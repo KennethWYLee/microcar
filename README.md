@@ -18,7 +18,7 @@
 說明：從左右循跡感測值出發，先用最基本的四種規則讓小車沿著黑線前進。
 
 4. `循跡進階`
-說明：規劃中，會加入更細的轉向控制與穩定度調整。
+說明：把固定規則升級成速度差控制，並加入 PD / PID 與閉迴路控制的入門觀念。
 
 5. `PIT 演算法討論`
 說明：規劃中，作為循跡進階後的控制策略延伸主題。
@@ -36,6 +36,8 @@
   主題 2：感測器的操控。
 - `line-following-intro.html`
   主題 3：循跡入門。
+- `line-following-advanced.html`
+  主題 4：循跡進階。
 - `student-handout.html`
   Boot Camp 學習單，可投影或列印。
 - `downloads.html`
@@ -63,6 +65,10 @@
 - `line-sensor-read.py`
 - `line-following-intro.py`
 
+### 主題 4：循跡進階
+- `line-error-to-speed.py`
+- `line-following-advanced.py`
+
 ### 延伸教材
 - `AmebaAI / AmebaNN`
 - `Mango Library`
@@ -81,6 +87,8 @@
 第二堂課再進入 `sensor-control.html`，讓學生先觀察 RGB LED 的變化，再理解距離感測器與條件判斷。
 
 第三堂課可以接著打開 `line-following-intro.html`，讓學生把感測器值和小車轉向規則連在一起，開始做最基本的循跡。
+
+第四堂課可以打開 `line-following-advanced.html`，讓學生從固定規則跨到速度差控制，開始理解 error、correction、PD / PID 這些進階觀念。
 
 ## 備註
 

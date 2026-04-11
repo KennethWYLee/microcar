@@ -9,10 +9,10 @@
 1. `1 hr Boot Camp`
 2. `感測器的操控`
 3. `循跡入門`
+4. `循跡進階`
 
 後續主題規劃：
-4. `循跡進階`
-5. `PIT 演算法討論`
+5. `PIT / PID 演算法討論`
 額外模組：`電路板入門`
 
 ## 這一輪完成內容
@@ -61,6 +61,7 @@
   - `主題 1：Boot Camp`
   - `主題 2：感測器操控`
   - `主題 3：循跡入門`
+  - `主題 4：循跡進階`
   - `延伸教材`
 - 目前網站可直接展示與複製的程式包含：
   - `keyboard-car-control.py`
@@ -69,10 +70,25 @@
   - `distance-sensor-rgb.py`
   - `line-sensor-read.py`
   - `line-following-intro.py`
+  - `line-error-to-speed.py`
+  - `line-following-advanced.py`
 
 ### 6. 文件同步
 - `README.md` 已改為主題式專案介紹。
 - 本進度檔同步更新為主題式網站架構。
+
+### 7. 主題 4：循跡進階
+- 新增 `line-following-advanced.html` 作為第四主題頁。
+- 主題內容包含：
+  - 速度差控制概念
+  - 橋接程式
+  - 循跡進階主程式
+  - PD / PID 與閉迴路控制的專業補充
+  - 真實循跡影片
+- 新增：
+  - `downloads/line-error-to-speed.py`
+  - `downloads/line-following-advanced.py`
+- `script.js` 已接上第四主題的程式頁與頁內複製功能。
 
 ## 目前保留但降級的內容
 
@@ -80,6 +96,6 @@
 
 ## 下一步建議
 
-1. 開始製作 `循跡進階` 主題頁。
-2. 將 `循跡入門` 的感測器接線圖再補得更清楚。
-3. 把第四、第五主題也接進同一套主題節奏。
+1. 開始製作 `PIT / PID 演算法討論` 主題頁。
+2. 開始製作 `電路板入門` 主題頁。
+3. 補更多真實影片與調參示意圖，讓主題 4 更直觀。

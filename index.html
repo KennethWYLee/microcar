@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Raspberry Pi Pico 小車入門教學站</title>
-  <meta name="description" content="以主題方式整理 Raspberry Pi Pico 小車教學，從 1 小時 Boot Camp、感測器操控、循跡入門一路延伸到進階主題。">
+  <meta name="description" content="以主題方式整理 Raspberry Pi Pico 小車教學，從 1 小時 Boot Camp、感測器操控、循跡入門一路延伸到循跡進階。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -24,6 +24,7 @@
         <a href="bootcamp.html">Boot Camp</a>
         <a href="sensor-control.html">感測器操控</a>
         <a href="line-following-intro.html">循跡入門</a>
+        <a href="line-following-advanced.html">循跡進階</a>
         <a href="downloads.html">下載區</a>
       </nav>
       <a class="button ghost" href="https://github.com/KennethWYLee/microcar" target="_blank" rel="noreferrer">GitHub</a>
@@ -54,7 +55,7 @@
             </div>
             <div class="point-card">
               <strong>之後延伸</strong>
-              <span>循跡入門、循跡進階、PIT 演算法與電路板入門</span>
+              <span>循跡入門、循跡進階、PID / PIT 與電路板入門</span>
             </div>
           </div>
         </div>
@@ -144,8 +145,8 @@
       <section class="section product-band reveal">
         <div class="section-heading">
           <p class="eyebrow">Current Topics</p>
-          <h2>目前網站先聚焦三個主題：Boot Camp、感測器操控、循跡入門</h2>
-          <p>三個主題都沿用相同學習邏輯：先跟著做出功能，再透過完整程式與程式解讀理解背後做法。</p>
+          <h2>目前網站先聚焦四個主題：Boot Camp、感測器操控、循跡入門、循跡進階</h2>
+          <p>四個主題都沿用相同學習邏輯：先跟著做出功能，再透過完整程式與程式解讀理解背後做法。</p>
         </div>
         <div class="product-rail">
           <article class="product-panel product-primary">
@@ -180,6 +181,17 @@
               <span>基本規則</span>
             </div>
             <a class="button ghost" href="line-following-intro.html">進入循跡入門</a>
+          </article>
+          <article class="product-panel product-advanced">
+            <span class="zone-badge teacher">主題 4</span>
+            <h3>循跡進階</h3>
+            <p>把固定規則升級成速度差控制，開始理解 error、base speed、correction 與 PD / PID 的概念。</p>
+            <div class="chip-list compact">
+              <span>速度差控制</span>
+              <span>error</span>
+              <span>PD / PID</span>
+            </div>
+            <a class="button secondary" href="line-following-advanced.html">進入循跡進階</a>
           </article>
         </div>
       </section>
@@ -216,14 +228,17 @@
             </div>
           </article>
           <article class="content-card">
-            <span class="zone-badge teacher">Planned</span>
+            <span class="zone-badge teacher">Topic 4</span>
             <h3>主題 4：循跡進階</h3>
-            <p>加入更細的調整方式，改善轉向與速度控制，讓循跡更穩定。</p>
+            <p>從固定規則升級成可調整的速度差控制，並加入 PD / PID 與閉迴路控制的專業補充。</p>
+            <div class="action-row">
+              <a class="button secondary" href="line-following-advanced.html">打開主題 4</a>
+            </div>
           </article>
           <article class="content-card">
             <span class="zone-badge teacher">Planned</span>
-            <h3>主題 5：PIT 演算法討論</h3>
-            <p>從主題 4 再往上延伸，討論進階控制策略如何提升循跡表現。</p>
+            <h3>主題 5：PIT / PID 演算法討論</h3>
+            <p>從主題 4 再往上延伸，討論進階控制策略如何提升循跡表現與穩定度。</p>
           </article>
           <article class="content-card">
             <span class="zone-badge student">Extra</span>
@@ -271,7 +286,7 @@
         <div class="section-heading">
           <p class="eyebrow">Download Hub</p>
           <h2>所有教材已改成依主題整理</h2>
-          <p>下載區也不再分身分，而是改成以主題為主：Boot Camp 必用、感測器主題、以及延伸教材。</p>
+          <p>下載區也不再分身分，而是改成以主題為主：Boot Camp、感測器操控、循跡入門、循跡進階與延伸教材。</p>
         </div>
         <div class="download-grid">
           <article class="download-card">
@@ -291,6 +306,12 @@
             <h3>循跡入門資源</h3>
             <p>包含感測器讀值暖身程式、循跡入門主程式與主題頁入口。</p>
             <a class="button ghost block" href="downloads.html#topic-line">查看主題 3 資源</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">TOPIC 4</span>
+            <h3>循跡進階資源</h3>
+            <p>包含速度差暖身程式、循跡進階主程式與專業補充頁面。</p>
+            <a class="button secondary block" href="downloads.html#topic-line-advanced">查看主題 4 資源</a>
           </article>
         </div>
       </section>

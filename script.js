@@ -495,6 +495,239 @@ while True:
 
     time.sleep(0.05)
 `
+  },
+  "line-error-to-speed": {
+    path: "downloads/line-error-to-speed.py",
+    title: "速度差暖身程式",
+    summary: "這份暖身程式先把左右循跡感測值轉成 error、correction 與左右速度，幫助學生建立速度差控制的直覺。",
+    stage: "主題 4：循跡進階暖身",
+    backHref: "line-following-advanced.html",
+    steps: [
+      "先讀取左右循跡感測值。",
+      "再把感測值轉成 error。",
+      "觀察 correction 對左右速度的影響。"
+    ],
+    highlights: [
+      {
+        title: "感測器與參數",
+        summary: "先設定左右感測器、基礎速度、最大速度與比例增益 KP。",
+        range: "第 1-15 行",
+        lines: [1, 15],
+        tone: "teacher"
+      },
+      {
+        title: "把感測值轉成 error",
+        summary: "左右黑線位置不同時，就用不同 error 表示偏左或偏右。",
+        range: "第 22-36 行",
+        lines: [22, 36],
+        tone: "student"
+      },
+      {
+        title: "速度差計算",
+        summary: "用 correction 讓左右輪速度出現差距，為真正的循跡控制做準備。",
+        range: "第 42-55 行",
+        lines: [42, 55],
+        tone: "teacher"
+      }
+    ],
+    fallbackText: `from machine import Pin
+import time
+
+# Topic 4 bridge: turn line sensor values into speed difference
+# Assumption:
+#   left sensor  -> GP15
+#   right sensor -> GP14
+# Black line = 1, white floor = 0
+
+LEFT_SENSOR = Pin(15, Pin.IN)
+RIGHT_SENSOR = Pin(14, Pin.IN)
+
+BASE_SPEED = 24000
+MAX_SPEED = 42000
+KP = 10000
+
+last_error = 0.0
+
+
+def clamp_speed(value):
+    if value < 0:
+        return 0
+    if value > MAX_SPEED:
+        return MAX_SPEED
+    return int(value)
+
+
+def read_error(previous_error):
+    left_value = LEFT_SENSOR.value()
+    right_value = RIGHT_SENSOR.value()
+
+    if left_value == 1 and right_value == 1:
+        error = 0.0
+    elif left_value == 1 and right_value == 0:
+        error = 1.0
+    elif left_value == 0 and right_value == 1:
+        error = -1.0
+    else:
+        error = previous_error
+
+    return left_value, right_value, error
+
+
+print("Topic 4 bridge")
+print("Observe sensor values, error, and left/right speed")
+
+while True:
+    left_value, right_value, error = read_error(last_error)
+    correction = KP * error
+    left_speed = clamp_speed(BASE_SPEED - correction)
+    right_speed = clamp_speed(BASE_SPEED + correction)
+
+    print(
+        "left =", left_value,
+        "right =", right_value,
+        "error =", error,
+        "left_speed =", left_speed,
+        "right_speed =", right_speed,
+    )
+
+    last_error = error
+    time.sleep(0.1)
+`
+  },
+  "line-following-advanced": {
+    path: "downloads/line-following-advanced.py",
+    title: "循跡進階主程式",
+    summary: "這份主程式把固定規則升級成速度差控制，並引入 last_error 與 derivative，讓循跡反應更平滑。",
+    stage: "主題 4：循跡進階",
+    backHref: "line-following-advanced.html",
+    steps: [
+      "先確認左右感測器的黑白讀值。",
+      "把感測值轉成 error 與 derivative。",
+      "再用 correction 調整左右輪速度差。"
+    ],
+    highlights: [
+      {
+        title: "PWM 馬達與控制參數",
+        summary: "先準備四個 PWM 馬達腳位，再設定 BASE_SPEED、KP、KD 等參數。",
+        range: "第 1-19 行",
+        lines: [1, 19],
+        tone: "teacher"
+      },
+      {
+        title: "error 與 last_error",
+        summary: "用 read_error() 把感測器狀態轉成控制所需的 error。",
+        range: "第 46-64 行",
+        lines: [46, 64],
+        tone: "student"
+      },
+      {
+        title: "PD 速度差控制",
+        summary: "用 correction 同步調整左右速度，讓小車不只是轉彎，而是更平滑地修正方向。",
+        range: "第 70-89 行",
+        lines: [70, 89],
+        tone: "teacher"
+      }
+    ],
+    fallbackText: `from machine import Pin, PWM
+import time
+
+# Topic 4: line following advanced
+# Assumption:
+#   left sensor  -> GP15
+#   right sensor -> GP14
+# Black line = 1, white floor = 0
+# Motor PWM pins follow the Pico car course materials
+
+FREQUENCY = 1000
+BASE_SPEED = 24000
+MAX_SPEED = 42000
+KP = 11000
+KD = 5000
+
+RIGHT_FORWARD = PWM(Pin(13))
+RIGHT_BACKWARD = PWM(Pin(12))
+LEFT_FORWARD = PWM(Pin(10))
+LEFT_BACKWARD = PWM(Pin(11))
+
+for motor in (RIGHT_FORWARD, RIGHT_BACKWARD, LEFT_FORWARD, LEFT_BACKWARD):
+    motor.freq(FREQUENCY)
+
+LEFT_SENSOR = Pin(15, Pin.IN)
+RIGHT_SENSOR = Pin(14, Pin.IN)
+
+last_error = 0.0
+
+
+def clamp_speed(value):
+    if value < 0:
+        return 0
+    if value > MAX_SPEED:
+        return MAX_SPEED
+    return int(value)
+
+
+def stop():
+    RIGHT_FORWARD.duty_u16(0)
+    RIGHT_BACKWARD.duty_u16(0)
+    LEFT_FORWARD.duty_u16(0)
+    LEFT_BACKWARD.duty_u16(0)
+
+
+def drive_forward(left_speed, right_speed):
+    LEFT_FORWARD.duty_u16(left_speed)
+    LEFT_BACKWARD.duty_u16(0)
+    RIGHT_FORWARD.duty_u16(right_speed)
+    RIGHT_BACKWARD.duty_u16(0)
+
+
+def read_error(previous_error):
+    left_value = LEFT_SENSOR.value()
+    right_value = RIGHT_SENSOR.value()
+
+    if left_value == 1 and right_value == 1:
+        error = 0.0
+    elif left_value == 1 and right_value == 0:
+        error = 1.0
+    elif left_value == 0 and right_value == 1:
+        error = -1.0
+    else:
+        if previous_error > 0:
+            error = 1.5
+        elif previous_error < 0:
+            error = -1.5
+        else:
+            error = 0.0
+
+    return left_value, right_value, error
+
+
+print("Topic 4: line following advanced")
+print("This version uses speed difference instead of fixed turns")
+
+while True:
+    left_value, right_value, error = read_error(last_error)
+    derivative = error - last_error
+    correction = KP * error + KD * derivative
+
+    left_speed = clamp_speed(BASE_SPEED - correction)
+    right_speed = clamp_speed(BASE_SPEED + correction)
+
+    if left_value == 0 and right_value == 0 and last_error == 0:
+        stop()
+        print("stop", left_value, right_value, "error =", error)
+    else:
+        drive_forward(left_speed, right_speed)
+        print(
+            "left =", left_value,
+            "right =", right_value,
+            "error =", error,
+            "left_speed =", left_speed,
+            "right_speed =", right_speed,
+        )
+
+    last_error = error
+    time.sleep(0.03)
+`
   }
 };
 
@@ -657,3 +890,4 @@ const attachInlineCodeBlock = (nodeId, buttonId, pageKey, useHighlights = false)
 attachInlineCodeBlock("bootcamp-full-code", "bootcamp-copy-code", "keyboard-car-control", false);
 attachInlineCodeBlock("sensor-full-code", "sensor-copy-code", "distance-sensor-rgb", true);
 attachInlineCodeBlock("line-following-full-code", "line-following-copy-code", "line-following-intro", true);
+attachInlineCodeBlock("line-advanced-full-code", "line-advanced-copy-code", "line-following-advanced", true);
