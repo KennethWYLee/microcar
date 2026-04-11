@@ -25,7 +25,7 @@
         <a href="sensor-control.html">感測器操控</a>
         <a href="line-following-intro.html">循跡入門</a>
         <a href="line-following-advanced.html">循跡進階</a>
-        <a href="line-following-algorithms.html">演算法</a>
+        <a href="line-following-algorithms.html">循跡演算法</a>
         <a href="downloads.html">下載區</a>
       </nav>
       <a class="button ghost" href="https://github.com/KennethWYLee/microcar" target="_blank" rel="noreferrer">GitHub</a>
@@ -147,7 +147,7 @@
         <div class="section-heading">
           <p class="eyebrow">Current Topics</p>
           <h2>目前網站先聚焦五個主題：Boot Camp、感測器操控、循跡入門、循跡進階、循跡演算法</h2>
-          <p>五個主題都沿用相同學習邏輯：先跟著做出功能，再透過完整程式與程式解讀理解背後做法。</p>
+          <p>其中第 3、4、5 題都是循跡主線，但三者各自的學習目標不同：入門學規則、進階學速度差、演算法學比較與選擇。</p>
         </div>
         <div class="product-rail">
           <article class="product-panel product-primary">
@@ -175,7 +175,7 @@
           <article class="product-panel product-student">
             <span class="zone-badge student">主題 3</span>
             <h3>循跡入門</h3>
-            <p>從左右循跡感測值出發，用最基本的四種規則讓小車沿著黑線前進，作為進入進階控制前的第一步。</p>
+            <p>從左右循跡感測值出發，用最基本的四種規則讓小車沿著黑線前進。這一題重點是「看懂規則」，不是調參。</p>
             <div class="chip-list compact">
               <span>雙感測器</span>
               <span>黑線 / 白底</span>
@@ -186,7 +186,7 @@
           <article class="product-panel product-advanced">
             <span class="zone-badge teacher">主題 4</span>
             <h3>循跡進階</h3>
-            <p>把固定規則升級成速度差控制，開始理解 error、base speed、correction 與 PD / PID 的概念。</p>
+            <p>把固定規則升級成速度差控制，開始理解 error、base speed、correction 與 PD 的修正邏輯。這一題重點是「讓車跑得更穩」。</p>
             <div class="chip-list compact">
               <span>速度差控制</span>
               <span>error</span>
@@ -197,13 +197,38 @@
           <article class="product-panel product-algorithm">
             <span class="zone-badge student">主題 5</span>
             <h3>循跡演算法</h3>
-            <p>把規則式、P、PD、PID 放在同一頁比較，並讓使用者直接打開程式頁複製到 Thonny 執行。</p>
+            <p>把規則式、P、PD、PID 放在同一頁比較，並讓使用者直接打開程式頁複製到 Thonny 執行。這一題重點是「比較不同方法」。</p>
             <div class="chip-list compact">
               <span>Rule-based</span>
               <span>P / PD / PID</span>
               <span>可直接貼上</span>
             </div>
             <a class="button ghost" href="line-following-algorithms.html">進入演算法主題</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Line Following Path</p>
+          <h2>三個循跡主題的差別</h2>
+          <p>如果你正在決定要先看哪一題，可以直接用這一區判斷。三個主題不是重複，而是從「規則」一路走到「控制」再走到「比較」。</p>
+        </div>
+        <div class="page-grid">
+          <article class="content-card tool-focus-card">
+            <span class="zone-badge student">主題 3</span>
+            <h3>循跡入門：先看懂規則</h3>
+            <p>這一題最適合第一次碰循跡。學生只要知道左黑、右黑、都黑、都白分別代表什麼，再用固定規則讓車子動起來就可以。</p>
+          </article>
+          <article class="content-card tool-focus-card">
+            <span class="zone-badge teacher">主題 4</span>
+            <h3>循跡進階：開始調整速度</h3>
+            <p>這一題不再只是「左轉或右轉」，而是開始用左右輪速度差修正方向。核心是理解 error 和 correction，不是背更多規則。</p>
+          </article>
+          <article class="content-card tool-focus-card">
+            <span class="zone-badge teacher">主題 5</span>
+            <h3>循跡演算法：比較不同方法</h3>
+            <p>這一題把規則式、P、PD、PID 放在一起，幫助使用者判斷哪一種方法最適合目前的車體、感測器與教學時間。</p>
           </article>
         </div>
       </section>
@@ -234,7 +259,7 @@
           <article class="content-card">
             <span class="zone-badge student">Topic 3</span>
             <h3>主題 3：循跡入門</h3>
-            <p>把感測器讀值轉成基本循跡反應，建立黑線與移動邏輯的連結。</p>
+            <p>把感測器讀值轉成基本循跡反應，建立黑線與移動邏輯的連結。這一題先學規則，不談調參。</p>
             <div class="action-row">
               <a class="button primary" href="line-following-intro.html">打開主題 3</a>
             </div>
@@ -242,7 +267,7 @@
           <article class="content-card">
             <span class="zone-badge teacher">Topic 4</span>
             <h3>主題 4：循跡進階</h3>
-            <p>從固定規則升級成可調整的速度差控制，並加入 PD / PID 與閉迴路控制的專業補充。</p>
+            <p>從固定規則升級成可調整的速度差控制，並加入 PD / PID 與閉迴路控制的專業補充。這一題先學怎麼修正得更平順。</p>
             <div class="action-row">
               <a class="button secondary" href="line-following-advanced.html">打開主題 4</a>
             </div>
@@ -250,7 +275,7 @@
           <article class="content-card">
             <span class="zone-badge teacher">Topic 5</span>
             <h3>主題 5：循跡演算法</h3>
-            <p>把規則式、P、PD、PID 放在一起比較，並提供可直接貼上執行的程式版本。</p>
+            <p>把規則式、P、PD、PID 放在一起比較，並提供可直接貼上執行的程式版本。這一題重點是比較與選擇。</p>
             <div class="action-row">
               <a class="button ghost" href="line-following-algorithms.html">打開主題 5</a>
             </div>
