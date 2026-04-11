@@ -180,16 +180,73 @@ while True:
       }
     ]
   },
+  "sensor-rgb-warmup": {
+    path: "downloads/sensor-rgb-warmup.py",
+    title: "感測器暖身程式",
+    summary:
+      "第二主題的暖身程式。先確認感測器模組與 RGB LED 可以正常亮燈，再進入距離讀值與判斷。",
+    stage: "主題 2 暖身程式",
+    backHref: "sensor-control.html",
+    steps: [
+      "先在 Thonny 建立新檔，再把這份程式貼上。",
+      "按下 Run 後，觀察 RGB LED 是否依序亮紅、綠、藍。",
+      "暖身成功後，再進到距離感測主程式。"
+    ],
+    highlights: [
+      {
+        title: "建立感測器",
+        summary: "本段匯入 RUS04，並以 sensor_pin=15、rgb_pin=14 建立感測器物件。",
+        range: "第 1-7 行",
+        lines: [1, 7],
+        tone: "teacher"
+      },
+      {
+        title: "RGB 顏色切換",
+        summary: "本段依序顯示紅、綠、藍三種顏色，幫助學生先確認燈號能正常工作。",
+        range: "第 9-17 行",
+        lines: [9, 17],
+        tone: "student"
+      },
+      {
+        title: "結束與關閉",
+        summary: "本段在程式最後關閉 RGB LED，避免結束後燈號持續亮著。",
+        range: "第 19-20 行",
+        lines: [19, 20],
+        tone: "teacher"
+      }
+    ],
+    fallbackText: `import time
+from mango import RUS04
+
+# 主題 2：感測器的操控
+# 先用最簡單的方式確認感測器模組與 RGB LED 可以正常工作
+
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
+
+# 依序顯示紅、綠、藍三種顏色
+sensor.rgb_all((255, 0, 0))
+time.sleep(1)
+
+sensor.rgb_all((0, 255, 0))
+time.sleep(1)
+
+sensor.rgb_all((0, 0, 255))
+time.sleep(1)
+
+# 結束前關閉 RGB LED
+sensor.rgb_close()
+`
+  },
   "distance-sensor-rgb": {
     path: "downloads/distance-sensor-rgb.py",
-    title: "距離感測範例",
-    summary: "本程式為延伸課使用內容，示範如何加入感測器與條件判斷。",
-    stage: "延伸程式",
-    backHref: "downloads.html",
+    title: "距離感測主程式",
+    summary: "第二主題的主程式，示範如何讀取距離、印出數值，並用 if / elif / else 控制 RGB LED。",
+    stage: "主題 2 主程式",
+    backHref: "sensor-control.html",
     steps: [
-      "本程式不列入第一堂課必要內容。",
-      "建議先閱讀感測器讀值，再閱讀 if 判斷。",
-      "待學生熟悉鍵盤控制後，再納入延伸學習。"
+      "建議先完成感測器暖身程式，再閱讀這份主程式。",
+      "先看 sensor.ping() 與 print()，再看 if / elif / else 判斷。",
+      "可修改距離門檻或顏色設定，觀察小車反應。"
     ],
     highlights: [
       {
@@ -213,7 +270,32 @@ while True:
         lines: [14, 19],
         tone: "teacher"
       }
-    ]
+    ],
+    fallbackText: `import time
+from mango import RUS04
+from mango import utils
+
+# 初始化超音波距離感測器與 RGB LED
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
+sensor.rgb_all((255, 0, 0))
+
+# 重複量測 500 次
+for i in range(500):
+    dist = sensor.ping()
+    print(f'distance = {dist} cm')
+
+    if dist < 10:
+        sensor.rgb_all(utils.COLOR_RED)
+    elif 10 <= dist < 20:
+        sensor.rgb_all(utils.COLOR_BLUE)
+    else:
+        sensor.rgb_all(utils.COLOR_GREEN)
+
+    time.sleep(0.1)  # 100 毫秒
+
+# 關閉感測器
+sensor.rgb_close()
+`
   }
 };
 
@@ -349,17 +431,29 @@ if (codeContent) {
   }
 }
 
-const bootcampCodeNode = document.getElementById("bootcamp-full-code");
-const bootcampCopyButton = document.getElementById("bootcamp-copy-code");
+const attachInlineCodeBlock = (nodeId, buttonId, pageKey, useHighlights = false) => {
+  const codeNode = document.getElementById(nodeId);
+  const copyButton = document.getElementById(buttonId);
 
-if (bootcampCodeNode) {
-  const meta = codePages["keyboard-car-control"];
+  if (!codeNode) {
+    return;
+  }
+
+  const meta = codePages[pageKey];
+  if (!meta) {
+    codeNode.textContent = "找不到對應程式。";
+    return;
+  }
+
   loadCodeText(meta)
     .then(text => {
-      renderCode(bootcampCodeNode, text, []);
-      attachCopyHandler(bootcampCopyButton, () => text);
+      renderCode(codeNode, text, useHighlights ? meta.highlights : []);
+      attachCopyHandler(copyButton, () => text);
     })
     .catch(error => {
-      bootcampCodeNode.textContent = `載入失敗: ${error.message}`;
+      codeNode.textContent = `載入失敗: ${error.message}`;
     });
-}
+};
+
+attachInlineCodeBlock("bootcamp-full-code", "bootcamp-copy-code", "keyboard-car-control", false);
+attachInlineCodeBlock("sensor-full-code", "sensor-copy-code", "distance-sensor-rgb", true);
