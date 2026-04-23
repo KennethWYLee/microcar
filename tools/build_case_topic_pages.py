@@ -23,6 +23,7 @@ ROBOT_HANDOUT_DIR = ROBOT_DIR / "講義"
 ROBOT_WEB_DIR = ROBOT_DIR / "無人車網頁開發"
 DOWNLOAD_TOPIC_06_DIR = REPO / "downloads" / "topic-06-bluetooth-car"
 DOWNLOAD_TOPIC_08_DIR = REPO / "downloads" / "topic-08-fan-application"
+ASSET_VERSION = "20260423-navfix"
 
 
 @dataclass(frozen=True)
@@ -337,7 +338,6 @@ def header_html(active_output: str | None = None) -> str:
         </span>
       </a>
 {nav_html(active_output)}
-      <a class="button ghost" href="https://github.com/KennethWYLee/microcar" target="_blank" rel="noreferrer">GitHub</a>
     </header>"""
 
 
@@ -391,7 +391,7 @@ def render_topic_page(topic: Topic) -> str:
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260423-cases">
+  <link rel="stylesheet" href="styles.css?v={ASSET_VERSION}">
 </head>
 <body class="topic-page">
   <div class="page-shell">
@@ -480,7 +480,7 @@ def render_topic_page(topic: Topic) -> str:
       </section>
     </main>
   </div>
-  <script src="script.js?v=20260423-cases"></script>
+  <script src="script.js?v={ASSET_VERSION}"></script>
 </body>
 </html>
 """
@@ -514,7 +514,7 @@ def render_static_topic_page(topic: StaticTopic, body_html: str) -> str:
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260423-cases">
+  <link rel="stylesheet" href="styles.css?v={ASSET_VERSION}">
 </head>
 <body class="topic-page">
   <div class="page-shell">
@@ -572,7 +572,7 @@ def render_static_topic_page(topic: StaticTopic, body_html: str) -> str:
       </section>
     </main>
   </div>
-  <script src="script.js?v=20260423-cases"></script>
+  <script src="script.js?v={ASSET_VERSION}"></script>
 </body>
 </html>
 """
@@ -977,7 +977,7 @@ def render_index() -> str:
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260423-cases">
+  <link rel="stylesheet" href="styles.css?v={ASSET_VERSION}">
 </head>
 <body class="home-page">
   <div class="page-shell">
@@ -1093,7 +1093,7 @@ def render_index() -> str:
       </section>
     </main>
   </div>
-  <script src="script.js?v=20260423-cases"></script>
+  <script src="script.js?v={ASSET_VERSION}"></script>
 </body>
 </html>
 """
@@ -1127,7 +1127,7 @@ def render_downloads() -> str:
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260423-cases">
+  <link rel="stylesheet" href="styles.css?v={ASSET_VERSION}">
 </head>
 <body class="downloads-page">
   <div class="page-shell">
@@ -1189,7 +1189,7 @@ def render_downloads() -> str:
       </section>
     </main>
   </div>
-  <script src="script.js?v=20260423-cases"></script>
+  <script src="script.js?v={ASSET_VERSION}"></script>
 </body>
 </html>
 """

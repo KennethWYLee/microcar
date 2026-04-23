@@ -18,6 +18,18 @@ if (revealNodes.length) {
   revealNodes.forEach(node => observer.observe(node));
 }
 
+const activeNavLink = document.querySelector(".site-nav a[aria-current='page']");
+
+if (activeNavLink) {
+  requestAnimationFrame(() => {
+    activeNavLink.scrollIntoView({
+      behavior: "auto",
+      block: "nearest",
+      inline: "center"
+    });
+  });
+}
+
 const codePages = {
   "keyboard-car-control": {
     path: "downloads/keyboard-car-control.py",
