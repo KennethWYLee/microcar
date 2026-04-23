@@ -315,7 +315,7 @@ def split_cases(markdown: str) -> tuple[str, list[dict[str, object]]]:
 
 
 def nav_html(active_output: str | None = None) -> str:
-    links = [("bootcamp.html", "Boot Camp")] + [
+    links = [("bootcamp.html", "00_BootCamp")] + [
         (topic.output, topic.title.split("：", 1)[0]) for topic in all_topics()
     ]
     link_html = "\n".join(
@@ -993,7 +993,7 @@ def render_index() -> str:
             後續再加入藍芽遙控小車、Python 電路板教材與擺頭電扇應用，讓課程可以從小車走到完整作品。
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="bootcamp.html">先看 1 hr Boot Camp</a>
+            <a class="button primary" href="bootcamp.html">先看 00_BootCamp</a>
             <a class="button secondary" href="topic-01-intro.html">從主題 1 開始</a>
             <a class="button ghost" href="downloads.html">下載教材</a>
           </div>
@@ -1040,19 +1040,19 @@ def render_index() -> str:
       <section class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">Quick Start</p>
-          <h2>1 hr Boot Camp 保留為快速體驗課</h2>
-          <p>Boot Camp 是一小時活動入口，適合先讓學生用 Thonny 連上 Raspberry Pi Pico 小車，貼上程式並用鍵盤控制基本動作。它會保留在網站中，但不併入正式主題編號。</p>
+          <h2>00_BootCamp 保留為快速體驗課</h2>
+          <p>00_BootCamp 是一小時活動入口，適合先讓學生用 Thonny 連上 Raspberry Pi Pico 小車，貼上程式並用鍵盤控制基本動作。它會保留在網站中，但不併入正式主題編號。</p>
         </div>
         <div class="page-grid">
           <article class="content-card tool-focus-card">
-            <span class="zone-badge student">1 hr Boot Camp</span>
+            <span class="zone-badge student">00_BootCamp</span>
             <h3>先完成連線與基本控制</h3>
             <p>學生照著 12 個步驟操作：開啟 Thonny、建立新檔、貼上完整程式、按 Run，最後用 W / A / S / D / X 控制小車。</p>
-            <a class="button primary" href="bootcamp.html">打開 Boot Camp</a>
+            <a class="button primary" href="bootcamp.html">打開 00_BootCamp</a>
           </article>
           <article class="content-card tool-focus-card">
             <span class="zone-badge teacher">正式主題</span>
-            <h3>Boot Camp 之後再進入 8 主題</h3>
+            <h3>00_BootCamp 之後再進入 8 主題</h3>
             <p>完成快速體驗後，再依序進入入門、感測與輸出、小車移動、無人車、專題化、藍芽遙控、電路板教材與擺頭電扇應用。</p>
             <a class="button ghost" href="#topic-roadmap">查看 8 個主題</a>
           </article>
@@ -1175,9 +1175,9 @@ def render_downloads() -> str:
         <div class="page-grid">
           <article class="content-card">
             <span class="zone-badge student">Quick Class</span>
-            <h3>1 hr Boot Camp</h3>
+            <h3>00_BootCamp</h3>
             <p>適合短時間體驗用 Thonny 控制小車前進、後退、左轉、右轉與停止。</p>
-            <a class="button ghost" href="bootcamp.html">打開 Boot Camp</a>
+            <a class="button ghost" href="bootcamp.html">打開 00_BootCamp</a>
           </article>
           <article class="content-card">
             <span class="zone-badge teacher">Code Viewer</span>
