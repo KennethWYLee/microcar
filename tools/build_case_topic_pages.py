@@ -23,7 +23,7 @@ ROBOT_HANDOUT_DIR = ROBOT_DIR / "講義"
 ROBOT_WEB_DIR = ROBOT_DIR / "無人車網頁開發"
 DOWNLOAD_TOPIC_06_DIR = REPO / "downloads" / "topic-06-bluetooth-car"
 DOWNLOAD_TOPIC_08_DIR = REPO / "downloads" / "topic-08-fan-application"
-ASSET_VERSION = "20260423-building"
+ASSET_VERSION = "20260423-license"
 
 
 @dataclass(frozen=True)
@@ -710,6 +710,27 @@ def header_html(active_output: str | None = None) -> str:
     </header>"""
 
 
+def footer_html() -> str:
+    return """    <footer class="site-footer">
+      <div class="license-card">
+        <a class="cc-badge" rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hant">
+          <img src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" alt="Creative Commons BY-NC-SA 4.0 授權標章">
+        </a>
+        <div>
+          <h2>授權與使用聲明</h2>
+          <p>
+            除另有標示外，本網站文字教材與自製教學圖片採用
+            <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hant">Creative Commons 姓名標示-非商業性-相同方式分享 4.0 國際授權條款</a>。
+          </p>
+          <p>
+            程式碼、第三方素材、PDF、PPT、商標、外部引用圖片與原始教材檔案，依各自檔案或來源授權為準。教材與程式仍在驗證中，實際上課前請先由教師測試。
+          </p>
+        </div>
+      </div>
+    </footer>
+"""
+
+
 def render_case(case: dict[str, object], open_first: bool = False) -> str:
     sections_html = []
     for section in case["sections"]:  # type: ignore[index]
@@ -1013,6 +1034,7 @@ def render_topic_page(topic: Topic) -> str:
         </div>
       </section>
     </main>
+{footer_html()}
   </div>
   <script src="script.js?v={ASSET_VERSION}"></script>
 </body>
@@ -1111,6 +1133,7 @@ def render_static_topic_page(topic: StaticTopic, body_html: str) -> str:
         </div>
       </section>
     </main>
+{footer_html()}
   </div>
   <script src="script.js?v={ASSET_VERSION}"></script>
 </body>
@@ -1684,6 +1707,7 @@ stop()"""
         </div>
       </section>
     </main>
+{footer_html()}
   </div>
   <script src="script.js?v={ASSET_VERSION}"></script>
 </body>
@@ -1866,6 +1890,7 @@ def render_index() -> str:
         </div>
       </section>
     </main>
+{footer_html()}
   </div>
   <script src="script.js?v={ASSET_VERSION}"></script>
 </body>
@@ -2001,6 +2026,7 @@ def render_downloads() -> str:
         </div>
       </section>
     </main>
+{footer_html()}
   </div>
   <script src="script.js?v={ASSET_VERSION}"></script>
 </body>

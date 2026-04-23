@@ -183,6 +183,60 @@ pre,
   background: rgba(29, 79, 122, 0.08);
 }
 
+.site-footer {
+  margin-top: 28px;
+}
+
+.license-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+  padding: 22px;
+  border: 1px solid rgba(29, 79, 122, 0.12);
+  border-radius: 26px;
+  background: rgba(255, 253, 249, 0.86);
+  box-shadow: 0 14px 34px rgba(31, 43, 58, 0.07);
+}
+
+.cc-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid rgba(21, 36, 51, 0.1);
+}
+
+.cc-badge img {
+  width: 88px;
+  height: 31px;
+}
+
+.license-card h2 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+.license-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.license-card p + p {
+  margin-top: 6px;
+}
+
+.license-card a:not(.cc-badge) {
+  color: var(--navy);
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
 .hero,
 .section {
   border: 1px solid rgba(255, 255, 255, 0.55);
@@ -1740,6 +1794,10 @@ pre code {
     width: calc(100% - 12px);
   }
 
+  .license-card {
+    grid-template-columns: 1fr;
+  }
+
   .site-nav {
     gap: 8px;
   }
@@ -1796,6 +1854,7 @@ pre code {
 
   .site-header,
   .site-notice,
+  .site-footer,
   .button,
   .action-row {
     display: none !important;
