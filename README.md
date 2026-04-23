@@ -4,78 +4,38 @@
 - [GitHub Pages 網站](https://kennethwylee.github.io/microcar/)
 - [GitHub Repository](https://github.com/KennethWYLee/microcar)
 
-這個網站將機器人課程教材整理成 5 個主題，讓學習者可以依序從基礎輸出入、感測器、馬達控制，一路走到無人車應用與專題任務。
+這個網站將機器人課程教材整理成可依序學習的主題式教學網站。課程從 Raspberry Pi Pico 小車的基本輸出入開始，逐步進入感測器、馬達控制、無人車任務、專題化整合、藍芽遙控，以及電路板作品應用。
 
-`1 hr Boot Camp` 也會保留在網站中，作為一小時快速體驗課入口；它不是正式 5 主題之一，但適合在第一次接觸小車時先使用。
+`1 hr Boot Camp` 保留為一小時快速體驗課入口，適合第一次上課時讓學生先用 Thonny 連接小車、貼上程式並完成前進、後退、左右轉與停止。它不是正式主題編號的一部分。
 
-## 目前 5 個主題
+## 目前 8 個主題
 
 1. `01 入門：LED、按鈕與狀態控制`
-說明：建立輸出、輸入、判斷與狀態概念。
-
 2. `02 感測與輸出：蜂鳴器、RGB 與超音波`
-說明：把感測資料轉成聲音、燈號與距離回饋。
-
 3. `03 小車移動：馬達、速度與控制模組`
-說明：從單顆馬達測試走到雙輪小車與速度控制。
-
 4. `04 無人車：差速、避障、循跡與伺服掃描`
-說明：把感測器與馬達整合成無人車策略。
-
 5. `05 專題化：任務設計、策略比較與成果評量`
-說明：整合前面技巧，並加入規則式、P、PD、PID 循跡演算法延伸 cases。
+6. `06 藍芽遙控小車：Flutter App 與 Pico BLE`
+7. `07 電路板教材：Python 控制與腳位導讀`
+8. `08 電路板應用：擺頭電扇`
 
-## 網站結構
+## 網站頁面
 
-- `index.html`
-  網站首頁與 5 主題地圖。
-- `topic-01-intro.html`
-  主題 01：LED、按鈕與狀態控制。
-- `topic-02-sensor-output.html`
-  主題 02：蜂鳴器、RGB 與超音波。
-- `topic-03-car-motion.html`
-  主題 03：馬達、速度與控制模組。
-- `topic-04-autonomous-car.html`
-  主題 04：差速、避障、循跡與伺服掃描。
-- `topic-05-project-cases.html`
-  主題 05：任務設計、策略比較與成果評量。
-- `downloads.html`
-  依主題整理的 Markdown 教材下載區。
-- `bootcamp.html`
-  1 小時 Boot Camp 快速體驗課，保留作為第一次操作小車的入口，不列入正式 5 主題。
-- `code-viewer.html`
-  程式檢視與複製支援頁。
+- `index.html`：首頁與 8 主題總覽。
+- `bootcamp.html`：1 小時 Boot Camp 快速體驗課。
+- `topic-01-intro.html` 到 `topic-05-project-cases.html`：五個小車核心主題。
+- `topic-06-bluetooth-car.html`：Flutter App 與 Pico BLE 藍芽遙控小車。
+- `topic-07-board-python.html`：依 `機器人程式設計實務-Python.pdf` 整理的電路板與腳位導讀。
+- `topic-08-fan-application.html`：依 `擺頭電扇-課程簡報.pptx` 整理的電路板應用作品。
+- `downloads.html`：依主題整理的教材、程式、PDF 與簡報下載區。
+- `code-viewer.html`：可顯示網站中保留的獨立 Python 範例。
 
-## 教材來源
+## 教材來源與下載
 
-網頁主題內容由下列 Markdown 教材轉成 HTML：
+01-05 主題由 Markdown cases 產生，原始檔放在 `downloads/case-md/`。06 主題提供 Flutter `main.dart` 與 Pico BLE 小車端程式，07 主題提供 Python PDF，08 主題提供擺頭電扇課程簡報。
 
-- `01_入門_cases.md`
-- `02_感測輸出_cases.md`
-- `03_小車移動_cases.md`
-- `04_無人車_cases.md`
-- `05_專題化_cases.md`
+## 建議使用方式
 
-網站中的 Markdown 下載檔放在：
+第一次上課先使用 `1 hr Boot Camp`，讓學生建立「電腦連到小車、程式貼上去、小車會動」的成功經驗。後續課程再依序進入 01-05 主題建立小車能力，最後用 06-08 主題延伸到藍芽遙控、電路板導讀與擺頭電扇作品應用。
 
-- `downloads/case-md/`
-
-## 教學使用方式
-
-建議依照主題順序上課：
-
-如果只有一小時體驗課，先使用 `bootcamp.html`。如果是完整課程，再依照以下順序：
-
-1. 先完成 LED、按鈕與狀態控制。
-2. 再加入蜂鳴器、RGB 與超音波感測器。
-3. 接著練習馬達方向、速度與小車移動。
-4. 再把小車推進到避障、循跡與伺服掃描。
-5. 最後進入專題任務與循跡演算法比較。
-
-每個 case 都保留固定結構：主題、分階段教學、完整程式碼、最終成果、應用題與解答。
-
-## 備註
-
-- 舊的 `循跡入門 / 循跡進階 / 循跡演算法` 獨立主題已從公開主線移除。
-- 循跡演算法中較有價值的規則式、P、PD、PID 內容已整合到 `05_專題化_cases.md`。
-- 網站設計進度請見 [WEB_DESIGN_PROGRESS.md](./WEB_DESIGN_PROGRESS.md)。
+更多網站設計進度請見 [WEB_DESIGN_PROGRESS.md](./WEB_DESIGN_PROGRESS.md)。

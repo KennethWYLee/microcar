@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>08 電路板應用：擺頭電扇 | Raspberry Pi Pico 小車主題教材</title>
+  <meta name="description" content="本主題使用擺頭電扇-課程簡報，整理風扇擺頭機構、齒輪與連桿、Pico X2 腳位、輸入輸出與 PWM 控制應用。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260423-cases">
+</head>
+<body class="topic-page">
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">MC</span>
+        <span class="brand-copy">
+          <strong>Raspberry Pi Pico 小車主題教材</strong>
+          <small>Topic-based Microcar Course</small>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="主題導覽">
+        <a href="bootcamp.html">Boot Camp</a>
+        <a href="topic-01-intro.html">01 入門</a>
+        <a href="topic-02-sensor-output.html">02 感測與輸出</a>
+        <a href="topic-03-car-motion.html">03 小車移動</a>
+        <a href="topic-04-autonomous-car.html">04 無人車</a>
+        <a href="topic-05-project-cases.html">05 專題化</a>
+        <a href="topic-06-bluetooth-car.html">06 藍芽遙控小車</a>
+        <a href="topic-07-board-python.html">07 電路板教材</a>
+        <a href="topic-08-fan-application.html" aria-current="page">08 電路板應用</a>
+        <a href="downloads.html">下載區</a>
+      </nav>
+      <a class="button ghost" href="https://github.com/KennethWYLee/microcar" target="_blank" rel="noreferrer">GitHub</a>
+    </header>
+
+    <main>
+      <section class="subpage-hero reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">主題 08</p>
+          <h1>08 電路板應用：擺頭電扇</h1>
+          <p class="hero-text">本主題使用擺頭電扇-課程簡報，整理風扇擺頭機構、齒輪與連桿、Pico X2 腳位、輸入輸出與 PWM 控制應用。</p>
+          <div class="chip-list compact">
+            <span>Fan</span>
+<span>Mechanism</span>
+<span>PWM</span>
+          </div>
+          <div class="action-row">
+            <a class="button primary" href="#learning-route">查看學習路徑</a>
+            <a class="button secondary" href="#classroom-flow">進入教學流程</a>
+            <a class="button ghost" href="downloads/topic-08-fan-application/fan-course-slides.pptx">下載擺頭電扇簡報</a>
+          </div>
+        </div>
+        <div class="subpage-aside">
+          <article class="aside-card">
+            <img class="teaching-visual" src="assets/fan-assembled.png" alt="08 電路板應用：擺頭電扇教材示意圖">
+            <p class="visual-note">把電路板控制放進真實作品，從機構、電路到智慧控制完整整合</p>
+          </article>
+          <article class="aside-card">
+            <span class="zone-badge teacher">Teaching Focus</span>
+            <h3>這一頁是整理後的教學導讀</h3>
+            <p>保留原教材檔案下載，同時把上課時需要先說明的概念、操作順序與關鍵程式整理成網頁版。</p>
+          </article>
+        </div>
+      </section>
+
+
+      <section id="learning-route" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Learning Route</p>
+          <h2>從小車走到真實作品：智慧型可擺動電風扇</h2>
+          <p>這個主題是電路板應用，不是單一元件練習。學生會看到機構、電路、感測器與程式如何合成一件作品。</p>
+        </div>
+        <div class="visual-story-grid">
+          <article class="content-card">
+            <img class="teaching-visual" src="assets/fan-assembled.png" alt="擺頭電扇成品">
+            <h3>作品目標</h3>
+            <p>做出可以擺頭、調速、接收控制訊號的智慧型電風扇。</p>
+          </article>
+          <article class="content-card">
+            <img class="teaching-visual" src="assets/fan-gear.png" alt="齒輪傳動機構">
+            <h3>機構原理</h3>
+            <p>用蝸桿齒輪改變方向並減速，再把旋轉運動傳到連桿。</p>
+          </article>
+          <article class="content-card">
+            <img class="teaching-visual" src="assets/fan-linkage.png" alt="連桿機構">
+            <h3>擺頭運動</h3>
+            <p>四連桿把旋轉型動力轉成左右搖擺，這是風扇擺頭的核心。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="classroom-flow" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Classroom Flow</p>
+          <h2>建議教學順序</h2>
+          <p>先讓學生看見作品與機構，再回到板子、腳位與程式，理解「控制」如何進入作品。</p>
+        </div>
+        <div class="resource-roadmap">
+          <article class="content-card resource-step">
+            <span class="zone-badge student">01</span>
+            <strong>觀察風扇如何擺頭</strong>
+            <p>先看成品與零件，討論為什麼馬達一直轉，風扇卻會左右擺。</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge student">02</span>
+            <strong>認識齒輪與連桿</strong>
+            <p>齒輪負責改變方向與減速，連桿負責把旋轉變成搖擺。</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge teacher">03</span>
+            <strong>對照 Pico X2 腳位</strong>
+            <p>說明馬達、舵機、蜂鳴器、感測器與 I2C/SPI/UART 等接口。</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge teacher">04</span>
+            <strong>加入智慧控制</strong>
+            <p>用按鈕、電位器、感測器或藍芽，把風扇變成可互動的裝置。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Pico X2 Board</p>
+          <h2>擺頭電扇簡報中的腳位重點</h2>
+          <p>以下整理自擺頭電扇課程簡報的 Pico X2 腳位頁，適合放在作品控制前講解。</p>
+        </div>
+        <div class="page-grid">
+          <article class="content-card">
+            <img class="teaching-visual diagram-visual" src="assets/fan-board.png" alt="智慧型控制電路板">
+            <h3>智慧型控制電路板</h3>
+            <p>簡報中特別標示電源、電機接口、感測器接口、OLED、I2C、蜂鳴器、藍芽模組與開放腳位。</p>
+          </article>
+          <article class="content-card">
+            <div class="table-wrap"><table class="topic-table"><thead><tr><th>接口</th><th>對應腳位</th><th>說明</th></tr></thead><tbody><tr><td>UART</td><td><code>GP0</code> / <code>GP1</code></td><td>第一組 UART TX/RX，可用於通訊</td></tr>
+<tr><td>GPIO / PWM</td><td><code>GP2</code> / <code>GP3</code> / <code>GP4</code></td><td>開放式數位輸入輸出，也可做 PWM</td></tr>
+<tr><td>ADC</td><td><code>GP26</code> / <code>GP27</code> / <code>GP28</code></td><td>類比輸入，適合電位器</td></tr>
+<tr><td>I2C</td><td><code>GP21</code> / <code>GP20</code></td><td>SCL / SDA 通訊介面</td></tr>
+<tr><td>SPI</td><td><code>GP18</code> / <code>GP19</code> / <code>GP16</code> / <code>GP17</code></td><td>SCLK / MOSI / MISO / CS</td></tr>
+<tr><td>M1 / M2</td><td><code>GP9</code> / <code>GP8</code> / <code>GP11</code> / <code>GP10</code></td><td>電機接口</td></tr>
+<tr><td>Servo</td><td><code>GP6</code> / <code>GP7</code></td><td>舵機或控制輸出</td></tr>
+<tr><td>Buzzer</td><td><code>GP22</code></td><td>蜂鳴器</td></tr>
+<tr><td>Sensor 1 / 2</td><td><code>GP12</code> / <code>GP13</code>、<code>GP14</code> / <code>GP15</code></td><td>可做超音波或紅外線感測器接口</td></tr></tbody></table></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Control Ideas</p>
+          <h2>可以放進作品的控制概念</h2>
+          <p>擺頭電扇簡報中的智慧控制包含按鈕、電機轉動、調速、感測開關、訊息顯示與藍芽遙控。</p>
+        </div>
+        <div class="page-grid">
+          <article class="content-card">
+            <img class="teaching-visual diagram-visual" src="assets/fan-block-code.png" alt="擺頭電扇積木程式示意">
+            <h3>從積木邏輯轉成 Python 思維</h3>
+            <p>先用積木看流程，再回到 Python 的變數、判斷與 PWM 輸出，學生會比較容易理解。</p>
+          </article>
+          <article class="case-code-card"><div class="code-toolbar"><span>PWM 調速概念片段</span><button class="button ghost copy-md-code" type="button">複製程式碼</button></div><p>這是概念範例，實際接線腳位請依課程簡報與現場電路調整。</p><pre class="code-block markdown-code"><code>from machine import Pin, PWM
+import time
+
+# 概念範例：用 PWM 改變馬達輸出強度
+# 實際腳位請依擺頭電扇簡報與電路接線調整。
+fan_motor = PWM(Pin(9))
+fan_motor.freq(1000)
+
+speeds = [0, 22000, 42000, 65535]
+
+for duty in speeds:
+    fan_motor.duty_u16(duty)
+    time.sleep(2)
+
+fan_motor.duty_u16(0)</code></pre></article>
+        </div>
+      </section>
+
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Continue</p>
+          <h2>繼續下一個主題</h2>
+        </div>
+        <div class="page-grid">
+          <article class="content-card">
+            <span class="zone-badge student">上一個</span>
+            <h3>07 電路板教材：Python 控制與腳位導讀</h3>
+            <p>本主題依照機器人程式設計實務-Python.pdf 與相容性驗證報告，整理 Raspberry Pi Pico 主板、腳位、輸入輸出與馬達控制的授課導讀。</p>
+            <a class="button ghost" href="topic-07-board-python.html">打開上一個主題</a>
+          </article>
+          <article class="content-card">
+            <span class="zone-badge teacher">下一個</span>
+            <h3>01 入門：LED、按鈕與狀態控制</h3>
+            <p>本主題讓學習者先理解輸出、輸入、判斷與狀態，適合作為 Raspberry Pi Pico 小車課程的起點。</p>
+            <a class="button primary" href="topic-01-intro.html">打開下一個主題</a>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="script.js?v=20260423-cases"></script>
+</body>
+</html>
