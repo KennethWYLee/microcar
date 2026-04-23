@@ -1,4 +1,4 @@
-document.documentElement.classList.add("js");
+﻿document.documentElement.classList.add("js");
 
 const revealNodes = document.querySelectorAll(".reveal");
 
@@ -230,7 +230,7 @@ stop()
     title: "感測器主題暖身程式",
     summary: "這份暖身程式先讓學生看見 RGB LED 的變化，再進入距離感測與條件判斷。",
     stage: "主題 2：感測器操控暖身",
-    backHref: "sensor-control.html",
+    backHref: "topic-02-sensor-output.html",
     steps: [
       "先在 Thonny 開新檔。",
       "把程式貼上後按 Run。",
@@ -283,7 +283,7 @@ sensor.rgb_close()
     title: "距離感測主程式",
     summary: "這份主程式會讀取距離數值，並透過 if / elif / else 切換 RGB LED 顏色。",
     stage: "主題 2：感測器操控",
-    backHref: "sensor-control.html",
+    backHref: "topic-02-sensor-output.html",
     steps: [
       "先看如何建立感測器物件。",
       "再看 sensor.ping() 如何讀取距離。",
@@ -340,8 +340,8 @@ sensor.rgb_close()
     path: "downloads/line-sensor-read.py",
     title: "循跡感測器讀值程式",
     summary: "這份暖身程式先把左右循跡感測器的值印到 Shell，幫助學生看懂黑線與白底的差異。",
-    stage: "主題 3：循跡入門暖身",
-    backHref: "line-following-intro.html",
+    stage: "主題 4：無人車循跡暖身",
+    backHref: "topic-04-autonomous-car.html",
     steps: [
       "先在 Thonny 開新檔。",
       "把程式貼上後按 Run。",
@@ -388,10 +388,10 @@ while True:
   },
   "line-following-intro": {
     path: "downloads/line-following-intro.py",
-    title: "循跡入門主程式",
+    title: "無人車循跡基礎程式",
     summary: "這份主程式把左右循跡感測值直接轉成基本轉向規則，是進入進階循跡前的入門版本。",
-    stage: "主題 3：循跡入門",
-    backHref: "line-following-intro.html",
+    stage: "主題 4：無人車",
+    backHref: "topic-04-autonomous-car.html",
     steps: [
       "先讀取左右循跡感測器的值。",
       "再用四種規則決定前進、左修正、右修正或停止。",
@@ -500,8 +500,8 @@ while True:
     path: "downloads/line-error-to-speed.py",
     title: "速度差暖身程式",
     summary: "這份暖身程式先把左右循跡感測值轉成 error、correction 與左右速度，幫助學生建立速度差控制的直覺。",
-    stage: "主題 4：循跡進階暖身",
-    backHref: "line-following-advanced.html",
+    stage: "主題 5：專題化循跡調參",
+    backHref: "topic-05-project-cases.html",
     steps: [
       "先讀取左右循跡感測值。",
       "再把感測值轉成 error。",
@@ -596,10 +596,10 @@ while True:
   },
   "line-following-advanced": {
     path: "downloads/line-following-advanced.py",
-    title: "循跡進階主程式",
+    title: "專題化 PD 循跡程式",
     summary: "這份主程式把固定規則升級成速度差控制，並引入 last_error 與 derivative，讓循跡反應更平滑。",
-    stage: "主題 4：循跡進階",
-    backHref: "line-following-advanced.html",
+    stage: "主題 5：專題化",
+    backHref: "topic-05-project-cases.html",
     steps: [
       "先確認左右感測器的黑白讀值。",
       "把感測值轉成 error 與 derivative。",
@@ -735,8 +735,8 @@ codePages["line-algorithm-rule"] = {
   ...codePages["line-following-intro"],
   title: "規則式循跡演算法",
   summary: "這是最直觀的循跡寫法。看到黑線就照固定規則前進、左修正、右修正或停止。",
-  stage: "主題 5：循跡演算法",
-  backHref: "line-following-algorithms.html",
+  stage: "主題 5：專題化",
+  backHref: "topic-05-project-cases.html",
   steps: [
     "先看左右循跡感測值。",
     "再用固定規則決定車子現在該做什麼。",
@@ -748,8 +748,8 @@ codePages["line-algorithm-p"] = {
   path: "downloads/line-following-p.py",
   title: "P 循跡演算法",
   summary: "這份程式把 error 直接轉成 correction，讓左右輪用速度差修正方向。",
-  stage: "主題 5：循跡演算法",
-  backHref: "line-following-algorithms.html",
+  stage: "主題 5：專題化",
+  backHref: "topic-05-project-cases.html",
   steps: [
     "先把左右感測值換成 error。",
     "再用 correction = KP * error 算出修正量。",
@@ -881,8 +881,8 @@ codePages["line-algorithm-pd"] = {
   ...codePages["line-following-advanced"],
   title: "PD 循跡演算法",
   summary: "這份版本在比例控制之外再加入微分項，讓循跡反應更平順、也更不容易左右擺動。",
-  stage: "主題 5：循跡演算法",
-  backHref: "line-following-algorithms.html",
+  stage: "主題 5：專題化",
+  backHref: "topic-05-project-cases.html",
   steps: [
     "先把感測值轉成 error。",
     "再算出 derivative，看誤差現在變化得多快。",
@@ -894,8 +894,8 @@ codePages["line-algorithm-pid"] = {
   path: "downloads/line-following-pid.py",
   title: "PID 循跡演算法",
   summary: "這份版本加入積分項與微分項，是目前網站裡最完整的循跡控制教學程式。",
-  stage: "主題 5：循跡演算法",
-  backHref: "line-following-algorithms.html",
+  stage: "主題 5：專題化",
+  backHref: "topic-05-project-cases.html",
   steps: [
     "先看 error 與 derivative。",
     "再把過去偏差累積成 sum_error。",
@@ -1200,3 +1200,9 @@ attachInlineCodeBlock("bootcamp-full-code", "bootcamp-copy-code", "keyboard-car-
 attachInlineCodeBlock("sensor-full-code", "sensor-copy-code", "distance-sensor-rgb", true);
 attachInlineCodeBlock("line-following-full-code", "line-following-copy-code", "line-following-intro", true);
 attachInlineCodeBlock("line-advanced-full-code", "line-advanced-copy-code", "line-following-advanced", true);
+
+document.querySelectorAll(".case-code-card").forEach(card => {
+  const button = card.querySelector(".copy-md-code");
+  const code = card.querySelector("code");
+  attachCopyHandler(button, () => code?.textContent ?? "");
+});

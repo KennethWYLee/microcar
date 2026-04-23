@@ -1,118 +1,57 @@
 # 網頁設計進度紀錄
-最後更新：2026-04-11
+
+最後更新：2026-04-23
 
 ## 目前定位
 
-網站已從「依身分區分」改成「依主題區分」。
+網站已調整為「5 個正式教材主題」：
 
-目前公開主線為：
-1. `1 hr Boot Camp`
-2. `感測器的操控`
-3. `循跡入門`
-4. `循跡進階`
-5. `循跡演算法`
+1. `入門：LED、按鈕與狀態控制`
+2. `感測與輸出：蜂鳴器、RGB 與超音波`
+3. `小車移動：馬達、速度與控制模組`
+4. `無人車：差速、避障、循跡與伺服掃描`
+5. `專題化：任務設計、策略比較與成果評量`
 
-後續主題規劃：
-額外模組：`電路板入門`
+`1 hr Boot Camp` 仍保留為快速體驗課支援頁，但不再列為正式主題。
 
 ## 這一輪完成內容
 
-### 1. 網站主結構改成純主題導覽
-- 首頁導覽改為：
-  - `Boot Camp`
-  - `感測器操控`
+- 移除公開主線中的舊三個循跡主題：
   - `循跡入門`
-  - `下載區`
-- 首頁移除教師支援與學生練習的公開主線定位。
-- README 與下載區同步改為依主題分類。
+  - `循跡進階`
+  - `循跡演算法`
+- 新增 5 個由 Markdown 產生的正式主題頁：
+  - `topic-01-intro.html`
+  - `topic-02-sensor-output.html`
+  - `topic-03-car-motion.html`
+  - `topic-04-autonomous-car.html`
+  - `topic-05-project-cases.html`
+- 將 `05_專題化_cases.md` 擴充為 14 cases。
+- 新增的 4 個 case 來自原循跡演算法內容整理：
+  - Case 11：規則式循跡演算法比較
+  - Case 12：P 比例循跡控制
+  - Case 13：PD 循跡控制與擺動修正
+  - Case 14：PID 循跡調參挑戰
+- 首頁與下載區改成 5 主題架構。
+- Markdown 原始教材同步複製到 `downloads/case-md/`。
+- 新增 `tools/build_case_topic_pages.py`，之後可由 Markdown 重建主題頁。
 
-### 2. 主題 1：1 hr Boot Camp
-- `bootcamp.html` 保留為目前最重要的第一主題頁。
-- 主線內容為：
-  - `12 個步驟`
-  - `完整程式`
-  - `Code Walkthrough`
-- 學生不必先下載 `.py`，可直接從網站複製程式到 Thonny。
-- 12 個步驟已整理成由上到下的單一路徑，搭配對應 GIF。
+## 視覺與互動設計
 
-### 3. 主題 2：感測器的操控
-- `sensor-control.html` 已作為第二主題頁上線。
-- 主題內容包含：
-  - 感測器主題路線
-  - RGB 暖身程式
-  - 距離感測主程式
-  - 主程式重點解讀
+- 5 個主題頁沿用現有網站風格：hero、卡片、case map、accordion case list、程式碼區塊。
+- 每個 case 都可展開閱讀。
+- Markdown 程式碼區塊加入「複製程式」按鈕。
+- 下載區同時提供主題頁入口與 Markdown 下載。
 
-### 4. 主題 3：循跡入門
-- 新增 `line-following-intro.html` 作為第三主題頁。
-- 主題內容包含：
-  - 感測器讀值暖身
-  - 循跡入門主程式
-  - 真實循跡影片
-  - 循跡規則重點說明
-- 新增：
-  - `downloads/line-sensor-read.py`
-  - `downloads/line-following-intro.py`
-- `script.js` 已接上第三主題的程式頁與頁內複製功能。
+## 驗證重點
 
-### 5. 程式頁與下載區整理
-- `code-viewer.html` 改為中性程式頁，不再使用身分導向文案。
-- `downloads.html` 目前分成：
-  - `主題 1：Boot Camp`
-  - `主題 2：感測器操控`
-  - `主題 3：循跡入門`
-  - `主題 4：循跡進階`
-  - `延伸教材`
-- 目前網站可直接展示與複製的程式包含：
-  - `keyboard-car-control.py`
-  - `basic-motor-functions.py`
-  - `sensor-rgb-warmup.py`
-  - `distance-sensor-rgb.py`
-  - `line-sensor-read.py`
-  - `line-following-intro.py`
-  - `line-error-to-speed.py`
-  - `line-following-advanced.py`
-
-### 6. 文件同步
-- `README.md` 已改為主題式專案介紹。
-- 本進度檔同步更新為主題式網站架構。
-
-### 7. 主題 4：循跡進階
-- 新增 `line-following-advanced.html` 作為第四主題頁。
-- 主題內容包含：
-  - 速度差控制概念
-  - 橋接程式
-  - 循跡進階主程式
-  - PD / PID 與閉迴路控制的專業補充
-  - 真實循跡影片
-- 新增：
-  - `downloads/line-error-to-speed.py`
-  - `downloads/line-following-advanced.py`
-- `script.js` 已接上第四主題的程式頁與頁內複製功能。
-
-### 8. 主題 5：循跡演算法
-- 新增 `line-following-algorithms.html` 作為第五主題頁。
-- 主題內容包含：
-  - 規則式、P、PD、PID 的比較
-  - 各演算法適用情境
-  - 可直接打開並複製的程式頁
-  - 官方控制理論補充連結
-- 新增：
-  - `downloads/line-following-p.py`
-  - `downloads/line-following-pid.py`
-- `script.js` 已接上主題 5 的演算法程式頁。
-
-### 9. 循跡三主題的差異化
-- 首頁新增循跡主線比較區塊。
-- `循跡入門`、`循跡進階`、`循跡演算法` 三頁都補上「這一題和其他兩題差在哪裡」。
-- 導覽文字由 `演算法` 統一改成 `循跡演算法`。
-
-## 目前保留但降級的內容
-
-- 舊版身分分流頁面目前保留為歷史參考，不再作為公開主線導覽。
+- 5 份 Markdown case 順序已驗證。
+- `05_專題化_cases.md` 目前為 14 cases，code fence 成對。
+- 舊的三個循跡 HTML 已移除。
+- 首頁、下載區與 5 個新主題頁已改成新架構。
 
 ## 下一步建議
 
-1. 開始製作 `電路板入門` 主題頁。
-2. 補更多真實影片與調參示意圖，讓主題 4、主題 5 更直觀。
-3. 規劃一頁專門比較不同車體與感測器配置對演算法的影響。
+1. 針對 5 個主題頁補更精準的真實照片或示意圖。
+2. 將每個 case 的程式碼抽成可單獨下載的 `.py` 檔。
+3. 針對第 5 主題加入調參紀錄表與課堂評量表。

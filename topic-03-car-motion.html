@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小車移動：馬達、速度與控制模組 | Raspberry Pi Pico 小車主題教材</title>
+  <meta name="description" content="本主題聚焦馬達方向、PWM 速度、左右輪差速與模組化，建立小車可以穩定移動的基礎。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260423-cases">
+</head>
+<body class="topic-page">
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">MC</span>
+        <span class="brand-copy">
+          <strong>Raspberry Pi Pico 小車主題教材</strong>
+          <small>Topic-based Microcar Course</small>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="主題導覽">
+        <a href="topic-01-intro.html">入門</a>
+        <a href="topic-02-sensor-output.html">感測與輸出</a>
+        <a href="topic-03-car-motion.html" aria-current="page">小車移動</a>
+        <a href="topic-04-autonomous-car.html">無人車</a>
+        <a href="topic-05-project-cases.html">專題化</a>
+        <a href="downloads.html">下載區</a>
+      </nav>
+      <a class="button ghost" href="https://github.com/KennethWYLee/microcar" target="_blank" rel="noreferrer">GitHub</a>
+    </header>
+
+    <main>
+      <section class="subpage-hero reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">主題 3</p>
+          <h1>小車移動：馬達、速度與控制模組</h1>
+          <p class="hero-text">本主題聚焦馬達方向、PWM 速度、左右輪差速與模組化，建立小車可以穩定移動的基礎。</p>
+          <div class="chip-list compact">
+            <span>Motor</span>
+<span>PWM</span>
+<span>Drive</span>
+          </div>
+          <div class="action-row">
+            <a class="button primary" href="#case-map">查看 Case 地圖</a>
+            <a class="button secondary" href="#case-list">開始閱讀 Cases</a>
+            <a class="button ghost" href="downloads/case-md/03_小車移動_cases.md">下載 Markdown</a>
+          </div>
+        </div>
+        <div class="subpage-aside">
+          <article class="aside-card">
+            <img class="teaching-visual" src="assets/real-bootcamp-car.jpg" alt="小車移動：馬達、速度與控制模組教材示意圖">
+            <p class="visual-note">讓小車從單顆馬達走到雙輪控制</p>
+          </article>
+          <article class="aside-card">
+            <span class="zone-badge teacher">Topic Overview</span>
+            <h3>本主題包含 10 個 cases</h3>
+            <p>每個 case 都依照「主題、分階段教學、完整程式碼、最終成果、應用題與解答」整理，適合逐步教學與自學。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Learning Context</p>
+          <h2>這個主題在整門課的位置</h2>
+          <p>讓小車從單顆馬達走到雙輪控制</p>
+        </div>
+        <div class="content-card markdown-intro">
+<p>本篇延伸原教材第 45-58 頁，重點是讓學生從一顆馬達的正反轉，逐步走到雙輪小車、PWM 速度控制、校正與模組化。</p>
+<p>參考資料：</p>
+<ul class="detail-list"><li>MicroPython <code>machine.Pin</code>：<a class="text-link" href="https://docs.micropython.org/en/latest/library/machine.Pin.html" target="_blank" rel="noreferrer">https://docs.micropython.org/en/latest/library/machine.Pin.html</a></li><li>MicroPython <code>machine.PWM</code>：<a class="text-link" href="https://docs.micropython.org/en/latest/library/machine.PWM.html" target="_blank" rel="noreferrer">https://docs.micropython.org/en/latest/library/machine.PWM.html</a></li><li>MicroPython RP2 quick reference：<a class="text-link" href="https://docs.micropython.org/en/latest/rp2/quickref.html" target="_blank" rel="noreferrer">https://docs.micropython.org/en/latest/rp2/quickref.html</a></li><li>Raspberry Pi Pico hardware documentation：<a class="text-link" href="https://www.raspberrypi.com/documentation/pico-sdk/hardware.html" target="_blank" rel="noreferrer">https://www.raspberrypi.com/documentation/pico-sdk/hardware.html</a></li><li>Raspberry Pi Pico MicroPython examples：<a class="text-link" href="https://github.com/raspberrypi/pico-micropython-examples" target="_blank" rel="noreferrer">https://github.com/raspberrypi/pico-micropython-examples</a></li></ul>
+        </div>
+      </section>
+
+      <section id="case-map" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Case Map</p>
+          <h2>先用地圖看完整學習順序</h2>
+          <p>可以依序完成，也可以直接點選需要的 case。</p>
+        </div>
+        <div class="case-index-grid">
+          <a class="case-index-card" href="#case-1">
+            <span>Case 1</span>
+            <strong>單顆馬達方向測試</strong>
+          </a>
+          <a class="case-index-card" href="#case-2">
+            <span>Case 2</span>
+            <strong>雙馬達基本移動</strong>
+          </a>
+          <a class="case-index-card" href="#case-3">
+            <span>Case 3</span>
+            <strong>PWM 馬達速度控制</strong>
+          </a>
+          <a class="case-index-card" href="#case-4">
+            <span>Case 4</span>
+            <strong>雙輪速度差轉向</strong>
+          </a>
+          <a class="case-index-card" href="#case-5">
+            <span>Case 5</span>
+            <strong>使用 `mango.motor.Motor` 控制馬達</strong>
+          </a>
+          <a class="case-index-card" href="#case-6">
+            <span>Case 6</span>
+            <strong>小車控制模組化</strong>
+          </a>
+          <a class="case-index-card" href="#case-7">
+            <span>Case 7</span>
+            <strong>雙馬達方向校正工具</strong>
+          </a>
+          <a class="case-index-card" href="#case-8">
+            <span>Case 8</span>
+            <strong>軟啟動與軟停止</strong>
+          </a>
+          <a class="case-index-card" href="#case-9">
+            <span>Case 9</span>
+            <strong>動作腳本播放器</strong>
+          </a>
+          <a class="case-index-card" href="#case-10">
+            <span>Case 10</span>
+            <strong>Shell 文字指令遙控車</strong>
+          </a>
+        </div>
+      </section>
+
+      <section id="case-list" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Cases</p>
+          <h2>逐步教學內容</h2>
+          <p>點開每個 case 後，可以看到完整教學段落與可複製的程式碼。</p>
+        </div>
+        <div class="case-list">
+        <details class="case-detail" open id="case-1">
+          <summary>
+            <span class="download-type">Case 1</span>
+            <strong>單顆馬達方向測試</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>用兩個 GPIO 腳位控制一顆直流馬達，觀察停止、正轉、反轉、煞車。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：理解馬達需要兩個控制點</strong></h4>
+<p>一顆馬達的方向由 a、b 兩個腳位的高低電位決定。</p>
+<h4><strong>階段 B：依序測試四種組合</strong></h4>
+<p><code>00</code>、<code>01</code>、<code>10</code>、<code>11</code> 都要實測。</p>
+<h4><strong>階段 C：記錄實際方向</strong></h4>
+<p>不同接線可能讓正反轉相反。</p>
+<h4><strong>階段 D：建立校正觀念</strong></h4>
+<p>不要背方向，要依車子實際結果修正程式。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin
+import time
+
+a = Pin(12, Pin.OUT)
+b = Pin(13, Pin.OUT)
+
+def set_motor(av, bv, label, seconds=2):
+    print(label, &quot;a =&quot;, av, &quot;b =&quot;, bv)
+    a.value(av)
+    b.value(bv)
+    time.sleep(seconds)
+
+set_motor(0, 0, &quot;stop&quot;)
+set_motor(0, 1, &quot;direction 1&quot;)
+set_motor(0, 0, &quot;stop&quot;, 1)
+set_motor(1, 0, &quot;direction 2&quot;)
+set_motor(1, 1, &quot;brake&quot;, 1)
+set_motor(0, 0, &quot;stop&quot;)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>學生可以觀察一顆馬達在四種輸出組合下的實際行為，並填寫自己的馬達方向表。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 寫一個 <code>motor_forward()</code> 和 <code>motor_stop()</code> 函式，讓馬達前進 3 秒後停止。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin
+import time
+
+a = Pin(12, Pin.OUT)
+b = Pin(13, Pin.OUT)
+
+def motor_forward():
+    a.value(1)
+    b.value(0)
+
+def motor_stop():
+    a.value(0)
+    b.value(0)
+
+motor_forward()
+time.sleep(3)
+motor_stop()</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-2">
+          <summary>
+            <span class="download-type">Case 2</span>
+            <strong>雙馬達基本移動</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>控制 M1、M2 兩顆馬達，做出小車前進、後退、左轉、右轉與停止。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：宣告四個馬達腳位</strong></h4>
+<p>M1 使用 <code>12, 13</code>，M2 使用 <code>11, 10</code>。</p>
+<h4><strong>階段 B：先測試前進</strong></h4>
+<p>若小車不是前進，要校正左右馬達方向。</p>
+<h4><strong>階段 C：封裝基本動作</strong></h4>
+<p>把每個動作寫成函式。</p>
+<h4><strong>階段 D：建立測試流程</strong></h4>
+<p>讓小車依序前進、後退、右轉、左轉、停止。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin
+import time
+
+m1a = Pin(12, Pin.OUT)
+m1b = Pin(13, Pin.OUT)
+m2a = Pin(11, Pin.OUT)
+m2b = Pin(10, Pin.OUT)
+
+def forward():
+    m1a.value(1)
+    m1b.value(0)
+    m2a.value(1)
+    m2b.value(0)
+
+def backward():
+    m1a.value(0)
+    m1b.value(1)
+    m2a.value(0)
+    m2b.value(1)
+
+def turn_left():
+    m1a.value(1)
+    m1b.value(0)
+    m2a.value(0)
+    m2b.value(0)
+
+def turn_right():
+    m1a.value(0)
+    m1b.value(0)
+    m2a.value(1)
+    m2b.value(0)
+
+def stop():
+    m1a.value(0)
+    m1b.value(0)
+    m2a.value(0)
+    m2b.value(0)
+
+forward()
+time.sleep(2)
+backward()
+time.sleep(2)
+turn_left()
+time.sleep(1)
+turn_right()
+time.sleep(1)
+stop()</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>小車依序前進、後退、左轉、右轉，最後停止。若方向不符合預期，學生要回到馬達方向表修正。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 讓小車走出一個正方形，每次前進 2 秒、右轉 0.8 秒，共重複 4 次。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin
+import time
+
+m1a = Pin(12, Pin.OUT)
+m1b = Pin(13, Pin.OUT)
+m2a = Pin(11, Pin.OUT)
+m2b = Pin(10, Pin.OUT)
+
+def forward():
+    m1a.value(1)
+    m1b.value(0)
+    m2a.value(1)
+    m2b.value(0)
+
+def turn_right():
+    m1a.value(0)
+    m1b.value(0)
+    m2a.value(1)
+    m2b.value(0)
+
+def stop():
+    m1a.value(0)
+    m1b.value(0)
+    m2a.value(0)
+    m2b.value(0)
+
+for i in range(4):
+    forward()
+    time.sleep(2)
+    turn_right()
+    time.sleep(0.8)
+
+stop()</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-3">
+          <summary>
+            <span class="download-type">Case 3</span>
+            <strong>PWM 馬達速度控制</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>把馬達從「全速/停止」提升到「可調速度」，用百分比控制 PWM duty。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：理解 duty 範圍</strong></h4>
+<p>MicroPython 的 <code>duty_u16</code> 使用 <code>0-65535</code>。</p>
+<h4><strong>階段 B：建立速度轉換函式</strong></h4>
+<p>把 <code>0-100</code> 轉成 <code>0-65535</code>。</p>
+<h4><strong>階段 C：測試不同速度</strong></h4>
+<p>讓馬達依序用 20%、50%、80% 轉動。</p>
+<h4><strong>階段 D：觀察低速限制</strong></h4>
+<p>馬達太低速可能不動，這是實體摩擦與電壓問題。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin, PWM
+import time
+
+FULL_DUTY = 65535
+
+m1a = PWM(Pin(12, Pin.OUT), freq=1000)
+m1b = PWM(Pin(13, Pin.OUT), freq=1000)
+
+def speed_to_duty(speed):
+    if speed &lt; 0:
+        speed = 0
+    if speed &gt; 100:
+        speed = 100
+    return int(FULL_DUTY * speed / 100)
+
+def motor_speed(speed):
+    duty = speed_to_duty(speed)
+    m1a.duty_u16(duty)
+    m1b.duty_u16(0)
+
+def motor_stop():
+    m1a.duty_u16(0)
+    m1b.duty_u16(0)
+
+for speed in [20, 50, 80]:
+    print(&quot;speed =&quot;, speed)
+    motor_speed(speed)
+    time.sleep(2)
+
+motor_stop()</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>同一顆馬達會用不同速度轉動。學生能看到 duty 越大，馬達速度越快。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 讓馬達從 10% 慢慢加速到 100%，每次增加 10%。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin, PWM
+import time
+
+m1a = PWM(Pin(12, Pin.OUT), freq=1000)
+m1b = PWM(Pin(13, Pin.OUT), freq=1000)
+
+def speed_to_duty(speed):
+    return int(65535 * speed / 100)
+
+for speed in range(10, 101, 10):
+    print(&quot;speed =&quot;, speed)
+    m1a.duty_u16(speed_to_duty(speed))
+    m1b.duty_u16(0)
+    time.sleep(0.5)
+
+m1a.duty_u16(0)
+m1b.duty_u16(0)</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-4">
+          <summary>
+            <span class="download-type">Case 4</span>
+            <strong>雙輪速度差轉向</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>用左右輪不同速度控制小車弧線轉向，理解差速控制。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：左右輪都用 PWM</strong></h4>
+<p>每顆馬達都能用百分比速度控制。</p>
+<h4><strong>階段 B：建立 <code>run(left, right)</code></strong></h4>
+<p>左右輪速度分開輸入。</p>
+<h4><strong>階段 C：測試直行與弧線轉向</strong></h4>
+<p>左右同速直行，左慢右快會向左轉。</p>
+<h4><strong>階段 D：觀察車體軌跡</strong></h4>
+<p>讓學生把速度差與轉彎半徑連結起來。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin, PWM
+import time
+
+m1a = PWM(Pin(12, Pin.OUT), freq=1000)  # right motor
+m1b = PWM(Pin(13, Pin.OUT), freq=1000)
+m2a = PWM(Pin(11, Pin.OUT), freq=1000)  # left motor
+m2b = PWM(Pin(10, Pin.OUT), freq=1000)
+
+def duty(speed):
+    if speed &lt; 0:
+        speed = 0
+    if speed &gt; 100:
+        speed = 100
+    return int(65535 * speed / 100)
+
+def run(left_speed, right_speed):
+    m1a.duty_u16(duty(right_speed))
+    m1b.duty_u16(0)
+    m2a.duty_u16(duty(left_speed))
+    m2b.duty_u16(0)
+
+def stop():
+    m1a.duty_u16(0)
+    m1b.duty_u16(0)
+    m2a.duty_u16(0)
+    m2b.duty_u16(0)
+
+run(30, 30)   # straight
+time.sleep(2)
+run(10, 35)   # arc left
+time.sleep(2)
+run(35, 10)   # arc right
+time.sleep(2)
+stop()</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>小車先直行，再向左畫弧線，接著向右畫弧線。學生會理解「方向不是只有左轉/右轉，而是左右輪速度差」。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 讓小車以 S 型前進：左弧 2 秒、右弧 2 秒，重複 3 次。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin, PWM
+import time
+
+m1a = PWM(Pin(12, Pin.OUT), freq=1000)
+m1b = PWM(Pin(13, Pin.OUT), freq=1000)
+m2a = PWM(Pin(11, Pin.OUT), freq=1000)
+m2b = PWM(Pin(10, Pin.OUT), freq=1000)
+
+def duty(speed):
+    return int(65535 * speed / 100)
+
+def run(left_speed, right_speed):
+    m1a.duty_u16(duty(right_speed))
+    m1b.duty_u16(0)
+    m2a.duty_u16(duty(left_speed))
+    m2b.duty_u16(0)
+
+def stop():
+    m1a.duty_u16(0)
+    m1b.duty_u16(0)
+    m2a.duty_u16(0)
+    m2b.duty_u16(0)
+
+for i in range(3):
+    run(10, 35)
+    time.sleep(2)
+    run(35, 10)
+    time.sleep(2)
+
+stop()</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-5">
+          <summary>
+            <span class="download-type">Case 5</span>
+            <strong>使用 `mango.motor.Motor` 控制馬達</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>使用本機 Mango 函式庫中的 <code>Motor</code> 類別，簡化 PWM 馬達控制。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：認識 <code>Motor.speed()</code></strong></h4>
+<p><code>speed(正值)</code> 正轉，<code>speed(負值)</code> 反轉，<code>speed(0)</code> 停止。</p>
+<h4><strong>階段 B：建立左右馬達物件</strong></h4>
+<p>右輪 M1：<code>12, 13</code>；左輪 M2：<code>11, 10</code>。</p>
+<h4><strong>階段 C：封裝小車動作</strong></h4>
+<p>用 <code>forward()</code>、<code>backward()</code>、<code>stop()</code> 控制。</p>
+<h4><strong>階段 D：觀察類別的好處</strong></h4>
+<p>主程式不再直接處理 duty。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import Motor
+import time
+
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+
+def forward(speed=20):
+    right_motor.speed(speed)
+    left_motor.speed(speed)
+
+def backward(speed=20):
+    right_motor.speed(-speed)
+    left_motor.speed(-speed)
+
+def stop():
+    right_motor.stop()
+    left_motor.stop()
+
+forward(20)
+time.sleep(2)
+backward(20)
+time.sleep(2)
+stop()</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>小車用 Mango 的 <code>Motor</code> 類別完成前進、後退與停止，程式比直接 PWM 控制更容易閱讀。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 加入 <code>spin_left(speed)</code>，讓左右輪反向旋轉，形成原地左旋。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import Motor
+import time
+
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+
+def spin_left(speed=20):
+    right_motor.speed(speed)
+    left_motor.speed(-speed)
+
+def stop():
+    right_motor.stop()
+    left_motor.stop()
+
+spin_left(20)
+time.sleep(2)
+stop()</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-6">
+          <summary>
+            <span class="download-type">Case 6</span>
+            <strong>小車控制模組化</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>把小車動作整理成 <code>bot.py</code> 模組，讓主程式只負責任務流程。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：建立 <code>bot.py</code></strong></h4>
+<p>把馬達物件與動作函式放進模組。</p>
+<h4><strong>階段 B：建立 <code>main.py</code></strong></h4>
+<p>主程式只呼叫 <code>bot.forward()</code>、<code>bot.stop()</code>。</p>
+<h4><strong>階段 C：測試模組</strong></h4>
+<p>確認 <code>import bot</code> 可用。</p>
+<h4><strong>階段 D：理解模組化</strong></h4>
+<p>未來避障車、循跡車都可以重用同一份 <code>bot.py</code>。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><p><code>bot.py</code></p>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import Motor
+
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+
+def forward(speed=20):
+    right_motor.speed(speed)
+    left_motor.speed(speed)
+
+def backward(speed=20):
+    right_motor.speed(-speed)
+    left_motor.speed(-speed)
+
+def turn(left_speed, right_speed):
+    left_motor.speed(left_speed)
+    right_motor.speed(right_speed)
+
+def spin_left(speed=20):
+    left_motor.speed(-speed)
+    right_motor.speed(speed)
+
+def spin_right(speed=20):
+    left_motor.speed(speed)
+    right_motor.speed(-speed)
+
+def stop():
+    left_motor.stop()
+    right_motor.stop()</code></pre></div>
+<p><code>main.py</code></p>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 2</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>import time
+import bot
+
+bot.forward(20)
+time.sleep(2)
+
+bot.turn(10, 35)
+time.sleep(2)
+
+bot.turn(35, 10)
+time.sleep(2)
+
+bot.spin_left(20)
+time.sleep(1)
+
+bot.stop()</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>小車會依照主程式流程完成直行、左右弧線、原地旋轉與停止。學生會看到「底層控制」和「任務流程」被分開。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 在 <code>bot.py</code> 新增 <code>square(speed)</code> 函式，讓小車走出近似正方形。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import Motor
+import time
+
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+
+def forward(speed=20):
+    right_motor.speed(speed)
+    left_motor.speed(speed)
+
+def spin_right(speed=20):
+    left_motor.speed(speed)
+    right_motor.speed(-speed)
+
+def stop():
+    left_motor.stop()
+    right_motor.stop()
+
+def square(speed=20):
+    for i in range(4):
+        forward(speed)
+        time.sleep(2)
+        spin_right(speed)
+        time.sleep(0.7)
+    stop()
+
+square(20)</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-7">
+          <summary>
+            <span class="download-type">Case 7</span>
+            <strong>雙馬達方向校正工具</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>建立一支校正程式，快速測試左右馬達正負速度是否符合「正值前進、負值後退」的約定。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：定義校正係數</strong></h4>
+<p>用 <code>LEFT_SIGN</code> 與 <code>RIGHT_SIGN</code> 表示左右馬達方向。若某邊馬達接線方向相反，就把係數改成 <code>-1</code>。</p>
+<h4><strong>階段 B：只測一邊馬達</strong></h4>
+<p>先單獨讓左輪、右輪轉動，確認哪一邊的正轉方向不對。</p>
+<h4><strong>階段 C：測雙輪直行</strong></h4>
+<p>當左右輪正值都能讓小車往前，後續所有 case 才有穩定基礎。</p>
+<h4><strong>階段 D：把校正結果保留下來</strong></h4>
+<p>學生可以把校正後的 <code>drive()</code> 函式複製到之後的小車任務中。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import Motor
+import time
+
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+
+LEFT_SIGN = 1
+RIGHT_SIGN = 1
+
+def drive(left, right):
+    left_motor.speed(left * LEFT_SIGN)
+    right_motor.speed(right * RIGHT_SIGN)
+
+def stop():
+    left_motor.stop()
+    right_motor.stop()
+
+tests = [
+    (&quot;left wheel forward&quot;, 20, 0, 1.5),
+    (&quot;right wheel forward&quot;, 0, 20, 1.5),
+    (&quot;both wheels forward&quot;, 20, 20, 2),
+    (&quot;both wheels backward&quot;, -20, -20, 2),
+]
+
+for name, left, right, seconds in tests:
+    print(name, &quot;left =&quot;, left, &quot;right =&quot;, right)
+    drive(left, right)
+    time.sleep(seconds)
+    stop()
+    time.sleep(1)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>學生能知道左右馬達是否接反，並得到一個符合自己車體的 <code>drive(left, right)</code> 函式。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 如果右輪在正速度時往後轉，請修改程式讓 <code>drive(20, 20)</code> 可以前進。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import Motor
+import time
+
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+
+LEFT_SIGN = 1
+RIGHT_SIGN = -1
+
+def drive(left, right):
+    left_motor.speed(left * LEFT_SIGN)
+    right_motor.speed(right * RIGHT_SIGN)
+
+def stop():
+    left_motor.stop()
+    right_motor.stop()
+
+drive(20, 20)
+time.sleep(2)
+stop()</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-8">
+          <summary>
+            <span class="download-type">Case 8</span>
+            <strong>軟啟動與軟停止</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>讓小車速度逐步增加與逐步降低，避免一啟動就暴衝，也讓學生理解速度曲線的概念。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：建立目前速度</strong></h4>
+<p>用 <code>current_left</code> 與 <code>current_right</code> 記錄目前馬達速度。</p>
+<h4><strong>階段 B：每次只改一小步</strong></h4>
+<p>目標速度不是一次到位，而是每隔一小段時間增加或減少 <code>step</code>。</p>
+<h4><strong>階段 C：封裝成 <code>ramp_to()</code></strong></h4>
+<p>未來不論要直行、後退或停止，都可以共用同一個函式。</p>
+<h4><strong>階段 D：比較立即啟動與軟啟動</strong></h4>
+<p>讓學生觀察車身晃動、輪胎打滑與行進距離是否變穩定。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import Motor
+import time
+
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+
+current_left = 0
+current_right = 0
+
+def drive(left, right):
+    left_motor.speed(left)
+    right_motor.speed(right)
+
+def approach(current, target, step):
+    if current &lt; target:
+        return min(current + step, target)
+    if current &gt; target:
+        return max(current - step, target)
+    return current
+
+def ramp_to(target_left, target_right, step=2, delay_ms=80):
+    global current_left, current_right
+
+    while current_left != target_left or current_right != target_right:
+        current_left = approach(current_left, target_left, step)
+        current_right = approach(current_right, target_right, step)
+        drive(current_left, current_right)
+        print(&quot;speed =&quot;, current_left, current_right)
+        time.sleep_ms(delay_ms)
+
+def stop():
+    ramp_to(0, 0)
+    left_motor.stop()
+    right_motor.stop()
+
+ramp_to(30, 30)
+time.sleep(2)
+ramp_to(10, 35)
+time.sleep(2)
+stop()</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>小車會慢慢加速到直行速度，再平滑變成弧線轉彎，最後逐步減速停止。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 加入按鈕急停：軟啟動過程中只要按下按鈕，就立刻停止。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin
+from mango import Motor
+import time
+
+BUTTON_ACTIVE = 1
+btn = Pin(3, Pin.IN)
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+
+current_left = 0
+current_right = 0
+
+def drive(left, right):
+    left_motor.speed(left)
+    right_motor.speed(right)
+
+def hard_stop():
+    left_motor.stop()
+    right_motor.stop()
+
+def approach(current, target, step):
+    if current &lt; target:
+        return min(current + step, target)
+    if current &gt; target:
+        return max(current - step, target)
+    return current
+
+def ramp_to(target_left, target_right, step=2, delay_ms=80):
+    global current_left, current_right
+
+    while current_left != target_left or current_right != target_right:
+        if btn.value() == BUTTON_ACTIVE:
+            current_left = 0
+            current_right = 0
+            hard_stop()
+            print(&quot;emergency stop&quot;)
+            return False
+
+        current_left = approach(current_left, target_left, step)
+        current_right = approach(current_right, target_right, step)
+        drive(current_left, current_right)
+        time.sleep_ms(delay_ms)
+
+    return True
+
+if ramp_to(35, 35):
+    time.sleep(3)
+
+ramp_to(0, 0)
+hard_stop()</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-9">
+          <summary>
+            <span class="download-type">Case 9</span>
+            <strong>動作腳本播放器</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>把小車動作寫成一份腳本清單，讓程式依序播放前進、轉彎、停止等動作。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：定義動作格式</strong></h4>
+<p>每個動作用 <code>(名稱, 左輪速度, 右輪速度, 秒數)</code> 表示。</p>
+<h4><strong>階段 B：建立 <code>play_script()</code></strong></h4>
+<p>函式逐筆讀取清單，執行馬達速度與等待時間。</p>
+<h4><strong>階段 C：把路徑變成資料</strong></h4>
+<p>學生只要修改清單，就能改變小車路線，不必一直改函式。</p>
+<h4><strong>階段 D：加入動作名稱輸出</strong></h4>
+<p>讓 Shell 成為除錯工具，知道小車目前正在執行哪一步。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import Motor
+import time
+
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+
+def drive(left, right):
+    left_motor.speed(left)
+    right_motor.speed(right)
+
+def stop():
+    left_motor.stop()
+    right_motor.stop()
+
+def play_script(script):
+    for name, left, right, seconds in script:
+        print(&quot;action =&quot;, name, &quot;left =&quot;, left, &quot;right =&quot;, right)
+        drive(left, right)
+        time.sleep(seconds)
+        stop()
+        time.sleep_ms(300)
+
+path = [
+    (&quot;forward 1&quot;, 22, 22, 1.5),
+    (&quot;turn right&quot;, 24, -24, 0.55),
+    (&quot;forward 2&quot;, 22, 22, 1.5),
+    (&quot;turn left&quot;, -24, 24, 0.55),
+    (&quot;finish&quot;, 0, 0, 0.5),
+]
+
+play_script(path)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>小車會依照清單完成一段固定路徑。學生可以像修改劇本一樣修改路線，也能把測試結果回寫成更準確的秒數。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 讓同一段路徑重複播放 3 次。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import Motor
+import time
+
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+
+def drive(left, right):
+    left_motor.speed(left)
+    right_motor.speed(right)
+
+def stop():
+    left_motor.stop()
+    right_motor.stop()
+
+def play_script(script, repeat=1):
+    for round_id in range(repeat):
+        print(&quot;round =&quot;, round_id + 1)
+        for name, left, right, seconds in script:
+            print(&quot;action =&quot;, name)
+            drive(left, right)
+            time.sleep(seconds)
+            stop()
+            time.sleep_ms(300)
+
+path = [
+    (&quot;forward&quot;, 22, 22, 1.2),
+    (&quot;spin right&quot;, 24, -24, 0.5),
+]
+
+play_script(path, repeat=3)
+stop()</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-10">
+          <summary>
+            <span class="download-type">Case 10</span>
+            <strong>Shell 文字指令遙控車</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>使用 Thonny Shell 輸入文字指令控制小車，建立簡易的人機介面。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：定義指令表</strong></h4>
+<p>用 <code>f</code>、<code>b</code>、<code>l</code>、<code>r</code>、<code>s</code> 代表前進、後退、左轉、右轉、停止。</p>
+<h4><strong>階段 B：用 <code>input()</code> 讀取命令</strong></h4>
+<p>小車每次等待一個指令，收到後才動作。</p>
+<h4><strong>階段 C：加入預設速度與時間</strong></h4>
+<p>每個動作只執行短時間，避免輸入錯誤時一直跑。</p>
+<h4><strong>階段 D：加入錯誤提示</strong></h4>
+<p>學生輸入未知指令時，程式不應該失控，而是顯示可用指令。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import Motor
+import time
+
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+
+SPEED = 22
+MOVE_TIME = 0.6
+
+def drive(left, right):
+    left_motor.speed(left)
+    right_motor.speed(right)
+
+def stop():
+    left_motor.stop()
+    right_motor.stop()
+
+def run_command(cmd):
+    if cmd == &quot;f&quot;:
+        drive(SPEED, SPEED)
+    elif cmd == &quot;b&quot;:
+        drive(-SPEED, -SPEED)
+    elif cmd == &quot;l&quot;:
+        drive(-SPEED, SPEED)
+    elif cmd == &quot;r&quot;:
+        drive(SPEED, -SPEED)
+    elif cmd == &quot;s&quot;:
+        stop()
+        return
+    else:
+        print(&quot;commands: f b l r s q&quot;)
+        return
+
+    time.sleep(MOVE_TIME)
+    stop()
+
+while True:
+    command = input(&quot;car&gt; &quot;).strip().lower()
+
+    if command == &quot;q&quot;:
+        stop()
+        print(&quot;bye&quot;)
+        break
+
+    run_command(command)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>學生可以在 Thonny Shell 輸入 <code>f</code>、<code>b</code>、<code>l</code>、<code>r</code>、<code>s</code> 控制小車，並理解「控制介面」與「馬達動作」可以分開設計。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 支援 <code>f 30</code> 這種指令，讓第二個數字代表速度。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import Motor
+import time
+
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+
+DEFAULT_SPEED = 22
+MOVE_TIME = 0.6
+
+def drive(left, right):
+    left_motor.speed(left)
+    right_motor.speed(right)
+
+def stop():
+    left_motor.stop()
+    right_motor.stop()
+
+def parse_command(text):
+    parts = text.strip().lower().split()
+    if len(parts) == 0:
+        return &quot;&quot;, DEFAULT_SPEED
+
+    cmd = parts[0]
+    speed = DEFAULT_SPEED
+
+    if len(parts) &gt;= 2:
+        speed = int(parts[1])
+        if speed &lt; 0:
+            speed = 0
+        if speed &gt; 60:
+            speed = 60
+
+    return cmd, speed
+
+def run_command(cmd, speed):
+    if cmd == &quot;f&quot;:
+        drive(speed, speed)
+    elif cmd == &quot;b&quot;:
+        drive(-speed, -speed)
+    elif cmd == &quot;l&quot;:
+        drive(-speed, speed)
+    elif cmd == &quot;r&quot;:
+        drive(speed, -speed)
+    elif cmd == &quot;s&quot;:
+        stop()
+        return
+    else:
+        print(&quot;commands: f 30, b 20, l 25, r 25, s, q&quot;)
+        return
+
+    time.sleep(MOVE_TIME)
+    stop()
+
+while True:
+    text = input(&quot;car&gt; &quot;)
+    cmd, speed = parse_command(text)
+
+    if cmd == &quot;q&quot;:
+        stop()
+        print(&quot;bye&quot;)
+        break
+
+    run_command(cmd, speed)</code></pre></div></article>
+          </div>
+        </details>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Continue</p>
+          <h2>繼續下一個主題</h2>
+        </div>
+        <div class="page-grid">
+          <article class="content-card">
+            <span class="zone-badge student">上一個</span>
+            <h3>感測與輸出：蜂鳴器、RGB 與超音波</h3>
+            <p>本主題從蜂鳴器與 RGB 輸出延伸到超音波距離感測，讓學生看見程式如何回應環境變化。</p>
+            <a class="button ghost" href="topic-02-sensor-output.html">打開上一個主題</a>
+          </article>
+          <article class="content-card">
+            <span class="zone-badge teacher">下一個</span>
+            <h3>無人車：差速、避障、循跡與伺服掃描</h3>
+            <p>本主題把差速控制、避障、循跡與伺服掃描整合成無人車應用，適合銜接較完整的小車任務。</p>
+            <a class="button primary" href="topic-04-autonomous-car.html">打開下一個主題</a>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="script.js?v=20260423-cases"></script>
+</body>
+</html>
