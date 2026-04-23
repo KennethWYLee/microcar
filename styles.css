@@ -781,6 +781,24 @@ button.button {
   border-radius: 0;
 }
 
+.case-code-card pre,
+.case-code-card .code-block,
+.case-code-card .markdown-code {
+  color: #101820 !important;
+  background: #ffffff !important;
+}
+
+.case-code-card code,
+.case-code-card pre code,
+pre.code-block code,
+pre.markdown-code code {
+  display: block;
+  padding: 0;
+  border-radius: 0;
+  color: #101820 !important;
+  background: transparent !important;
+}
+
 .table-wrap {
   overflow-x: auto;
   margin: 1rem 0;
