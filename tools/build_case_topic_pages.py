@@ -23,7 +23,7 @@ ROBOT_HANDOUT_DIR = ROBOT_DIR / "講義"
 ROBOT_WEB_DIR = ROBOT_DIR / "無人車網頁開發"
 DOWNLOAD_TOPIC_06_DIR = REPO / "downloads" / "topic-06-bluetooth-car"
 DOWNLOAD_TOPIC_08_DIR = REPO / "downloads" / "topic-08-fan-application"
-ASSET_VERSION = "20260423-filemap"
+ASSET_VERSION = "20260423-building"
 
 
 @dataclass(frozen=True)
@@ -689,8 +689,16 @@ def nav_html(active_output: str | None = None) -> str:
       </nav>"""
 
 
+def site_notice_html() -> str:
+    return """    <aside class="site-notice" aria-label="網站狀態提醒">
+      <span class="notice-label">網站建置中</span>
+      <span>本網站教材、所有程式碼與操作流程仍在持續驗證。實際上課前，請以教師現場測試與最新版本為準。</span>
+    </aside>
+"""
+
+
 def header_html(active_output: str | None = None) -> str:
-    return f"""    <header class="site-header">
+    return f"""{site_notice_html()}    <header class="site-header">
       <a class="brand" href="index.html">
         <span class="brand-mark">MC</span>
         <span class="brand-copy">
