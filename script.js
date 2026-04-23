@@ -1,4 +1,4 @@
-﻿document.documentElement.classList.add("js");
+document.documentElement.classList.add("js");
 
 const revealNodes = document.querySelectorAll(".reveal");
 
@@ -33,9 +33,9 @@ if (activeNavLink) {
 const codePages = {
   "keyboard-car-control": {
     path: "downloads/keyboard-car-control.py",
-    title: "00_BootCamp 鍵盤控制主程式",
-    summary: "這份程式是 00_BootCamp 的唯一主程式。學生把它貼到 Thonny 後，就可以用 W / A / S / D / X 控制小車。",
-    stage: "00_BootCamp",
+    title: "BootCamp 鍵盤控制主程式",
+    summary: "這份程式是 BootCamp 的唯一主程式。學生把它貼到 Thonny 後，就可以用 W / A / S / D / X 控制小車。",
+    stage: "BootCamp",
     backHref: "bootcamp.html",
     steps: [
       "在 Thonny 建立新的 .py 檔案。",
@@ -76,7 +76,7 @@ const codePages = {
     fallbackText: `from machine import Pin
 import time
 
-# Raspberry Pi Pico 小車 00_BootCamp
+# Raspberry Pi Pico 小車 BootCamp
 # 在 Thonny Shell 輸入 w / a / s / d / x 後按 Enter
 
 M1_A = Pin(12, Pin.OUT)
@@ -123,7 +123,7 @@ def turn_right():
     _set_motor(M2_A, M2_B, -1)
 
 
-print("Raspberry Pi Pico 小車 00_BootCamp")
+print("Raspberry Pi Pico 小車 BootCamp")
 print("請在 Thonny Shell 輸入 w / a / s / d / x 後按 Enter")
 print("w=前進 s=後退 a=左轉 d=右轉 x=停止")
 
@@ -156,8 +156,8 @@ while True:
   "basic-motor-functions": {
     path: "downloads/basic-motor-functions.py",
     title: "基本動作函式",
-    summary: "這份程式把小車的五個基本動作拆成獨立函式，適合在 00_BootCamp 後補充閱讀。",
-    stage: "00_BootCamp 補充",
+    summary: "這份程式把小車的五個基本動作拆成獨立函式，適合在 BootCamp 後補充閱讀。",
+    stage: "BootCamp 補充",
     backHref: "bootcamp.html",
     steps: [
       "先看腳位設定。",
@@ -181,7 +181,7 @@ while True:
       },
       {
         title: "五個動作函式",
-        summary: "後面的函式就是 00_BootCamp 五個基本動作的來源。",
+        summary: "後面的函式就是 BootCamp 五個基本動作的來源。",
         range: "第 21-41 行",
         lines: [21, 41],
         tone: "teacher"
@@ -1155,7 +1155,7 @@ if (codeContent) {
 
   if (!meta) {
     titleNode.textContent = "找不到對應的程式";
-    summaryNode.textContent = "請從 00_BootCamp、感測器主題或下載區重新打開程式頁。";
+    summaryNode.textContent = "請從 BootCamp、感測器主題或下載區重新打開程式頁。";
     codeContent.textContent = "Unknown file key.";
     fileLabelNode.textContent = "UNKNOWN";
     stageNode.textContent = "未指定主題";
@@ -1218,3 +1218,4 @@ document.querySelectorAll(".case-code-card").forEach(card => {
   const code = card.querySelector("code");
   attachCopyHandler(button, () => code?.textContent ?? "");
 });
+
