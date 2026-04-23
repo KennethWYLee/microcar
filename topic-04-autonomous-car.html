@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260423-codewhite2">
+  <link rel="stylesheet" href="styles.css?v=20260423-selfstudy">
 </head>
 <body class="topic-page">
   <div class="page-shell">
@@ -22,6 +22,7 @@
       </a>
       <nav class="site-nav" aria-label="主題導覽">
         <a href="bootcamp.html">BootCamp</a>
+        <a href="setup.html">開始設定</a>
         <a href="topic-01-intro.html">01 入門</a>
         <a href="topic-02-sensor-output.html">02 感測與輸出</a>
         <a href="topic-03-car-motion.html">03 小車移動</a>
@@ -63,6 +64,30 @@
           </article>
         </div>
       </section>
+
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Before You Start</p>
+          <h2>開始本主題前先確認</h2>
+          <p>這一章開始會真的驅動小車。請先確認馬達方向與 mango 函式庫，否則程式看起來正確，小車仍可能反向、原地轉或直接報錯。</p>
+        </div>
+        <div class="page-grid">
+          <article class="content-card">
+            <span class="zone-badge student">必做</span>
+            <h3>先完成開始前設定</h3>
+            <p>包含 Thonny 連線、MicroPython 解譯器、mango 函式庫上傳、import 測試與馬達方向校正。</p>
+            <a class="button primary" href="setup.html">打開開始設定</a>
+          </article>
+          <article class="content-card">
+            <span class="zone-badge teacher">校正</span>
+            <h3>先讓前進真的往前</h3>
+            <p>小車程式最常見的問題不是語法，而是左右輪方向相反。進入避障或循跡前，請先跑馬達校正。</p>
+            <a class="button ghost" href="downloads/motor-calibration.py">下載馬達校正程式</a>
+          </article>
+        </div>
+      </section>
+
 
       <section class="section reveal">
         <div class="section-heading">
@@ -1211,6 +1236,38 @@ while True:
         </div>
       </section>
 
+
+      <section id="completion-check" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Completion Check</p>
+          <h2>完成這個主題前，學生應該做得到</h2>
+          <p>這不是考試，而是讓學生知道自己是否已經準備好進入下一個主題。</p>
+        </div>
+        <div class="check-grid">
+          <article class="check-card">
+            <span class="zone-badge student">Check 1</span>
+            <h3>完成確認</h3>
+            <p>我能讓小車用距離感測器判斷是否避障。</p>
+          </article>
+          <article class="check-card">
+            <span class="zone-badge student">Check 2</span>
+            <h3>完成確認</h3>
+            <p>我能讀取循跡感測器，判斷黑線在左、中或右。</p>
+          </article>
+          <article class="check-card">
+            <span class="zone-badge student">Check 3</span>
+            <h3>完成確認</h3>
+            <p>我能把感測結果轉成馬達動作，而不是只印數字。</p>
+          </article>
+          <article class="check-card">
+            <span class="zone-badge student">Check 4</span>
+            <h3>完成確認</h3>
+            <p>我能先降低速度測試，再逐步提高任務難度。</p>
+          </article>
+        </div>
+      </section>
+
+
       <section class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">Continue</p>
@@ -1233,6 +1290,6 @@ while True:
       </section>
     </main>
   </div>
-  <script src="script.js?v=20260423-codewhite2"></script>
+  <script src="script.js?v=20260423-selfstudy"></script>
 </body>
 </html>

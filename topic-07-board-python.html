@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260423-codewhite2">
+  <link rel="stylesheet" href="styles.css?v=20260423-selfstudy">
 </head>
 <body class="topic-page">
   <div class="page-shell">
@@ -22,6 +22,7 @@
       </a>
       <nav class="site-nav" aria-label="主題導覽">
         <a href="bootcamp.html">BootCamp</a>
+        <a href="setup.html">開始設定</a>
         <a href="topic-01-intro.html">01 入門</a>
         <a href="topic-02-sensor-output.html">02 感測與輸出</a>
         <a href="topic-03-car-motion.html">03 小車移動</a>
@@ -63,6 +64,30 @@
           </article>
         </div>
       </section>
+
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Before You Start</p>
+          <h2>開始本主題前先確認</h2>
+          <p>這一章可以當成查表與除錯工具，協助學生把腳位、程式與實際板子對起來。</p>
+        </div>
+        <div class="page-grid">
+          <article class="content-card">
+            <span class="zone-badge student">必做</span>
+            <h3>先完成開始前設定</h3>
+            <p>包含 Thonny 連線、MicroPython 解譯器、mango 函式庫上傳、import 測試與馬達方向校正。</p>
+            <a class="button primary" href="setup.html">打開開始設定</a>
+          </article>
+          <article class="content-card">
+            <span class="zone-badge teacher">查表</span>
+            <h3>把 PDF 當除錯地圖</h3>
+            <p>遇到元件沒有反應時，先用腳位表確認接線、功能腳位與程式中的 Pin 是否一致。</p>
+            <a class="button ghost" href="downloads/robot-programming-practice-python.pdf">下載 Python PDF</a>
+          </article>
+        </div>
+      </section>
+
 
 
       <section id="learning-route" class="section reveal">
@@ -168,6 +193,38 @@ def set_motor(pin_a, pin_b, direction):
       </section>
 
 
+
+      <section id="completion-check" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Completion Check</p>
+          <h2>完成這個主題前，學生應該做得到</h2>
+          <p>這不是考試，而是讓學生知道自己是否已經準備好進入下一個主題。</p>
+        </div>
+        <div class="check-grid">
+          <article class="check-card">
+            <span class="zone-badge student">Check 1</span>
+            <h3>完成確認</h3>
+            <p>我能用腳位表查出 LED、按鈕、蜂鳴器、馬達與感測器的接腳。</p>
+          </article>
+          <article class="check-card">
+            <span class="zone-badge student">Check 2</span>
+            <h3>完成確認</h3>
+            <p>我能判斷一個元件需要 Pin、PWM、ADC、I2C 還是 UART。</p>
+          </article>
+          <article class="check-card">
+            <span class="zone-badge student">Check 3</span>
+            <h3>完成確認</h3>
+            <p>我能用 PDF 對照網頁 case，找出程式中的腳位來源。</p>
+          </article>
+          <article class="check-card">
+            <span class="zone-badge student">Check 4</span>
+            <h3>完成確認</h3>
+            <p>我能用腳位表作為除錯第一步，而不是只改程式。</p>
+          </article>
+        </div>
+      </section>
+
+
       <section class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">Continue</p>
@@ -177,19 +234,19 @@ def set_motor(pin_a, pin_b, direction):
           <article class="content-card">
             <span class="zone-badge student">上一個</span>
             <h3>06 藍芽遙控小車：Flutter App 與 Pico BLE</h3>
-            <p>本主題使用既有 Flutter 介面與 Pico BLE 小車程式，整理成藍芽掃描、連線、送出指令與小車動作對應的教學頁。</p>
+            <p>本主題是進階遙控單元，建議先完成 03 小車移動，再使用既有 Flutter 介面與 Pico BLE 小車程式完成手機控制。</p>
             <a class="button ghost" href="topic-06-bluetooth-car.html">打開上一個主題</a>
           </article>
           <article class="content-card">
             <span class="zone-badge teacher">下一個</span>
             <h3>08 電路板應用：擺頭電扇</h3>
-            <p>本主題使用擺頭電扇-課程簡報，整理風扇擺頭機構、齒輪與連桿、Pico X2 腳位、輸入輸出與 PWM 控制應用。</p>
+            <p>本主題是延伸作品單元，使用擺頭電扇-課程簡報整理風扇機構、Pico X2 腳位與 PWM 控制應用，不屬於小車核心必修。</p>
             <a class="button primary" href="topic-08-fan-application.html">打開下一個主題</a>
           </article>
         </div>
       </section>
     </main>
   </div>
-  <script src="script.js?v=20260423-codewhite2"></script>
+  <script src="script.js?v=20260423-selfstudy"></script>
 </body>
 </html>

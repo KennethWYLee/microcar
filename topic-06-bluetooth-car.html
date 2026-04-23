@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>06 藍芽遙控小車：Flutter App 與 Pico BLE | Raspberry Pi Pico 小車主題教材</title>
-  <meta name="description" content="本主題使用既有 Flutter 介面與 Pico BLE 小車程式，整理成藍芽掃描、連線、送出指令與小車動作對應的教學頁。">
+  <meta name="description" content="本主題是進階遙控單元，建議先完成 03 小車移動，再使用既有 Flutter 介面與 Pico BLE 小車程式完成手機控制。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260423-codewhite2">
+  <link rel="stylesheet" href="styles.css?v=20260423-selfstudy">
 </head>
 <body class="topic-page">
   <div class="page-shell">
@@ -22,6 +22,7 @@
       </a>
       <nav class="site-nav" aria-label="主題導覽">
         <a href="bootcamp.html">BootCamp</a>
+        <a href="setup.html">開始設定</a>
         <a href="topic-01-intro.html">01 入門</a>
         <a href="topic-02-sensor-output.html">02 感測與輸出</a>
         <a href="topic-03-car-motion.html">03 小車移動</a>
@@ -39,7 +40,7 @@
         <div class="hero-copy">
           <p class="eyebrow">主題 06</p>
           <h1>06 藍芽遙控小車：Flutter App 與 Pico BLE</h1>
-          <p class="hero-text">本主題使用既有 Flutter 介面與 Pico BLE 小車程式，整理成藍芽掃描、連線、送出指令與小車動作對應的教學頁。</p>
+          <p class="hero-text">本主題是進階遙控單元，建議先完成 03 小車移動，再使用既有 Flutter 介面與 Pico BLE 小車程式完成手機控制。</p>
           <div class="chip-list compact">
             <span>Flutter</span>
 <span>BLE</span>
@@ -65,6 +66,30 @@
       </section>
 
 
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Before You Start</p>
+          <h2>開始本主題前先確認</h2>
+          <p>這是進階遙控主題。學生應先完成 03 小車移動，確認小車端五個基本動作都正確，再進入手機 App 與 BLE。</p>
+        </div>
+        <div class="page-grid">
+          <article class="content-card">
+            <span class="zone-badge student">必做</span>
+            <h3>先完成開始前設定</h3>
+            <p>包含 Thonny 連線、MicroPython 解譯器、mango 函式庫上傳、import 測試與馬達方向校正。</p>
+            <a class="button primary" href="setup.html">打開開始設定</a>
+          </article>
+          <article class="content-card">
+            <span class="zone-badge teacher">進階</span>
+            <h3>先完成主題 03</h3>
+            <p>藍芽 App 只是把按鈕轉成指令。進入本章前，請先確認小車端的前進、後退、左右轉和停止都正確。</p>
+            <a class="button ghost" href="topic-03-car-motion.html">回主題 03</a>
+          </article>
+        </div>
+      </section>
+
+
+
       <section id="learning-route" class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">Learning Route</p>
@@ -74,24 +99,38 @@
         <div class="resource-roadmap">
           <article class="content-card resource-step">
             <span class="zone-badge student">Step 01</span>
-            <strong>Flutter App 搜尋 PicoCar</strong>
-            <p>App 先掃描名稱為 <code>PicoCar</code> 的藍芽裝置，並優先尋找 <code>FFA0</code> 服務，保留 <code>FFE0</code> 作為備用。</p>
+            <strong>確認小車端可以基本移動</strong>
+            <p>先回到主題 03，確認前進、後退、左轉、右轉、停止都正確。藍芽只是把手機按鈕變成指令，不會修正馬達方向問題。</p>
           </article>
           <article class="content-card resource-step">
             <span class="zone-badge student">Step 02</span>
-            <strong>找到可寫入的特徵值</strong>
-            <p>連線後尋找 <code>FFA1</code> 或 <code>FFE1</code>，這就是 App 把指令寫給小車的通道。</p>
+            <strong>上傳 Pico BLE 小車端檔案</strong>
+            <p>標準版至少需要 <code>blue.py</code>、<code>bot.py</code>、<code>rcbot.py</code>。先讓 Pico 端可以讀取 BLE UART。</p>
           </article>
           <article class="content-card resource-step">
             <span class="zone-badge teacher">Step 03</span>
-            <strong>Pico 端讀取 BLE UART</strong>
-            <p>小車端使用 UART0，通常接在 <code>GP0</code> 與 <code>GP1</code>，收到資料後把 bytes 轉成文字指令。</p>
+            <strong>Flutter App 搜尋 PicoCar</strong>
+            <p>App 掃描名稱為 <code>PicoCar</code> 的藍芽裝置，並尋找 <code>FFA0</code> 服務與 <code>FFA1</code> 可寫入特徵值。</p>
           </article>
           <article class="content-card resource-step">
             <span class="zone-badge teacher">Step 04</span>
             <strong>指令對應馬達動作</strong>
             <p><code>1</code> 前進、<code>2</code> 後退、<code>3</code> 左轉、<code>4</code> 右轉、<code>0</code> 停止；變速版再加入速度指令。</p>
           </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Practice Order</p>
+          <h2>學生自學時請照這個順序做</h2>
+          <p>藍芽主題牽涉手機端和小車端，請先把每一層分開測通，再把它們接起來。</p>
+        </div>
+        <div class="resource-roadmap">
+          <article class="content-card resource-step"><span class="zone-badge student">01</span><strong>先測小車端動作</strong><p>用 BootCamp 或主題 03 確認小車能正確做五個基本動作。</p><a class="button ghost" href="topic-03-car-motion.html">回主題 03</a></article>
+          <article class="content-card resource-step"><span class="zone-badge student">02</span><strong>上傳標準版 Pico 檔案</strong><p>把標準版資料夾中的 <code>blue.py</code>、<code>bot.py</code>、<code>rcbot.py</code> 上傳到 Pico。</p><a class="button ghost" href="downloads/topic-06-bluetooth-car/controler_ble.7z">下載標準版壓縮檔</a></article>
+          <article class="content-card resource-step"><span class="zone-badge teacher">03</span><strong>確認 BLE 名稱與 UUID</strong><p>App 端搜尋 <code>PicoCar</code>，服務與特徵值需和 Pico 端設定一致。</p><a class="button ghost" href="downloads/topic-06-bluetooth-car/main.dart">下載 Flutter main.dart</a></article>
+          <article class="content-card resource-step"><span class="zone-badge teacher">04</span><strong>最後再測 App 控制</strong><p>若手機按鈕沒反應，先回頭查小車端是否收到資料，再查 App 是否找到可寫入特徵值。</p><a class="button ghost" href="downloads/topic-06-bluetooth-car/controler_ble_v2_speed-variable.7z">下載變速版壓縮檔</a></article>
         </div>
       </section>
 
@@ -162,6 +201,38 @@
       </section>
 
 
+
+      <section id="completion-check" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Completion Check</p>
+          <h2>完成這個主題前，學生應該做得到</h2>
+          <p>這不是考試，而是讓學生知道自己是否已經準備好進入下一個主題。</p>
+        </div>
+        <div class="check-grid">
+          <article class="check-card">
+            <span class="zone-badge student">Check 1</span>
+            <h3>完成確認</h3>
+            <p>我已完成 03 小車移動，知道小車端前後左右如何控制。</p>
+          </article>
+          <article class="check-card">
+            <span class="zone-badge student">Check 2</span>
+            <h3>完成確認</h3>
+            <p>我知道 Pico 端需要上傳 blue.py、bot.py、rcbot.py 等檔案。</p>
+          </article>
+          <article class="check-card">
+            <span class="zone-badge student">Check 3</span>
+            <h3>完成確認</h3>
+            <p>我知道 App 掃描名稱、服務 UUID、特徵值要和小車端一致。</p>
+          </article>
+          <article class="check-card">
+            <span class="zone-badge student">Check 4</span>
+            <h3>完成確認</h3>
+            <p>我能先用 Thonny Shell 確認小車端收到指令，再測手機 App。</p>
+          </article>
+        </div>
+      </section>
+
+
       <section class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">Continue</p>
@@ -184,6 +255,6 @@
       </section>
     </main>
   </div>
-  <script src="script.js?v=20260423-codewhite2"></script>
+  <script src="script.js?v=20260423-selfstudy"></script>
 </body>
 </html>

@@ -23,7 +23,7 @@ ROBOT_HANDOUT_DIR = ROBOT_DIR / "講義"
 ROBOT_WEB_DIR = ROBOT_DIR / "無人車網頁開發"
 DOWNLOAD_TOPIC_06_DIR = REPO / "downloads" / "topic-06-bluetooth-car"
 DOWNLOAD_TOPIC_08_DIR = REPO / "downloads" / "topic-08-fan-application"
-ASSET_VERSION = "20260423-codewhite2"
+ASSET_VERSION = "20260423-selfstudy"
 
 
 @dataclass(frozen=True)
@@ -118,7 +118,7 @@ SUPPLEMENT_TOPICS: tuple[StaticTopic, ...] = (
         label="主題 06",
         title="06 藍芽遙控小車：Flutter App 與 Pico BLE",
         subtitle="把手機 App、藍芽通訊與小車端程式串成一個完整遙控專案",
-        summary="本主題使用既有 Flutter 介面與 Pico BLE 小車程式，整理成藍芽掃描、連線、送出指令與小車動作對應的教學頁。",
+        summary="本主題是進階遙控單元，建議先完成 03 小車移動，再使用既有 Flutter 介面與 Pico BLE 小車程式完成手機控制。",
         chips=("Flutter", "BLE", "Remote"),
         accent="product-advanced",
         image="assets/topic-06-flutter-app.png",
@@ -142,7 +142,7 @@ SUPPLEMENT_TOPICS: tuple[StaticTopic, ...] = (
         label="主題 08",
         title="08 電路板應用：擺頭電扇",
         subtitle="把電路板控制放進真實作品，從機構、電路到智慧控制完整整合",
-        summary="本主題使用擺頭電扇-課程簡報，整理風扇擺頭機構、齒輪與連桿、Pico X2 腳位、輸入輸出與 PWM 控制應用。",
+        summary="本主題是延伸作品單元，使用擺頭電扇-課程簡報整理風扇機構、Pico X2 腳位與 PWM 控制應用，不屬於小車核心必修。",
         chips=("Fan", "Mechanism", "PWM"),
         accent="product-teacher",
         image="assets/fan-assembled.png",
@@ -154,6 +154,110 @@ SUPPLEMENT_TOPICS: tuple[StaticTopic, ...] = (
 
 def all_topics() -> tuple[Topic | StaticTopic, ...]:
     return (*TOPICS, *SUPPLEMENT_TOPICS)
+
+
+MAINLINE_STEPS: tuple[tuple[str, str, str, str], ...] = (
+    (
+        "00",
+        "開始前設定",
+        "先讓 Thonny、MicroPython、mango 函式庫與馬達方向全部確認正確。",
+        "setup.html",
+    ),
+    (
+        "BootCamp",
+        "一小時快速體驗",
+        "用完整程式先讓小車前進、後退、左轉、右轉與停止，建立成功經驗。",
+        "bootcamp.html",
+    ),
+    (
+        "01",
+        "輸出入與狀態",
+        "用 LED、按鈕、狀態變數和 Shell 指令建立硬體控制直覺。",
+        "topic-01-intro.html",
+    ),
+    (
+        "02",
+        "感測與回饋",
+        "把蜂鳴器、RGB、超音波與 ADC 讀值轉成可以觀察的聲光反應。",
+        "topic-02-sensor-output.html",
+    ),
+    (
+        "03",
+        "馬達與校正",
+        "確認左右輪、方向、速度差與基本動作，讓小車可以穩定受控。",
+        "topic-03-car-motion.html",
+    ),
+    (
+        "04",
+        "自走任務",
+        "把馬達和感測器整合成避障、循跡、伺服掃描等無人車行為。",
+        "topic-04-autonomous-car.html",
+    ),
+    (
+        "05",
+        "專題整合",
+        "用狀態機、策略比較與循跡演算法完成可以展示與調參的作品。",
+        "topic-05-project-cases.html",
+    ),
+)
+
+
+TOPIC_CHECKLISTS: dict[str, tuple[str, ...]] = {
+    "setup.html": (
+        "Thonny 已連上 Raspberry Pi Pico，並可以執行最小測試程式。",
+        "mango 資料夾已上傳到 Pico，import 測試不會報錯。",
+        "右輪與左輪方向已校正，前進時小車真的往前走。",
+        "我知道如果後面程式報錯，要先回來檢查函式庫、腳位與馬達方向。",
+    ),
+    "topic-01-intro.html": (
+        "我能讓 LED 閃爍，並說出 Pin.OUT 的意思。",
+        "我能讀取按鈕值，知道按下時是 0 還是 1。",
+        "我能用狀態變數切換 LED，而不是只靠 sleep()。",
+        "我能在 Thonny Shell 輸入指令並觸發不同動作。",
+    ),
+    "topic-02-sensor-output.html": (
+        "我能讓蜂鳴器、RGB 或 LED 根據程式改變輸出。",
+        "我能在 Shell 看到超音波或 ADC 感測數值。",
+        "我能把感測數值分成安全、警告、危險等區間。",
+        "我能先測單一感測器，再把它接到小車任務。",
+    ),
+    "topic-03-car-motion.html": (
+        "我能分別測試右馬達與左馬達方向。",
+        "我能修正左右輪方向，讓前進真的往前走。",
+        "我能用速度差做左轉、右轉與原地旋轉。",
+        "我能把小車動作整理成 forward()、stop() 等函式。",
+    ),
+    "topic-04-autonomous-car.html": (
+        "我能讓小車用距離感測器判斷是否避障。",
+        "我能讀取循跡感測器，判斷黑線在左、中或右。",
+        "我能把感測結果轉成馬達動作，而不是只印數字。",
+        "我能先降低速度測試，再逐步提高任務難度。",
+    ),
+    "topic-05-project-cases.html": (
+        "我能選一個任務目標，說明需要哪些輸入、輸出與馬達動作。",
+        "我能用狀態或模式整理大型程式。",
+        "我能比較不同策略或參數造成的小車行為差異。",
+        "我能完成一個可以展示、測試與改良的小車作品。",
+    ),
+    "topic-06-bluetooth-car.html": (
+        "我已完成 03 小車移動，知道小車端前後左右如何控制。",
+        "我知道 Pico 端需要上傳 blue.py、bot.py、rcbot.py 等檔案。",
+        "我知道 App 掃描名稱、服務 UUID、特徵值要和小車端一致。",
+        "我能先用 Thonny Shell 確認小車端收到指令，再測手機 App。",
+    ),
+    "topic-07-board-python.html": (
+        "我能用腳位表查出 LED、按鈕、蜂鳴器、馬達與感測器的接腳。",
+        "我能判斷一個元件需要 Pin、PWM、ADC、I2C 還是 UART。",
+        "我能用 PDF 對照網頁 case，找出程式中的腳位來源。",
+        "我能用腳位表作為除錯第一步，而不是只改程式。",
+    ),
+    "topic-08-fan-application.html": (
+        "我知道這是延伸作品，不是小車核心操控必修單元。",
+        "我能說明馬達、齒輪、連桿和擺頭動作的關係。",
+        "我能把 PWM 調速概念從小車延伸到風扇馬達。",
+        "我能從作品需求反推需要哪些輸入、輸出和控制流程。",
+    ),
+}
 
 
 CASE_RE = re.compile(r"(?m)^## Case\s+(\d+)：(.+)$")
@@ -315,7 +419,7 @@ def split_cases(markdown: str) -> tuple[str, list[dict[str, object]]]:
 
 
 def nav_html(active_output: str | None = None) -> str:
-    links = [("bootcamp.html", "BootCamp")] + [
+    links = [("bootcamp.html", "BootCamp"), ("setup.html", "開始設定")] + [
         (topic.output, topic.title.split("：", 1)[0]) for topic in all_topics()
     ]
     link_html = "\n".join(
@@ -362,6 +466,124 @@ def render_case(case: dict[str, object], open_first: bool = False) -> str:
 {chr(10).join(sections_html)}
           </div>
         </details>"""
+
+
+def render_mainline_section(
+    eyebrow: str = "Microcar Path",
+    title: str = "從零到能操控小車的主線",
+    intro: str = "如果學生的目標是完整操控小車，建議先走這條主線。06-08 可以在核心能力完成後再作為進階與延伸。",
+) -> str:
+    cards = []
+    for label, step_title, description, href in MAINLINE_STEPS:
+        cards.append(
+            f"""          <article class="content-card resource-step">
+            <span class="zone-badge student">{html.escape(label)}</span>
+            <strong>{html.escape(step_title)}</strong>
+            <p>{html.escape(description)}</p>
+            <a class="button ghost" href="{href}">前往這一步</a>
+          </article>"""
+        )
+    return f"""
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">{html.escape(eyebrow)}</p>
+          <h2>{html.escape(title)}</h2>
+          <p>{html.escape(intro)}</p>
+        </div>
+        <div class="resource-roadmap">
+{chr(10).join(cards)}
+        </div>
+      </section>
+"""
+
+
+def render_preflight_section(topic_output: str) -> str:
+    if topic_output in {"topic-01-intro.html", "topic-02-sensor-output.html"}:
+        focus = "這一章可以直接從簡單輸出入開始，但若要跑到 RGB、超音波或後續小車任務，仍要先完成函式庫與腳位確認。"
+    elif topic_output in {"topic-03-car-motion.html", "topic-04-autonomous-car.html", "topic-05-project-cases.html"}:
+        focus = "這一章開始會真的驅動小車。請先確認馬達方向與 mango 函式庫，否則程式看起來正確，小車仍可能反向、原地轉或直接報錯。"
+    elif topic_output == "topic-06-bluetooth-car.html":
+        focus = "這是進階遙控主題。學生應先完成 03 小車移動，確認小車端五個基本動作都正確，再進入手機 App 與 BLE。"
+    elif topic_output == "topic-08-fan-application.html":
+        focus = "這是延伸作品主題，不是小車核心操控必修。建議學生先完成 01-05，再把控制概念移植到擺頭電扇。"
+    else:
+        focus = "這一章可以當成查表與除錯工具，協助學生把腳位、程式與實際板子對起來。"
+
+    if topic_output == "topic-06-bluetooth-car.html":
+        second_badge = "進階"
+        second_title = "先完成主題 03"
+        second_desc = "藍芽 App 只是把按鈕轉成指令。進入本章前，請先確認小車端的前進、後退、左右轉和停止都正確。"
+        second_href = "topic-03-car-motion.html"
+        second_label = "回主題 03"
+    elif topic_output == "topic-07-board-python.html":
+        second_badge = "查表"
+        second_title = "把 PDF 當除錯地圖"
+        second_desc = "遇到元件沒有反應時，先用腳位表確認接線、功能腳位與程式中的 Pin 是否一致。"
+        second_href = "downloads/robot-programming-practice-python.pdf"
+        second_label = "下載 Python PDF"
+    elif topic_output == "topic-08-fan-application.html":
+        second_badge = "延伸"
+        second_title = "先完成小車核心主線"
+        second_desc = "08 是作品延伸，不是小車操控必修。若學生還不會控制小車，請先完成 01-05。"
+        second_href = "topic-05-project-cases.html"
+        second_label = "回主題 05"
+    else:
+        second_badge = "校正"
+        second_title = "先讓前進真的往前"
+        second_desc = "小車程式最常見的問題不是語法，而是左右輪方向相反。進入避障或循跡前，請先跑馬達校正。"
+        second_href = "downloads/motor-calibration.py"
+        second_label = "下載馬達校正程式"
+
+    return f"""
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Before You Start</p>
+          <h2>開始本主題前先確認</h2>
+          <p>{html.escape(focus)}</p>
+        </div>
+        <div class="page-grid">
+          <article class="content-card">
+            <span class="zone-badge student">必做</span>
+            <h3>先完成開始前設定</h3>
+            <p>包含 Thonny 連線、MicroPython 解譯器、mango 函式庫上傳、import 測試與馬達方向校正。</p>
+            <a class="button primary" href="setup.html">打開開始設定</a>
+          </article>
+          <article class="content-card">
+            <span class="zone-badge teacher">{html.escape(second_badge)}</span>
+            <h3>{html.escape(second_title)}</h3>
+            <p>{html.escape(second_desc)}</p>
+            <a class="button ghost" href="{second_href}">{html.escape(second_label)}</a>
+          </article>
+        </div>
+      </section>
+"""
+
+
+def render_completion_checklist(output: str) -> str:
+    items = TOPIC_CHECKLISTS.get(output)
+    if not items:
+        return ""
+    cards = []
+    for index, item in enumerate(items, start=1):
+        cards.append(
+            f"""          <article class="check-card">
+            <span class="zone-badge student">Check {index}</span>
+            <h3>完成確認</h3>
+            <p>{html.escape(item)}</p>
+          </article>"""
+        )
+    return f"""
+      <section id="completion-check" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Completion Check</p>
+          <h2>完成這個主題前，學生應該做得到</h2>
+          <p>這不是考試，而是讓學生知道自己是否已經準備好進入下一個主題。</p>
+        </div>
+        <div class="check-grid">
+{chr(10).join(cards)}
+        </div>
+      </section>
+"""
 
 
 def render_topic_page(topic: Topic) -> str:
@@ -425,6 +647,8 @@ def render_topic_page(topic: Topic) -> str:
         </div>
       </section>
 
+{render_preflight_section(topic.output)}
+
       <section class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">Learning Context</p>
@@ -457,6 +681,8 @@ def render_topic_page(topic: Topic) -> str:
 {cases_html}
         </div>
       </section>
+
+{render_completion_checklist(topic.output)}
 
       <section class="section reveal">
         <div class="section-heading">
@@ -548,7 +774,11 @@ def render_static_topic_page(topic: StaticTopic, body_html: str) -> str:
         </div>
       </section>
 
+{render_preflight_section(topic.output)}
+
 {body_html}
+
+{render_completion_checklist(topic.output)}
 
       <section class="section reveal">
         <div class="section-heading">
@@ -612,24 +842,38 @@ def render_bluetooth_topic_page(topic: StaticTopic) -> str:
         <div class="resource-roadmap">
           <article class="content-card resource-step">
             <span class="zone-badge student">Step 01</span>
-            <strong>Flutter App 搜尋 PicoCar</strong>
-            <p>App 先掃描名稱為 <code>PicoCar</code> 的藍芽裝置，並優先尋找 <code>FFA0</code> 服務，保留 <code>FFE0</code> 作為備用。</p>
+            <strong>確認小車端可以基本移動</strong>
+            <p>先回到主題 03，確認前進、後退、左轉、右轉、停止都正確。藍芽只是把手機按鈕變成指令，不會修正馬達方向問題。</p>
           </article>
           <article class="content-card resource-step">
             <span class="zone-badge student">Step 02</span>
-            <strong>找到可寫入的特徵值</strong>
-            <p>連線後尋找 <code>FFA1</code> 或 <code>FFE1</code>，這就是 App 把指令寫給小車的通道。</p>
+            <strong>上傳 Pico BLE 小車端檔案</strong>
+            <p>標準版至少需要 <code>blue.py</code>、<code>bot.py</code>、<code>rcbot.py</code>。先讓 Pico 端可以讀取 BLE UART。</p>
           </article>
           <article class="content-card resource-step">
             <span class="zone-badge teacher">Step 03</span>
-            <strong>Pico 端讀取 BLE UART</strong>
-            <p>小車端使用 UART0，通常接在 <code>GP0</code> 與 <code>GP1</code>，收到資料後把 bytes 轉成文字指令。</p>
+            <strong>Flutter App 搜尋 PicoCar</strong>
+            <p>App 掃描名稱為 <code>PicoCar</code> 的藍芽裝置，並尋找 <code>FFA0</code> 服務與 <code>FFA1</code> 可寫入特徵值。</p>
           </article>
           <article class="content-card resource-step">
             <span class="zone-badge teacher">Step 04</span>
             <strong>指令對應馬達動作</strong>
             <p><code>1</code> 前進、<code>2</code> 後退、<code>3</code> 左轉、<code>4</code> 右轉、<code>0</code> 停止；變速版再加入速度指令。</p>
           </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Practice Order</p>
+          <h2>學生自學時請照這個順序做</h2>
+          <p>藍芽主題牽涉手機端和小車端，請先把每一層分開測通，再把它們接起來。</p>
+        </div>
+        <div class="resource-roadmap">
+          <article class="content-card resource-step"><span class="zone-badge student">01</span><strong>先測小車端動作</strong><p>用 BootCamp 或主題 03 確認小車能正確做五個基本動作。</p><a class="button ghost" href="topic-03-car-motion.html">回主題 03</a></article>
+          <article class="content-card resource-step"><span class="zone-badge student">02</span><strong>上傳標準版 Pico 檔案</strong><p>把標準版資料夾中的 <code>blue.py</code>、<code>bot.py</code>、<code>rcbot.py</code> 上傳到 Pico。</p><a class="button ghost" href="downloads/topic-06-bluetooth-car/controler_ble.7z">下載標準版壓縮檔</a></article>
+          <article class="content-card resource-step"><span class="zone-badge teacher">03</span><strong>確認 BLE 名稱與 UUID</strong><p>App 端搜尋 <code>PicoCar</code>，服務與特徵值需和 Pico 端設定一致。</p><a class="button ghost" href="downloads/topic-06-bluetooth-car/main.dart">下載 Flutter main.dart</a></article>
+          <article class="content-card resource-step"><span class="zone-badge teacher">04</span><strong>最後再測 App 控制</strong><p>若手機按鈕沒反應，先回頭查小車端是否收到資料，再查 App 是否找到可寫入特徵值。</p><a class="button ghost" href="downloads/topic-06-bluetooth-car/controler_ble_v2_speed-variable.7z">下載變速版壓縮檔</a></article>
         </div>
       </section>
 
@@ -819,7 +1063,7 @@ fan_motor.duty_u16(0)"""
         <div class="section-heading">
           <p class="eyebrow">Learning Route</p>
           <h2>從小車走到真實作品：智慧型可擺動電風扇</h2>
-          <p>這個主題是電路板應用，不是單一元件練習。學生會看到機構、電路、感測器與程式如何合成一件作品。</p>
+          <p>這個主題是延伸作品，不是小車核心操控必修。學生會看到機構、電路、感測器與程式如何合成一件作品。</p>
         </div>
         <div class="visual-story-grid">
           <article class="content-card">
@@ -836,6 +1080,28 @@ fan_motor.duty_u16(0)"""
             <img class="teaching-visual" src="assets/fan-linkage.png" alt="連桿機構">
             <h3>擺頭運動</h3>
             <p>四連桿把旋轉型動力轉成左右搖擺，這是風扇擺頭的核心。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Extension Role</p>
+          <h2>這一章在整門課中的角色</h2>
+          <p>如果課程目標是「完整操控小車」，請先完成 01-05。08 的價值是讓學生知道同一套輸入、輸出、PWM、感測與控制流程，也可以移植到非小車作品。</p>
+        </div>
+        <div class="page-grid">
+          <article class="content-card">
+            <span class="zone-badge student">小車主線</span>
+            <h3>先完成 01-05</h3>
+            <p>LED、感測器、馬達、避障、循跡與專題整合是小車操控的核心能力。</p>
+            <a class="button ghost" href="topic-05-project-cases.html">回到主題 05</a>
+          </article>
+          <article class="content-card">
+            <span class="zone-badge teacher">作品延伸</span>
+            <h3>再轉到擺頭電扇</h3>
+            <p>把小車課程中的 PWM 調速、按鈕控制、感測判斷與藍芽遙控概念，放進風扇這個真實機構作品。</p>
+            <a class="button ghost" href="downloads/topic-08-fan-application/fan-course-slides.pptx">下載擺頭電扇簡報</a>
           </article>
         </div>
       </section>
@@ -919,6 +1185,200 @@ fan_motor.duty_u16(0)"""
     return render_static_topic_page(topic, body_html)
 
 
+def render_setup_page() -> str:
+    import_test_code = """# mango-import-test.py
+# 先確認 mango 函式庫已經放到 Pico 根目錄
+
+from mango import Motor, RUS04, WS2812B
+
+print("mango import OK")
+print("現在可以繼續做馬達、超音波與 RGB cases。")"""
+    calibration_code = """from machine import Pin
+import time
+
+# Raspberry Pi Pico 小車馬達校正
+# 教材統一腳位：
+#   右馬達 M1 = GP12 / GP13
+#   左馬達 M2 = GP11 / GP10
+
+RIGHT_A = Pin(12, Pin.OUT)
+RIGHT_B = Pin(13, Pin.OUT)
+LEFT_A = Pin(11, Pin.OUT)
+LEFT_B = Pin(10, Pin.OUT)
+
+# 如果某一邊前進方向相反，把 1 改成 -1。
+RIGHT_SIGN = 1
+LEFT_SIGN = 1
+
+
+def _set_motor(pin_a, pin_b, direction):
+    if direction > 0:
+        pin_a.value(1)
+        pin_b.value(0)
+    elif direction < 0:
+        pin_a.value(0)
+        pin_b.value(1)
+    else:
+        pin_a.value(0)
+        pin_b.value(0)
+
+
+def drive(left, right):
+    _set_motor(LEFT_A, LEFT_B, left * LEFT_SIGN)
+    _set_motor(RIGHT_A, RIGHT_B, right * RIGHT_SIGN)
+
+
+def stop():
+    drive(0, 0)
+
+
+tests = [
+    ("右輪往前", 0, 1),
+    ("左輪往前", 1, 0),
+    ("整台前進", 1, 1),
+    ("整台後退", -1, -1),
+    ("原地左轉", -1, 1),
+    ("原地右轉", 1, -1),
+]
+
+print("Motor calibration start")
+print("如果方向相反，先按 Ctrl+C 停止，再修改 RIGHT_SIGN 或 LEFT_SIGN。")
+
+for label, left, right in tests:
+    print(label)
+    drive(left, right)
+    time.sleep(1.2)
+    stop()
+    time.sleep(0.8)
+
+print("Motor calibration done")
+stop()"""
+
+    return f"""<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>開始前設定 | Raspberry Pi Pico 小車主題教材</title>
+  <meta name="description" content="開始 Raspberry Pi Pico 小車課程前，先完成 Thonny、MicroPython、mango 函式庫、馬達校正與自學檢查。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v={ASSET_VERSION}">
+</head>
+<body class="topic-page">
+  <div class="page-shell">
+{header_html("setup.html")}
+
+    <main>
+      <section class="subpage-hero reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">Start Here</p>
+          <h1>開始前設定：先讓小車真的能跑</h1>
+          <p class="hero-text">
+            這一頁是 01-08 主題的前置檢查。學生先確認 Thonny 能連上 Pico、mango 函式庫已上傳、馬達方向正確，再進入正式主題，後面才不會一直卡在環境問題。
+          </p>
+          <div class="action-row">
+            <a class="button primary" href="#setup-steps">照步驟設定</a>
+            <a class="button secondary" href="downloads/extensions/board-library/mango-library.zip">下載 mango 函式庫</a>
+            <a class="button ghost" href="downloads/motor-calibration.py">下載馬達校正程式</a>
+          </div>
+        </div>
+        <div class="subpage-aside">
+          <article class="aside-card">
+            <img class="teaching-visual" src="assets/real-bootcamp-car.jpg" alt="Raspberry Pi Pico 小車">
+            <p class="visual-note">這頁的目標不是講新概念，而是把會讓學生卡住的環境問題先排除。</p>
+          </article>
+          <article class="aside-card">
+            <span class="zone-badge student">Goal</span>
+            <h3>完成後應該能做到</h3>
+            <p>Thonny 可以 Run 程式、<code>from mango import Motor</code> 不報錯、按下馬達校正後小車前進方向正確。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="setup-steps" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Required Steps</p>
+          <h2>開始前先完成 6 件事</h2>
+          <p>這 6 步完成後，學生再看 01-05 才會像是在學小車，而不是一直處理環境錯誤。</p>
+        </div>
+        <div class="resource-roadmap">
+          <article class="content-card resource-step"><span class="zone-badge student">Step 01</span><strong>接上 Pico 小車</strong><p>用 USB 線連接電腦與 Raspberry Pi Pico，並確認小車放在平面上，輪子不要懸空亂轉。</p></article>
+          <article class="content-card resource-step"><span class="zone-badge student">Step 02</span><strong>打開 Thonny</strong><p>右下角選擇 <code>MicroPython (Raspberry Pi Pico)</code>。如果看不到，先請老師協助安裝或更新 MicroPython。</p></article>
+          <article class="content-card resource-step"><span class="zone-badge teacher">Step 03</span><strong>上傳 mango 函式庫</strong><p>下載 <code>mango-library.zip</code>，解壓縮後把整個 <code>mango</code> 資料夾放到 Pico 的根目錄。</p></article>
+          <article class="content-card resource-step"><span class="zone-badge student">Step 04</span><strong>執行 import 測試</strong><p>貼上測試程式，看到 <code>mango import OK</code> 才進入 02-05 中需要 mango 的 cases。</p></article>
+          <article class="content-card resource-step"><span class="zone-badge teacher">Step 05</span><strong>跑馬達校正</strong><p>先確認右輪、左輪、前進、後退、左右轉方向正確。若相反，修改 <code>RIGHT_SIGN</code> 或 <code>LEFT_SIGN</code>。</p></article>
+          <article class="content-card resource-step"><span class="zone-badge student">Step 06</span><strong>再進入正式主題</strong><p>完成設定後，先做 BootCamp 或 01 入門；要真的控制小車移動時，再進入 03 小車移動。</p></article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Mango Library</p>
+          <h2>mango 函式庫要先放進 Pico</h2>
+          <p>許多主題會使用 <code>from mango import Motor</code>、<code>RUS04</code>、<code>WS2812B</code>、<code>GraySensor8</code>。如果沒有上傳函式庫，學生會看到 <code>ImportError</code> 或 <code>ModuleNotFoundError</code>。</p>
+        </div>
+        <div class="page-grid">
+          <article class="content-card">
+            <span class="zone-badge teacher">Upload</span>
+            <h3>Thonny 上傳方式</h3>
+            <p>下載 zip 後解壓縮，確認裡面有 <code>mango/__init__.py</code>。在 Thonny 檔案視窗中，把整個 <code>mango</code> 資料夾上傳到 Pico 根目錄。</p>
+            <a class="button primary" href="downloads/extensions/board-library/mango-library.zip">下載 mango-library.zip</a>
+          </article>
+          {render_code_card("mango import 測試", import_test_code, "若這段程式可以正常執行，就代表函式庫已經放到 Pico 上。")}
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Motor Calibration</p>
+          <h2>馬達方向先校正，再談避障或循跡</h2>
+          <p>如果左右輪方向錯了，後面的避障與循跡都會看起來像程式壞掉。先用這段程式確認每個方向，再進入主題 03。</p>
+        </div>
+        <div class="page-grid">
+          {render_code_card("馬達校正程式", calibration_code, "先觀察每個動作是否符合中文提示；若方向相反，修改 RIGHT_SIGN 或 LEFT_SIGN。")}
+          <article class="content-card">
+            <span class="zone-badge student">Rule</span>
+            <h3>教材統一腳位</h3>
+            <p>右馬達 M1 使用 <code>GP12 / GP13</code>，左馬達 M2 使用 <code>GP11 / GP10</code>。若現場車子接線不同，請以這頁先建立自己的校正版本。</p>
+            <a class="button ghost" href="topic-03-car-motion.html">校正後進入主題 03</a>
+          </article>
+        </div>
+      </section>
+
+{render_mainline_section()}
+
+{render_completion_checklist("setup.html")}
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Next</p>
+          <h2>完成設定後要去哪裡</h2>
+        </div>
+        <div class="page-grid">
+          <article class="content-card">
+            <span class="zone-badge student">第一次上課</span>
+            <h3>先做 BootCamp</h3>
+            <p>如果只是要讓學生快速感受到小車會動，先做 1 小時 BootCamp。</p>
+            <a class="button primary" href="bootcamp.html">打開 BootCamp</a>
+          </article>
+          <article class="content-card">
+            <span class="zone-badge teacher">正式課程</span>
+            <h3>從主題 01 開始</h3>
+            <p>若要完整自學，就從 LED、按鈕、狀態控制開始，逐步建立到小車任務。</p>
+            <a class="button ghost" href="topic-01-intro.html">進入主題 01</a>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="script.js?v={ASSET_VERSION}"></script>
+</body>
+</html>
+"""
+
+
 def render_supplement_topic_page(topic: StaticTopic) -> str:
     if topic.output == "topic-06-bluetooth-car.html":
         return render_bluetooth_topic_page(topic)
@@ -993,8 +1453,8 @@ def render_index() -> str:
             後續再加入藍芽遙控小車、Python 電路板教材與擺頭電扇應用，讓課程可以從小車走到完整作品。
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="bootcamp.html">先看 BootCamp</a>
-            <a class="button secondary" href="topic-01-intro.html">從主題 1 開始</a>
+            <a class="button primary" href="setup.html">先做開始設定</a>
+            <a class="button secondary" href="bootcamp.html">一小時 BootCamp</a>
             <a class="button ghost" href="downloads.html">下載教材</a>
           </div>
           <div class="hero-points">
@@ -1036,6 +1496,8 @@ def render_index() -> str:
           </article>
         </div>
       </section>
+
+{render_mainline_section()}
 
       <section class="section reveal">
         <div class="section-heading">
@@ -1139,10 +1601,11 @@ def render_downloads() -> str:
           <p class="eyebrow">Downloads</p>
           <h1>8 個主題教材下載區</h1>
           <p class="hero-text">
-            下載區現在依照 8 個正式主題整理。每個主題都可以直接打開網頁閱讀，也可以下載對應的 Markdown、程式、PDF 或簡報教材。
+            下載區現在依照開始前設定與 8 個正式主題整理。每個主題都可以直接打開網頁閱讀，也可以下載對應的 Markdown、程式、PDF 或簡報教材。
           </p>
           <div class="action-row">
-            <a class="button primary" href="#topic-downloads">查看主題教材</a>
+            <a class="button primary" href="#required-downloads">先看必備檔案</a>
+            <a class="button secondary" href="#topic-downloads">查看主題教材</a>
             <a class="button ghost" href="index.html">回首頁</a>
           </div>
         </div>
@@ -1151,6 +1614,42 @@ def render_downloads() -> str:
             <span class="zone-badge teacher">Format</span>
             <h3>網頁與 Markdown 並存</h3>
             <p>網頁適合直接閱讀與投影，Markdown 適合教師備課、修改與整理。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="required-downloads" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Required Files</p>
+          <h2>開始前必備檔案</h2>
+          <p>這些檔案不是額外補充，而是讓 01-05 小車主線能順利執行的前置工具。</p>
+        </div>
+        <div class="download-grid">
+          <article class="download-card">
+            <span class="download-type">Start Here</span>
+            <h3>開始前設定頁</h3>
+            <p>照步驟完成 Thonny、MicroPython、mango 函式庫、import 測試與馬達校正。</p>
+            <a class="button primary block" href="setup.html">打開開始設定</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">Library</span>
+            <h3>mango 函式庫</h3>
+            <p>02-05 中許多 RGB、超音波、馬達、循跡 cases 需要先把這個資料夾上傳到 Pico。</p>
+            <a class="button ghost block" href="downloads/extensions/board-library/mango-library.zip">下載 mango-library.zip</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">Calibration</span>
+            <h3>馬達校正程式</h3>
+            <p>進入 03 小車移動前，先確認左右輪與前後方向都正確。</p>
+            <a class="button primary block" href="code-viewer.html?file=motor-calibration">檢視程式</a>
+            <a class="button ghost block" href="downloads/motor-calibration.py">下載 motor-calibration.py</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">Import Test</span>
+            <h3>mango import 測試</h3>
+            <p>用最短程式確認 Pico 上已經可以載入 mango 函式庫。</p>
+            <a class="button primary block" href="code-viewer.html?file=mango-import-test">檢視程式</a>
+            <a class="button ghost block" href="downloads/mango-import-test.py">下載 mango-import-test.py</a>
           </article>
         </div>
       </section>
@@ -1276,6 +1775,7 @@ def main() -> None:
     copy_extra_sources()
     write_text(REPO / "index.html", render_index())
     write_text(REPO / "downloads.html", render_downloads())
+    write_text(REPO / "setup.html", render_setup_page())
     for topic in TOPICS:
         write_text(REPO / topic.output, render_topic_page(topic))
     for topic in SUPPLEMENT_TOPICS:

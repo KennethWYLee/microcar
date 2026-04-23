@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260423-codewhite2">
+  <link rel="stylesheet" href="styles.css?v=20260423-selfstudy">
 </head>
 <body class="home-page">
   <div class="page-shell">
@@ -22,6 +22,7 @@
       </a>
       <nav class="site-nav" aria-label="主題導覽">
         <a href="bootcamp.html">BootCamp</a>
+        <a href="setup.html">開始設定</a>
         <a href="topic-01-intro.html">01 入門</a>
         <a href="topic-02-sensor-output.html">02 感測與輸出</a>
         <a href="topic-03-car-motion.html">03 小車移動</a>
@@ -44,8 +45,8 @@
             後續再加入藍芽遙控小車、Python 電路板教材與擺頭電扇應用，讓課程可以從小車走到完整作品。
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="bootcamp.html">先看 BootCamp</a>
-            <a class="button secondary" href="topic-01-intro.html">從主題 1 開始</a>
+            <a class="button primary" href="setup.html">先做開始設定</a>
+            <a class="button secondary" href="bootcamp.html">一小時 BootCamp</a>
             <a class="button ghost" href="downloads.html">下載教材</a>
           </div>
           <div class="hero-points">
@@ -87,6 +88,60 @@
           </article>
         </div>
       </section>
+
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Microcar Path</p>
+          <h2>從零到能操控小車的主線</h2>
+          <p>如果學生的目標是完整操控小車，建議先走這條主線。06-08 可以在核心能力完成後再作為進階與延伸。</p>
+        </div>
+        <div class="resource-roadmap">
+          <article class="content-card resource-step">
+            <span class="zone-badge student">00</span>
+            <strong>開始前設定</strong>
+            <p>先讓 Thonny、MicroPython、mango 函式庫與馬達方向全部確認正確。</p>
+            <a class="button ghost" href="setup.html">前往這一步</a>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge student">BootCamp</span>
+            <strong>一小時快速體驗</strong>
+            <p>用完整程式先讓小車前進、後退、左轉、右轉與停止，建立成功經驗。</p>
+            <a class="button ghost" href="bootcamp.html">前往這一步</a>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge student">01</span>
+            <strong>輸出入與狀態</strong>
+            <p>用 LED、按鈕、狀態變數和 Shell 指令建立硬體控制直覺。</p>
+            <a class="button ghost" href="topic-01-intro.html">前往這一步</a>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge student">02</span>
+            <strong>感測與回饋</strong>
+            <p>把蜂鳴器、RGB、超音波與 ADC 讀值轉成可以觀察的聲光反應。</p>
+            <a class="button ghost" href="topic-02-sensor-output.html">前往這一步</a>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge student">03</span>
+            <strong>馬達與校正</strong>
+            <p>確認左右輪、方向、速度差與基本動作，讓小車可以穩定受控。</p>
+            <a class="button ghost" href="topic-03-car-motion.html">前往這一步</a>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge student">04</span>
+            <strong>自走任務</strong>
+            <p>把馬達和感測器整合成避障、循跡、伺服掃描等無人車行為。</p>
+            <a class="button ghost" href="topic-04-autonomous-car.html">前往這一步</a>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge student">05</span>
+            <strong>專題整合</strong>
+            <p>用狀態機、策略比較與循跡演算法完成可以展示與調參的作品。</p>
+            <a class="button ghost" href="topic-05-project-cases.html">前往這一步</a>
+          </article>
+        </div>
+      </section>
+
 
       <section class="section reveal">
         <div class="section-heading">
@@ -155,7 +210,7 @@
           <article class="product-panel product-advanced">
             <span class="zone-badge teacher">主題 06</span>
             <h3>06 藍芽遙控小車：Flutter App 與 Pico BLE</h3>
-            <p>本主題使用既有 Flutter 介面與 Pico BLE 小車程式，整理成藍芽掃描、連線、送出指令與小車動作對應的教學頁。</p>
+            <p>本主題是進階遙控單元，建議先完成 03 小車移動，再使用既有 Flutter 介面與 Pico BLE 小車程式完成手機控制。</p>
             <div class="chip-list compact"><span>Flutter</span><span>BLE</span><span>Remote</span></div>
             <a class="button primary" href="topic-06-bluetooth-car.html">進入主題 06</a>
           </article>
@@ -169,7 +224,7 @@
           <article class="product-panel product-teacher">
             <span class="zone-badge teacher">主題 08</span>
             <h3>08 電路板應用：擺頭電扇</h3>
-            <p>本主題使用擺頭電扇-課程簡報，整理風扇擺頭機構、齒輪與連桿、Pico X2 腳位、輸入輸出與 PWM 控制應用。</p>
+            <p>本主題是延伸作品單元，使用擺頭電扇-課程簡報整理風扇機構、Pico X2 腳位與 PWM 控制應用，不屬於小車核心必修。</p>
             <div class="chip-list compact"><span>Fan</span><span>Mechanism</span><span>PWM</span></div>
             <a class="button primary" href="topic-08-fan-application.html">進入主題 08</a>
           </article>
@@ -274,7 +329,7 @@
           <article class="download-card">
             <span class="download-type">主題 06</span>
             <h3>06 藍芽遙控小車：Flutter App 與 Pico BLE</h3>
-            <p>本主題使用既有 Flutter 介面與 Pico BLE 小車程式，整理成藍芽掃描、連線、送出指令與小車動作對應的教學頁。</p>
+            <p>本主題是進階遙控單元，建議先完成 03 小車移動，再使用既有 Flutter 介面與 Pico BLE 小車程式完成手機控制。</p>
             <a class="button ghost block" href="downloads/topic-06-bluetooth-car/main.dart">下載 Flutter main.dart</a>
           </article>
           <article class="download-card">
@@ -286,13 +341,13 @@
           <article class="download-card">
             <span class="download-type">主題 08</span>
             <h3>08 電路板應用：擺頭電扇</h3>
-            <p>本主題使用擺頭電扇-課程簡報，整理風扇擺頭機構、齒輪與連桿、Pico X2 腳位、輸入輸出與 PWM 控制應用。</p>
+            <p>本主題是延伸作品單元，使用擺頭電扇-課程簡報整理風扇機構、Pico X2 腳位與 PWM 控制應用，不屬於小車核心必修。</p>
             <a class="button ghost block" href="downloads/topic-08-fan-application/fan-course-slides.pptx">下載擺頭電扇簡報</a>
           </article>
         </div>
       </section>
     </main>
   </div>
-  <script src="script.js?v=20260423-codewhite2"></script>
+  <script src="script.js?v=20260423-selfstudy"></script>
 </body>
 </html>
