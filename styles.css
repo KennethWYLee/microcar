@@ -477,6 +477,61 @@ button.button {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.file-map-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.file-tree-card,
+.file-flow-card {
+  display: grid;
+  gap: 14px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.76);
+  box-shadow: 0 14px 32px rgba(31, 43, 58, 0.07);
+}
+
+.file-tree-card h3,
+.file-flow-card h3 {
+  margin: 0;
+}
+
+.file-tree {
+  min-height: auto;
+  padding: 18px;
+  border-radius: 18px;
+  color: #101820;
+  background:
+    linear-gradient(90deg, rgba(29, 79, 122, 0.05) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(29, 79, 122, 0.05) 1px, transparent 1px),
+    #ffffff;
+  background-size: 18px 18px;
+}
+
+.file-tree code {
+  color: #101820 !important;
+  line-height: 1.75;
+  white-space: pre;
+}
+
+.file-flow-card {
+  margin-top: 18px;
+}
+
+.file-flow-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: var(--muted);
+  line-height: 1.85;
+}
+
+.file-flow-list li + li {
+  margin-top: 0.45rem;
+}
+
 .visual-story-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -1567,6 +1622,7 @@ pre code {
   .handout-grid,
   .check-grid,
   .troubleshoot-grid,
+  .file-map-grid,
   .teacher-console-grid,
   .student-mission-track,
   .teacher-grid,
@@ -1694,6 +1750,7 @@ pre code {
   .visual-story-grid,
   .handout-grid,
   .check-grid,
+  .file-map-grid,
   .troubleshoot-grid {
     grid-template-columns: 1fr;
   }

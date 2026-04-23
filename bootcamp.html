@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260423-selfstudy">
+  <link rel="stylesheet" href="styles.css?v=20260423-filemap">
 </head>
 <body class="bootcamp-page">
   <div class="page-shell">
@@ -66,6 +66,42 @@
             <p class="visual-note">本主題使用真實 Raspberry Pi Pico 小車與 Thonny 操作流程作為教學基礎。</p>
           </article>
         </div>
+      </section>
+
+      <section id="file-location" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">File Location</p>
+          <h2>BootCamp 只需要一份主程式，先貼上執行，不急著存成 main.py</h2>
+          <p>這一小時的目標是讓小車動起來。學生可以從網頁直接複製完整程式到 Thonny，不需要先下載整包檔案，也不需要把網站資料夾上傳到 Pico。</p>
+        </div>
+        <div class="file-map-grid">
+          <article class="file-tree-card">
+            <span class="zone-badge teacher">Computer</span>
+            <h3>電腦本機端</h3>
+            <pre class="file-tree"><code>microcar/
+├─ bootcamp.html
+├─ downloads/keyboard-car-control.py  ← 備用下載檔
+└─ assets/bootcamp-step-*.gif         ← 網頁示意圖，不用上傳</code></pre>
+          </article>
+          <article class="file-tree-card">
+            <span class="zone-badge student">Pico</span>
+            <h3>Raspberry Pi Pico 端</h3>
+            <pre class="file-tree"><code>Raspberry Pi Pico /
+├─ keyboard_car.py       ← BootCamp 練習檔
+└─ main.py               ← 只有要開機自動執行才改成這個名字</code></pre>
+          </article>
+        </div>
+        <article class="content-card file-flow-card">
+          <span class="zone-badge student">Class Flow</span>
+          <h3>上課時學生照這樣做</h3>
+          <ol class="file-flow-list">
+            <li>在電腦打開本頁，往下找到完整程式。</li>
+            <li>在 Thonny 按 File &gt; New，建立新的 Python 檔。</li>
+            <li>把完整程式貼上，先按 Run 測試小車動作。</li>
+            <li>要存檔時可以命名為 <code>keyboard_car.py</code>；不要一開始就存成 <code>main.py</code>。</li>
+            <li>如果課後希望小車一插電就啟動，再把穩定版本另存成 Pico 上的 <code>main.py</code>。</li>
+          </ol>
+        </article>
       </section>
 
       <section id="thonny-steps" class="section">
@@ -284,7 +320,7 @@ else:
       </section>
     </main>
   </div>
-  <script src="script.js?v=20260423-selfstudy"></script>
+  <script src="script.js?v=20260423-filemap"></script>
 </body>
 </html>
 

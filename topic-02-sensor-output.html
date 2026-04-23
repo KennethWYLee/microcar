@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260423-selfstudy">
+  <link rel="stylesheet" href="styles.css?v=20260423-filemap">
 </head>
 <body class="topic-page">
   <div class="page-shell">
@@ -86,6 +86,45 @@
             <a class="button ghost" href="downloads/motor-calibration.py">下載馬達校正程式</a>
           </article>
         </div>
+      </section>
+
+
+
+      <section id="file-location" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">File Location</p>
+          <h2>02 感測與輸出的檔案放置方式</h2>
+          <p>本章會進入蜂鳴器、RGB、超音波與感測讀值；只要程式有寫 from mango import ...，mango 資料夾就必須已經在 Pico 上。</p>
+        </div>
+        <div class="file-map-grid">
+          <article class="file-tree-card">
+            <span class="zone-badge teacher">Computer</span>
+            <h3>電腦本機端</h3>
+            <pre class="file-tree"><code>microcar/
+├─ topic-02-sensor-output.html
+├─ downloads/sensor-rgb-warmup.py
+├─ downloads/distance-sensor-rgb.py
+└─ downloads/case-md/02_感測輸出_cases.md</code></pre>
+          </article>
+          <article class="file-tree-card">
+            <span class="zone-badge student">Pico</span>
+            <h3>Raspberry Pi Pico 端</h3>
+            <pre class="file-tree"><code>Raspberry Pi Pico /
+├─ mango/                     ← RGB、超音波常用
+├─ sensor_test.py             ← 當天練習程式
+└─ main.py                    ← 完成後才改存自動執行</code></pre>
+          </article>
+        </div>
+        <article class="content-card file-flow-card">
+          <span class="zone-badge student">Class Flow</span>
+          <h3>上課時學生照這樣做</h3>
+          <ol class="file-flow-list">
+            <li>先確認 setup.html 的 mango import 測試已通過。</li>
+            <li>複製本章 case 程式到 Thonny，新檔先直接 Run。</li>
+            <li>如果程式需要 mango，確認 Pico 根目錄看得到 mango 資料夾。</li>
+            <li>感測器讀值不穩時，先檢查接線與腳位，再檢查程式。</li>
+          </ol>
+        </article>
       </section>
 
 
@@ -875,6 +914,6 @@ while True:
       </section>
     </main>
   </div>
-  <script src="script.js?v=20260423-selfstudy"></script>
+  <script src="script.js?v=20260423-filemap"></script>
 </body>
 </html>

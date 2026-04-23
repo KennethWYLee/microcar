@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260423-selfstudy">
+  <link rel="stylesheet" href="styles.css?v=20260423-filemap">
 </head>
 <body class="downloads-page">
   <div class="page-shell">
@@ -57,6 +57,46 @@
           </article>
         </div>
       </section>
+
+
+      <section id="file-location" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">File Location</p>
+          <h2>下載檔不是全部都要上傳到 Pico</h2>
+          <p>下載區的檔案有兩種：教材檔留在電腦閱讀，MicroPython 函式庫或要執行的程式才放到 Pico。</p>
+        </div>
+        <div class="file-map-grid">
+          <article class="file-tree-card">
+            <span class="zone-badge teacher">Computer</span>
+            <h3>留在電腦本機閱讀或備課</h3>
+            <pre class="file-tree"><code>downloads/
+├─ case-md/                   ← Markdown 教材，給老師備課
+├─ robot-programming-practice-python.pdf
+├─ topic-08-fan-application/fan-course-slides.pptx
+└─ topic-06-bluetooth-car/    ← Flutter App 與藍芽專案素材</code></pre>
+          </article>
+          <article class="file-tree-card">
+            <span class="zone-badge student">Pico</span>
+            <h3>需要時才上傳到 Pico</h3>
+            <pre class="file-tree"><code>Raspberry Pi Pico /
+├─ mango/                     ← 02-05 常用函式庫
+├─ main.py                    ← 最終要自動執行的主程式
+├─ motor-calibration.py       ← 可暫存，用完可刪
+└─ blue.py / bot.py / moto.py ← 06 藍芽小車需要的 Pico 端檔案</code></pre>
+          </article>
+        </div>
+        <article class="content-card file-flow-card">
+          <span class="zone-badge student">Class Flow</span>
+          <h3>上課時學生照這樣做</h3>
+          <ol class="file-flow-list">
+            <li>先看下載卡片的說明，判斷它是教材、函式庫、還是 Pico 程式。</li>
+            <li>教材檔留在電腦；函式庫資料夾與 Pico 程式才用 Thonny 上傳。</li>
+            <li>如果只是從網頁複製程式碼，可以不用先下載 .py 檔，直接貼到 Thonny 測試。</li>
+            <li>每次遇到 ModuleNotFoundError，先回來確認對應資料夾是否真的在 Pico 上。</li>
+          </ol>
+        </article>
+      </section>
+
 
       <section id="required-downloads" class="section reveal">
         <div class="section-heading">
@@ -183,6 +223,6 @@
       </section>
     </main>
   </div>
-  <script src="script.js?v=20260423-selfstudy"></script>
+  <script src="script.js?v=20260423-filemap"></script>
 </body>
 </html>

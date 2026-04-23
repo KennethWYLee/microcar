@@ -23,7 +23,7 @@ ROBOT_HANDOUT_DIR = ROBOT_DIR / "講義"
 ROBOT_WEB_DIR = ROBOT_DIR / "無人車網頁開發"
 DOWNLOAD_TOPIC_06_DIR = REPO / "downloads" / "topic-06-bluetooth-car"
 DOWNLOAD_TOPIC_08_DIR = REPO / "downloads" / "topic-08-fan-application"
-ASSET_VERSION = "20260423-selfstudy"
+ASSET_VERSION = "20260423-filemap"
 
 
 @dataclass(frozen=True)
@@ -257,6 +257,263 @@ TOPIC_CHECKLISTS: dict[str, tuple[str, ...]] = {
         "我能把 PWM 調速概念從小車延伸到風扇馬達。",
         "我能從作品需求反推需要哪些輸入、輸出和控制流程。",
     ),
+}
+
+
+FILE_LOCATION_GUIDES: dict[str, dict[str, tuple[str, ...] | str]] = {
+    "setup.html": {
+        "title": "先分清楚：電腦本機端 vs Pico 板子端",
+        "intro": "學生只要記住一件事：下載檔會先在電腦裡，真正要被 Pico import 或開機執行的檔案，才需要用 Thonny 上傳到 Pico。",
+        "computer_title": "電腦本機端",
+        "computer_tree": (
+            "microcar/",
+            "├─ setup.html                 ← 先看這一頁",
+            "├─ downloads/",
+            "│  ├─ mango-import-test.py    ← 複製到 Thonny 測試",
+            "│  ├─ motor-calibration.py    ← 複製到 Thonny 校正馬達",
+            "│  └─ mango-library.zip       ← 解壓縮後準備上傳",
+            "└─ topic-01 到 topic-08        ← 閱讀教材，不會自動跑到 Pico",
+        ),
+        "pico_title": "Raspberry Pi Pico 端",
+        "pico_tree": (
+            "Raspberry Pi Pico /",
+            "├─ mango/                     ← 必須上傳，給 from mango import ... 使用",
+            "│  ├─ __init__.py",
+            "│  └─ ...",
+            "├─ main.py                    ← 只有要開機自動執行才存這個名字",
+            "└─ practice.py                ← 平常練習可用任意檔名",
+        ),
+        "flow": (
+            "先在電腦打開網站與下載區，確認今天要用的程式或 zip。",
+            "在 Thonny 左側檔案視窗分清楚 This computer 與 Raspberry Pi Pico。",
+            "把 mango 資料夾上傳到 Pico 根目錄；PDF、PPT、Markdown 不需要上傳到 Pico。",
+            "練習程式先貼到 Thonny 按 Run，確定成功後再決定是否存到 Pico。",
+            "只有希望 Pico 重新插電後自動跑，才把最後版本存成 Pico 上的 main.py。",
+        ),
+    },
+    "downloads.html": {
+        "title": "下載檔不是全部都要上傳到 Pico",
+        "intro": "下載區的檔案有兩種：教材檔留在電腦閱讀，MicroPython 函式庫或要執行的程式才放到 Pico。",
+        "computer_title": "留在電腦本機閱讀或備課",
+        "computer_tree": (
+            "downloads/",
+            "├─ case-md/                   ← Markdown 教材，給老師備課",
+            "├─ robot-programming-practice-python.pdf",
+            "├─ topic-08-fan-application/fan-course-slides.pptx",
+            "└─ topic-06-bluetooth-car/    ← Flutter App 與藍芽專案素材",
+        ),
+        "pico_title": "需要時才上傳到 Pico",
+        "pico_tree": (
+            "Raspberry Pi Pico /",
+            "├─ mango/                     ← 02-05 常用函式庫",
+            "├─ main.py                    ← 最終要自動執行的主程式",
+            "├─ motor-calibration.py       ← 可暫存，用完可刪",
+            "└─ blue.py / bot.py / moto.py ← 06 藍芽小車需要的 Pico 端檔案",
+        ),
+        "flow": (
+            "先看下載卡片的說明，判斷它是教材、函式庫、還是 Pico 程式。",
+            "教材檔留在電腦；函式庫資料夾與 Pico 程式才用 Thonny 上傳。",
+            "如果只是從網頁複製程式碼，可以不用先下載 .py 檔，直接貼到 Thonny 測試。",
+            "每次遇到 ModuleNotFoundError，先回來確認對應資料夾是否真的在 Pico 上。",
+        ),
+    },
+    "topic-01-intro.html": {
+        "title": "01 入門的檔案放置方式",
+        "intro": "本章多數 case 是 LED、按鈕與狀態控制，重點是學會在 Thonny 建立新檔、貼上程式、按 Run。基礎 case 通常不需要 mango。",
+        "computer_title": "電腦本機端",
+        "computer_tree": (
+            "microcar/",
+            "├─ topic-01-intro.html        ← 主要閱讀頁",
+            "└─ downloads/case-md/01_入門_cases.md",
+        ),
+        "pico_title": "Raspberry Pi Pico 端",
+        "pico_tree": (
+            "Raspberry Pi Pico /",
+            "├─ led_blink.py               ← 練習檔名可自訂",
+            "├─ button_test.py             ← 練習檔名可自訂",
+            "└─ main.py                    ← 只有要開機自動跑才使用",
+        ),
+        "flow": (
+            "打開本頁 case，複製第一段完整程式。",
+            "在 Thonny 按 File > New，貼上程式後先按 Run。",
+            "若要存檔，練習時可存到電腦；要放進 Pico 才選 Raspberry Pi Pico。",
+            "不要一開始就全部存成 main.py，先確認程式真的會動。",
+        ),
+    },
+    "topic-02-sensor-output.html": {
+        "title": "02 感測與輸出的檔案放置方式",
+        "intro": "本章會進入蜂鳴器、RGB、超音波與感測讀值；只要程式有寫 from mango import ...，mango 資料夾就必須已經在 Pico 上。",
+        "computer_title": "電腦本機端",
+        "computer_tree": (
+            "microcar/",
+            "├─ topic-02-sensor-output.html",
+            "├─ downloads/sensor-rgb-warmup.py",
+            "├─ downloads/distance-sensor-rgb.py",
+            "└─ downloads/case-md/02_感測輸出_cases.md",
+        ),
+        "pico_title": "Raspberry Pi Pico 端",
+        "pico_tree": (
+            "Raspberry Pi Pico /",
+            "├─ mango/                     ← RGB、超音波常用",
+            "├─ sensor_test.py             ← 當天練習程式",
+            "└─ main.py                    ← 完成後才改存自動執行",
+        ),
+        "flow": (
+            "先確認 setup.html 的 mango import 測試已通過。",
+            "複製本章 case 程式到 Thonny，新檔先直接 Run。",
+            "如果程式需要 mango，確認 Pico 根目錄看得到 mango 資料夾。",
+            "感測器讀值不穩時，先檢查接線與腳位，再檢查程式。",
+        ),
+    },
+    "topic-03-car-motion.html": {
+        "title": "03 小車移動的檔案放置方式",
+        "intro": "本章開始真正驅動馬達。馬達校正程式可以留在電腦複製貼上，也可以暫時存到 Pico；但最終控制程式才需要保留為 main.py。",
+        "computer_title": "電腦本機端",
+        "computer_tree": (
+            "microcar/",
+            "├─ topic-03-car-motion.html",
+            "├─ downloads/motor-calibration.py",
+            "├─ downloads/basic-motor-functions.py",
+            "└─ downloads/case-md/03_小車移動_cases.md",
+        ),
+        "pico_title": "Raspberry Pi Pico 端",
+        "pico_tree": (
+            "Raspberry Pi Pico /",
+            "├─ mango/                     ← 若使用 Motor 模組就需要",
+            "├─ motor_test.py              ← 馬達測試或校正用",
+            "├─ keyboard_car.py            ← 手動控制練習",
+            "└─ main.py                    ← 確定方向正確後才存",
+        ),
+        "flow": (
+            "先跑 motor-calibration.py，確認左右輪與前後方向。",
+            "方向錯誤時，先修改 RIGHT_SIGN 或 LEFT_SIGN，不要急著改後面所有程式。",
+            "複製本章 case 程式到 Thonny，按 Run 觀察小車。",
+            "完成穩定前進、後退、轉向後，再進入 04 無人車。",
+        ),
+    },
+    "topic-04-autonomous-car.html": {
+        "title": "04 無人車任務的檔案放置方式",
+        "intro": "本章把感測器與馬達整合成避障、循跡與伺服掃描。Pico 上需要有 mango，也需要保留當天要執行的主程式。",
+        "computer_title": "電腦本機端",
+        "computer_tree": (
+            "microcar/",
+            "├─ topic-04-autonomous-car.html",
+            "├─ downloads/line-sensor-read.py",
+            "├─ downloads/line-following-intro.py",
+            "└─ downloads/case-md/04_無人車_cases.md",
+        ),
+        "pico_title": "Raspberry Pi Pico 端",
+        "pico_tree": (
+            "Raspberry Pi Pico /",
+            "├─ mango/                     ← 感測器與馬達模組",
+            "├─ line_sensor_test.py        ← 先讀循跡感測器",
+            "├─ obstacle_car.py            ← 避障練習",
+            "└─ main.py                    ← 最終任務版本",
+        ),
+        "flow": (
+            "先單獨測感測器讀值，再接上馬達控制。",
+            "避障或循跡不穩時，先回到感測器測試檔，不要直接改整份大程式。",
+            "每完成一個任務版本，先另存檔名備份，再決定是否覆蓋 main.py。",
+            "完成本章代表小車已經能根據環境做出反應。",
+        ),
+    },
+    "topic-05-project-cases.html": {
+        "title": "05 專題化的檔案放置方式",
+        "intro": "本章適合把專題版本分成多個檔名保存，例如 base、p、pid、final，避免學生把能跑的版本覆蓋掉。",
+        "computer_title": "電腦本機端",
+        "computer_tree": (
+            "microcar/",
+            "├─ topic-05-project-cases.html",
+            "├─ downloads/line-error-to-speed.py",
+            "├─ downloads/line-following-p.py",
+            "├─ downloads/line-following-pid.py",
+            "└─ downloads/case-md/05_專題化_cases.md",
+        ),
+        "pico_title": "Raspberry Pi Pico 端",
+        "pico_tree": (
+            "Raspberry Pi Pico /",
+            "├─ mango/",
+            "├─ project_base.py            ← 可以跑的基礎版",
+            "├─ project_pid.py             ← 調參實驗版",
+            "└─ main.py                    ← 最後展示版",
+        ),
+        "flow": (
+            "先複製基礎版，確認能跑再做策略改良。",
+            "每次調整演算法前，先保留上一個成功版本。",
+            "把參數寫在程式上方，方便比較不同策略。",
+            "展示前再把最穩定版本存成 Pico 上的 main.py。",
+        ),
+    },
+    "topic-06-bluetooth-car.html": {
+        "title": "06 藍芽遙控小車的檔案放置方式",
+        "intro": "這個主題有兩邊：Flutter App 留在電腦或手機端開發，Pico 端只放 BLE 與小車控制需要的 Python 檔案。",
+        "computer_title": "電腦本機端 / App 端",
+        "computer_tree": (
+            "downloads/topic-06-bluetooth-car/",
+            "├─ main.dart                  ← Flutter App 主畫面",
+            "├─ controler_ble.7z           ← App 專案壓縮檔",
+            "└─ flutter-app-preview.png    ← 網頁預覽圖",
+        ),
+        "pico_title": "Raspberry Pi Pico 端",
+        "pico_tree": (
+            "Raspberry Pi Pico /",
+            "├─ blue.py                    ← BLE 通訊",
+            "├─ bot.py                     ← 小車動作",
+            "├─ moto.py                    ← 馬達控制",
+            "├─ rcbot.py                   ← 主程式",
+            "└─ main.py                    ← 若要開機自動啟動，可由 rcbot.py 改名",
+        ),
+        "flow": (
+            "先完成 03 小車移動，確認不靠 App 也能前進、後退與轉向。",
+            "再把 Pico 端 BLE Python 檔案上傳到 Pico。",
+            "Flutter 專案留在電腦端，不要整包上傳到 Pico。",
+            "App 連線失敗時，先用 Thonny Shell 確認 Pico 端程式有啟動。",
+        ),
+    },
+    "topic-07-board-python.html": {
+        "title": "07 電路板教材的檔案放置方式",
+        "intro": "PDF 是給學生與老師查表用，留在電腦閱讀即可；Pico 上只需要放正在練習的 MicroPython 程式。",
+        "computer_title": "電腦本機端",
+        "computer_tree": (
+            "downloads/",
+            "└─ robot-programming-practice-python.pdf ← 腳位與電路板導讀",
+        ),
+        "pico_title": "Raspberry Pi Pico 端",
+        "pico_tree": (
+            "Raspberry Pi Pico /",
+            "├─ pin_test.py                ← 腳位測試",
+            "├─ pwm_test.py                ← PWM 測試",
+            "└─ main.py                    ← 只有最終作品才需要",
+        ),
+        "flow": (
+            "先在 PDF 找到元件與腳位，再回到網頁看操作範例。",
+            "練習程式從 Thonny 新檔開始，先 Run 再存檔。",
+            "PDF、圖片與講義不需要上傳到 Pico。",
+            "遇到元件不動時，先比對接線、腳位與程式中的 Pin 編號。",
+        ),
+    },
+    "topic-08-fan-application.html": {
+        "title": "08 電路板應用的檔案放置方式",
+        "intro": "擺頭電扇簡報留在電腦端教學；Pico 上只放控制馬達、伺服或 PWM 的程式。",
+        "computer_title": "電腦本機端",
+        "computer_tree": (
+            "downloads/topic-08-fan-application/",
+            "└─ fan-course-slides.pptx     ← 教師授課與作品說明",
+        ),
+        "pico_title": "Raspberry Pi Pico 端",
+        "pico_tree": (
+            "Raspberry Pi Pico /",
+            "├─ fan_pwm_test.py            ← 先測風扇或馬達速度",
+            "├─ servo_scan.py              ← 再測擺頭角度",
+            "└─ main.py                    ← 最終擺頭電扇作品",
+        ),
+        "flow": (
+            "先用簡報理解作品結構，不要把 PPT 上傳到 Pico。",
+            "先分開測 PWM、馬達與伺服，再整合成完整作品。",
+            "每次接線改動後，先跑最小測試檔確認硬體正常。",
+            "最後展示版本再存成 main.py。",
+        ),
+    },
 }
 
 
@@ -586,6 +843,47 @@ def render_completion_checklist(output: str) -> str:
 """
 
 
+def render_file_location_section(page: str) -> str:
+    guide = FILE_LOCATION_GUIDES.get(page)
+    if not guide:
+        return ""
+
+    flow_items = "\n".join(
+        f"            <li>{html.escape(step)}</li>"
+        for step in guide["flow"]  # type: ignore[index]
+    )
+    computer_tree = "\n".join(guide["computer_tree"])  # type: ignore[index]
+    pico_tree = "\n".join(guide["pico_tree"])  # type: ignore[index]
+    return f"""
+      <section id="file-location" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">File Location</p>
+          <h2>{html.escape(str(guide["title"]))}</h2>
+          <p>{html.escape(str(guide["intro"]))}</p>
+        </div>
+        <div class="file-map-grid">
+          <article class="file-tree-card">
+            <span class="zone-badge teacher">Computer</span>
+            <h3>{html.escape(str(guide["computer_title"]))}</h3>
+            <pre class="file-tree"><code>{html.escape(computer_tree)}</code></pre>
+          </article>
+          <article class="file-tree-card">
+            <span class="zone-badge student">Pico</span>
+            <h3>{html.escape(str(guide["pico_title"]))}</h3>
+            <pre class="file-tree"><code>{html.escape(pico_tree)}</code></pre>
+          </article>
+        </div>
+        <article class="content-card file-flow-card">
+          <span class="zone-badge student">Class Flow</span>
+          <h3>上課時學生照這樣做</h3>
+          <ol class="file-flow-list">
+{flow_items}
+          </ol>
+        </article>
+      </section>
+"""
+
+
 def render_topic_page(topic: Topic) -> str:
     markdown = (SOURCE_DIR / topic.source).read_text(encoding="utf-8")
     intro, cases = split_cases(markdown)
@@ -648,6 +946,8 @@ def render_topic_page(topic: Topic) -> str:
       </section>
 
 {render_preflight_section(topic.output)}
+
+{render_file_location_section(topic.output)}
 
       <section class="section reveal">
         <div class="section-heading">
@@ -775,6 +1075,8 @@ def render_static_topic_page(topic: StaticTopic, body_html: str) -> str:
       </section>
 
 {render_preflight_section(topic.output)}
+
+{render_file_location_section(topic.output)}
 
 {body_html}
 
@@ -1297,6 +1599,8 @@ stop()"""
         </div>
       </section>
 
+{render_file_location_section("setup.html")}
+
       <section id="setup-steps" class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">Required Steps</p>
@@ -1617,6 +1921,8 @@ def render_downloads() -> str:
           </article>
         </div>
       </section>
+
+{render_file_location_section("downloads.html")}
 
       <section id="required-downloads" class="section reveal">
         <div class="section-heading">
