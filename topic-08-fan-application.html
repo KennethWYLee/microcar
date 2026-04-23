@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260423-selfstudy">
+  <link rel="stylesheet" href="styles.css?v=20260423-filemap">
 </head>
 <body class="topic-page">
   <div class="page-shell">
@@ -86,6 +86,42 @@
             <a class="button ghost" href="topic-05-project-cases.html">回主題 05</a>
           </article>
         </div>
+      </section>
+
+
+
+      <section id="file-location" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">File Location</p>
+          <h2>08 電路板應用的檔案放置方式</h2>
+          <p>擺頭電扇簡報留在電腦端教學；Pico 上只放控制馬達、伺服或 PWM 的程式。</p>
+        </div>
+        <div class="file-map-grid">
+          <article class="file-tree-card">
+            <span class="zone-badge teacher">Computer</span>
+            <h3>電腦本機端</h3>
+            <pre class="file-tree"><code>downloads/topic-08-fan-application/
+└─ fan-course-slides.pptx     ← 教師授課與作品說明</code></pre>
+          </article>
+          <article class="file-tree-card">
+            <span class="zone-badge student">Pico</span>
+            <h3>Raspberry Pi Pico 端</h3>
+            <pre class="file-tree"><code>Raspberry Pi Pico /
+├─ fan_pwm_test.py            ← 先測風扇或馬達速度
+├─ servo_scan.py              ← 再測擺頭角度
+└─ main.py                    ← 最終擺頭電扇作品</code></pre>
+          </article>
+        </div>
+        <article class="content-card file-flow-card">
+          <span class="zone-badge student">Class Flow</span>
+          <h3>上課時學生照這樣做</h3>
+          <ol class="file-flow-list">
+            <li>先用簡報理解作品結構，不要把 PPT 上傳到 Pico。</li>
+            <li>先分開測 PWM、馬達與伺服，再整合成完整作品。</li>
+            <li>每次接線改動後，先跑最小測試檔確認硬體正常。</li>
+            <li>最後展示版本再存成 main.py。</li>
+          </ol>
+        </article>
       </section>
 
 
@@ -278,6 +314,6 @@ fan_motor.duty_u16(0)</code></pre></article>
       </section>
     </main>
   </div>
-  <script src="script.js?v=20260423-selfstudy"></script>
+  <script src="script.js?v=20260423-filemap"></script>
 </body>
 </html>

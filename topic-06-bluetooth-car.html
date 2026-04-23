@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260423-selfstudy">
+  <link rel="stylesheet" href="styles.css?v=20260423-filemap">
 </head>
 <body class="topic-page">
   <div class="page-shell">
@@ -86,6 +86,46 @@
             <a class="button ghost" href="topic-03-car-motion.html">回主題 03</a>
           </article>
         </div>
+      </section>
+
+
+
+      <section id="file-location" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">File Location</p>
+          <h2>06 藍芽遙控小車的檔案放置方式</h2>
+          <p>這個主題有兩邊：Flutter App 留在電腦或手機端開發，Pico 端只放 BLE 與小車控制需要的 Python 檔案。</p>
+        </div>
+        <div class="file-map-grid">
+          <article class="file-tree-card">
+            <span class="zone-badge teacher">Computer</span>
+            <h3>電腦本機端 / App 端</h3>
+            <pre class="file-tree"><code>downloads/topic-06-bluetooth-car/
+├─ main.dart                  ← Flutter App 主畫面
+├─ controler_ble.7z           ← App 專案壓縮檔
+└─ flutter-app-preview.png    ← 網頁預覽圖</code></pre>
+          </article>
+          <article class="file-tree-card">
+            <span class="zone-badge student">Pico</span>
+            <h3>Raspberry Pi Pico 端</h3>
+            <pre class="file-tree"><code>Raspberry Pi Pico /
+├─ blue.py                    ← BLE 通訊
+├─ bot.py                     ← 小車動作
+├─ moto.py                    ← 馬達控制
+├─ rcbot.py                   ← 主程式
+└─ main.py                    ← 若要開機自動啟動，可由 rcbot.py 改名</code></pre>
+          </article>
+        </div>
+        <article class="content-card file-flow-card">
+          <span class="zone-badge student">Class Flow</span>
+          <h3>上課時學生照這樣做</h3>
+          <ol class="file-flow-list">
+            <li>先完成 03 小車移動，確認不靠 App 也能前進、後退與轉向。</li>
+            <li>再把 Pico 端 BLE Python 檔案上傳到 Pico。</li>
+            <li>Flutter 專案留在電腦端，不要整包上傳到 Pico。</li>
+            <li>App 連線失敗時，先用 Thonny Shell 確認 Pico 端程式有啟動。</li>
+          </ol>
+        </article>
       </section>
 
 
@@ -255,6 +295,6 @@
       </section>
     </main>
   </div>
-  <script src="script.js?v=20260423-selfstudy"></script>
+  <script src="script.js?v=20260423-filemap"></script>
 </body>
 </html>

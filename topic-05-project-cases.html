@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260423-selfstudy">
+  <link rel="stylesheet" href="styles.css?v=20260423-filemap">
 </head>
 <body class="topic-page">
   <div class="page-shell">
@@ -86,6 +86,47 @@
             <a class="button ghost" href="downloads/motor-calibration.py">下載馬達校正程式</a>
           </article>
         </div>
+      </section>
+
+
+
+      <section id="file-location" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">File Location</p>
+          <h2>05 專題化的檔案放置方式</h2>
+          <p>本章適合把專題版本分成多個檔名保存，例如 base、p、pid、final，避免學生把能跑的版本覆蓋掉。</p>
+        </div>
+        <div class="file-map-grid">
+          <article class="file-tree-card">
+            <span class="zone-badge teacher">Computer</span>
+            <h3>電腦本機端</h3>
+            <pre class="file-tree"><code>microcar/
+├─ topic-05-project-cases.html
+├─ downloads/line-error-to-speed.py
+├─ downloads/line-following-p.py
+├─ downloads/line-following-pid.py
+└─ downloads/case-md/05_專題化_cases.md</code></pre>
+          </article>
+          <article class="file-tree-card">
+            <span class="zone-badge student">Pico</span>
+            <h3>Raspberry Pi Pico 端</h3>
+            <pre class="file-tree"><code>Raspberry Pi Pico /
+├─ mango/
+├─ project_base.py            ← 可以跑的基礎版
+├─ project_pid.py             ← 調參實驗版
+└─ main.py                    ← 最後展示版</code></pre>
+          </article>
+        </div>
+        <article class="content-card file-flow-card">
+          <span class="zone-badge student">Class Flow</span>
+          <h3>上課時學生照這樣做</h3>
+          <ol class="file-flow-list">
+            <li>先複製基礎版，確認能跑再做策略改良。</li>
+            <li>每次調整演算法前，先保留上一個成功版本。</li>
+            <li>把參數寫在程式上方，方便比較不同策略。</li>
+            <li>展示前再把最穩定版本存成 Pico 上的 main.py。</li>
+          </ol>
+        </article>
       </section>
 
 
@@ -1717,6 +1758,6 @@ while True:
       </section>
     </main>
   </div>
-  <script src="script.js?v=20260423-selfstudy"></script>
+  <script src="script.js?v=20260423-filemap"></script>
 </body>
 </html>

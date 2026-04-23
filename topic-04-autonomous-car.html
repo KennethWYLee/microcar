@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260423-selfstudy">
+  <link rel="stylesheet" href="styles.css?v=20260423-filemap">
 </head>
 <body class="topic-page">
   <div class="page-shell">
@@ -86,6 +86,46 @@
             <a class="button ghost" href="downloads/motor-calibration.py">下載馬達校正程式</a>
           </article>
         </div>
+      </section>
+
+
+
+      <section id="file-location" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">File Location</p>
+          <h2>04 無人車任務的檔案放置方式</h2>
+          <p>本章把感測器與馬達整合成避障、循跡與伺服掃描。Pico 上需要有 mango，也需要保留當天要執行的主程式。</p>
+        </div>
+        <div class="file-map-grid">
+          <article class="file-tree-card">
+            <span class="zone-badge teacher">Computer</span>
+            <h3>電腦本機端</h3>
+            <pre class="file-tree"><code>microcar/
+├─ topic-04-autonomous-car.html
+├─ downloads/line-sensor-read.py
+├─ downloads/line-following-intro.py
+└─ downloads/case-md/04_無人車_cases.md</code></pre>
+          </article>
+          <article class="file-tree-card">
+            <span class="zone-badge student">Pico</span>
+            <h3>Raspberry Pi Pico 端</h3>
+            <pre class="file-tree"><code>Raspberry Pi Pico /
+├─ mango/                     ← 感測器與馬達模組
+├─ line_sensor_test.py        ← 先讀循跡感測器
+├─ obstacle_car.py            ← 避障練習
+└─ main.py                    ← 最終任務版本</code></pre>
+          </article>
+        </div>
+        <article class="content-card file-flow-card">
+          <span class="zone-badge student">Class Flow</span>
+          <h3>上課時學生照這樣做</h3>
+          <ol class="file-flow-list">
+            <li>先單獨測感測器讀值，再接上馬達控制。</li>
+            <li>避障或循跡不穩時，先回到感測器測試檔，不要直接改整份大程式。</li>
+            <li>每完成一個任務版本，先另存檔名備份，再決定是否覆蓋 main.py。</li>
+            <li>完成本章代表小車已經能根據環境做出反應。</li>
+          </ol>
+        </article>
       </section>
 
 
@@ -1290,6 +1330,6 @@ while True:
       </section>
     </main>
   </div>
-  <script src="script.js?v=20260423-selfstudy"></script>
+  <script src="script.js?v=20260423-filemap"></script>
 </body>
 </html>

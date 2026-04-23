@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260423-selfstudy">
+  <link rel="stylesheet" href="styles.css?v=20260423-filemap">
 </head>
 <body class="topic-page">
   <div class="page-shell">
@@ -86,6 +86,42 @@
             <a class="button ghost" href="downloads/robot-programming-practice-python.pdf">下載 Python PDF</a>
           </article>
         </div>
+      </section>
+
+
+
+      <section id="file-location" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">File Location</p>
+          <h2>07 電路板教材的檔案放置方式</h2>
+          <p>PDF 是給學生與老師查表用，留在電腦閱讀即可；Pico 上只需要放正在練習的 MicroPython 程式。</p>
+        </div>
+        <div class="file-map-grid">
+          <article class="file-tree-card">
+            <span class="zone-badge teacher">Computer</span>
+            <h3>電腦本機端</h3>
+            <pre class="file-tree"><code>downloads/
+└─ robot-programming-practice-python.pdf ← 腳位與電路板導讀</code></pre>
+          </article>
+          <article class="file-tree-card">
+            <span class="zone-badge student">Pico</span>
+            <h3>Raspberry Pi Pico 端</h3>
+            <pre class="file-tree"><code>Raspberry Pi Pico /
+├─ pin_test.py                ← 腳位測試
+├─ pwm_test.py                ← PWM 測試
+└─ main.py                    ← 只有最終作品才需要</code></pre>
+          </article>
+        </div>
+        <article class="content-card file-flow-card">
+          <span class="zone-badge student">Class Flow</span>
+          <h3>上課時學生照這樣做</h3>
+          <ol class="file-flow-list">
+            <li>先在 PDF 找到元件與腳位，再回到網頁看操作範例。</li>
+            <li>練習程式從 Thonny 新檔開始，先 Run 再存檔。</li>
+            <li>PDF、圖片與講義不需要上傳到 Pico。</li>
+            <li>遇到元件不動時，先比對接線、腳位與程式中的 Pin 編號。</li>
+          </ol>
+        </article>
       </section>
 
 
@@ -247,6 +283,6 @@ def set_motor(pin_a, pin_b, direction):
       </section>
     </main>
   </div>
-  <script src="script.js?v=20260423-selfstudy"></script>
+  <script src="script.js?v=20260423-filemap"></script>
 </body>
 </html>

@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260423-selfstudy">
+  <link rel="stylesheet" href="styles.css?v=20260423-filemap">
 </head>
 <body class="topic-page">
   <div class="page-shell">
@@ -86,6 +86,46 @@
             <a class="button ghost" href="downloads/motor-calibration.py">下載馬達校正程式</a>
           </article>
         </div>
+      </section>
+
+
+
+      <section id="file-location" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">File Location</p>
+          <h2>03 小車移動的檔案放置方式</h2>
+          <p>本章開始真正驅動馬達。馬達校正程式可以留在電腦複製貼上，也可以暫時存到 Pico；但最終控制程式才需要保留為 main.py。</p>
+        </div>
+        <div class="file-map-grid">
+          <article class="file-tree-card">
+            <span class="zone-badge teacher">Computer</span>
+            <h3>電腦本機端</h3>
+            <pre class="file-tree"><code>microcar/
+├─ topic-03-car-motion.html
+├─ downloads/motor-calibration.py
+├─ downloads/basic-motor-functions.py
+└─ downloads/case-md/03_小車移動_cases.md</code></pre>
+          </article>
+          <article class="file-tree-card">
+            <span class="zone-badge student">Pico</span>
+            <h3>Raspberry Pi Pico 端</h3>
+            <pre class="file-tree"><code>Raspberry Pi Pico /
+├─ mango/                     ← 若使用 Motor 模組就需要
+├─ motor_test.py              ← 馬達測試或校正用
+├─ keyboard_car.py            ← 手動控制練習
+└─ main.py                    ← 確定方向正確後才存</code></pre>
+          </article>
+        </div>
+        <article class="content-card file-flow-card">
+          <span class="zone-badge student">Class Flow</span>
+          <h3>上課時學生照這樣做</h3>
+          <ol class="file-flow-list">
+            <li>先跑 motor-calibration.py，確認左右輪與前後方向。</li>
+            <li>方向錯誤時，先修改 RIGHT_SIGN 或 LEFT_SIGN，不要急著改後面所有程式。</li>
+            <li>複製本章 case 程式到 Thonny，按 Run 觀察小車。</li>
+            <li>完成穩定前進、後退、轉向後，再進入 04 無人車。</li>
+          </ol>
+        </article>
       </section>
 
 
@@ -1065,6 +1105,6 @@ while True:
       </section>
     </main>
   </div>
-  <script src="script.js?v=20260423-selfstudy"></script>
+  <script src="script.js?v=20260423-filemap"></script>
 </body>
 </html>

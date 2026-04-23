@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260423-selfstudy">
+  <link rel="stylesheet" href="styles.css?v=20260423-filemap">
 </head>
 <body class="topic-page">
   <div class="page-shell">
@@ -61,6 +61,50 @@
           </article>
         </div>
       </section>
+
+
+      <section id="file-location" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">File Location</p>
+          <h2>先分清楚：電腦本機端 vs Pico 板子端</h2>
+          <p>學生只要記住一件事：下載檔會先在電腦裡，真正要被 Pico import 或開機執行的檔案，才需要用 Thonny 上傳到 Pico。</p>
+        </div>
+        <div class="file-map-grid">
+          <article class="file-tree-card">
+            <span class="zone-badge teacher">Computer</span>
+            <h3>電腦本機端</h3>
+            <pre class="file-tree"><code>microcar/
+├─ setup.html                 ← 先看這一頁
+├─ downloads/
+│  ├─ mango-import-test.py    ← 複製到 Thonny 測試
+│  ├─ motor-calibration.py    ← 複製到 Thonny 校正馬達
+│  └─ mango-library.zip       ← 解壓縮後準備上傳
+└─ topic-01 到 topic-08        ← 閱讀教材，不會自動跑到 Pico</code></pre>
+          </article>
+          <article class="file-tree-card">
+            <span class="zone-badge student">Pico</span>
+            <h3>Raspberry Pi Pico 端</h3>
+            <pre class="file-tree"><code>Raspberry Pi Pico /
+├─ mango/                     ← 必須上傳，給 from mango import ... 使用
+│  ├─ __init__.py
+│  └─ ...
+├─ main.py                    ← 只有要開機自動執行才存這個名字
+└─ practice.py                ← 平常練習可用任意檔名</code></pre>
+          </article>
+        </div>
+        <article class="content-card file-flow-card">
+          <span class="zone-badge student">Class Flow</span>
+          <h3>上課時學生照這樣做</h3>
+          <ol class="file-flow-list">
+            <li>先在電腦打開網站與下載區，確認今天要用的程式或 zip。</li>
+            <li>在 Thonny 左側檔案視窗分清楚 This computer 與 Raspberry Pi Pico。</li>
+            <li>把 mango 資料夾上傳到 Pico 根目錄；PDF、PPT、Markdown 不需要上傳到 Pico。</li>
+            <li>練習程式先貼到 Thonny 按 Run，確定成功後再決定是否存到 Pico。</li>
+            <li>只有希望 Pico 重新插電後自動跑，才把最後版本存成 Pico 上的 main.py。</li>
+          </ol>
+        </article>
+      </section>
+
 
       <section id="setup-steps" class="section reveal">
         <div class="section-heading">
@@ -285,6 +329,6 @@ stop()</code></pre></article>
       </section>
     </main>
   </div>
-  <script src="script.js?v=20260423-selfstudy"></script>
+  <script src="script.js?v=20260423-filemap"></script>
 </body>
 </html>

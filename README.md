@@ -43,6 +43,36 @@
 - `downloads/mango-import-test.py`：確認 `mango` 函式庫可正常 import。
 - `downloads/motor-calibration.py`：確認右輪、左輪、前進、後退與左右轉方向。
 
+## 檔案位置觀念
+
+本教材特別把「電腦本機端」與「Pico 板子端」分開說明。網站、PDF、PPT、Markdown 與下載素材會先留在電腦；只有 Pico 需要 import 的函式庫，或要直接執行的 MicroPython 程式，才需要用 Thonny 上傳到 Pico。
+
+```text
+電腦本機 microcar/
+├─ index.html / setup.html / topic-xx.html
+├─ downloads/
+│  ├─ case-md/
+│  ├─ mango-import-test.py
+│  ├─ motor-calibration.py
+│  └─ extensions/board-library/mango-library.zip
+└─ assets/
+```
+
+```text
+Raspberry Pi Pico /
+├─ mango/        ← 使用 from mango import ... 前必須先上傳
+├─ practice.py   ← 平常練習檔，名稱可自訂
+└─ main.py       ← 只有要開機自動執行時才使用
+```
+
+學生上課時建議流程：
+
+1. 從網站複製當天的程式。
+2. 在 Thonny 按 `File > New` 建立新檔。
+3. 貼上程式後先按 `Run` 測試。
+4. 如果程式需要 `mango`，確認 Pico 根目錄已經有 `mango/`。
+5. 練習檔可以存成自訂名稱；最後穩定版本才存成 Pico 上的 `main.py`。
+
 ## 建議使用方式
 
 自學或正式授課建議先從 `開始前設定` 開始，確認環境、函式庫與馬達方向都正確。第一次上課可接著使用 `BootCamp`，讓學生建立「電腦連到小車、程式貼上去、小車會動」的成功經驗。後續課程再依序進入 01-05 主題建立小車能力。
