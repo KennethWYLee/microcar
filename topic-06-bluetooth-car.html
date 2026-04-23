@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>06 藍芽遙控小車：Flutter App 與 Pico BLE | Raspberry Pi Pico 小車主題教材</title>
+  <meta name="description" content="本主題使用既有 Flutter 介面與 Pico BLE 小車程式，整理成藍芽掃描、連線、送出指令與小車動作對應的教學頁。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260423-cases">
+</head>
+<body class="topic-page">
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">MC</span>
+        <span class="brand-copy">
+          <strong>Raspberry Pi Pico 小車主題教材</strong>
+          <small>Topic-based Microcar Course</small>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="主題導覽">
+        <a href="bootcamp.html">Boot Camp</a>
+        <a href="topic-01-intro.html">01 入門</a>
+        <a href="topic-02-sensor-output.html">02 感測與輸出</a>
+        <a href="topic-03-car-motion.html">03 小車移動</a>
+        <a href="topic-04-autonomous-car.html">04 無人車</a>
+        <a href="topic-05-project-cases.html">05 專題化</a>
+        <a href="topic-06-bluetooth-car.html" aria-current="page">06 藍芽遙控小車</a>
+        <a href="topic-07-board-python.html">07 電路板教材</a>
+        <a href="topic-08-fan-application.html">08 電路板應用</a>
+        <a href="downloads.html">下載區</a>
+      </nav>
+      <a class="button ghost" href="https://github.com/KennethWYLee/microcar" target="_blank" rel="noreferrer">GitHub</a>
+    </header>
+
+    <main>
+      <section class="subpage-hero reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">主題 06</p>
+          <h1>06 藍芽遙控小車：Flutter App 與 Pico BLE</h1>
+          <p class="hero-text">本主題使用既有 Flutter 介面與 Pico BLE 小車程式，整理成藍芽掃描、連線、送出指令與小車動作對應的教學頁。</p>
+          <div class="chip-list compact">
+            <span>Flutter</span>
+<span>BLE</span>
+<span>Remote</span>
+          </div>
+          <div class="action-row">
+            <a class="button primary" href="#learning-route">查看學習路徑</a>
+            <a class="button secondary" href="#classroom-flow">進入教學流程</a>
+            <a class="button ghost" href="downloads/topic-06-bluetooth-car/main.dart">下載 Flutter main.dart</a>
+          </div>
+        </div>
+        <div class="subpage-aside">
+          <article class="aside-card">
+            <img class="teaching-visual" src="assets/topic-06-flutter-app.png" alt="06 藍芽遙控小車：Flutter App 與 Pico BLE教材示意圖">
+            <p class="visual-note">把手機 App、藍芽通訊與小車端程式串成一個完整遙控專案</p>
+          </article>
+          <article class="aside-card">
+            <span class="zone-badge teacher">Teaching Focus</span>
+            <h3>這一頁是整理後的教學導讀</h3>
+            <p>保留原教材檔案下載，同時把上課時需要先說明的概念、操作順序與關鍵程式整理成網頁版。</p>
+          </article>
+        </div>
+      </section>
+
+
+      <section id="learning-route" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Learning Route</p>
+          <h2>藍芽遙控小車的完整路徑</h2>
+          <p>這個主題不是只看 App 畫面，而是把手機端、藍芽模組與 Pico 小車端程式串起來看。</p>
+        </div>
+        <div class="resource-roadmap">
+          <article class="content-card resource-step">
+            <span class="zone-badge student">Step 01</span>
+            <strong>Flutter App 搜尋 PicoCar</strong>
+            <p>App 先掃描名稱為 <code>PicoCar</code> 的藍芽裝置，並優先尋找 <code>FFA0</code> 服務，保留 <code>FFE0</code> 作為備用。</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge student">Step 02</span>
+            <strong>找到可寫入的特徵值</strong>
+            <p>連線後尋找 <code>FFA1</code> 或 <code>FFE1</code>，這就是 App 把指令寫給小車的通道。</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge teacher">Step 03</span>
+            <strong>Pico 端讀取 BLE UART</strong>
+            <p>小車端使用 UART0，通常接在 <code>GP0</code> 與 <code>GP1</code>，收到資料後把 bytes 轉成文字指令。</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge teacher">Step 04</span>
+            <strong>指令對應馬達動作</strong>
+            <p><code>1</code> 前進、<code>2</code> 後退、<code>3</code> 左轉、<code>4</code> 右轉、<code>0</code> 停止；變速版再加入速度指令。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="classroom-flow" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Classroom Flow</p>
+          <h2>建議上課流程</h2>
+          <p>這一章建議放在小車能基本移動之後，讓學生知道「按鈕不是直接控制馬達，而是透過藍芽送出指令」。</p>
+        </div>
+        <div class="page-grid">
+          <article class="content-card">
+            <img class="teaching-visual diagram-visual" src="assets/topic-06-flutter-app.png" alt="Flutter 藍芽小車 App 介面">
+            <h3>先看 App 畫面</h3>
+            <p>從搜尋裝置、連線按鈕、方向控制按鈕開始，讓學生先理解使用者看到的是控制介面。</p>
+          </article>
+          <article class="content-card">
+            <img class="teaching-visual" src="assets/real-bootcamp-car.jpg" alt="Raspberry Pi Pico 小車">
+            <h3>再看小車端反應</h3>
+            <p>同一個按鈕會送出不同字元，小車端只要把字元對應到馬達函式，就能完成遙控。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Key Code</p>
+          <h2>課堂上最值得解讀的兩段程式</h2>
+          <p>完整 Flutter 程式與 Pico 小車端程式已放在下載區，網頁先呈現最關鍵的藍芽掃描與指令對應。</p>
+        </div>
+        <div class="page-grid">
+          <article class="case-code-card"><div class="code-toolbar"><span>Flutter：搜尋 PicoCar</span><button class="button ghost copy-md-code" type="button">複製程式碼</button></div><p>學生先理解 App 如何找到小車。</p><pre class="code-block markdown-code"><code>Future&lt;void&gt; startScan() async {
+  await FlutterBluePlus.stopScan();
+  await FlutterBluePlus.startScan(
+    withNames: [&quot;PicoCar&quot;],
+    withServices: [Guid(&quot;FFA0&quot;), Guid(&quot;FFE0&quot;)],
+    timeout: const Duration(seconds: 15),
+  );
+}</code></pre></article>
+          <article class="case-code-card"><div class="code-toolbar"><span>Pico：收到指令後控制小車</span><button class="button ghost copy-md-code" type="button">複製程式碼</button></div><p>學生再理解小車端如何把 1/2/3/4/0 轉成動作。</p><pre class="code-block markdown-code"><code>while True:
+    buf = blue.read()
+    if buf:
+        data = blue.buf_to_text(buf).strip()
+
+        if data == &quot;1&quot;:
+            bot.forward()
+        elif data == &quot;2&quot;:
+            bot.backward()
+        elif data == &quot;3&quot;:
+            bot.turn_left()
+        elif data == &quot;4&quot;:
+            bot.turn_right()
+        elif data == &quot;0&quot;:
+            bot.stop()</code></pre></article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Teacher Notes</p>
+          <h2>藍芽遙控的授課重點</h2>
+          <p>這裡適合讓老師快速確認 App 與 Pico 小車端是否使用同一組通訊設定。</p>
+        </div>
+        <div class="table-wrap"><table class="topic-table"><thead><tr><th>項目</th><th>教材設定</th><th>教學提醒</th></tr></thead><tbody><tr><td>藍芽裝置名稱</td><td><code>PicoCar</code></td><td>App 掃描不到時，先確認小車端 BLE 名稱是否一致</td></tr>
+<tr><td>服務 UUID</td><td><code>FFA0</code>，備用 <code>FFE0</code></td><td>新設定失敗時可能仍會出現原廠預設 UUID</td></tr>
+<tr><td>寫入特徵值</td><td><code>FFA1</code> 或 <code>FFE1</code></td><td>Flutter 端必須找到可 write 的 characteristic</td></tr>
+<tr><td>基本指令</td><td><code>1/2/3/4/0</code></td><td>分別對應前進、後退、左轉、右轉、停止</td></tr>
+<tr><td>變速版指令</td><td><code>5/6/7</code></td><td>低速、中速、高速，適合做進階挑戰</td></tr></tbody></table></div>
+      </section>
+
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Continue</p>
+          <h2>繼續下一個主題</h2>
+        </div>
+        <div class="page-grid">
+          <article class="content-card">
+            <span class="zone-badge student">上一個</span>
+            <h3>05 專題化：任務設計、策略比較與成果評量</h3>
+            <p>本主題把前面學到的輸入、輸出、馬達、感測與循跡控制整合成任務挑戰，並加入規則式、P、PD、PID 循跡演算法 cases。</p>
+            <a class="button ghost" href="topic-05-project-cases.html">打開上一個主題</a>
+          </article>
+          <article class="content-card">
+            <span class="zone-badge teacher">下一個</span>
+            <h3>07 電路板教材：Python 控制與腳位導讀</h3>
+            <p>本主題依照機器人程式設計實務-Python.pdf 與相容性驗證報告，整理 Raspberry Pi Pico 主板、腳位、輸入輸出與馬達控制的授課導讀。</p>
+            <a class="button primary" href="topic-07-board-python.html">打開下一個主題</a>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="script.js?v=20260423-cases"></script>
+</body>
+</html>

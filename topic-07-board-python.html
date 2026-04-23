@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>07 電路板教材：Python 控制與腳位導讀 | Raspberry Pi Pico 小車主題教材</title>
+  <meta name="description" content="本主題依照機器人程式設計實務-Python.pdf 與相容性驗證報告，整理 Raspberry Pi Pico 主板、腳位、輸入輸出與馬達控制的授課導讀。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260423-cases">
+</head>
+<body class="topic-page">
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">MC</span>
+        <span class="brand-copy">
+          <strong>Raspberry Pi Pico 小車主題教材</strong>
+          <small>Topic-based Microcar Course</small>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="主題導覽">
+        <a href="bootcamp.html">Boot Camp</a>
+        <a href="topic-01-intro.html">01 入門</a>
+        <a href="topic-02-sensor-output.html">02 感測與輸出</a>
+        <a href="topic-03-car-motion.html">03 小車移動</a>
+        <a href="topic-04-autonomous-car.html">04 無人車</a>
+        <a href="topic-05-project-cases.html">05 專題化</a>
+        <a href="topic-06-bluetooth-car.html">06 藍芽遙控小車</a>
+        <a href="topic-07-board-python.html" aria-current="page">07 電路板教材</a>
+        <a href="topic-08-fan-application.html">08 電路板應用</a>
+        <a href="downloads.html">下載區</a>
+      </nav>
+      <a class="button ghost" href="https://github.com/KennethWYLee/microcar" target="_blank" rel="noreferrer">GitHub</a>
+    </header>
+
+    <main>
+      <section class="subpage-hero reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">主題 07</p>
+          <h1>07 電路板教材：Python 控制與腳位導讀</h1>
+          <p class="hero-text">本主題依照機器人程式設計實務-Python.pdf 與相容性驗證報告，整理 Raspberry Pi Pico 主板、腳位、輸入輸出與馬達控制的授課導讀。</p>
+          <div class="chip-list compact">
+            <span>Pico</span>
+<span>Pinout</span>
+<span>Python</span>
+          </div>
+          <div class="action-row">
+            <a class="button primary" href="#learning-route">查看學習路徑</a>
+            <a class="button secondary" href="#classroom-flow">進入教學流程</a>
+            <a class="button ghost" href="downloads/robot-programming-practice-python.pdf">下載 Python PDF</a>
+          </div>
+        </div>
+        <div class="subpage-aside">
+          <article class="aside-card">
+            <img class="teaching-visual" src="assets/topic-07-python-pdf-page.png" alt="07 電路板教材：Python 控制與腳位導讀教材示意圖">
+            <p class="visual-note">不拆成基礎單元，而是用原 PDF 建立完整板子導讀與腳位對照</p>
+          </article>
+          <article class="aside-card">
+            <span class="zone-badge teacher">Teaching Focus</span>
+            <h3>這一頁是整理後的教學導讀</h3>
+            <p>保留原教材檔案下載，同時把上課時需要先說明的概念、操作順序與關鍵程式整理成網頁版。</p>
+          </article>
+        </div>
+      </section>
+
+
+      <section id="learning-route" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Learning Route</p>
+          <h2>把 PDF 變成一張可上課的板子地圖</h2>
+          <p>這個主題不再拆成「電路板基礎教學」，而是用 PDF 作為主教材，先建立老師與學生都能查閱的腳位導讀。</p>
+        </div>
+        <div class="page-grid">
+          <article class="content-card">
+            <img class="teaching-visual diagram-visual" src="assets/ppt-pinout-overview.png" alt="Pico 腳位總覽">
+            <h3>先認識主板可以控制什麼</h3>
+            <p>LED、按鈕、蜂鳴器、RGB、超音波、馬達、I2C 循跡感測器都可以從同一塊板子出發。</p>
+          </article>
+          <article class="content-card">
+            <img class="teaching-visual diagram-visual" src="assets/topic-07-python-pdf-page.png" alt="Python PDF 馬達邏輯頁面">
+            <h3>再把腳位連到程式</h3>
+            <p>從 <code>Pin</code>、<code>PWM</code>、<code>ADC</code>、<code>I2C</code> 到馬達方向邏輯，讓硬體位置對應到程式語法。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="classroom-flow" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Board Map</p>
+          <h2>目前教材採用的腳位對照</h2>
+          <p>以下整理自 Python PDF 與相容性驗證報告，方便老師備課時快速確認各章節的硬體依賴。</p>
+        </div>
+        <div class="table-wrap"><table class="topic-table"><thead><tr><th>功能</th><th>教材腳位</th><th>網頁教材使用方式</th></tr></thead><tbody><tr><td>內建 LED</td><td><code>GP25</code></td><td>入門 cases 使用 <code>Pin(25, Pin.OUT)</code></td></tr>
+<tr><td>按鈕</td><td><code>GP3</code></td><td>數位輸入，適合說明上拉/下拉與狀態判斷</td></tr>
+<tr><td>蜂鳴器</td><td><code>GP6</code></td><td>使用 <code>PWM(Pin(6))</code> 製作聲音回饋</td></tr>
+<tr><td>RGB 彩燈條</td><td><code>GP2</code>，6 顆 WS2812B</td><td>感測輸出主題用來呈現顏色狀態</td></tr>
+<tr><td>超音波 / 距離 RGB</td><td>RGB <code>GP14</code>，聲波 <code>GP15</code></td><td>感測輸出與避障任務使用</td></tr>
+<tr><td>右馬達 M1</td><td><code>GP12</code> / <code>GP13</code></td><td>小車移動與無人車任務使用</td></tr>
+<tr><td>左馬達 M2</td><td><code>GP11</code> / <code>GP10</code></td><td>小車移動與無人車任務使用</td></tr>
+<tr><td>I2C</td><td>SDA <code>GP20</code>，SCL <code>GP21</code></td><td>四路循跡感測器使用</td></tr>
+<tr><td>類比輸入 A0</td><td><code>GP26</code></td><td>電位器與類比輸入 cases 使用</td></tr>
+<tr><td>外接 LED D7</td><td><code>GP7</code></td><td>PWM LED cases 使用</td></tr></tbody></table></div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Key Code</p>
+          <h2>用兩段程式把板子概念接起來</h2>
+          <p>第一段讓學生理解輸入與輸出，第二段讓老師銜接到馬達控制邏輯。</p>
+        </div>
+        <div class="page-grid">
+          <article class="case-code-card"><div class="code-toolbar"><span>LED 與按鈕：輸入輸出最小範例</span><button class="button ghost copy-md-code" type="button">複製程式碼</button></div><pre class="code-block markdown-code"><code>from machine import Pin
+import time
+
+led = Pin(25, Pin.OUT)
+button = Pin(3, Pin.IN)
+
+while True:
+    if button.value() == 1:
+        led.on()
+    else:
+        led.off()
+    time.sleep(0.05)</code></pre></article>
+          <article class="case-code-card"><div class="code-toolbar"><span>馬達方向：兩個腳位決定一個馬達狀態</span><button class="button ghost copy-md-code" type="button">複製程式碼</button></div><pre class="code-block markdown-code"><code># M1 右馬達：GP12 / GP13
+# M2 左馬達：GP11 / GP10
+
+def set_motor(pin_a, pin_b, direction):
+    if direction &gt; 0:
+        pin_a.value(1)
+        pin_b.value(0)
+    elif direction &lt; 0:
+        pin_a.value(0)
+        pin_b.value(1)
+    else:
+        pin_a.value(0)
+        pin_b.value(0)</code></pre></article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">How To Use</p>
+          <h2>這份 PDF 在網站中的角色</h2>
+        </div>
+        <div class="resource-roadmap">
+          <article class="content-card resource-step">
+            <span class="zone-badge teacher">課前</span>
+            <strong>先用腳位表確認硬體</strong>
+            <p>確認課堂要用的 LED、按鈕、蜂鳴器、感測器或馬達是否與主板腳位一致。</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge student">課中</span>
+            <strong>讓學生從一個元件開始</strong>
+            <p>先做 LED 或按鈕，再逐步銜接蜂鳴器、RGB、感測器與馬達。</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge teacher">除錯</span>
+            <strong>先查腳位，再查程式</strong>
+            <p>如果程式沒反應，優先檢查腳位、接線與元件方向，再檢查程式邏輯。</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge student">延伸</span>
+            <strong>把元件組合成任務</strong>
+            <p>學生熟悉單一元件後，再把輸入、輸出、馬達與感測器組成小作品。</p>
+          </article>
+        </div>
+      </section>
+
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Continue</p>
+          <h2>繼續下一個主題</h2>
+        </div>
+        <div class="page-grid">
+          <article class="content-card">
+            <span class="zone-badge student">上一個</span>
+            <h3>06 藍芽遙控小車：Flutter App 與 Pico BLE</h3>
+            <p>本主題使用既有 Flutter 介面與 Pico BLE 小車程式，整理成藍芽掃描、連線、送出指令與小車動作對應的教學頁。</p>
+            <a class="button ghost" href="topic-06-bluetooth-car.html">打開上一個主題</a>
+          </article>
+          <article class="content-card">
+            <span class="zone-badge teacher">下一個</span>
+            <h3>08 電路板應用：擺頭電扇</h3>
+            <p>本主題使用擺頭電扇-課程簡報，整理風扇擺頭機構、齒輪與連桿、Pico X2 腳位、輸入輸出與 PWM 控制應用。</p>
+            <a class="button primary" href="topic-08-fan-application.html">打開下一個主題</a>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="script.js?v=20260423-cases"></script>
+</body>
+</html>
