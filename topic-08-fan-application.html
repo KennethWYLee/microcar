@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>08 電路板應用：擺頭電扇 | Raspberry Pi Pico 小車主題教材</title>
-  <meta name="description" content="本主題使用擺頭電扇-課程簡報，整理風扇擺頭機構、齒輪與連桿、Pico X2 腳位、輸入輸出與 PWM 控制應用。">
+  <meta name="description" content="本主題是延伸作品單元，使用擺頭電扇-課程簡報整理風扇機構、Pico X2 腳位與 PWM 控制應用，不屬於小車核心必修。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260423-codewhite2">
+  <link rel="stylesheet" href="styles.css?v=20260423-selfstudy">
 </head>
 <body class="topic-page">
   <div class="page-shell">
@@ -22,6 +22,7 @@
       </a>
       <nav class="site-nav" aria-label="主題導覽">
         <a href="bootcamp.html">BootCamp</a>
+        <a href="setup.html">開始設定</a>
         <a href="topic-01-intro.html">01 入門</a>
         <a href="topic-02-sensor-output.html">02 感測與輸出</a>
         <a href="topic-03-car-motion.html">03 小車移動</a>
@@ -39,7 +40,7 @@
         <div class="hero-copy">
           <p class="eyebrow">主題 08</p>
           <h1>08 電路板應用：擺頭電扇</h1>
-          <p class="hero-text">本主題使用擺頭電扇-課程簡報，整理風扇擺頭機構、齒輪與連桿、Pico X2 腳位、輸入輸出與 PWM 控制應用。</p>
+          <p class="hero-text">本主題是延伸作品單元，使用擺頭電扇-課程簡報整理風扇機構、Pico X2 腳位與 PWM 控制應用，不屬於小車核心必修。</p>
           <div class="chip-list compact">
             <span>Fan</span>
 <span>Mechanism</span>
@@ -65,11 +66,35 @@
       </section>
 
 
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Before You Start</p>
+          <h2>開始本主題前先確認</h2>
+          <p>這是延伸作品主題，不是小車核心操控必修。建議學生先完成 01-05，再把控制概念移植到擺頭電扇。</p>
+        </div>
+        <div class="page-grid">
+          <article class="content-card">
+            <span class="zone-badge student">必做</span>
+            <h3>先完成開始前設定</h3>
+            <p>包含 Thonny 連線、MicroPython 解譯器、mango 函式庫上傳、import 測試與馬達方向校正。</p>
+            <a class="button primary" href="setup.html">打開開始設定</a>
+          </article>
+          <article class="content-card">
+            <span class="zone-badge teacher">延伸</span>
+            <h3>先完成小車核心主線</h3>
+            <p>08 是作品延伸，不是小車操控必修。若學生還不會控制小車，請先完成 01-05。</p>
+            <a class="button ghost" href="topic-05-project-cases.html">回主題 05</a>
+          </article>
+        </div>
+      </section>
+
+
+
       <section id="learning-route" class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">Learning Route</p>
           <h2>從小車走到真實作品：智慧型可擺動電風扇</h2>
-          <p>這個主題是電路板應用，不是單一元件練習。學生會看到機構、電路、感測器與程式如何合成一件作品。</p>
+          <p>這個主題是延伸作品，不是小車核心操控必修。學生會看到機構、電路、感測器與程式如何合成一件作品。</p>
         </div>
         <div class="visual-story-grid">
           <article class="content-card">
@@ -86,6 +111,28 @@
             <img class="teaching-visual" src="assets/fan-linkage.png" alt="連桿機構">
             <h3>擺頭運動</h3>
             <p>四連桿把旋轉型動力轉成左右搖擺，這是風扇擺頭的核心。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Extension Role</p>
+          <h2>這一章在整門課中的角色</h2>
+          <p>如果課程目標是「完整操控小車」，請先完成 01-05。08 的價值是讓學生知道同一套輸入、輸出、PWM、感測與控制流程，也可以移植到非小車作品。</p>
+        </div>
+        <div class="page-grid">
+          <article class="content-card">
+            <span class="zone-badge student">小車主線</span>
+            <h3>先完成 01-05</h3>
+            <p>LED、感測器、馬達、避障、循跡與專題整合是小車操控的核心能力。</p>
+            <a class="button ghost" href="topic-05-project-cases.html">回到主題 05</a>
+          </article>
+          <article class="content-card">
+            <span class="zone-badge teacher">作品延伸</span>
+            <h3>再轉到擺頭電扇</h3>
+            <p>把小車課程中的 PWM 調速、按鈕控制、感測判斷與藍芽遙控概念，放進風扇這個真實機構作品。</p>
+            <a class="button ghost" href="downloads/topic-08-fan-application/fan-course-slides.pptx">下載擺頭電扇簡報</a>
           </article>
         </div>
       </section>
@@ -177,6 +224,38 @@ fan_motor.duty_u16(0)</code></pre></article>
       </section>
 
 
+
+      <section id="completion-check" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Completion Check</p>
+          <h2>完成這個主題前，學生應該做得到</h2>
+          <p>這不是考試，而是讓學生知道自己是否已經準備好進入下一個主題。</p>
+        </div>
+        <div class="check-grid">
+          <article class="check-card">
+            <span class="zone-badge student">Check 1</span>
+            <h3>完成確認</h3>
+            <p>我知道這是延伸作品，不是小車核心操控必修單元。</p>
+          </article>
+          <article class="check-card">
+            <span class="zone-badge student">Check 2</span>
+            <h3>完成確認</h3>
+            <p>我能說明馬達、齒輪、連桿和擺頭動作的關係。</p>
+          </article>
+          <article class="check-card">
+            <span class="zone-badge student">Check 3</span>
+            <h3>完成確認</h3>
+            <p>我能把 PWM 調速概念從小車延伸到風扇馬達。</p>
+          </article>
+          <article class="check-card">
+            <span class="zone-badge student">Check 4</span>
+            <h3>完成確認</h3>
+            <p>我能從作品需求反推需要哪些輸入、輸出和控制流程。</p>
+          </article>
+        </div>
+      </section>
+
+
       <section class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">Continue</p>
@@ -199,6 +278,6 @@ fan_motor.duty_u16(0)</code></pre></article>
       </section>
     </main>
   </div>
-  <script src="script.js?v=20260423-codewhite2"></script>
+  <script src="script.js?v=20260423-selfstudy"></script>
 </body>
 </html>

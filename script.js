@@ -47,43 +47,47 @@ const codePages = {
       {
         title: "腳位設定",
         summary: "一開始先準備四個馬達腳位與板上的 LED。",
-        range: "第 1-9 行",
-        lines: [1, 9],
+        range: "第 1-15 行",
+        lines: [1, 15],
         tone: "teacher"
       },
       {
         title: "馬達方向函式",
         summary: "_set_motor() 會決定馬達現在要前進、後退還是停止。",
-        range: "第 12-20 行",
-        lines: [12, 20],
+        range: "第 18-27 行",
+        lines: [18, 27],
         tone: "student"
       },
       {
         title: "五個基本動作",
         summary: "前進、後退、左轉、右轉、停止都是由前面的函式組合而成。",
-        range: "第 23-42 行",
-        lines: [23, 42],
+        range: "第 30-52 行",
+        lines: [30, 52],
         tone: "teacher"
       },
       {
         title: "讀取指令",
         summary: "主程式會一直等待輸入，再決定小車要做哪個動作。",
-        range: "第 45-64 行",
-        lines: [45, 64],
+        range: "第 55-82 行",
+        lines: [55, 82],
         tone: "student"
       }
     ],
     fallbackText: `from machine import Pin
 import time
 
-# Raspberry Pi Pico 小車 BootCamp
+# Raspberry Pi Pico 小車 1 hr Boot Camp
 # 在 Thonny Shell 輸入 w / a / s / d / x 後按 Enter
 
-M1_A = Pin(12, Pin.OUT)
-M1_B = Pin(13, Pin.OUT)
-M2_A = Pin(10, Pin.OUT)
-M2_B = Pin(11, Pin.OUT)
+RIGHT_A = Pin(12, Pin.OUT)
+RIGHT_B = Pin(13, Pin.OUT)
+LEFT_A = Pin(11, Pin.OUT)
+LEFT_B = Pin(10, Pin.OUT)
 LED = Pin(25, Pin.OUT)
+
+# If the car moves backward during the forward command, change one sign to -1.
+RIGHT_SIGN = 1
+LEFT_SIGN = 1
 
 
 def _set_motor(pin_a, pin_b, direction):
@@ -98,32 +102,32 @@ def _set_motor(pin_a, pin_b, direction):
         pin_b.value(0)
 
 
+def drive(left, right):
+    _set_motor(LEFT_A, LEFT_B, left * LEFT_SIGN)
+    _set_motor(RIGHT_A, RIGHT_B, right * RIGHT_SIGN)
+
+
 def stop():
-    _set_motor(M1_A, M1_B, 0)
-    _set_motor(M2_A, M2_B, 0)
+    drive(0, 0)
 
 
 def forward():
-    _set_motor(M1_A, M1_B, 1)
-    _set_motor(M2_A, M2_B, 1)
+    drive(1, 1)
 
 
 def backward():
-    _set_motor(M1_A, M1_B, -1)
-    _set_motor(M2_A, M2_B, -1)
+    drive(-1, -1)
 
 
 def turn_left():
-    _set_motor(M1_A, M1_B, -1)
-    _set_motor(M2_A, M2_B, 1)
+    drive(-1, 1)
 
 
 def turn_right():
-    _set_motor(M1_A, M1_B, 1)
-    _set_motor(M2_A, M2_B, -1)
+    drive(1, -1)
 
 
-print("Raspberry Pi Pico 小車 BootCamp")
+print("Raspberry Pi Pico 小車 Boot Camp")
 print("請在 Thonny Shell 輸入 w / a / s / d / x 後按 Enter")
 print("w=前進 s=後退 a=左轉 d=右轉 x=停止")
 
@@ -168,22 +172,22 @@ while True:
       {
         title: "腳位設定",
         summary: "先定義左右馬達的四個輸出腳位。",
-        range: "第 1-7 行",
-        lines: [1, 7],
+        range: "第 1-11 行",
+        lines: [1, 11],
         tone: "teacher"
       },
       {
         title: "共用控制函式",
         summary: "_set_motor() 負責決定一個馬達的方向。",
-        range: "第 10-18 行",
-        lines: [10, 18],
+        range: "第 14-23 行",
+        lines: [14, 23],
         tone: "student"
       },
       {
         title: "五個動作函式",
         summary: "後面的函式就是 BootCamp 五個基本動作的來源。",
-        range: "第 21-41 行",
-        lines: [21, 41],
+        range: "第 26-48 行",
+        lines: [26, 48],
         tone: "teacher"
       }
     ],
@@ -191,10 +195,13 @@ while True:
 
 # Raspberry Pi Pico 小車基本動作函式
 
-M1_A = Pin(12, Pin.OUT)
-M1_B = Pin(13, Pin.OUT)
-M2_A = Pin(10, Pin.OUT)
-M2_B = Pin(11, Pin.OUT)
+RIGHT_A = Pin(12, Pin.OUT)
+RIGHT_B = Pin(13, Pin.OUT)
+LEFT_A = Pin(11, Pin.OUT)
+LEFT_B = Pin(10, Pin.OUT)
+
+RIGHT_SIGN = 1
+LEFT_SIGN = 1
 
 
 def _set_motor(pin_a, pin_b, direction):
@@ -209,31 +216,162 @@ def _set_motor(pin_a, pin_b, direction):
         pin_b.value(0)
 
 
+def drive(left, right):
+    _set_motor(LEFT_A, LEFT_B, left * LEFT_SIGN)
+    _set_motor(RIGHT_A, RIGHT_B, right * RIGHT_SIGN)
+
+
 def stop():
-    _set_motor(M1_A, M1_B, 0)
-    _set_motor(M2_A, M2_B, 0)
+    drive(0, 0)
 
 
 def forward():
-    _set_motor(M1_A, M1_B, 1)
-    _set_motor(M2_A, M2_B, 1)
+    drive(1, 1)
 
 
 def backward():
-    _set_motor(M1_A, M1_B, -1)
-    _set_motor(M2_A, M2_B, -1)
+    drive(-1, -1)
 
 
 def turn_left():
-    _set_motor(M1_A, M1_B, -1)
-    _set_motor(M2_A, M2_B, 1)
+    drive(-1, 1)
 
 
 def turn_right():
-    _set_motor(M1_A, M1_B, 1)
-    _set_motor(M2_A, M2_B, -1)
+    drive(1, -1)
 
 
+stop()
+`
+  },
+  "mango-import-test": {
+    path: "downloads/mango-import-test.py",
+    title: "mango 函式庫 import 測試",
+    summary: "這份程式用來確認 Pico 上已經成功上傳 mango 函式庫。看到 mango import OK 後，再進入需要 mango 的主題。",
+    stage: "開始前設定",
+    backHref: "setup.html",
+    steps: [
+      "先下載 mango-library.zip 並解壓縮。",
+      "把整個 mango 資料夾上傳到 Pico 根目錄。",
+      "執行這份測試程式。",
+      "看到 mango import OK 後再進入 02-05。"
+    ],
+    highlights: [
+      {
+        title: "載入常用類別",
+        summary: "Motor、RUS04、WS2812B 是後續小車主題最常用的 mango 類別。",
+        range: "第 1 行",
+        lines: [1, 1],
+        tone: "teacher"
+      },
+      {
+        title: "成功訊息",
+        summary: "如果 Shell 印出 OK，就代表函式庫路徑正確。",
+        range: "第 3-4 行",
+        lines: [3, 4],
+        tone: "student"
+      }
+    ],
+    fallbackText: `from mango import Motor, RUS04, WS2812B
+
+print("mango import OK")
+print("Motor, RUS04, and WS2812B are ready.")
+`
+  },
+  "motor-calibration": {
+    path: "downloads/motor-calibration.py",
+    title: "馬達方向校正程式",
+    summary: "這份程式會依序測右輪、左輪、前進、後退與左右轉。若方向相反，先修改 RIGHT_SIGN 或 LEFT_SIGN。",
+    stage: "開始前設定",
+    backHref: "setup.html",
+    steps: [
+      "把小車放在平坦桌面或地面。",
+      "貼上或打開這份程式，按 Run。",
+      "觀察每個中文/英文提示對應的輪子方向。",
+      "如果方向相反，停止程式後修改 RIGHT_SIGN 或 LEFT_SIGN。"
+    ],
+    highlights: [
+      {
+        title: "統一腳位",
+        summary: "右馬達使用 GP12/GP13，左馬達使用 GP11/GP10。",
+        range: "第 1-12 行",
+        lines: [1, 12],
+        tone: "teacher"
+      },
+      {
+        title: "方向校正",
+        summary: "RIGHT_SIGN 與 LEFT_SIGN 是修正馬達方向最重要的地方。",
+        range: "第 14-16 行",
+        lines: [14, 16],
+        tone: "student"
+      },
+      {
+        title: "測試動作表",
+        summary: "程式會依序測每個輪子與整台車的方向。",
+        range: "第 39-46 行",
+        lines: [39, 46],
+        tone: "teacher"
+      }
+    ],
+    fallbackText: `from machine import Pin
+import time
+
+# Raspberry Pi Pico microcar motor calibration
+# Course pin map:
+#   right motor M1 = GP12 / GP13
+#   left motor M2  = GP11 / GP10
+
+RIGHT_A = Pin(12, Pin.OUT)
+RIGHT_B = Pin(13, Pin.OUT)
+LEFT_A = Pin(11, Pin.OUT)
+LEFT_B = Pin(10, Pin.OUT)
+
+# If one side moves backward during the forward test, change 1 to -1.
+RIGHT_SIGN = 1
+LEFT_SIGN = 1
+
+
+def _set_motor(pin_a, pin_b, direction):
+    if direction > 0:
+        pin_a.value(1)
+        pin_b.value(0)
+    elif direction < 0:
+        pin_a.value(0)
+        pin_b.value(1)
+    else:
+        pin_a.value(0)
+        pin_b.value(0)
+
+
+def drive(left, right):
+    _set_motor(LEFT_A, LEFT_B, left * LEFT_SIGN)
+    _set_motor(RIGHT_A, RIGHT_B, right * RIGHT_SIGN)
+
+
+def stop():
+    drive(0, 0)
+
+
+tests = [
+    ("right wheel forward", 0, 1),
+    ("left wheel forward", 1, 0),
+    ("car forward", 1, 1),
+    ("car backward", -1, -1),
+    ("turn left in place", -1, 1),
+    ("turn right in place", 1, -1),
+]
+
+print("Motor calibration start")
+print("If a direction is wrong, press Ctrl+C and edit RIGHT_SIGN or LEFT_SIGN.")
+
+for label, left, right in tests:
+    print(label)
+    drive(left, right)
+    time.sleep(1.2)
+    stop()
+    time.sleep(0.8)
+
+print("Motor calibration done")
 stop()
 `
   },
@@ -413,22 +551,22 @@ while True:
       {
         title: "馬達與感測器設定",
         summary: "先準備兩側馬達腳位，再定義左右循跡感測器腳位。",
-        range: "第 1-15 行",
-        lines: [1, 15],
+        range: "第 1-19 行",
+        lines: [1, 19],
         tone: "teacher"
       },
       {
         title: "基本動作函式",
         summary: "這裡保留前進、左轉、右轉、停止四種最基本動作。",
-        range: "第 18-42 行",
-        lines: [18, 42],
+        range: "第 22-52 行",
+        lines: [22, 52],
         tone: "student"
       },
       {
         title: "四種循跡規則",
         summary: "左右感測值不同時，小車就依照規則做修正。",
-        range: "第 50-64 行",
-        lines: [50, 64],
+        range: "第 61-78 行",
+        lines: [61, 78],
         tone: "teacher"
       }
     ],
@@ -441,10 +579,13 @@ import time
 #   right sensor -> GP14
 # Black line = 1, white floor = 0
 
-M1_A = Pin(12, Pin.OUT)
-M1_B = Pin(13, Pin.OUT)
-M2_A = Pin(10, Pin.OUT)
-M2_B = Pin(11, Pin.OUT)
+RIGHT_A = Pin(12, Pin.OUT)
+RIGHT_B = Pin(13, Pin.OUT)
+LEFT_A = Pin(11, Pin.OUT)
+LEFT_B = Pin(10, Pin.OUT)
+
+RIGHT_SIGN = 1
+LEFT_SIGN = 1
 
 LEFT_SENSOR = Pin(15, Pin.IN)
 RIGHT_SENSOR = Pin(14, Pin.IN)
@@ -462,24 +603,25 @@ def _set_motor(pin_a, pin_b, direction):
         pin_b.value(0)
 
 
+def drive(left, right):
+    _set_motor(LEFT_A, LEFT_B, left * LEFT_SIGN)
+    _set_motor(RIGHT_A, RIGHT_B, right * RIGHT_SIGN)
+
+
 def stop():
-    _set_motor(M1_A, M1_B, 0)
-    _set_motor(M2_A, M2_B, 0)
+    drive(0, 0)
 
 
 def forward():
-    _set_motor(M1_A, M1_B, 1)
-    _set_motor(M2_A, M2_B, 1)
+    drive(1, 1)
 
 
 def turn_left():
-    _set_motor(M1_A, M1_B, -1)
-    _set_motor(M2_A, M2_B, 1)
+    drive(-1, 1)
 
 
 def turn_right():
-    _set_motor(M1_A, M1_B, 1)
-    _set_motor(M2_A, M2_B, -1)
+    drive(1, -1)
 
 
 print("Line following intro")
@@ -1162,7 +1304,7 @@ if (codeContent) {
     downloadNode.href = "downloads.html";
     backNode.href = "downloads.html";
   } else {
-    document.title = `${meta.title} | Raspberry Pi Pico 小車入門教學站`;
+    document.title = `${meta.title} | Raspberry Pi Pico 小車主題教材`;
     titleNode.textContent = meta.title;
     summaryNode.textContent = meta.summary;
     fileLabelNode.textContent = meta.path;

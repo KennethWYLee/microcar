@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260423-codewhite2">
+  <link rel="stylesheet" href="styles.css?v=20260423-selfstudy">
 </head>
 <body class="downloads-page">
   <div class="page-shell">
@@ -22,6 +22,7 @@
       </a>
       <nav class="site-nav" aria-label="主題導覽">
         <a href="bootcamp.html">BootCamp</a>
+        <a href="setup.html">開始設定</a>
         <a href="topic-01-intro.html">01 入門</a>
         <a href="topic-02-sensor-output.html">02 感測與輸出</a>
         <a href="topic-03-car-motion.html">03 小車移動</a>
@@ -40,10 +41,11 @@
           <p class="eyebrow">Downloads</p>
           <h1>8 個主題教材下載區</h1>
           <p class="hero-text">
-            下載區現在依照 8 個正式主題整理。每個主題都可以直接打開網頁閱讀，也可以下載對應的 Markdown、程式、PDF 或簡報教材。
+            下載區現在依照開始前設定與 8 個正式主題整理。每個主題都可以直接打開網頁閱讀，也可以下載對應的 Markdown、程式、PDF 或簡報教材。
           </p>
           <div class="action-row">
-            <a class="button primary" href="#topic-downloads">查看主題教材</a>
+            <a class="button primary" href="#required-downloads">先看必備檔案</a>
+            <a class="button secondary" href="#topic-downloads">查看主題教材</a>
             <a class="button ghost" href="index.html">回首頁</a>
           </div>
         </div>
@@ -52,6 +54,42 @@
             <span class="zone-badge teacher">Format</span>
             <h3>網頁與 Markdown 並存</h3>
             <p>網頁適合直接閱讀與投影，Markdown 適合教師備課、修改與整理。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="required-downloads" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Required Files</p>
+          <h2>開始前必備檔案</h2>
+          <p>這些檔案不是額外補充，而是讓 01-05 小車主線能順利執行的前置工具。</p>
+        </div>
+        <div class="download-grid">
+          <article class="download-card">
+            <span class="download-type">Start Here</span>
+            <h3>開始前設定頁</h3>
+            <p>照步驟完成 Thonny、MicroPython、mango 函式庫、import 測試與馬達校正。</p>
+            <a class="button primary block" href="setup.html">打開開始設定</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">Library</span>
+            <h3>mango 函式庫</h3>
+            <p>02-05 中許多 RGB、超音波、馬達、循跡 cases 需要先把這個資料夾上傳到 Pico。</p>
+            <a class="button ghost block" href="downloads/extensions/board-library/mango-library.zip">下載 mango-library.zip</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">Calibration</span>
+            <h3>馬達校正程式</h3>
+            <p>進入 03 小車移動前，先確認左右輪與前後方向都正確。</p>
+            <a class="button primary block" href="code-viewer.html?file=motor-calibration">檢視程式</a>
+            <a class="button ghost block" href="downloads/motor-calibration.py">下載 motor-calibration.py</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">Import Test</span>
+            <h3>mango import 測試</h3>
+            <p>用最短程式確認 Pico 上已經可以載入 mango 函式庫。</p>
+            <a class="button primary block" href="code-viewer.html?file=mango-import-test">檢視程式</a>
+            <a class="button ghost block" href="downloads/mango-import-test.py">下載 mango-import-test.py</a>
           </article>
         </div>
       </section>
@@ -101,7 +139,7 @@
           <article class="download-card" id="topic-06-bluetooth-car">
             <span class="download-type">主題 06</span>
             <h3>06 藍芽遙控小車：Flutter App 與 Pico BLE</h3>
-            <p>本主題使用既有 Flutter 介面與 Pico BLE 小車程式，整理成藍芽掃描、連線、送出指令與小車動作對應的教學頁。</p>
+            <p>本主題是進階遙控單元，建議先完成 03 小車移動，再使用既有 Flutter 介面與 Pico BLE 小車程式完成手機控制。</p>
             <a class="button primary block" href="topic-06-bluetooth-car.html">打開主題頁</a>
             <a class="button ghost block" href="downloads/topic-06-bluetooth-car/main.dart">下載 Flutter main.dart</a>
           </article>
@@ -115,7 +153,7 @@
           <article class="download-card" id="topic-08-fan-application">
             <span class="download-type">主題 08</span>
             <h3>08 電路板應用：擺頭電扇</h3>
-            <p>本主題使用擺頭電扇-課程簡報，整理風扇擺頭機構、齒輪與連桿、Pico X2 腳位、輸入輸出與 PWM 控制應用。</p>
+            <p>本主題是延伸作品單元，使用擺頭電扇-課程簡報整理風扇機構、Pico X2 腳位與 PWM 控制應用，不屬於小車核心必修。</p>
             <a class="button primary block" href="topic-08-fan-application.html">打開主題頁</a>
             <a class="button ghost block" href="downloads/topic-08-fan-application/fan-course-slides.pptx">下載擺頭電扇簡報</a>
           </article>
@@ -145,6 +183,6 @@
       </section>
     </main>
   </div>
-  <script src="script.js?v=20260423-codewhite2"></script>
+  <script src="script.js?v=20260423-selfstudy"></script>
 </body>
 </html>

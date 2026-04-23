@@ -7,10 +7,13 @@ import time
 #   right sensor -> GP14
 # Black line = 1, white floor = 0
 
-M1_A = Pin(12, Pin.OUT)
-M1_B = Pin(13, Pin.OUT)
-M2_A = Pin(10, Pin.OUT)
-M2_B = Pin(11, Pin.OUT)
+RIGHT_A = Pin(12, Pin.OUT)
+RIGHT_B = Pin(13, Pin.OUT)
+LEFT_A = Pin(11, Pin.OUT)
+LEFT_B = Pin(10, Pin.OUT)
+
+RIGHT_SIGN = 1
+LEFT_SIGN = 1
 
 LEFT_SENSOR = Pin(15, Pin.IN)
 RIGHT_SENSOR = Pin(14, Pin.IN)
@@ -28,24 +31,25 @@ def _set_motor(pin_a, pin_b, direction):
         pin_b.value(0)
 
 
+def drive(left, right):
+    _set_motor(LEFT_A, LEFT_B, left * LEFT_SIGN)
+    _set_motor(RIGHT_A, RIGHT_B, right * RIGHT_SIGN)
+
+
 def stop():
-    _set_motor(M1_A, M1_B, 0)
-    _set_motor(M2_A, M2_B, 0)
+    drive(0, 0)
 
 
 def forward():
-    _set_motor(M1_A, M1_B, 1)
-    _set_motor(M2_A, M2_B, 1)
+    drive(1, 1)
 
 
 def turn_left():
-    _set_motor(M1_A, M1_B, -1)
-    _set_motor(M2_A, M2_B, 1)
+    drive(-1, 1)
 
 
 def turn_right():
-    _set_motor(M1_A, M1_B, 1)
-    _set_motor(M2_A, M2_B, -1)
+    drive(1, -1)
 
 
 print("Line following intro")
