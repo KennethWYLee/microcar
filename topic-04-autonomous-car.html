@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>無人車：差速、避障、循跡與伺服掃描 | Raspberry Pi Pico 小車主題教材</title>
+  <meta name="description" content="本主題把差速控制、避障、循跡與伺服掃描整合成無人車應用，適合銜接較完整的小車任務。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260423-cases">
+</head>
+<body class="topic-page">
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">MC</span>
+        <span class="brand-copy">
+          <strong>Raspberry Pi Pico 小車主題教材</strong>
+          <small>Topic-based Microcar Course</small>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="主題導覽">
+        <a href="topic-01-intro.html">入門</a>
+        <a href="topic-02-sensor-output.html">感測與輸出</a>
+        <a href="topic-03-car-motion.html">小車移動</a>
+        <a href="topic-04-autonomous-car.html" aria-current="page">無人車</a>
+        <a href="topic-05-project-cases.html">專題化</a>
+        <a href="downloads.html">下載區</a>
+      </nav>
+      <a class="button ghost" href="https://github.com/KennethWYLee/microcar" target="_blank" rel="noreferrer">GitHub</a>
+    </header>
+
+    <main>
+      <section class="subpage-hero reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">主題 4</p>
+          <h1>無人車：差速、避障、循跡與伺服掃描</h1>
+          <p class="hero-text">本主題把差速控制、避障、循跡與伺服掃描整合成無人車應用，適合銜接較完整的小車任務。</p>
+          <div class="chip-list compact">
+            <span>Obstacle</span>
+<span>Line</span>
+<span>Servo</span>
+          </div>
+          <div class="action-row">
+            <a class="button primary" href="#case-map">查看 Case 地圖</a>
+            <a class="button secondary" href="#case-list">開始閱讀 Cases</a>
+            <a class="button ghost" href="downloads/case-md/04_無人車_cases.md">下載 Markdown</a>
+          </div>
+        </div>
+        <div class="subpage-aside">
+          <article class="aside-card">
+            <img class="teaching-visual" src="assets/video-line-following-demo-poster.jpg" alt="無人車：差速、避障、循跡與伺服掃描教材示意圖">
+            <p class="visual-note">把感測器與馬達整合成自走策略</p>
+          </article>
+          <article class="aside-card">
+            <span class="zone-badge teacher">Topic Overview</span>
+            <h3>本主題包含 10 個 cases</h3>
+            <p>每個 case 都依照「主題、分階段教學、完整程式碼、最終成果、應用題與解答」整理，適合逐步教學與自學。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Learning Context</p>
+          <h2>這個主題在整門課的位置</h2>
+          <p>把感測器與馬達整合成自走策略</p>
+        </div>
+        <div class="content-card markdown-intro">
+<p>本篇延伸原教材第 59-65 頁，將馬達、超音波、RGB、尋跡感測器與伺服馬達整合成無人車應用。每個 case 都從明確策略開始，再逐步轉成程式。</p>
+<p>參考資料：</p>
+<ul class="detail-list"><li>MicroPython <code>machine.PWM</code>：<a class="text-link" href="https://docs.micropython.org/en/latest/library/machine.PWM.html" target="_blank" rel="noreferrer">https://docs.micropython.org/en/latest/library/machine.PWM.html</a></li><li>MicroPython <code>machine.ADC</code>：<a class="text-link" href="https://docs.micropython.org/en/v1.14/library/machine.ADC.html" target="_blank" rel="noreferrer">https://docs.micropython.org/en/v1.14/library/machine.ADC.html</a></li><li>MicroPython <code>machine.I2C</code>：<a class="text-link" href="https://docs.micropython.org/en/latest/library/machine.I2C.html" target="_blank" rel="noreferrer">https://docs.micropython.org/en/latest/library/machine.I2C.html</a></li><li>MicroPython RP2 quick reference：<a class="text-link" href="https://docs.micropython.org/en/latest/rp2/quickref.html" target="_blank" rel="noreferrer">https://docs.micropython.org/en/latest/rp2/quickref.html</a></li><li>Raspberry Pi Pico Python SDK：<a class="text-link" href="https://datasheets.raspberrypi.com/pico/sdk/pico_python_sdk.pdf" target="_blank" rel="noreferrer">https://datasheets.raspberrypi.com/pico/sdk/pico_python_sdk.pdf</a></li><li>Pololu QTR reflectance sensor guide：<a class="text-link" href="https://www.pololu.com/docs/0J19/all" target="_blank" rel="noreferrer">https://www.pololu.com/docs/0J19/all</a></li></ul>
+        </div>
+      </section>
+
+      <section id="case-map" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Case Map</p>
+          <h2>先用地圖看完整學習順序</h2>
+          <p>可以依序完成，也可以直接點選需要的 case。</p>
+        </div>
+        <div class="case-index-grid">
+          <a class="case-index-card" href="#case-1">
+            <span>Case 1</span>
+            <strong>差速控制展示</strong>
+          </a>
+          <a class="case-index-card" href="#case-2">
+            <span>Case 2</span>
+            <strong>固定左轉避障車</strong>
+          </a>
+          <a class="case-index-card" href="#case-3">
+            <span>Case 3</span>
+            <strong>倒車後轉向避障</strong>
+          </a>
+          <a class="case-index-card" href="#case-4">
+            <span>Case 4</span>
+            <strong>左右交替避障策略</strong>
+          </a>
+          <a class="case-index-card" href="#case-5">
+            <span>Case 5</span>
+            <strong>尋跡感測器讀值與基礎循跡</strong>
+          </a>
+          <a class="case-index-card" href="#case-6">
+            <span>Case 6</span>
+            <strong>伺服掃描式避障</strong>
+          </a>
+          <a class="case-index-card" href="#case-7">
+            <span>Case 7</span>
+            <strong>I2C 掃描與尋跡感測器診斷</strong>
+          </a>
+          <a class="case-index-card" href="#case-8">
+            <span>Case 8</span>
+            <strong>加權循跡比例控制</strong>
+          </a>
+          <a class="case-index-card" href="#case-9">
+            <span>Case 9</span>
+            <strong>循跡結合超音波避障</strong>
+          </a>
+          <a class="case-index-card" href="#case-10">
+            <span>Case 10</span>
+            <strong>伺服多角度環境掃描</strong>
+          </a>
+        </div>
+      </section>
+
+      <section id="case-list" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Cases</p>
+          <h2>逐步教學內容</h2>
+          <p>點開每個 case 後，可以看到完整教學段落與可複製的程式碼。</p>
+        </div>
+        <div class="case-list">
+        <details class="case-detail" open id="case-1">
+          <summary>
+            <span class="download-type">Case 1</span>
+            <strong>差速控制展示</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>用左右輪不同速度展示直行、弧線轉向與原地旋轉。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：建立左右馬達</strong></h4>
+<p>使用 <code>mango.Motor</code> 建立右輪與左輪。</p>
+<h4><strong>階段 B：定義 <code>drive(left, right)</code></strong></h4>
+<p>左輪與右輪速度分開控制。</p>
+<h4><strong>階段 C：依序測試動作</strong></h4>
+<p>同速直行、左右不同速弧線轉向、左右反向原地旋轉。</p>
+<h4><strong>階段 D：對照車體運動表</strong></h4>
+<p>讓學生把數值和小車軌跡連起來。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import Motor
+import time
+
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+
+def drive(left, right):
+    left_motor.speed(left)
+    right_motor.speed(right)
+
+def stop():
+    left_motor.stop()
+    right_motor.stop()
+
+motions = [
+    (&quot;straight&quot;, 20, 20, 2),
+    (&quot;arc left&quot;, 10, 35, 2),
+    (&quot;arc right&quot;, 35, 10, 2),
+    (&quot;spin left&quot;, -20, 20, 1),
+    (&quot;spin right&quot;, 20, -20, 1),
+]
+
+for name, left, right, seconds in motions:
+    print(name, left, right)
+    drive(left, right)
+    time.sleep(seconds)
+
+stop()</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>小車會依序展示直行、左右弧線與左右原地旋轉。學生可以觀察差速對路徑的影響。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 設計一個「小車迴避動作」：先後退 0.5 秒，再原地右旋 0.8 秒，最後停止。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import Motor
+import time
+
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+
+def drive(left, right):
+    left_motor.speed(left)
+    right_motor.speed(right)
+
+def stop():
+    left_motor.stop()
+    right_motor.stop()
+
+drive(-20, -20)
+time.sleep(0.5)
+drive(20, -20)
+time.sleep(0.8)
+stop()</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-2">
+          <summary>
+            <span class="download-type">Case 2</span>
+            <strong>固定左轉避障車</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>使用超音波偵測障礙物，距離小於 20 cm 時固定左轉。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：先讓小車直行</strong></h4>
+<p>安全距離時左右輪同速前進。</p>
+<h4><strong>階段 B：讀取超音波距離</strong></h4>
+<p>使用 <code>RUS04.ping()</code>。</p>
+<h4><strong>階段 C：加入距離判斷</strong></h4>
+<p>小於 20 cm 代表障礙物太近。</p>
+<h4><strong>階段 D：加入 RGB 狀態燈</strong></h4>
+<p>綠燈直行，紅燈避障。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import Motor, RUS04
+import time
+
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
+
+def drive(left, right):
+    left_motor.speed(left)
+    right_motor.speed(right)
+
+def stop():
+    left_motor.stop()
+    right_motor.stop()
+
+while True:
+    dist = sensor.ping()
+    print(&quot;distance =&quot;, dist, &quot;cm&quot;)
+
+    if dist &lt; 20:
+        sensor.rgb_all((255, 0, 0))
+        drive(5, 30)   # left slow, right fast -&gt; turn left
+    else:
+        sensor.rgb_all((0, 255, 0))
+        drive(18, 18)
+
+    time.sleep_ms(100)</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-3">
+          <summary>
+            <span class="download-type">Case 3</span>
+            <strong>倒車後轉向避障</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>遇到障礙物時先停下、後退，再轉向。這比直接轉向更不容易卡在障礙物前。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：建立緊急避障流程</strong></h4>
+<p>停止、後退、轉向、恢復前進。</p>
+<h4><strong>階段 B：把流程寫成 <code>avoid()</code> 函式</strong></h4>
+<p>讓主迴圈保持簡潔。</p>
+<h4><strong>階段 C：使用時間控制動作</strong></h4>
+<p>後退與轉向都用固定時間。</p>
+<h4><strong>階段 D：調整速度與時間</strong></h4>
+<p>讓學生依場地調整參數。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import Motor, RUS04
+import time
+
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
+
+def drive(left, right):
+    left_motor.speed(left)
+    right_motor.speed(right)
+
+def stop():
+    left_motor.stop()
+    right_motor.stop()
+
+def avoid():
+    sensor.rgb_all((255, 0, 0))
+    stop()
+    time.sleep_ms(150)
+
+    drive(-18, -18)
+    time.sleep_ms(500)
+
+    drive(20, -20)
+    time.sleep_ms(700)
+
+    stop()
+
+while True:
+    dist = sensor.ping()
+    print(&quot;distance =&quot;, dist, &quot;cm&quot;)
+
+    if dist &lt; 20:
+        avoid()
+    else:
+        sensor.rgb_all((0, 255, 0))
+        drive(18, 18)
+
+    time.sleep_ms(100)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>小車遇到障礙時會先後退，再原地右旋，最後繼續前進。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 改成「後退後原地左旋」。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import Motor, RUS04
+import time
+
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
+
+def drive(left, right):
+    left_motor.speed(left)
+    right_motor.speed(right)
+
+def stop():
+    left_motor.stop()
+    right_motor.stop()
+
+def avoid_left():
+    sensor.rgb_all((255, 0, 0))
+    stop()
+    time.sleep_ms(150)
+    drive(-18, -18)
+    time.sleep_ms(500)
+    drive(-20, 20)
+    time.sleep_ms(700)
+    stop()
+
+while True:
+    if sensor.ping() &lt; 20:
+        avoid_left()
+    else:
+        sensor.rgb_all((0, 255, 0))
+        drive(18, 18)
+    time.sleep_ms(100)</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-4">
+          <summary>
+            <span class="download-type">Case 4</span>
+            <strong>左右交替避障策略</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>讓小車每次遇到障礙時左右交替轉向，避免永遠往同一邊卡住。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：建立方向狀態</strong></h4>
+<p>用 <code>turn_left_next</code> 記錄下一次要左轉還是右轉。</p>
+<h4><strong>階段 B：每次避障後切換方向</strong></h4>
+<p><code>turn_left_next = not turn_left_next</code>。</p>
+<h4><strong>階段 C：保留後退動作</strong></h4>
+<p>先後退再轉向，降低撞擊。</p>
+<h4><strong>階段 D：觀察策略差異</strong></h4>
+<p>和固定左轉相比，看哪個比較不容易卡住。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import Motor, RUS04
+import time
+
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
+
+turn_left_next = True
+
+def drive(left, right):
+    left_motor.speed(left)
+    right_motor.speed(right)
+
+def stop():
+    left_motor.stop()
+    right_motor.stop()
+
+def avoid():
+    global turn_left_next
+
+    sensor.rgb_all((255, 0, 0))
+    stop()
+    time.sleep_ms(150)
+
+    drive(-18, -18)
+    time.sleep_ms(450)
+
+    if turn_left_next:
+        drive(-20, 20)
+        print(&quot;avoid: left&quot;)
+    else:
+        drive(20, -20)
+        print(&quot;avoid: right&quot;)
+
+    time.sleep_ms(650)
+    stop()
+
+    turn_left_next = not turn_left_next
+
+while True:
+    dist = sensor.ping()
+
+    if dist &lt; 20:
+        avoid()
+    else:
+        sensor.rgb_all((0, 255, 0))
+        drive(18, 18)
+
+    time.sleep_ms(100)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>小車第一次遇障往左避，第二次往右避，之後左右交替。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 讓小車每遇到 3 次障礙後，原地旋轉更久一點，嘗試脫困。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import Motor, RUS04
+import time
+
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
+
+count = 0
+turn_left_next = True
+
+def drive(left, right):
+    left_motor.speed(left)
+    right_motor.speed(right)
+
+def stop():
+    left_motor.stop()
+    right_motor.stop()
+
+def avoid():
+    global count, turn_left_next
+
+    count += 1
+    drive(-18, -18)
+    time.sleep_ms(400)
+
+    turn_time = 1200 if count % 3 == 0 else 650
+
+    if turn_left_next:
+        drive(-20, 20)
+    else:
+        drive(20, -20)
+
+    time.sleep_ms(turn_time)
+    stop()
+    turn_left_next = not turn_left_next
+
+while True:
+    if sensor.ping() &lt; 20:
+        sensor.rgb_all((255, 0, 0))
+        avoid()
+    else:
+        sensor.rgb_all((0, 255, 0))
+        drive(18, 18)
+    time.sleep_ms(100)</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-5">
+          <summary>
+            <span class="download-type">Case 5</span>
+            <strong>尋跡感測器讀值與基礎循跡</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>讀取 I2C 灰度尋跡感測器的數位狀態，並用簡單判斷控制小車循線。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：建立 I2C 與 GraySensor8</strong></h4>
+<p>使用 Mango 內建 <code>bus.i2c</code> 與 <code>GraySensor8</code>。</p>
+<h4><strong>階段 B：先只印出狀態</strong></h4>
+<p>觀察黑線在不同位置時字串如何變化。</p>
+<h4><strong>階段 C：挑中間四路判斷</strong></h4>
+<p>使用 <code>digital_channels=&#x27;4&#x27;</code>，取得類似 <code>L2 L1 R1 R2</code> 的狀態。</p>
+<h4><strong>階段 D：根據狀態修正方向</strong></h4>
+<p>中間在線上直行，偏左/偏右就修正。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import GraySensor8
+from mango import bus
+from mango import Motor
+import time
+
+line = GraySensor8(i2c=bus.i2c, digital_channels=&#x27;4&#x27;)
+
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+
+def drive(left, right):
+    left_motor.speed(left)
+    right_motor.speed(right)
+
+def stop():
+    left_motor.stop()
+    right_motor.stop()
+
+while True:
+    state = line.digital_state
+    print(&quot;line =&quot;, state)
+
+    if state == &quot;0110&quot;:
+        drive(18, 18)
+    elif state in (&quot;1100&quot;, &quot;1000&quot;, &quot;0100&quot;):
+        drive(8, 22)
+    elif state in (&quot;0011&quot;, &quot;0001&quot;, &quot;0010&quot;):
+        drive(22, 8)
+    elif state == &quot;0000&quot;:
+        stop()
+    else:
+        drive(12, 12)
+
+    time.sleep_ms(30)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>小車可以用最基本的左右修正方式沿著黑線前進。若感測器黑白邏輯相反，需依實際 <code>print()</code> 結果調整狀態字串。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 當完全離線 <code>0000</code> 時，不要立刻停止，改成慢速原地左轉搜尋線。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import GraySensor8
+from mango import bus
+from mango import Motor
+import time
+
+line = GraySensor8(i2c=bus.i2c, digital_channels=&#x27;4&#x27;)
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+
+def drive(left, right):
+    left_motor.speed(left)
+    right_motor.speed(right)
+
+while True:
+    state = line.digital_state
+    print(&quot;line =&quot;, state)
+
+    if state == &quot;0110&quot;:
+        drive(18, 18)
+    elif state in (&quot;1100&quot;, &quot;1000&quot;, &quot;0100&quot;):
+        drive(8, 22)
+    elif state in (&quot;0011&quot;, &quot;0001&quot;, &quot;0010&quot;):
+        drive(22, 8)
+    elif state == &quot;0000&quot;:
+        drive(-10, 10)
+    else:
+        drive(12, 12)
+
+    time.sleep_ms(30)</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-6">
+          <summary>
+            <span class="download-type">Case 6</span>
+            <strong>伺服掃描式避障</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>把超音波裝在伺服馬達上，遇到障礙時左右掃描，選擇距離較遠的一側轉向。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：控制伺服角度</strong></h4>
+<p>使用 <code>Servo.position(angle)</code>。</p>
+<h4><strong>階段 B：在不同角度讀取距離</strong></h4>
+<p>左、中、右各讀一次。</p>
+<h4><strong>階段 C：比較左右距離</strong></h4>
+<p>哪邊距離大，就往哪邊轉。</p>
+<h4><strong>階段 D：回到中間繼續前進</strong></h4>
+<p>掃描後伺服回正，車子繼續走。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import Motor, RUS04, Servo
+import time
+
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
+servo = Servo(pin=6)
+
+def drive(left, right):
+    left_motor.speed(left)
+    right_motor.speed(right)
+
+def stop():
+    left_motor.stop()
+    right_motor.stop()
+
+def scan(angle):
+    servo.position(angle)
+    time.sleep_ms(500)
+    return sensor.ping()
+
+def choose_direction():
+    stop()
+    center = scan(90)
+    left = scan(150)
+    right = scan(30)
+    servo.position(90)
+
+    print(&quot;scan center/left/right =&quot;, center, left, right)
+
+    if left &gt; right:
+        drive(-20, 20)
+    else:
+        drive(20, -20)
+
+    time.sleep_ms(700)
+    stop()
+
+servo.position(90)
+
+while True:
+    dist = sensor.ping()
+    print(&quot;front =&quot;, dist)
+
+    if dist &lt; 25:
+        sensor.rgb_all((255, 0, 0))
+        choose_direction()
+    else:
+        sensor.rgb_all((0, 255, 0))
+        drive(18, 18)
+
+    time.sleep_ms(100)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>小車遇到障礙物時會停下，伺服帶著超音波左右掃描，選擇較空曠的一邊轉向。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 若左右距離都小於 20 cm，讓小車後退 1 秒再重新掃描。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import Motor, RUS04, Servo
+import time
+
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
+servo = Servo(pin=6)
+
+def drive(left, right):
+    left_motor.speed(left)
+    right_motor.speed(right)
+
+def stop():
+    left_motor.stop()
+    right_motor.stop()
+
+def scan(angle):
+    servo.position(angle)
+    time.sleep_ms(500)
+    return sensor.ping()
+
+def scan_and_turn():
+    left = scan(150)
+    right = scan(30)
+    servo.position(90)
+
+    if left &lt; 20 and right &lt; 20:
+        drive(-18, -18)
+        time.sleep(1)
+        stop()
+        return
+
+    if left &gt; right:
+        drive(-20, 20)
+    else:
+        drive(20, -20)
+
+    time.sleep_ms(700)
+    stop()
+
+servo.position(90)
+
+while True:
+    if sensor.ping() &lt; 25:
+        sensor.rgb_all((255, 0, 0))
+        stop()
+        scan_and_turn()
+    else:
+        sensor.rgb_all((0, 255, 0))
+        drive(18, 18)
+
+    time.sleep_ms(100)</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-7">
+          <summary>
+            <span class="download-type">Case 7</span>
+            <strong>I2C 掃描與尋跡感測器診斷</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>在開始循跡前，先用 I2C 掃描與灰階感測器讀值診斷，確認硬體連線、位址與黑白讀值都正常。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：掃描 I2C 裝置</strong></h4>
+<p>使用 <code>bus.i2c.scan()</code> 列出目前掛在 I2C 匯流排上的裝置位址。</p>
+<h4><strong>階段 B：確認 ADS1115 位址</strong></h4>
+<p>依原教材第 64 頁，本車課程預設使用 I2C 四路尋跡狀態；Mango 函式庫以 <code>GraySensor8(..., digital_channels=&#x27;4&#x27;)</code> 讀取中間四路，常見 I2C 位址為 <code>0x48</code> 與 <code>0x49</code>。</p>
+<h4><strong>階段 C：讀取類比值與數位狀態</strong></h4>
+<p><code>read_analog()</code> 可看原始數值，<code>digital_state</code> 可看黑白判斷結果。</p>
+<h4><strong>階段 D：用手或黑線逐一遮住感測器</strong></h4>
+<p>學生要觀察每一個位置的數字是否會改變，建立「感測器排序」概念。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import GraySensor8
+from mango import bus
+import time
+
+addresses = bus.i2c.scan()
+print(&quot;I2C addresses =&quot;, [hex(addr) for addr in addresses])
+
+if 0x48 not in addresses:
+    print(&quot;warning: cannot find left ADS1115 at 0x48&quot;)
+
+if 0x49 not in addresses:
+    print(&quot;warning: cannot find right ADS1115 at 0x49&quot;)
+
+line = GraySensor8(i2c=bus.i2c, digital_channels=&#x27;4&#x27;)
+
+while True:
+    analog = line.read_analog()
+    digital = line.digital_state
+    print(&quot;digital =&quot;, digital, &quot;analog =&quot;, analog)
+    time.sleep_ms(300)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>Shell 會顯示 I2C 裝置位址、四路黑白狀態與底層類比讀值。學生可以在循跡前先排除「沒有接到」「左右接反」「某一路沒有反應」等問題。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 顯示目前偵測到黑線的感測器數量。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import GraySensor8
+from mango import bus
+import time
+
+line = GraySensor8(i2c=bus.i2c, digital_channels=&#x27;4&#x27;)
+
+while True:
+    state = line.digital_state
+    black_count = state.count(&quot;1&quot;)
+    print(&quot;state =&quot;, state, &quot;black sensors =&quot;, black_count)
+    time.sleep_ms(300)</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-8">
+          <summary>
+            <span class="download-type">Case 8</span>
+            <strong>加權循跡比例控制</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>把四路尋跡感測器的黑線位置轉成誤差值，再用比例控制調整左右輪速度，讓循跡比單純 if/elif 更平滑。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：定義感測器權重</strong></h4>
+<p>由左到右設定為 <code>-2, -1, 1, 2</code>。黑線越偏左，誤差越負；越偏右，誤差越正。</p>
+<h4><strong>階段 B：計算加權平均</strong></h4>
+<p>只把讀到黑線的感測器納入平均，得到目前黑線相對於車身中心的位置。</p>
+<h4><strong>階段 C：用 Kp 算修正量</strong></h4>
+<p><code>correction = error * KP</code>，偏左時左輪慢、右輪快；偏右時右輪慢、左輪快。</p>
+<h4><strong>階段 D：限制速度範圍</strong></h4>
+<p>避免修正後超出馬達可用速度，讓控制更穩定。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import GraySensor8
+from mango import bus
+from mango import Motor
+import time
+
+line = GraySensor8(i2c=bus.i2c, digital_channels=&#x27;4&#x27;)
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+
+WEIGHTS = [-2, -1, 1, 2]
+BASE_SPEED = 20
+KP = 5
+last_error = 0
+
+def clamp(value, low, high):
+    if value &lt; low:
+        return low
+    if value &gt; high:
+        return high
+    return value
+
+def drive(left, right):
+    left_motor.speed(left)
+    right_motor.speed(right)
+
+def stop():
+    left_motor.stop()
+    right_motor.stop()
+
+def get_error():
+    global last_error
+
+    state = line.digital_state
+    total = 0
+    count = 0
+
+    for i in range(4):
+        if state[i] == &quot;1&quot;:
+            total += WEIGHTS[i]
+            count += 1
+
+    if count == 0:
+        return last_error
+
+    last_error = total / count
+    return last_error
+
+while True:
+    error = get_error()
+    correction = int(error * KP)
+    left = clamp(BASE_SPEED + correction, -35, 35)
+    right = clamp(BASE_SPEED - correction, -35, 35)
+
+    print(&quot;error =&quot;, error, &quot;left =&quot;, left, &quot;right =&quot;, right)
+    drive(left, right)
+    time.sleep_ms(40)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>小車會依黑線偏移量連續調整左右輪速度，而不是突然切換方向。學生會看到循跡從「規則判斷」進一步變成「比例控制」。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 當完全找不到黑線時，依照最後一次誤差方向原地搜尋。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import GraySensor8
+from mango import bus
+from mango import Motor
+import time
+
+line = GraySensor8(i2c=bus.i2c, digital_channels=&#x27;4&#x27;)
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+
+WEIGHTS = [-2, -1, 1, 2]
+BASE_SPEED = 20
+KP = 5
+last_error = 0
+
+def clamp(value, low, high):
+    if value &lt; low:
+        return low
+    if value &gt; high:
+        return high
+    return value
+
+def drive(left, right):
+    left_motor.speed(left)
+    right_motor.speed(right)
+
+def get_error_and_seen():
+    global last_error
+
+    state = line.digital_state
+    total = 0
+    count = 0
+
+    for i in range(4):
+        if state[i] == &quot;1&quot;:
+            total += WEIGHTS[i]
+            count += 1
+
+    if count == 0:
+        return last_error, False
+
+    last_error = total / count
+    return last_error, True
+
+while True:
+    error, seen = get_error_and_seen()
+
+    if not seen:
+        if last_error &lt; 0:
+            drive(-18, 18)
+        else:
+            drive(18, -18)
+        print(&quot;search line, last_error =&quot;, last_error)
+        time.sleep_ms(80)
+        continue
+
+    correction = int(error * KP)
+    left = clamp(BASE_SPEED + correction, -35, 35)
+    right = clamp(BASE_SPEED - correction, -35, 35)
+    drive(left, right)
+    print(&quot;follow line, error =&quot;, error)
+    time.sleep_ms(40)</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-9">
+          <summary>
+            <span class="download-type">Case 9</span>
+            <strong>循跡結合超音波避障</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>把循跡車與超音波避障整合：平常沿著黑線走，前方太近時先避開障礙，再回到循跡。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：設定任務優先順序</strong></h4>
+<p>安全優先於循跡。只要前方距離小於門檻，先執行避障。</p>
+<h4><strong>階段 B：保留循跡函式</strong></h4>
+<p>循跡控制獨立寫成 <code>follow_line_step()</code>，方便被主迴圈呼叫。</p>
+<h4><strong>階段 C：設計避障動作</strong></h4>
+<p>避障先停、後退、旋轉，再交回循跡控制。</p>
+<h4><strong>階段 D：加入 RGB 狀態提示</strong></h4>
+<p>綠色代表循跡，紅色代表避障，方便觀察狀態切換。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import GraySensor8
+from mango import bus
+from mango import Motor, RUS04
+import time
+
+line = GraySensor8(i2c=bus.i2c, digital_channels=&#x27;4&#x27;)
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+
+WEIGHTS = [-2, -1, 1, 2]
+BASE_SPEED = 18
+KP = 5
+last_error = 0
+
+def clamp(value, low, high):
+    if value &lt; low:
+        return low
+    if value &gt; high:
+        return high
+    return value
+
+def drive(left, right):
+    left_motor.speed(left)
+    right_motor.speed(right)
+
+def stop():
+    left_motor.stop()
+    right_motor.stop()
+
+def get_line_error():
+    global last_error
+
+    state = line.digital_state
+    total = 0
+    count = 0
+
+    for i in range(4):
+        if state[i] == &quot;1&quot;:
+            total += WEIGHTS[i]
+            count += 1
+
+    if count == 0:
+        return last_error
+
+    last_error = total / count
+    return last_error
+
+def follow_line_step():
+    error = get_line_error()
+    correction = int(error * KP)
+    left = clamp(BASE_SPEED + correction, -35, 35)
+    right = clamp(BASE_SPEED - correction, -35, 35)
+    sensor.rgb_all((0, 255, 0))
+    drive(left, right)
+    print(&quot;line error =&quot;, error)
+
+def avoid_obstacle():
+    sensor.rgb_all((255, 0, 0))
+    stop()
+    time.sleep_ms(150)
+    drive(-18, -18)
+    time.sleep_ms(500)
+    drive(20, -20)
+    time.sleep_ms(700)
+    stop()
+
+while True:
+    dist = sensor.ping()
+    print(&quot;distance =&quot;, dist)
+
+    if dist &lt; 18:
+        avoid_obstacle()
+    else:
+        follow_line_step()
+
+    time.sleep_ms(50)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>小車能沿黑線行駛，遇到前方障礙時會先紅燈避開，再回到循跡邏輯。這個 case 適合作為「多感測器整合」的第一個完整任務。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 加入中距離警示：距離 18-30 cm 時亮橘燈並降低循跡速度。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import GraySensor8
+from mango import bus
+from mango import Motor, RUS04
+import time
+
+line = GraySensor8(i2c=bus.i2c, digital_channels=&#x27;4&#x27;)
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+
+WEIGHTS = [-2, -1, 1, 2]
+KP = 5
+last_error = 0
+
+def clamp(value, low, high):
+    if value &lt; low:
+        return low
+    if value &gt; high:
+        return high
+    return value
+
+def drive(left, right):
+    left_motor.speed(left)
+    right_motor.speed(right)
+
+def stop():
+    left_motor.stop()
+    right_motor.stop()
+
+def get_line_error():
+    global last_error
+    state = line.digital_state
+    total = 0
+    count = 0
+
+    for i in range(4):
+        if state[i] == &quot;1&quot;:
+            total += WEIGHTS[i]
+            count += 1
+
+    if count == 0:
+        return last_error
+
+    last_error = total / count
+    return last_error
+
+def follow_line_step(base_speed):
+    error = get_line_error()
+    correction = int(error * KP)
+    left = clamp(base_speed + correction, -35, 35)
+    right = clamp(base_speed - correction, -35, 35)
+    drive(left, right)
+
+def avoid_obstacle():
+    sensor.rgb_all((255, 0, 0))
+    stop()
+    time.sleep_ms(150)
+    drive(-18, -18)
+    time.sleep_ms(500)
+    drive(20, -20)
+    time.sleep_ms(700)
+    stop()
+
+while True:
+    dist = sensor.ping()
+
+    if dist &lt; 18:
+        avoid_obstacle()
+    elif dist &lt; 30:
+        sensor.rgb_all((255, 120, 0))
+        follow_line_step(12)
+    else:
+        sensor.rgb_all((0, 255, 0))
+        follow_line_step(18)
+
+    time.sleep_ms(50)</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-10">
+          <summary>
+            <span class="download-type">Case 10</span>
+            <strong>伺服多角度環境掃描</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>讓伺服馬達帶著超音波感測器掃描多個角度，找出最空曠的方向，再決定小車轉向。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：設定掃描角度</strong></h4>
+<p>使用 <code>[30, 60, 90, 120, 150]</code> 代表右側、右前、正前、左前、左側。</p>
+<h4><strong>階段 B：每個角度讀一次距離</strong></h4>
+<p>伺服轉到角度後等待穩定，再讀取超音波距離。</p>
+<h4><strong>階段 C：尋找最大距離</strong></h4>
+<p>最大距離代表最可能安全通過的方向。</p>
+<h4><strong>階段 D：把角度轉成動作</strong></h4>
+<p>如果最佳角度小於 90 度，向右轉；大於 90 度，向左轉；等於 90 度則直行。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import Motor, RUS04, Servo
+import time
+
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
+servo = Servo(pin=6)
+
+ANGLES = [30, 60, 90, 120, 150]
+
+def drive(left, right):
+    left_motor.speed(left)
+    right_motor.speed(right)
+
+def stop():
+    left_motor.stop()
+    right_motor.stop()
+
+def read_at(angle):
+    servo.position(angle)
+    time.sleep_ms(450)
+    return sensor.ping()
+
+def scan_world():
+    results = []
+    for angle in ANGLES:
+        dist = read_at(angle)
+        results.append((angle, dist))
+        print(&quot;angle =&quot;, angle, &quot;distance =&quot;, dist)
+    servo.position(90)
+    return results
+
+def choose_best(results):
+    best_angle = results[0][0]
+    best_dist = results[0][1]
+
+    for angle, dist in results:
+        if dist &gt; best_dist:
+            best_angle = angle
+            best_dist = dist
+
+    return best_angle, best_dist
+
+def turn_to(angle):
+    if angle &lt; 80:
+        drive(22, -22)
+        time.sleep_ms(650)
+    elif angle &gt; 100:
+        drive(-22, 22)
+        time.sleep_ms(650)
+    else:
+        drive(18, 18)
+        time.sleep_ms(500)
+    stop()
+
+servo.position(90)
+
+while True:
+    if sensor.ping() &lt; 25:
+        sensor.rgb_all((255, 0, 0))
+        stop()
+        results = scan_world()
+        best_angle, best_dist = choose_best(results)
+        print(&quot;best =&quot;, best_angle, best_dist)
+        turn_to(best_angle)
+    else:
+        sensor.rgb_all((0, 255, 0))
+        drive(18, 18)
+
+    time.sleep_ms(80)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>小車前方受阻時，會停下來左右掃描多個角度，選擇距離最大的方向轉過去。學生能把「感測資料表」轉成「決策」。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 如果所有角度都小於 20 cm，讓小車先後退 1 秒，再重新掃描。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import Motor, RUS04, Servo
+import time
+
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
+servo = Servo(pin=6)
+
+ANGLES = [30, 60, 90, 120, 150]
+
+def drive(left, right):
+    left_motor.speed(left)
+    right_motor.speed(right)
+
+def stop():
+    left_motor.stop()
+    right_motor.stop()
+
+def read_at(angle):
+    servo.position(angle)
+    time.sleep_ms(450)
+    return sensor.ping()
+
+def scan_world():
+    results = []
+    for angle in ANGLES:
+        results.append((angle, read_at(angle)))
+    servo.position(90)
+    return results
+
+def choose_best(results):
+    best_angle = results[0][0]
+    best_dist = results[0][1]
+
+    for angle, dist in results:
+        if dist &gt; best_dist:
+            best_angle = angle
+            best_dist = dist
+
+    return best_angle, best_dist
+
+def back_up():
+    drive(-18, -18)
+    time.sleep(1)
+    stop()
+
+def turn_to(angle):
+    if angle &lt; 80:
+        drive(22, -22)
+    elif angle &gt; 100:
+        drive(-22, 22)
+    else:
+        drive(18, 18)
+
+    time.sleep_ms(650)
+    stop()
+
+servo.position(90)
+
+while True:
+    if sensor.ping() &lt; 25:
+        sensor.rgb_all((255, 0, 0))
+        stop()
+        results = scan_world()
+        best_angle, best_dist = choose_best(results)
+        print(&quot;best =&quot;, best_angle, best_dist)
+
+        if best_dist &lt; 20:
+            back_up()
+        else:
+            turn_to(best_angle)
+    else:
+        sensor.rgb_all((0, 255, 0))
+        drive(18, 18)
+
+    time.sleep_ms(80)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>小車平常直行；前方遇到障礙物時亮紅燈並左轉，距離安全後回到綠燈直行。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 把避障門檻改成 30 cm，並讓轉向時速度更慢。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import Motor, RUS04
+import time
+
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
+
+def drive(left, right):
+    left_motor.speed(left)
+    right_motor.speed(right)
+
+while True:
+    dist = sensor.ping()
+
+    if dist &lt; 30:
+        sensor.rgb_all((255, 0, 0))
+        drive(5, 18)
+    else:
+        sensor.rgb_all((0, 255, 0))
+        drive(15, 15)
+
+    time.sleep_ms(100)</code></pre></div></article>
+          </div>
+        </details>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Continue</p>
+          <h2>繼續下一個主題</h2>
+        </div>
+        <div class="page-grid">
+          <article class="content-card">
+            <span class="zone-badge student">上一個</span>
+            <h3>小車移動：馬達、速度與控制模組</h3>
+            <p>本主題聚焦馬達方向、PWM 速度、左右輪差速與模組化，建立小車可以穩定移動的基礎。</p>
+            <a class="button ghost" href="topic-03-car-motion.html">打開上一個主題</a>
+          </article>
+          <article class="content-card">
+            <span class="zone-badge teacher">下一個</span>
+            <h3>專題化：任務設計、策略比較與成果評量</h3>
+            <p>本主題把前面學到的輸入、輸出、馬達、感測與循跡控制整合成任務挑戰，並加入規則式、P、PD、PID 循跡演算法 cases。</p>
+            <a class="button primary" href="topic-05-project-cases.html">打開下一個主題</a>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="script.js?v=20260423-cases"></script>
+</body>
+</html>

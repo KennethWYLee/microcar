@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>感測與輸出：蜂鳴器、RGB 與超音波 | Raspberry Pi Pico 小車主題教材</title>
+  <meta name="description" content="本主題從蜂鳴器與 RGB 輸出延伸到超音波距離感測，讓學生看見程式如何回應環境變化。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260423-cases">
+</head>
+<body class="topic-page">
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">MC</span>
+        <span class="brand-copy">
+          <strong>Raspberry Pi Pico 小車主題教材</strong>
+          <small>Topic-based Microcar Course</small>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="主題導覽">
+        <a href="topic-01-intro.html">入門</a>
+        <a href="topic-02-sensor-output.html" aria-current="page">感測與輸出</a>
+        <a href="topic-03-car-motion.html">小車移動</a>
+        <a href="topic-04-autonomous-car.html">無人車</a>
+        <a href="topic-05-project-cases.html">專題化</a>
+        <a href="downloads.html">下載區</a>
+      </nav>
+      <a class="button ghost" href="https://github.com/KennethWYLee/microcar" target="_blank" rel="noreferrer">GitHub</a>
+    </header>
+
+    <main>
+      <section class="subpage-hero reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">主題 2</p>
+          <h1>感測與輸出：蜂鳴器、RGB 與超音波</h1>
+          <p class="hero-text">本主題從蜂鳴器與 RGB 輸出延伸到超音波距離感測，讓學生看見程式如何回應環境變化。</p>
+          <div class="chip-list compact">
+            <span>Buzzer</span>
+<span>RGB</span>
+<span>Ultrasonic</span>
+          </div>
+          <div class="action-row">
+            <a class="button primary" href="#case-map">查看 Case 地圖</a>
+            <a class="button secondary" href="#case-list">開始閱讀 Cases</a>
+            <a class="button ghost" href="downloads/case-md/02_感測輸出_cases.md">下載 Markdown</a>
+          </div>
+        </div>
+        <div class="subpage-aside">
+          <article class="aside-card">
+            <img class="teaching-visual" src="assets/ir-sensor.png" alt="感測與輸出：蜂鳴器、RGB 與超音波教材示意圖">
+            <p class="visual-note">把感測資料轉成聲光回饋</p>
+          </article>
+          <article class="aside-card">
+            <span class="zone-badge teacher">Topic Overview</span>
+            <h3>本主題包含 10 個 cases</h3>
+            <p>每個 case 都依照「主題、分階段教學、完整程式碼、最終成果、應用題與解答」整理，適合逐步教學與自學。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Learning Context</p>
+          <h2>這個主題在整門課的位置</h2>
+          <p>把感測資料轉成聲光回饋</p>
+        </div>
+        <div class="content-card markdown-intro">
+<p>本篇延伸原教材第 31-44 頁，從 PWM 蜂鳴器、WS2812B RGB 燈，到 RUS04 超音波測距。教學順序是：先控制輸出，再讀取感測器，最後把感測值轉成聲光回饋。</p>
+<p>參考資料：</p>
+<ul class="detail-list"><li>MicroPython <code>machine.PWM</code>：<a class="text-link" href="https://docs.micropython.org/en/latest/library/machine.PWM.html" target="_blank" rel="noreferrer">https://docs.micropython.org/en/latest/library/machine.PWM.html</a></li><li>MicroPython <code>machine.ADC</code>：<a class="text-link" href="https://docs.micropython.org/en/v1.12/library/machine.ADC.html" target="_blank" rel="noreferrer">https://docs.micropython.org/en/v1.12/library/machine.ADC.html</a></li><li>MicroPython <code>neopixel</code>：<a class="text-link" href="https://micropython.org/resources/docs/en/latest/library/neopixel.html" target="_blank" rel="noreferrer">https://micropython.org/resources/docs/en/latest/library/neopixel.html</a></li><li>MicroPython <code>machine.time_pulse_us</code>：<a class="text-link" href="https://docs.micropython.org/en/latest/library/machine.html" target="_blank" rel="noreferrer">https://docs.micropython.org/en/latest/library/machine.html</a></li><li>Raspberry Pi Pico MicroPython examples：<a class="text-link" href="https://github.com/raspberrypi/pico-micropython-examples" target="_blank" rel="noreferrer">https://github.com/raspberrypi/pico-micropython-examples</a></li></ul>
+        </div>
+      </section>
+
+      <section id="case-map" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Case Map</p>
+          <h2>先用地圖看完整學習順序</h2>
+          <p>可以依序完成，也可以直接點選需要的 case。</p>
+        </div>
+        <div class="case-index-grid">
+          <a class="case-index-card" href="#case-1">
+            <span>Case 1</span>
+            <strong>蜂鳴器單音控制</strong>
+          </a>
+          <a class="case-index-card" href="#case-2">
+            <span>Case 2</span>
+            <strong>蜂鳴器旋律播放器</strong>
+          </a>
+          <a class="case-index-card" href="#case-3">
+            <span>Case 3</span>
+            <strong>RGB 狀態燈</strong>
+          </a>
+          <a class="case-index-card" href="#case-4">
+            <span>Case 4</span>
+            <strong>RGB 跑馬燈</strong>
+          </a>
+          <a class="case-index-card" href="#case-5">
+            <span>Case 5</span>
+            <strong>超音波距離監測</strong>
+          </a>
+          <a class="case-index-card" href="#case-6">
+            <span>Case 6</span>
+            <strong>距離警示器</strong>
+          </a>
+          <a class="case-index-card" href="#case-7">
+            <span>Case 7</span>
+            <strong>ADC 旋鈕控制 LED 亮度</strong>
+          </a>
+          <a class="case-index-card" href="#case-8">
+            <span>Case 8</span>
+            <strong>ADC 旋鈕控制蜂鳴器音高</strong>
+          </a>
+          <a class="case-index-card" href="#case-9">
+            <span>Case 9</span>
+            <strong>超音波距離 RGB 條形圖</strong>
+          </a>
+          <a class="case-index-card" href="#case-10">
+            <span>Case 10</span>
+            <strong>距離移動平均濾波警示器</strong>
+          </a>
+        </div>
+      </section>
+
+      <section id="case-list" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Cases</p>
+          <h2>逐步教學內容</h2>
+          <p>點開每個 case 後，可以看到完整教學段落與可複製的程式碼。</p>
+        </div>
+        <div class="case-list">
+        <details class="case-detail" open id="case-1">
+          <summary>
+            <span class="download-type">Case 1</span>
+            <strong>蜂鳴器單音控制</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>使用 PWM 控制板載蜂鳴器，讓它發出指定頻率的聲音。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：理解 PWM 與蜂鳴器</strong></h4>
+<p>蜂鳴器需要頻率才能發出聲音，<code>freq</code> 影響音高，<code>duty_u16</code> 影響輸出強度。</p>
+<h4><strong>階段 B：建立 PWM 物件</strong></h4>
+<p>用 <code>PWM(Pin(6))</code> 控制板載蜂鳴器。</p>
+<h4><strong>階段 C：寫成 <code>beep()</code> 函式</strong></h4>
+<p>讓每次發聲都有頻率、時間與音量參數。</p>
+<h4><strong>階段 D：停止聲音</strong></h4>
+<p>發聲後要把 duty 設為 0。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin, PWM
+import time
+
+buzzer = PWM(Pin(6, Pin.OUT))
+
+def beep(freq=800, duration_ms=300, duty=5000):
+    buzzer.freq(freq)
+    buzzer.duty_u16(duty)
+    time.sleep_ms(duration_ms)
+    buzzer.duty_u16(0)
+
+beep(500, 300)
+time.sleep(0.5)
+beep(900, 300)
+time.sleep(0.5)
+beep(1200, 300)
+
+buzzer.deinit()</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>蜂鳴器依序發出三個不同音高的短音。學生可明顯聽到頻率改變造成音高不同。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 做出「倒數提示音」：低音、低音、高音。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin, PWM
+import time
+
+buzzer = PWM(Pin(6, Pin.OUT))
+
+def beep(freq, duration_ms=200):
+    buzzer.freq(freq)
+    buzzer.duty_u16(5000)
+    time.sleep_ms(duration_ms)
+    buzzer.duty_u16(0)
+    time.sleep_ms(150)
+
+beep(500)
+beep(500)
+beep(1200, 500)
+
+buzzer.deinit()</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-2">
+          <summary>
+            <span class="download-type">Case 2</span>
+            <strong>蜂鳴器旋律播放器</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>用陣列儲存旋律，讓蜂鳴器依序播放音符。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：把音符抽象成資料</strong></h4>
+<p>每個音符用 <code>(頻率, 時間)</code> 表示。</p>
+<h4><strong>階段 B：用迴圈播放</strong></h4>
+<p><code>for note in melody</code> 逐一播放音符。</p>
+<h4><strong>階段 C：加入休止符</strong></h4>
+<p>頻率為 <code>0</code> 時代表安靜。</p>
+<h4><strong>階段 D：調整節奏</strong></h4>
+<p>讓學生改變 duration 觀察節奏差異。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin, PWM
+import time
+
+buzzer = PWM(Pin(6, Pin.OUT))
+
+melody = [
+    (523, 200),  # C5
+    (587, 200),  # D5
+    (659, 200),  # E5
+    (0,   150),  # pause
+    (659, 200),
+    (587, 200),
+    (523, 400),
+]
+
+def play_tone(freq, duration_ms, duty=5000):
+    if freq == 0:
+        buzzer.duty_u16(0)
+    else:
+        buzzer.freq(freq)
+        buzzer.duty_u16(duty)
+
+    time.sleep_ms(duration_ms)
+    buzzer.duty_u16(0)
+    time.sleep_ms(60)
+
+for freq, duration in melody:
+    play_tone(freq, duration)
+
+buzzer.deinit()</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>蜂鳴器會播放一小段簡單旋律。學生可以把旋律資料改掉，練習資料驅動控制。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 加入一個警示旋律：高音、低音交替 5 次。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin, PWM
+import time
+
+buzzer = PWM(Pin(6, Pin.OUT))
+
+def play(freq, duration_ms=150):
+    buzzer.freq(freq)
+    buzzer.duty_u16(5000)
+    time.sleep_ms(duration_ms)
+    buzzer.duty_u16(0)
+    time.sleep_ms(80)
+
+for i in range(5):
+    play(1200)
+    play(500)
+
+buzzer.deinit()</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-3">
+          <summary>
+            <span class="download-type">Case 3</span>
+            <strong>RGB 狀態燈</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>使用芒果平台的 <code>WS2812B</code> 控制 RGB 彩燈，建立紅、綠、藍三種狀態。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：建立 RGB 物件</strong></h4>
+<p>使用 <code>WS2812B(pin=2, leds=6)</code>。</p>
+<h4><strong>階段 B：定義狀態顏色</strong></h4>
+<p>綠色代表正常，藍色代表待機，紅色代表警示。</p>
+<h4><strong>階段 C：封裝 <code>show_status()</code></strong></h4>
+<p>用函式管理狀態，不讓主程式到處寫顏色。</p>
+<h4><strong>階段 D：依序展示狀態</strong></h4>
+<p>讓學生看見狀態燈的用途。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import WS2812B
+import time
+
+rgb = WS2812B(pin=2, leds=6, sm_id=4, brightness=0.2)
+
+STATUS_COLORS = {
+    &quot;ready&quot;: (0, 0, 255),
+    &quot;run&quot;: (0, 255, 0),
+    &quot;warn&quot;: (255, 150, 0),
+    &quot;danger&quot;: (255, 0, 0),
+    &quot;off&quot;: (0, 0, 0),
+}
+
+def show_status(name):
+    color = STATUS_COLORS[name]
+    rgb.show_all(color)
+
+show_status(&quot;ready&quot;)
+time.sleep(1)
+show_status(&quot;run&quot;)
+time.sleep(1)
+show_status(&quot;warn&quot;)
+time.sleep(1)
+show_status(&quot;danger&quot;)
+time.sleep(1)
+show_status(&quot;off&quot;)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>RGB 會依序顯示藍、綠、橘、紅、關燈，形成可辨識的小車狀態燈。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 增加 <code>charging</code> 狀態，顏色為紫色，並讓它顯示 2 秒。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import WS2812B
+import time
+
+rgb = WS2812B(pin=2, leds=6, sm_id=4, brightness=0.2)
+
+STATUS_COLORS = {
+    &quot;ready&quot;: (0, 0, 255),
+    &quot;run&quot;: (0, 255, 0),
+    &quot;warn&quot;: (255, 150, 0),
+    &quot;danger&quot;: (255, 0, 0),
+    &quot;charging&quot;: (180, 0, 255),
+    &quot;off&quot;: (0, 0, 0),
+}
+
+def show_status(name):
+    rgb.show_all(STATUS_COLORS[name])
+
+show_status(&quot;charging&quot;)
+time.sleep(2)
+show_status(&quot;off&quot;)</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-4">
+          <summary>
+            <span class="download-type">Case 4</span>
+            <strong>RGB 跑馬燈</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>讓 6 顆 RGB 燈依序亮起，製作小車啟動動畫。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：理解 LED 索引</strong></h4>
+<p>6 顆 LED 的索引是 <code>0-5</code>。</p>
+<h4><strong>階段 B：一次只亮一顆</strong></h4>
+<p>先關閉全部，再點亮指定索引。</p>
+<h4><strong>階段 C：用迴圈移動亮點</strong></h4>
+<p>每次 <code>i</code> 增加，亮點就往下一顆移動。</p>
+<h4><strong>階段 D：做成函式</strong></h4>
+<p>未來啟動小車時可直接呼叫。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import WS2812B
+import time
+
+rgb = WS2812B(pin=2, leds=6, sm_id=4, brightness=0.2)
+
+def clear():
+    rgb.show_all((0, 0, 0))
+
+def chase(color=(0, 255, 0), rounds=3, delay_ms=120):
+    for r in range(rounds):
+        for i in range(6):
+            clear()
+            rgb.set_pixels(i, color)
+            rgb.show()
+            time.sleep_ms(delay_ms)
+
+chase((0, 255, 0), rounds=3)
+clear()</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>RGB 會形成綠色跑馬燈，適合當成小車啟動或任務開始動畫。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 讓跑馬燈從紅色開始，每跑一圈換成綠色、藍色。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import WS2812B
+import time
+
+rgb = WS2812B(pin=2, leds=6, sm_id=4, brightness=0.2)
+colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255)]
+
+for color in colors:
+    for i in range(6):
+        rgb.show_all((0, 0, 0))
+        rgb.set_pixels(i, color)
+        rgb.show()
+        time.sleep_ms(120)
+
+rgb.close()</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-5">
+          <summary>
+            <span class="download-type">Case 5</span>
+            <strong>超音波距離監測</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>使用 <code>RUS04</code> 超音波模組讀取距離，並在 Shell 中印出公分值。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：建立 RUS04 物件</strong></h4>
+<p>芒果車使用 <code>sensor_pin=15</code>、<code>rgb_pin=14</code>。</p>
+<h4><strong>階段 B：呼叫 <code>ping()</code></strong></h4>
+<p>取得距離值。</p>
+<h4><strong>階段 C：週期性讀取</strong></h4>
+<p>每 0.2 秒讀一次，避免讀太快。</p>
+<h4><strong>階段 D：觀察穩定度</strong></h4>
+<p>讓學生把手靠近、遠離感測器。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import RUS04
+import time
+
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
+
+while True:
+    dist = sensor.ping()
+    print(&quot;distance =&quot;, dist, &quot;cm&quot;)
+    time.sleep_ms(200)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>Thonny Shell 會持續印出距離。物體靠近時數字變小，遠離時數字變大。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 只在距離小於 20 cm 時印出 <code>Too close!</code>。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import RUS04
+import time
+
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
+
+while True:
+    dist = sensor.ping()
+
+    if dist &lt; 20:
+        print(&quot;Too close!&quot;, dist, &quot;cm&quot;)
+
+    time.sleep_ms(200)</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-6">
+          <summary>
+            <span class="download-type">Case 6</span>
+            <strong>距離警示器</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>整合超音波、RGB 與蜂鳴器：距離越近，燈色越危險，蜂鳴器提示越急促。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：先分距離區間</strong></h4>
+<p>近距離、中距離、安全距離。</p>
+<h4><strong>階段 B：距離對應 RGB</strong></h4>
+<p>紅色危險、橘色警告、綠色安全。</p>
+<h4><strong>階段 C：加入蜂鳴器</strong></h4>
+<p>危險時短促警示，中距離低頻提醒，安全時安靜。</p>
+<h4><strong>階段 D：把它視為避障車前置案例</strong></h4>
+<p>後續只要把蜂鳴器換成馬達控制，就變成避障邏輯。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin, PWM
+from mango import RUS04
+import time
+
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
+buzzer = PWM(Pin(6, Pin.OUT))
+
+def beep(freq=900, duration_ms=80):
+    buzzer.freq(freq)
+    buzzer.duty_u16(5000)
+    time.sleep_ms(duration_ms)
+    buzzer.duty_u16(0)
+
+while True:
+    dist = sensor.ping()
+    print(&quot;distance =&quot;, dist, &quot;cm&quot;)
+
+    if dist &lt; 15:
+        sensor.rgb_all((255, 0, 0))
+        beep(1200, 80)
+        time.sleep_ms(80)
+    elif dist &lt; 35:
+        sensor.rgb_all((255, 150, 0))
+        beep(600, 120)
+        time.sleep_ms(250)
+    else:
+        sensor.rgb_all((0, 255, 0))
+        buzzer.duty_u16(0)
+        time.sleep_ms(200)</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-7">
+          <summary>
+            <span class="download-type">Case 7</span>
+            <strong>ADC 旋鈕控制 LED 亮度</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>使用 ADC 讀取可變電阻或旋鈕的類比電壓，並把讀到的 0-65535 數值轉成 LED 的 PWM 亮度。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：理解 ADC</strong></h4>
+<p>ADC 會把類比電壓轉成數字。MicroPython 的 <code>read_u16()</code> 會回傳 0 到 65535，數字越大代表輸入電壓越高。</p>
+<h4><strong>階段 B：接上可變電阻</strong></h4>
+<p>可變電阻兩端接 3.3V 與 GND，中間腳接 Pico 可用的 ADC 腳位，例如 GP26。</p>
+<h4><strong>階段 C：把 ADC 數值送給 PWM</strong></h4>
+<p>LED 的 <code>duty_u16()</code> 也使用 0 到 65535，因此可以直接把 ADC 數值當亮度。</p>
+<h4><strong>階段 D：用序列輸出觀察數值</strong></h4>
+<p>在 Thonny Shell 印出原始值，讓學生看到「旋鈕位置」與「數字大小」的關係。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin, PWM, ADC
+import time
+
+pot = ADC(Pin(26))
+led = PWM(Pin(7, Pin.OUT))
+led.freq(1000)
+
+while True:
+    raw = pot.read_u16()
+    led.duty_u16(raw)
+    print(&quot;adc =&quot;, raw, &quot;duty =&quot;, raw)
+    time.sleep_ms(100)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>旋轉可變電阻時，LED 會平滑變亮或變暗。學生可以同時在 Shell 看到 ADC 數值同步改變。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 改成「旋鈕越大，LED 越暗」的反向控制。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin, PWM, ADC
+import time
+
+pot = ADC(Pin(26))
+led = PWM(Pin(7, Pin.OUT))
+led.freq(1000)
+
+while True:
+    raw = pot.read_u16()
+    duty = 65535 - raw
+    led.duty_u16(duty)
+    print(&quot;adc =&quot;, raw, &quot;reverse duty =&quot;, duty)
+    time.sleep_ms(100)</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-8">
+          <summary>
+            <span class="download-type">Case 8</span>
+            <strong>ADC 旋鈕控制蜂鳴器音高</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>把 ADC 讀到的旋鈕數值轉換成蜂鳴器頻率，做出可以手動調音高的小樂器。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：複習 PWM 蜂鳴器</strong></h4>
+<p>蜂鳴器的 <code>freq()</code> 控制音高，<code>duty_u16()</code> 控制輸出強度。</p>
+<h4><strong>階段 B：設定頻率範圍</strong></h4>
+<p>為了避免太低或太尖銳，先把頻率限制在 200 Hz 到 2000 Hz。</p>
+<h4><strong>階段 C：撰寫比例轉換函式</strong></h4>
+<p>把 0-65535 轉成 200-2000，讓旋鈕位置可以對應到可聽見的音高。</p>
+<h4><strong>階段 D：加入短暫延遲</strong></h4>
+<p>每 50 ms 更新一次，聲音變化會足夠即時，也不會讓 Shell 輸出過快。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin, PWM, ADC
+import time
+
+pot = ADC(Pin(26))
+buzzer = PWM(Pin(6, Pin.OUT))
+
+def map_range(value, in_min, in_max, out_min, out_max):
+    return out_min + (value - in_min) * (out_max - out_min) // (in_max - in_min)
+
+while True:
+    raw = pot.read_u16()
+    freq = map_range(raw, 0, 65535, 200, 2000)
+    buzzer.freq(freq)
+    buzzer.duty_u16(4000)
+    print(&quot;adc =&quot;, raw, &quot;freq =&quot;, freq)
+    time.sleep_ms(50)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>轉動旋鈕時，蜂鳴器音高會連續變化，學生能把 ADC、數值比例轉換與 PWM 頻率連成同一個控制流程。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 加入靜音區：當 ADC 小於 5000 時，蜂鳴器不發聲。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin, PWM, ADC
+import time
+
+pot = ADC(Pin(26))
+buzzer = PWM(Pin(6, Pin.OUT))
+
+def map_range(value, in_min, in_max, out_min, out_max):
+    return out_min + (value - in_min) * (out_max - out_min) // (in_max - in_min)
+
+while True:
+    raw = pot.read_u16()
+
+    if raw &lt; 5000:
+        buzzer.duty_u16(0)
+        print(&quot;adc =&quot;, raw, &quot;mute&quot;)
+    else:
+        freq = map_range(raw, 5000, 65535, 200, 2000)
+        buzzer.freq(freq)
+        buzzer.duty_u16(4000)
+        print(&quot;adc =&quot;, raw, &quot;freq =&quot;, freq)
+
+    time.sleep_ms(50)</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-9">
+          <summary>
+            <span class="download-type">Case 9</span>
+            <strong>超音波距離 RGB 條形圖</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>使用超音波測距，把距離轉成 RGB 燈條顯示：越接近，亮起的燈越多，並用顏色表示危險程度。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：讀取距離</strong></h4>
+<p>使用 <code>RUS04.ping()</code> 取得目前距離。</p>
+<h4><strong>階段 B：決定顏色</strong></h4>
+<p>距離小於 15 cm 顯示紅色，15-35 cm 顯示橘色，35 cm 以上顯示綠色。</p>
+<h4><strong>階段 C：把距離轉成燈數</strong></h4>
+<p>越靠近越危險，因此距離越小，亮起的 LED 數量越多。</p>
+<h4><strong>階段 D：重複更新</strong></h4>
+<p>每 100 ms 更新一次燈條，形成即時距離儀表。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import RUS04, WS2812B
+import time
+
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
+bar = WS2812B(pin=2, leds=6, sm_id=4, brightness=0.2)
+
+def clamp(value, low, high):
+    if value &lt; low:
+        return low
+    if value &gt; high:
+        return high
+    return value
+
+def distance_to_count(dist):
+    dist = clamp(dist, 5, 60)
+    return 1 + (60 - dist) * 5 // 55
+
+def distance_to_color(dist):
+    if dist &lt; 15:
+        return (255, 0, 0)
+    if dist &lt; 35:
+        return (255, 120, 0)
+    return (0, 255, 0)
+
+def show_bar(count, color):
+    for i in range(6):
+        if i &lt; count:
+            bar.set_pixels(i, color)
+        else:
+            bar.set_pixels(i, (0, 0, 0))
+    bar.show()
+
+while True:
+    dist = sensor.ping()
+    count = distance_to_count(dist)
+    color = distance_to_color(dist)
+    show_bar(count, color)
+    print(&quot;distance =&quot;, dist, &quot;leds =&quot;, count)
+    time.sleep_ms(100)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>學生把手靠近超音波感測器時，RGB 燈條會亮更多顆，並從綠色逐步變成橘色、紅色，像一個倒車雷達儀表。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 改成「距離越遠，亮起的燈越多」的展示模式。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from mango import RUS04, WS2812B
+import time
+
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
+bar = WS2812B(pin=2, leds=6, sm_id=4, brightness=0.2)
+
+def clamp(value, low, high):
+    if value &lt; low:
+        return low
+    if value &gt; high:
+        return high
+    return value
+
+def distance_to_count(dist):
+    dist = clamp(dist, 5, 60)
+    return 1 + (dist - 5) * 5 // 55
+
+def show_bar(count):
+    for i in range(6):
+        if i &lt; count:
+            bar.set_pixels(i, (0, 80, 255))
+        else:
+            bar.set_pixels(i, (0, 0, 0))
+    bar.show()
+
+while True:
+    dist = sensor.ping()
+    count = distance_to_count(dist)
+    show_bar(count)
+    print(&quot;distance =&quot;, dist, &quot;leds =&quot;, count)
+    time.sleep_ms(100)</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-10">
+          <summary>
+            <span class="download-type">Case 10</span>
+            <strong>距離移動平均濾波警示器</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>使用移動平均降低超音波測距跳動，讓 RGB 與蜂鳴器警示更穩定。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：觀察原始距離跳動</strong></h4>
+<p>超音波遇到斜面、邊角或太近的物體時，數值可能忽大忽小。</p>
+<h4><strong>階段 B：保留最近幾筆資料</strong></h4>
+<p>用 list 保存最近 5 次距離讀值。</p>
+<h4><strong>階段 C：計算平均距離</strong></h4>
+<p>用平均值判斷危險程度，避免單次異常讀值造成誤報。</p>
+<h4><strong>階段 D：比較原始值與平均值</strong></h4>
+<p>同時印出 raw 與 avg，讓學生看到濾波前後的差別。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin, PWM
+from mango import RUS04
+import time
+
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
+buzzer = PWM(Pin(6, Pin.OUT))
+samples = []
+
+def add_sample(value):
+    samples.append(value)
+    if len(samples) &gt; 5:
+        samples.pop(0)
+    return sum(samples) / len(samples)
+
+def beep(freq, duration_ms):
+    buzzer.freq(freq)
+    buzzer.duty_u16(5000)
+    time.sleep_ms(duration_ms)
+    buzzer.duty_u16(0)
+
+while True:
+    raw = sensor.ping()
+    avg = add_sample(raw)
+    print(&quot;raw =&quot;, raw, &quot;avg =&quot;, avg)
+
+    if avg &lt; 15:
+        sensor.rgb_all((255, 0, 0))
+        beep(1400, 60)
+        time.sleep_ms(80)
+    elif avg &lt; 35:
+        sensor.rgb_all((255, 120, 0))
+        beep(700, 80)
+        time.sleep_ms(220)
+    else:
+        sensor.rgb_all((0, 255, 0))
+        buzzer.duty_u16(0)
+        time.sleep_ms(120)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>距離警示不再因為單次讀值跳動而忽然變色或亂叫。學生能理解「感測器資料需要整理後再拿來決策」。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 忽略不合理讀值：距離等於 0 或大於 300 cm 時，不加入平均。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin, PWM
+from mango import RUS04
+import time
+
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
+buzzer = PWM(Pin(6, Pin.OUT))
+samples = []
+
+def add_sample(value):
+    if value == 0 or value &gt; 300:
+        return None
+    samples.append(value)
+    if len(samples) &gt; 5:
+        samples.pop(0)
+    return sum(samples) / len(samples)
+
+def beep(freq, duration_ms):
+    buzzer.freq(freq)
+    buzzer.duty_u16(5000)
+    time.sleep_ms(duration_ms)
+    buzzer.duty_u16(0)
+
+while True:
+    raw = sensor.ping()
+    avg = add_sample(raw)
+
+    if avg is None:
+        print(&quot;ignore raw =&quot;, raw)
+        time.sleep_ms(100)
+        continue
+
+    print(&quot;raw =&quot;, raw, &quot;avg =&quot;, avg)
+
+    if avg &lt; 15:
+        sensor.rgb_all((255, 0, 0))
+        beep(1400, 60)
+        time.sleep_ms(80)
+    elif avg &lt; 35:
+        sensor.rgb_all((255, 120, 0))
+        beep(700, 80)
+        time.sleep_ms(220)
+    else:
+        sensor.rgb_all((0, 255, 0))
+        buzzer.duty_u16(0)
+        time.sleep_ms(120)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>距離安全時亮綠燈；接近物體時亮橘燈並發出慢速提示；非常接近時亮紅燈並快速警示。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 加入「超近距離停止警報」：距離小於 8 cm 時，紅燈長亮並連續嗶 3 次。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin, PWM
+from mango import RUS04
+import time
+
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
+buzzer = PWM(Pin(6, Pin.OUT))
+
+def beep(freq=1300, duration_ms=80):
+    buzzer.freq(freq)
+    buzzer.duty_u16(5000)
+    time.sleep_ms(duration_ms)
+    buzzer.duty_u16(0)
+    time.sleep_ms(80)
+
+while True:
+    dist = sensor.ping()
+    print(&quot;distance =&quot;, dist, &quot;cm&quot;)
+
+    if dist &lt; 8:
+        sensor.rgb_all((255, 0, 0))
+        for i in range(3):
+            beep()
+        time.sleep_ms(300)
+    elif dist &lt; 15:
+        sensor.rgb_all((255, 0, 0))
+        beep(1200, 80)
+    elif dist &lt; 35:
+        sensor.rgb_all((255, 150, 0))
+        beep(600, 120)
+        time.sleep_ms(250)
+    else:
+        sensor.rgb_all((0, 255, 0))
+        buzzer.duty_u16(0)
+        time.sleep_ms(200)</code></pre></div></article>
+          </div>
+        </details>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Continue</p>
+          <h2>繼續下一個主題</h2>
+        </div>
+        <div class="page-grid">
+          <article class="content-card">
+            <span class="zone-badge student">上一個</span>
+            <h3>入門：LED、按鈕與狀態控制</h3>
+            <p>本主題讓學習者先理解輸出、輸入、判斷與狀態，適合作為 Raspberry Pi Pico 小車課程的起點。</p>
+            <a class="button ghost" href="topic-01-intro.html">打開上一個主題</a>
+          </article>
+          <article class="content-card">
+            <span class="zone-badge teacher">下一個</span>
+            <h3>小車移動：馬達、速度與控制模組</h3>
+            <p>本主題聚焦馬達方向、PWM 速度、左右輪差速與模組化，建立小車可以穩定移動的基礎。</p>
+            <a class="button primary" href="topic-03-car-motion.html">打開下一個主題</a>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="script.js?v=20260423-cases"></script>
+</body>
+</html>

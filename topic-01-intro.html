@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>入門：LED、按鈕與狀態控制 | Raspberry Pi Pico 小車主題教材</title>
+  <meta name="description" content="本主題讓學習者先理解輸出、輸入、判斷與狀態，適合作為 Raspberry Pi Pico 小車課程的起點。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260423-cases">
+</head>
+<body class="topic-page">
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">MC</span>
+        <span class="brand-copy">
+          <strong>Raspberry Pi Pico 小車主題教材</strong>
+          <small>Topic-based Microcar Course</small>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="主題導覽">
+        <a href="topic-01-intro.html" aria-current="page">入門</a>
+        <a href="topic-02-sensor-output.html">感測與輸出</a>
+        <a href="topic-03-car-motion.html">小車移動</a>
+        <a href="topic-04-autonomous-car.html">無人車</a>
+        <a href="topic-05-project-cases.html">專題化</a>
+        <a href="downloads.html">下載區</a>
+      </nav>
+      <a class="button ghost" href="https://github.com/KennethWYLee/microcar" target="_blank" rel="noreferrer">GitHub</a>
+    </header>
+
+    <main>
+      <section class="subpage-hero reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">主題 1</p>
+          <h1>入門：LED、按鈕與狀態控制</h1>
+          <p class="hero-text">本主題讓學習者先理解輸出、輸入、判斷與狀態，適合作為 Raspberry Pi Pico 小車課程的起點。</p>
+          <div class="chip-list compact">
+            <span>LED</span>
+<span>Button</span>
+<span>State</span>
+          </div>
+          <div class="action-row">
+            <a class="button primary" href="#case-map">查看 Case 地圖</a>
+            <a class="button secondary" href="#case-list">開始閱讀 Cases</a>
+            <a class="button ghost" href="downloads/case-md/01_入門_cases.md">下載 Markdown</a>
+          </div>
+        </div>
+        <div class="subpage-aside">
+          <article class="aside-card">
+            <img class="teaching-visual" src="assets/control-board.png" alt="入門：LED、按鈕與狀態控制教材示意圖">
+            <p class="visual-note">從最小硬體控制開始建立程式直覺</p>
+          </article>
+          <article class="aside-card">
+            <span class="zone-badge teacher">Topic Overview</span>
+            <h3>本主題包含 10 個 cases</h3>
+            <p>每個 case 都依照「主題、分階段教學、完整程式碼、最終成果、應用題與解答」整理，適合逐步教學與自學。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Learning Context</p>
+          <h2>這個主題在整門課的位置</h2>
+          <p>從最小硬體控制開始建立程式直覺</p>
+        </div>
+        <div class="content-card markdown-intro">
+<p>本篇延伸原教材第 1-30 頁，目標是讓學生從最小的硬體控制開始，逐步建立「輸出、輸入、判斷、狀態」的概念。所有案例都以 Raspberry Pi Pico / MicroPython 的 <code>machine.Pin</code> 為核心，並配合芒果機器人主板常用腳位。</p>
+<p>參考資料：</p>
+<ul class="detail-list"><li>MicroPython <code>machine.Pin</code>：<a class="text-link" href="https://docs.micropython.org/en/latest/library/machine.Pin.html" target="_blank" rel="noreferrer">https://docs.micropython.org/en/latest/library/machine.Pin.html</a></li><li>Raspberry Pi Pico Python SDK：<a class="text-link" href="https://datasheets.raspberrypi.com/pico/sdk/pico_python_sdk.pdf" target="_blank" rel="noreferrer">https://datasheets.raspberrypi.com/pico/sdk/pico_python_sdk.pdf</a></li><li>Raspberry Pi Pico MicroPython examples：<a class="text-link" href="https://github.com/raspberrypi/pico-micropython-examples" target="_blank" rel="noreferrer">https://github.com/raspberrypi/pico-micropython-examples</a></li><li>MicroPython RP2 quick reference：<a class="text-link" href="https://docs.micropython.org/en/latest/rp2/quickref.html" target="_blank" rel="noreferrer">https://docs.micropython.org/en/latest/rp2/quickref.html</a></li></ul>
+        </div>
+      </section>
+
+      <section id="case-map" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Case Map</p>
+          <h2>先用地圖看完整學習順序</h2>
+          <p>可以依序完成，也可以直接點選需要的 case。</p>
+        </div>
+        <div class="case-index-grid">
+          <a class="case-index-card" href="#case-1">
+            <span>Case 1</span>
+            <strong>內建 LED 閃爍</strong>
+          </a>
+          <a class="case-index-card" href="#case-2">
+            <span>Case 2</span>
+            <strong>LED 訊號節奏設計</strong>
+          </a>
+          <a class="case-index-card" href="#case-3">
+            <span>Case 3</span>
+            <strong>按鈕即時控制 LED</strong>
+          </a>
+          <a class="case-index-card" href="#case-4">
+            <span>Case 4</span>
+            <strong>按鈕切換 LED 狀態</strong>
+          </a>
+          <a class="case-index-card" href="#case-5">
+            <span>Case 5</span>
+            <strong>短按與長按判斷</strong>
+          </a>
+          <a class="case-index-card" href="#case-6">
+            <span>Case 6</span>
+            <strong>小車啟動前狀態燈</strong>
+          </a>
+          <a class="case-index-card" href="#case-7">
+            <span>Case 7</span>
+            <strong>按鈕中斷計數器</strong>
+          </a>
+          <a class="case-index-card" href="#case-8">
+            <span>Case 8</span>
+            <strong>非阻塞式待機燈與按鈕模式</strong>
+          </a>
+          <a class="case-index-card" href="#case-9">
+            <span>Case 9</span>
+            <strong>Shell 指令控制 LED</strong>
+          </a>
+          <a class="case-index-card" href="#case-10">
+            <span>Case 10</span>
+            <strong>開機自我測試程式</strong>
+          </a>
+        </div>
+      </section>
+
+      <section id="case-list" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Cases</p>
+          <h2>逐步教學內容</h2>
+          <p>點開每個 case 後，可以看到完整教學段落與可複製的程式碼。</p>
+        </div>
+        <div class="case-list">
+        <details class="case-detail" open id="case-1">
+          <summary>
+            <span class="download-type">Case 1</span>
+            <strong>內建 LED 閃爍</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>讓 Pico 內建 LED 以固定節奏亮、滅，建立數位輸出的第一個概念。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：認識輸出腳位</strong></h4>
+<p>LED 是輸出裝置，程式要先把腳位設定成 <code>Pin.OUT</code>。</p>
+<h4><strong>階段 B：讓 LED 亮與滅</strong></h4>
+<p>使用 <code>on()</code> 與 <code>off()</code> 控制高低電位。</p>
+<h4><strong>階段 C：加入時間</strong></h4>
+<p>使用 <code>time.sleep()</code> 讓亮滅可以被眼睛看見。</p>
+<h4><strong>階段 D：加入無限迴圈</strong></h4>
+<p>使用 <code>while True</code> 讓動作持續發生。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin
+import time
+
+led = Pin(25, Pin.OUT)
+
+while True:
+    led.on()
+    time.sleep(1)
+    led.off()
+    time.sleep(1)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>執行後，內建 LED 每 1 秒亮一次、每 1 秒滅一次，形成穩定閃爍。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 請修改程式，讓 LED 快速閃 3 次後休息 2 秒，然後重複。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin
+import time
+
+led = Pin(25, Pin.OUT)
+
+while True:
+    for i in range(3):
+        led.on()
+        time.sleep(0.2)
+        led.off()
+        time.sleep(0.2)
+
+    time.sleep(2)</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-2">
+          <summary>
+            <span class="download-type">Case 2</span>
+            <strong>LED 訊號節奏設計</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>用陣列設計 LED 閃爍節奏，讓學生理解「資料可以控制行為」。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：把閃爍時間放進陣列</strong></h4>
+<p>例如 <code>[0.1, 0.1, 0.5]</code> 代表短、短、長。</p>
+<h4><strong>階段 B：用 <code>for</code> 讀取節奏</strong></h4>
+<p>每次讀一個時間值，讓 LED 亮同樣長度。</p>
+<h4><strong>階段 C：加入休息時間</strong></h4>
+<p>每個節奏播放完後，讓 LED 停一小段。</p>
+<h4><strong>階段 D：形成重複訊號</strong></h4>
+<p>使用 <code>while True</code> 讓節奏不斷重複。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin
+import time
+
+led = Pin(25, Pin.OUT)
+
+pattern = [0.15, 0.15, 0.15, 0.6]
+
+while True:
+    for duration in pattern:
+        led.on()
+        time.sleep(duration)
+        led.off()
+        time.sleep(0.15)
+
+    time.sleep(1)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>LED 會依照「短、短、短、長」的節奏閃爍。這可以當成小車待機或警示訊號。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 設計一個「啟動倒數」燈號：先慢閃 3 次，再快速閃 5 次。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin
+import time
+
+led = Pin(25, Pin.OUT)
+
+while True:
+    for i in range(3):
+        led.on()
+        time.sleep(0.5)
+        led.off()
+        time.sleep(0.5)
+
+    for i in range(5):
+        led.on()
+        time.sleep(0.1)
+        led.off()
+        time.sleep(0.1)
+
+    time.sleep(2)</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-3">
+          <summary>
+            <span class="download-type">Case 3</span>
+            <strong>按鈕即時控制 LED</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>讀取板載按鈕，按下時 LED 亮，放開時 LED 滅。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：宣告輸入與輸出</strong></h4>
+<p>LED 是輸出，按鈕是輸入。</p>
+<h4><strong>階段 B：讀取按鈕值</strong></h4>
+<p>用 <code>btn.value()</code> 讀取 <code>0</code> 或 <code>1</code>。</p>
+<h4><strong>階段 C：用判斷式控制 LED</strong></h4>
+<p>如果按鈕值等於啟動值，就讓 LED 亮。</p>
+<h4><strong>階段 D：印出按鈕值</strong></h4>
+<p>先觀察按下與放開的數字，確認硬體邏輯。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin
+import time
+
+BUTTON_ACTIVE = 1
+
+led = Pin(25, Pin.OUT)
+btn = Pin(3, Pin.IN)
+
+while True:
+    value = btn.value()
+    print(&quot;button =&quot;, value)
+
+    if value == BUTTON_ACTIVE:
+        led.on()
+    else:
+        led.off()
+
+    time.sleep(0.1)</code></pre></div>
+<p>如果你的按鈕按下時讀到 <code>0</code>，把這行改成：</p>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 2</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>BUTTON_ACTIVE = 0</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>按住按鈕時 LED 亮，放開按鈕時 LED 滅。學生可直接看到輸入如何影響輸出。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 修改程式，讓按下按鈕時 LED 滅，放開時 LED 亮。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin
+import time
+
+BUTTON_ACTIVE = 1
+
+led = Pin(25, Pin.OUT)
+btn = Pin(3, Pin.IN)
+
+while True:
+    if btn.value() == BUTTON_ACTIVE:
+        led.off()
+    else:
+        led.on()
+
+    time.sleep(0.1)</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-4">
+          <summary>
+            <span class="download-type">Case 4</span>
+            <strong>按鈕切換 LED 狀態</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>讓按鈕從「按住才亮」變成「按一下切換一次狀態」。這是小車啟動/停止控制的基礎。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：建立狀態變數</strong></h4>
+<p>用 <code>led_state</code> 記錄 LED 目前該亮或該滅。</p>
+<h4><strong>階段 B：偵測按下事件</strong></h4>
+<p>按鈕從沒按到按下時，才切換狀態。</p>
+<h4><strong>階段 C：加入防彈跳</strong></h4>
+<p>按鈕是機械開關，按下瞬間可能跳動，要加短暫延遲。</p>
+<h4><strong>階段 D：等待放開</strong></h4>
+<p>避免長按時連續切換多次。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin
+import time
+
+BUTTON_ACTIVE = 1
+
+led = Pin(25, Pin.OUT)
+btn = Pin(3, Pin.IN)
+
+led_state = False
+
+while True:
+    if btn.value() == BUTTON_ACTIVE:
+        led_state = not led_state
+
+        if led_state:
+            led.on()
+        else:
+            led.off()
+
+        time.sleep_ms(250)
+
+        while btn.value() == BUTTON_ACTIVE:
+            time.sleep_ms(20)
+
+    time.sleep_ms(20)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>按一下按鈕，LED 亮；再按一下，LED 滅。這種寫法可以直接延伸成「按一下啟動小車，再按一下停止」。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 改成「LED 亮的時候慢閃，LED 關閉狀態時完全不亮」。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin
+import time
+
+BUTTON_ACTIVE = 1
+
+led = Pin(25, Pin.OUT)
+btn = Pin(3, Pin.IN)
+
+running = False
+last_blink = time.ticks_ms()
+led_level = False
+
+while True:
+    if btn.value() == BUTTON_ACTIVE:
+        running = not running
+        time.sleep_ms(250)
+        while btn.value() == BUTTON_ACTIVE:
+            time.sleep_ms(20)
+
+    if running:
+        now = time.ticks_ms()
+        if time.ticks_diff(now, last_blink) &gt;= 500:
+            led_level = not led_level
+            led.value(1 if led_level else 0)
+            last_blink = now
+    else:
+        led.off()
+
+    time.sleep_ms(20)</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-5">
+          <summary>
+            <span class="download-type">Case 5</span>
+            <strong>短按與長按判斷</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>判斷學生是短按還是長按按鈕。短按可用於切換模式，長按可用於重置或停止。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：記錄按下時間</strong></h4>
+<p>按下時用 <code>time.ticks_ms()</code> 記錄起點。</p>
+<h4><strong>階段 B：等待放開</strong></h4>
+<p>按住期間持續等待。</p>
+<h4><strong>階段 C：計算按住多久</strong></h4>
+<p>使用 <code>time.ticks_diff()</code> 計算時間差。</p>
+<h4><strong>階段 D：根據時間決定動作</strong></h4>
+<p>短按切換 LED，長按快速閃爍 3 次。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin
+import time
+
+BUTTON_ACTIVE = 1
+LONG_PRESS_MS = 1000
+
+led = Pin(25, Pin.OUT)
+btn = Pin(3, Pin.IN)
+
+led_state = False
+
+def blink(times, delay_ms):
+    for i in range(times):
+        led.on()
+        time.sleep_ms(delay_ms)
+        led.off()
+        time.sleep_ms(delay_ms)
+
+while True:
+    if btn.value() == BUTTON_ACTIVE:
+        start = time.ticks_ms()
+
+        while btn.value() == BUTTON_ACTIVE:
+            time.sleep_ms(20)
+
+        duration = time.ticks_diff(time.ticks_ms(), start)
+        print(&quot;press ms =&quot;, duration)
+
+        if duration &gt;= LONG_PRESS_MS:
+            blink(3, 120)
+            led_state = False
+        else:
+            led_state = not led_state
+            led.value(1 if led_state else 0)
+
+        time.sleep_ms(200)
+
+    time.sleep_ms(20)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>短按按鈕會切換 LED 亮滅；長按超過 1 秒會快速閃 3 次並關閉 LED。這可延伸為小車的「短按啟動、長按緊急停止」。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 將長按門檻改成 2 秒，並讓長按後 LED 長亮 2 秒再熄滅。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin
+import time
+
+BUTTON_ACTIVE = 1
+LONG_PRESS_MS = 2000
+
+led = Pin(25, Pin.OUT)
+btn = Pin(3, Pin.IN)
+
+while True:
+    if btn.value() == BUTTON_ACTIVE:
+        start = time.ticks_ms()
+
+        while btn.value() == BUTTON_ACTIVE:
+            time.sleep_ms(20)
+
+        duration = time.ticks_diff(time.ticks_ms(), start)
+
+        if duration &gt;= LONG_PRESS_MS:
+            led.on()
+            time.sleep(2)
+            led.off()
+        else:
+            led.toggle()
+
+        time.sleep_ms(200)</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-6">
+          <summary>
+            <span class="download-type">Case 6</span>
+            <strong>小車啟動前狀態燈</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>設計小車啟動前的狀態控制：待機慢閃、按下後進入啟動狀態、再按一次回待機。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：建立 <code>running</code> 狀態</strong></h4>
+<p><code>False</code> 代表待機，<code>True</code> 代表啟動。</p>
+<h4><strong>階段 B：待機時慢閃</strong></h4>
+<p>讓學生理解非阻塞式計時，不要一直卡在 <code>sleep()</code>。</p>
+<h4><strong>階段 C：啟動時 LED 長亮</strong></h4>
+<p>代表小車可以開始進入下一階段任務。</p>
+<h4><strong>階段 D：按鈕切換狀態</strong></h4>
+<p>此架構可直接移植到避障車或循跡車。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin
+import time
+
+BUTTON_ACTIVE = 1
+
+led = Pin(25, Pin.OUT)
+btn = Pin(3, Pin.IN)
+
+running = False
+blink_on = False
+last_blink = time.ticks_ms()
+
+def wait_button_release():
+    while btn.value() == BUTTON_ACTIVE:
+        time.sleep_ms(20)
+
+while True:
+    if btn.value() == BUTTON_ACTIVE:
+        running = not running
+        print(&quot;running =&quot;, running)
+        time.sleep_ms(250)
+        wait_button_release()
+
+    if running:
+        led.on()
+    else:
+        now = time.ticks_ms()
+        if time.ticks_diff(now, last_blink) &gt;= 700:
+            blink_on = not blink_on
+            led.value(1 if blink_on else 0)
+            last_blink = now
+
+    time.sleep_ms(20)</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-7">
+          <summary>
+            <span class="download-type">Case 7</span>
+            <strong>按鈕中斷計數器</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>使用 <code>Pin.irq()</code> 建立按鈕中斷，讓程式不需要一直卡在等待按鈕，也能在按下時記錄事件。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：理解輪詢與中斷</strong></h4>
+<p>輪詢是程式一直問「按了嗎？」；中斷是按鈕事件發生時通知程式。</p>
+<h4><strong>階段 B：建立中斷處理函式</strong></h4>
+<p>中斷函式中不要做太複雜的工作，只設定旗標或計數。</p>
+<h4><strong>階段 C：加入簡單防彈跳</strong></h4>
+<p>用 <code>time.ticks_ms()</code> 避免一次按下被算成很多次。</p>
+<h4><strong>階段 D：主迴圈處理結果</strong></h4>
+<p>主迴圈看到按鈕次數改變後，再更新 LED。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin
+import time
+
+led = Pin(25, Pin.OUT)
+btn = Pin(3, Pin.IN)
+
+press_count = 0
+last_irq_time = 0
+
+def button_irq(pin):
+    global press_count, last_irq_time
+    now = time.ticks_ms()
+    if time.ticks_diff(now, last_irq_time) &gt; 250:
+        press_count += 1
+        last_irq_time = now
+
+btn.irq(trigger=Pin.IRQ_RISING, handler=button_irq)
+
+last_count = -1
+
+while True:
+    if press_count != last_count:
+        print(&quot;press count =&quot;, press_count)
+        led.value(press_count % 2)
+        last_count = press_count
+
+    time.sleep_ms(50)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>每按一次按鈕，Shell 會顯示累積次數；奇數次 LED 亮，偶數次 LED 滅。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 改成每按滿 5 次，LED 快閃 5 下，然後重新計數。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin
+import time
+
+led = Pin(25, Pin.OUT)
+btn = Pin(3, Pin.IN)
+
+press_count = 0
+last_irq_time = 0
+flash_request = False
+
+def button_irq(pin):
+    global press_count, last_irq_time, flash_request
+    now = time.ticks_ms()
+    if time.ticks_diff(now, last_irq_time) &gt; 250:
+        press_count += 1
+        last_irq_time = now
+        if press_count &gt;= 5:
+            flash_request = True
+
+btn.irq(trigger=Pin.IRQ_RISING, handler=button_irq)
+
+while True:
+    if flash_request:
+        flash_request = False
+        press_count = 0
+        for i in range(5):
+            led.on()
+            time.sleep_ms(120)
+            led.off()
+            time.sleep_ms(120)
+
+    time.sleep_ms(50)</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-8">
+          <summary>
+            <span class="download-type">Case 8</span>
+            <strong>非阻塞式待機燈與按鈕模式</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>讓 LED 持續慢閃，同時還能立即偵測按鈕，建立非阻塞式程式設計概念。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：避免長時間 <code>sleep()</code></strong></h4>
+<p>長時間 <code>sleep()</code> 會讓程式暫時無法處理按鈕。</p>
+<h4><strong>階段 B：使用 <code>ticks_ms()</code></strong></h4>
+<p>用目前時間和上次閃爍時間相減，判斷是否該切換 LED。</p>
+<h4><strong>階段 C：建立模式</strong></h4>
+<p><code>mode = 0</code> 慢閃，<code>mode = 1</code> 長亮，<code>mode = 2</code> 快閃。</p>
+<h4><strong>階段 D：按鈕切換模式</strong></h4>
+<p>每按一次切換到下一個模式。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin
+import time
+
+BUTTON_ACTIVE = 1
+
+led = Pin(25, Pin.OUT)
+btn = Pin(3, Pin.IN)
+
+mode = 0
+led_on = False
+last_blink = time.ticks_ms()
+
+def wait_release():
+    while btn.value() == BUTTON_ACTIVE:
+        time.sleep_ms(20)
+
+while True:
+    if btn.value() == BUTTON_ACTIVE:
+        mode = (mode + 1) % 3
+        print(&quot;mode =&quot;, mode)
+        time.sleep_ms(250)
+        wait_release()
+
+    now = time.ticks_ms()
+
+    if mode == 0:
+        interval = 700
+        if time.ticks_diff(now, last_blink) &gt;= interval:
+            led_on = not led_on
+            led.value(1 if led_on else 0)
+            last_blink = now
+    elif mode == 1:
+        led.on()
+    else:
+        interval = 120
+        if time.ticks_diff(now, last_blink) &gt;= interval:
+            led_on = not led_on
+            led.value(1 if led_on else 0)
+            last_blink = now
+
+    time.sleep_ms(20)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>按鈕可以在慢閃、長亮、快閃三種模式中切換，且 LED 閃爍時按鈕仍能被即時讀取。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 加入第 4 種模式 <code>mode = 3</code>，讓 LED 完全關閉。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code># 將切換改成 4 種模式
+mode = (mode + 1) % 4
+
+# 在主迴圈中加入：
+if mode == 3:
+    led.off()</code></pre></div>
+<p>完整版本：</p>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 2</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin
+import time
+
+BUTTON_ACTIVE = 1
+
+led = Pin(25, Pin.OUT)
+btn = Pin(3, Pin.IN)
+mode = 0
+led_on = False
+last_blink = time.ticks_ms()
+
+while True:
+    if btn.value() == BUTTON_ACTIVE:
+        mode = (mode + 1) % 4
+        time.sleep_ms(250)
+        while btn.value() == BUTTON_ACTIVE:
+            time.sleep_ms(20)
+
+    now = time.ticks_ms()
+
+    if mode == 0 and time.ticks_diff(now, last_blink) &gt;= 700:
+        led_on = not led_on
+        led.value(led_on)
+        last_blink = now
+    elif mode == 1:
+        led.on()
+    elif mode == 2 and time.ticks_diff(now, last_blink) &gt;= 120:
+        led_on = not led_on
+        led.value(led_on)
+        last_blink = now
+    elif mode == 3:
+        led.off()
+
+    time.sleep_ms(20)</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-9">
+          <summary>
+            <span class="download-type">Case 9</span>
+            <strong>Shell 指令控制 LED</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>透過 Thonny Shell 輸入文字指令，控制 LED 開、關、閃爍，讓學生理解「命令式控制」。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：使用 <code>input()</code></strong></h4>
+<p>從 Shell 讀取使用者輸入。</p>
+<h4><strong>階段 B：判斷文字命令</strong></h4>
+<p>例如 <code>on</code>、<code>off</code>、<code>blink</code>、<code>quit</code>。</p>
+<h4><strong>階段 C：呼叫對應動作</strong></h4>
+<p>將命令轉成 LED 行為。</p>
+<h4><strong>階段 D：建立可互動測試工具</strong></h4>
+<p>未來可擴充成馬達或感測器測試命令。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin
+import time
+
+led = Pin(25, Pin.OUT)
+
+def blink(times=3):
+    for i in range(times):
+        led.on()
+        time.sleep_ms(200)
+        led.off()
+        time.sleep_ms(200)
+
+while True:
+    cmd = input(&quot;command(on/off/blink/quit): &quot;).strip().lower()
+
+    if cmd == &quot;on&quot;:
+        led.on()
+        print(&quot;LED on&quot;)
+    elif cmd == &quot;off&quot;:
+        led.off()
+        print(&quot;LED off&quot;)
+    elif cmd == &quot;blink&quot;:
+        blink(3)
+    elif cmd == &quot;quit&quot;:
+        led.off()
+        print(&quot;bye&quot;)
+        break
+    else:
+        print(&quot;unknown command&quot;)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>學生可以在 Shell 輸入 <code>on</code>、<code>off</code>、<code>blink</code> 控制 LED。這可作為硬體測試台的雛形。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 新增 <code>blink5</code> 指令，讓 LED 閃 5 次。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin
+import time
+
+led = Pin(25, Pin.OUT)
+
+def blink(times=3):
+    for i in range(times):
+        led.on()
+        time.sleep_ms(200)
+        led.off()
+        time.sleep_ms(200)
+
+while True:
+    cmd = input(&quot;command(on/off/blink/blink5/quit): &quot;).strip().lower()
+
+    if cmd == &quot;on&quot;:
+        led.on()
+        print(&quot;LED on&quot;)
+    elif cmd == &quot;off&quot;:
+        led.off()
+        print(&quot;LED off&quot;)
+    elif cmd == &quot;blink&quot;:
+        blink(3)
+    elif cmd == &quot;blink5&quot;:
+        blink(5)
+    elif cmd == &quot;quit&quot;:
+        led.off()
+        print(&quot;bye&quot;)
+        break
+    else:
+        print(&quot;unknown command&quot;)</code></pre></div></article>
+          </div>
+        </details>
+        <details class="case-detail" id="case-10">
+          <summary>
+            <span class="download-type">Case 10</span>
+            <strong>開機自我測試程式</strong>
+          </summary>
+          <div class="case-body">
+<article class="case-section"><h3>1. 要做的主題</h3><p>設計一段可存成 <code>main.py</code> 的開機自我測試：LED 先閃爍，等待按鈕確認後才進入待機。</p></article>
+<article class="case-section"><h3>2. 分階段逐步教學</h3><h4><strong>階段 A：開機提示</strong></h4>
+<p>LED 快閃表示程式已啟動。</p>
+<h4><strong>階段 B：等待按鈕確認</strong></h4>
+<p>學生按下按鈕表示硬體輸入正常。</p>
+<h4><strong>階段 C：進入待機狀態</strong></h4>
+<p>LED 慢閃代表準備好。</p>
+<h4><strong>階段 D：銜接小車專題</strong></h4>
+<p>未來可在按鈕確認後啟動馬達或避障程式。</p></article>
+<article class="case-section"><h3>3. 完整程式碼</h3><div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin
+import time
+
+BUTTON_ACTIVE = 1
+
+led = Pin(25, Pin.OUT)
+btn = Pin(3, Pin.IN)
+
+def flash(times, delay_ms):
+    for i in range(times):
+        led.on()
+        time.sleep_ms(delay_ms)
+        led.off()
+        time.sleep_ms(delay_ms)
+
+print(&quot;boot self-test&quot;)
+flash(5, 100)
+
+print(&quot;press button to enter ready mode&quot;)
+while btn.value() != BUTTON_ACTIVE:
+    led.on()
+    time.sleep_ms(50)
+    led.off()
+    time.sleep_ms(450)
+
+while btn.value() == BUTTON_ACTIVE:
+    time.sleep_ms(20)
+
+print(&quot;ready&quot;)
+
+while True:
+    led.toggle()
+    time.sleep_ms(700)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>開機後 LED 快閃 5 次，接著等待按鈕；按下後進入慢閃待機。這能確認 LED、按鈕與主程式都正常。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 如果 10 秒內沒有按下按鈕，讓 LED 快閃表示錯誤。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin
+import time
+
+BUTTON_ACTIVE = 1
+
+led = Pin(25, Pin.OUT)
+btn = Pin(3, Pin.IN)
+
+def flash(times, delay_ms):
+    for i in range(times):
+        led.on()
+        time.sleep_ms(delay_ms)
+        led.off()
+        time.sleep_ms(delay_ms)
+
+start = time.ticks_ms()
+confirmed = False
+
+while time.ticks_diff(time.ticks_ms(), start) &lt; 10000:
+    if btn.value() == BUTTON_ACTIVE:
+        confirmed = True
+        break
+    led.toggle()
+    time.sleep_ms(500)
+
+if confirmed:
+    flash(2, 100)
+    while True:
+        led.toggle()
+        time.sleep_ms(700)
+else:
+    while True:
+        flash(3, 80)
+        time.sleep_ms(1000)</code></pre></div></article>
+<article class="case-section"><h3>4. 最終成果展現</h3><p>待機時 LED 慢慢閃爍；按一下後 LED 長亮代表啟動；再按一下回到待機慢閃。這就是後續專題中「小車啟停控制」的核心架構。</p></article>
+<article class="case-section"><h3>5. 應用題與解答</h3><p><strong>題目：</strong> 加入 <code>mode</code> 變數，讓每次按鈕切換三種狀態：<code>0=待機慢閃</code>、<code>1=啟動長亮</code>、<code>2=警示快閃</code>。</p>
+<h4><strong>解答：</strong></h4>
+<div class="case-code-card"><div class="code-toolbar"><span>程式碼 1</span><button class="button ghost copy-md-code" type="button">複製程式</button></div><pre class="code-block markdown-code"><code>from machine import Pin
+import time
+
+BUTTON_ACTIVE = 1
+
+led = Pin(25, Pin.OUT)
+btn = Pin(3, Pin.IN)
+
+mode = 0
+blink_on = False
+last_blink = time.ticks_ms()
+
+def wait_button_release():
+    while btn.value() == BUTTON_ACTIVE:
+        time.sleep_ms(20)
+
+while True:
+    if btn.value() == BUTTON_ACTIVE:
+        mode = (mode + 1) % 3
+        print(&quot;mode =&quot;, mode)
+        time.sleep_ms(250)
+        wait_button_release()
+
+    now = time.ticks_ms()
+
+    if mode == 0:
+        if time.ticks_diff(now, last_blink) &gt;= 700:
+            blink_on = not blink_on
+            led.value(1 if blink_on else 0)
+            last_blink = now
+    elif mode == 1:
+        led.on()
+    else:
+        if time.ticks_diff(now, last_blink) &gt;= 150:
+            blink_on = not blink_on
+            led.value(1 if blink_on else 0)
+            last_blink = now
+
+    time.sleep_ms(20)</code></pre></div></article>
+          </div>
+        </details>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Continue</p>
+          <h2>繼續下一個主題</h2>
+        </div>
+        <div class="page-grid">
+          <article class="content-card">
+            <span class="zone-badge student">上一個</span>
+            <h3>專題化：任務設計、策略比較與成果評量</h3>
+            <p>本主題把前面學到的輸入、輸出、馬達、感測與循跡控制整合成任務挑戰，並加入規則式、P、PD、PID 循跡演算法 cases。</p>
+            <a class="button ghost" href="topic-05-project-cases.html">打開上一個主題</a>
+          </article>
+          <article class="content-card">
+            <span class="zone-badge teacher">下一個</span>
+            <h3>感測與輸出：蜂鳴器、RGB 與超音波</h3>
+            <p>本主題從蜂鳴器與 RGB 輸出延伸到超音波距離感測，讓學生看見程式如何回應環境變化。</p>
+            <a class="button primary" href="topic-02-sensor-output.html">打開下一個主題</a>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="script.js?v=20260423-cases"></script>
+</body>
+</html>

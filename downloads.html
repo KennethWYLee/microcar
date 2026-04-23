@@ -3,294 +3,124 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>下載區 | Raspberry Pi Pico 小車入門教學站</title>
-  <meta name="description" content="以主題分類的下載區，包含 Boot Camp、感測器操控、循跡入門、循跡進階與延伸教材。">
+  <title>下載區 | Raspberry Pi Pico 小車主題教材</title>
+  <meta name="description" content="下載 Raspberry Pi Pico 小車 5 個主題教材的 Markdown 原始檔。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260411-topic">
+  <link rel="stylesheet" href="styles.css?v=20260423-cases">
 </head>
-<body>
+<body class="downloads-page">
   <div class="page-shell">
     <header class="site-header">
       <a class="brand" href="index.html">
         <span class="brand-mark">MC</span>
         <span class="brand-copy">
-          <strong>Raspberry Pi Pico 小車入門教學站</strong>
-          <small>Beginner Microcar Course</small>
+          <strong>Raspberry Pi Pico 小車主題教材</strong>
+          <small>Topic-based Microcar Course</small>
         </span>
       </a>
       <nav class="site-nav" aria-label="主題導覽">
-        <a href="bootcamp.html">Boot Camp</a>
-        <a href="sensor-control.html">感測器操控</a>
-        <a href="line-following-intro.html">循跡入門</a>
-        <a href="line-following-advanced.html">循跡進階</a>
-        <a href="line-following-algorithms.html">循跡演算法</a>
+        <a href="topic-01-intro.html">入門</a>
+        <a href="topic-02-sensor-output.html">感測與輸出</a>
+        <a href="topic-03-car-motion.html">小車移動</a>
+        <a href="topic-04-autonomous-car.html">無人車</a>
+        <a href="topic-05-project-cases.html">專題化</a>
         <a href="downloads.html">下載區</a>
       </nav>
-      <a class="button ghost" href="index.html">回首頁</a>
+      <a class="button ghost" href="https://github.com/KennethWYLee/microcar" target="_blank" rel="noreferrer">GitHub</a>
     </header>
 
     <main>
       <section class="subpage-hero reveal">
         <div class="hero-copy">
           <p class="eyebrow">Downloads</p>
-          <h1>所有資源都改成依主題整理</h1>
+          <h1>5 個主題教材下載區</h1>
           <p class="hero-text">
-            下載區不再分教師或學生，而是直接依主題整理成 Boot Camp、感測器操控、循跡入門、循跡進階、循跡演算法與延伸教材。
-            其中循跡主線會依照「規則 -> 速度差 -> 演算法比較」的順序展開，所以第三、四、五題的下載內容也會刻意分開。
+            下載區現在依照 5 個正式主題整理。每個主題都可以直接打開網頁閱讀，也可以下載 Markdown 原始教材。
           </p>
           <div class="action-row">
-            <a class="button primary" href="#setup-thonny">先準備 Thonny</a>
-            <a class="button secondary" href="#topic-bootcamp">主題 1 資源</a>
-            <a class="button ghost" href="#topic-algorithms">主題 5 資源</a>
+            <a class="button primary" href="#topic-downloads">查看主題教材</a>
+            <a class="button ghost" href="index.html">回首頁</a>
           </div>
         </div>
         <div class="subpage-aside">
           <article class="aside-card">
-            <span class="zone-badge teacher">Suggested Order</span>
-            <ol class="number-list">
-              <li>先安裝與確認 Thonny。</li>
-              <li>再進入 Boot Camp 12 步驟。</li>
-              <li>第二堂再開感測器主題。</li>
-              <li>第三堂接著進入循跡入門。</li>
-              <li>第四堂再進入循跡進階。</li>
-              <li>第五堂再比較不同循跡演算法。</li>
-            </ol>
+            <span class="zone-badge teacher">Format</span>
+            <h3>網頁與 Markdown 並存</h3>
+            <p>網頁適合直接閱讀與投影，Markdown 適合教師備課、修改與整理。</p>
           </article>
         </div>
       </section>
 
-      <section id="setup-thonny" class="section reveal">
+      <section id="topic-downloads" class="section reveal">
         <div class="section-heading">
-          <p class="eyebrow">Setup Tool</p>
-          <h2>開始前先準備好 Thonny</h2>
-          <p>第一堂課只要能順利開啟 Thonny、建立新檔並執行程式，整個 Boot Camp 就能順利完成。</p>
-        </div>
-        <div class="page-grid">
-          <article class="content-card tool-focus-card">
-            <span class="zone-badge teacher">Official Site</span>
-            <h3>Thonny 官方網站</h3>
-            <p>如果教室電腦還沒有安裝 Thonny，可以先到官方網站下載，再回來依照 Boot Camp 頁面的步驟操作。</p>
-            <div class="action-row tool-link-row">
-              <a class="button primary" href="https://thonny.org/" target="_blank" rel="noreferrer">前往 thonny.org</a>
-              <a class="button ghost" href="bootcamp.html#thonny-steps">查看 Boot Camp 步驟</a>
-            </div>
-          </article>
-          <article class="content-card tool-focus-card">
-            <span class="zone-badge student">Quick Reminder</span>
-            <h3>進教室後先確認這 3 件事</h3>
-            <ul class="detail-list">
-              <li>Thonny 已經可以打開。</li>
-              <li>Interpreter 已設成 MicroPython (Raspberry Pi Pico)。</li>
-              <li>小車已用 USB 線連上電腦。</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <section id="topic-bootcamp" class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">Topic 1</p>
-          <h2>1 hr Boot Camp 必用資源</h2>
-          <p>第一堂課只要使用這幾個入口就夠了，不需要再另外下載多份程式檔。</p>
+          <p class="eyebrow">Topic Files</p>
+          <h2>依主題下載教材</h2>
+          <p>第 5 主題已加入循跡演算法延伸 cases，因此 case 數比其他主題更多。</p>
         </div>
         <div class="download-grid">
-          <article class="download-card">
-            <span class="download-type">TOPIC 1</span>
-            <h3>Boot Camp 主題頁</h3>
-            <p>包含 12 步驟、完整程式與程式解讀，是第一堂課最重要的入口。</p>
-            <a class="button primary block" href="bootcamp.html">打開 Boot Camp</a>
+          <article class="download-card" id="topic-01-intro">
+            <span class="download-type">主題 1</span>
+            <h3>入門：LED、按鈕與狀態控制</h3>
+            <p>本主題讓學習者先理解輸出、輸入、判斷與狀態，適合作為 Raspberry Pi Pico 小車課程的起點。</p>
+            <a class="button primary block" href="topic-01-intro.html">打開主題頁</a>
+            <a class="button ghost block" href="downloads/case-md/01_入門_cases.md">下載 Markdown</a>
           </article>
-          <article class="download-card">
-            <span class="download-type">HANDOUT</span>
-            <h3>學生學習單</h3>
-            <p>適合投影或列印，幫學生快速掌握今日目標、按鍵與操作重點。</p>
-            <a class="button secondary block" href="student-handout.html">打開學習單</a>
+          <article class="download-card" id="topic-02-sensor-output">
+            <span class="download-type">主題 2</span>
+            <h3>感測與輸出：蜂鳴器、RGB 與超音波</h3>
+            <p>本主題從蜂鳴器與 RGB 輸出延伸到超音波距離感測，讓學生看見程式如何回應環境變化。</p>
+            <a class="button primary block" href="topic-02-sensor-output.html">打開主題頁</a>
+            <a class="button ghost block" href="downloads/case-md/02_感測輸出_cases.md">下載 Markdown</a>
           </article>
-          <article class="download-card">
-            <span class="download-type">PLAN</span>
-            <h3>Boot Camp 教學建議</h3>
-            <p>簡短版本的教學流程與課堂完成線，適合快速備課使用。</p>
-            <a class="button ghost block" href="downloads/one-hour-bootcamp-teaching-plan.txt">下載 TXT</a>
+          <article class="download-card" id="topic-03-car-motion">
+            <span class="download-type">主題 3</span>
+            <h3>小車移動：馬達、速度與控制模組</h3>
+            <p>本主題聚焦馬達方向、PWM 速度、左右輪差速與模組化，建立小車可以穩定移動的基礎。</p>
+            <a class="button primary block" href="topic-03-car-motion.html">打開主題頁</a>
+            <a class="button ghost block" href="downloads/case-md/03_小車移動_cases.md">下載 Markdown</a>
           </article>
-          <article class="download-card">
-            <span class="download-type">CODE</span>
-            <h3>鍵盤控制主程式</h3>
-            <p>這份程式可直接在網站上查看與複製，不必先下載才開始上課。</p>
-            <a class="button secondary block" href="code-viewer.html?file=keyboard-car-control">打開程式頁</a>
+          <article class="download-card" id="topic-04-autonomous-car">
+            <span class="download-type">主題 4</span>
+            <h3>無人車：差速、避障、循跡與伺服掃描</h3>
+            <p>本主題把差速控制、避障、循跡與伺服掃描整合成無人車應用，適合銜接較完整的小車任務。</p>
+            <a class="button primary block" href="topic-04-autonomous-car.html">打開主題頁</a>
+            <a class="button ghost block" href="downloads/case-md/04_無人車_cases.md">下載 Markdown</a>
           </article>
-          <article class="download-card">
-            <span class="download-type">FUNCTIONS</span>
-            <h3>基本動作函式</h3>
-            <p>適合在 Boot Camp 之後補充，幫學生理解前進、後退、轉向與停止函式。</p>
-            <a class="button secondary block" href="code-viewer.html?file=basic-motor-functions">打開程式頁</a>
-          </article>
-        </div>
-      </section>
-
-      <section id="topic-sensor" class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">Topic 2</p>
-          <h2>感測器操控主題資源</h2>
-          <p>第二個主題建議在 Boot Camp 之後再進行，學生先學會看距離，再理解條件判斷。</p>
-        </div>
-        <div class="download-grid">
-          <article class="download-card">
-            <span class="download-type">TOPIC 2</span>
-            <h3>感測器主題頁</h3>
-            <p>包含主題步驟、暖身程式、主程式與重點說明。</p>
-            <a class="button primary block" href="sensor-control.html">打開主題頁</a>
-          </article>
-          <article class="download-card">
-            <span class="download-type">WARM-UP</span>
-            <h3>RGB 暖身程式</h3>
-            <p>先讓學生看見顏色變化，作為進入距離感測器之前的暖身。</p>
-            <a class="button secondary block" href="code-viewer.html?file=sensor-rgb-warmup">打開程式頁</a>
-          </article>
-          <article class="download-card">
-            <span class="download-type">MAIN CODE</span>
-            <h3>距離感測主程式</h3>
-            <p>本主題的核心程式，會讀距離並切換 RGB LED 顏色。</p>
-            <a class="button secondary block" href="code-viewer.html?file=distance-sensor-rgb">打開程式頁</a>
+          <article class="download-card" id="topic-05-project-cases">
+            <span class="download-type">主題 5</span>
+            <h3>專題化：任務設計、策略比較與成果評量</h3>
+            <p>本主題把前面學到的輸入、輸出、馬達、感測與循跡控制整合成任務挑戰，並加入規則式、P、PD、PID 循跡演算法 cases。</p>
+            <a class="button primary block" href="topic-05-project-cases.html">打開主題頁</a>
+            <a class="button ghost block" href="downloads/case-md/05_專題化_cases.md">下載 Markdown</a>
           </article>
         </div>
       </section>
 
-      <section id="topic-line" class="section reveal">
+      <section class="section reveal">
         <div class="section-heading">
-          <p class="eyebrow">Topic 3</p>
-          <h2>循跡入門主題資源</h2>
-          <p>第三個主題把感測器值轉成簡單循跡規則，作為進入循跡進階前的過渡版本。</p>
-        </div>
-        <div class="download-grid">
-          <article class="download-card">
-            <span class="download-type">TOPIC 3</span>
-            <h3>循跡入門主題頁</h3>
-            <p>包含主題步驟、暖身程式、主程式、真實循跡影片與重點解讀。</p>
-            <a class="button primary block" href="line-following-intro.html">打開主題頁</a>
-          </article>
-          <article class="download-card">
-            <span class="download-type">WARM-UP</span>
-            <h3>循跡感測器讀值程式</h3>
-            <p>先讀左、右循跡感測器的值，建立黑線與白底的基本判讀概念。</p>
-            <a class="button secondary block" href="code-viewer.html?file=line-sensor-read">打開程式頁</a>
-          </article>
-          <article class="download-card">
-            <span class="download-type">MAIN CODE</span>
-            <h3>循跡入門主程式</h3>
-            <p>使用四種基本規則，讓小車開始做出直走、左修正、右修正與停止。這一題先求看得懂，不先求最平順。</p>
-            <a class="button secondary block" href="code-viewer.html?file=line-following-intro">打開程式頁</a>
-          </article>
-        </div>
-      </section>
-
-      <section id="topic-line-advanced" class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">Topic 4</p>
-          <h2>循跡進階主題資源</h2>
-          <p>把循跡入門的固定規則升級成速度差控制，並補上 PD / PID 與閉迴路控制的專業觀念。</p>
-        </div>
-        <div class="download-grid">
-          <article class="download-card">
-            <span class="download-type">TOPIC 4</span>
-            <h3>循跡進階主題頁</h3>
-            <p>包含四個主題階段、專業補充、橋接程式、主程式與程式解讀。</p>
-            <a class="button primary block" href="line-following-advanced.html">打開主題頁</a>
-          </article>
-          <article class="download-card">
-            <span class="download-type">BRIDGE</span>
-            <h3>速度差暖身程式</h3>
-            <p>先把左右感測值轉成 error 與左右速度，建立 correction 的直覺。</p>
-            <a class="button secondary block" href="code-viewer.html?file=line-error-to-speed">打開程式頁</a>
-          </article>
-          <article class="download-card">
-            <span class="download-type">MAIN CODE</span>
-            <h3>循跡進階主程式</h3>
-            <p>使用 base speed、correction 與 last_error，讓小車做出更平滑的循跡反應。這一題開始重視穩定度與修正品質。</p>
-            <a class="button secondary block" href="code-viewer.html?file=line-following-advanced">打開程式頁</a>
-          </article>
-        </div>
-      </section>
-
-      <section id="topic-algorithms" class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">Topic 5</p>
-          <h2>循跡演算法主題資源</h2>
-          <p>把規則式、P、PD、PID 四種方法排在一起比較，並提供可直接貼到 Thonny 的程式頁。</p>
-        </div>
-        <div class="download-grid">
-          <article class="download-card">
-            <span class="download-type">TOPIC 5</span>
-            <h3>循跡演算法主題頁</h3>
-            <p>一頁看懂各類循跡演算法，知道哪一種適合目前的教學目標。這一題重點不是新功能，而是比較不同方法。</p>
-            <a class="button primary block" href="line-following-algorithms.html">打開主題頁</a>
-          </article>
-          <article class="download-card">
-            <span class="download-type">ALGORITHM</span>
-            <h3>P 循跡演算法</h3>
-            <p>用比例控制把 error 直接轉成左右速度差，是規則式進入連續控制的第一步。</p>
-            <a class="button secondary block" href="code-viewer.html?file=line-algorithm-p">打開程式頁</a>
-          </article>
-          <article class="download-card">
-            <span class="download-type">ALGORITHM</span>
-            <h3>PID 循跡演算法</h3>
-            <p>加入積分項與微分項，適合用來示範更完整的控制思路與調參概念。</p>
-            <a class="button secondary block" href="code-viewer.html?file=line-algorithm-pid">打開程式頁</a>
-          </article>
-        </div>
-      </section>
-
-      <section id="extension-materials" class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">Extension Materials</p>
-          <h2>延伸教材</h2>
-          <p>其他車型、板子與套件相關內容會集中在這裡，避免干擾目前的主線教學。</p>
+          <p class="eyebrow">Support</p>
+          <h2>其他輔助頁面</h2>
+          <p>若需要 1 小時體驗課或程式檢視器，仍可從這裡進入，但它們不再列為正式主題。</p>
         </div>
         <div class="page-grid">
           <article class="content-card">
-            <span class="zone-badge teacher">Other Car</span>
-            <h3>AmebaAI / AmebaNN</h3>
-            <p>這是另外一台車的教材，不屬於目前 Raspberry Pi Pico 小車主線，但仍保留作為延伸參考。</p>
-            <div class="download-grid compact-grid">
-              <article class="download-card">
-                <span class="download-type">ZIP</span>
-                <h3>AmebaAI</h3>
-                <a class="button ghost block" href="downloads/extensions/other-car/ameba-ai.zip">下載 ZIP</a>
-              </article>
-              <article class="download-card">
-                <span class="download-type">ZIP</span>
-                <h3>AmebaNN</h3>
-                <a class="button ghost block" href="downloads/extensions/other-car/ameba-nn.zip">下載 ZIP</a>
-              </article>
-            </div>
+            <span class="zone-badge student">Quick Class</span>
+            <h3>1 hr Boot Camp</h3>
+            <p>適合短時間體驗用 Thonny 控制小車前進、後退、左轉、右轉與停止。</p>
+            <a class="button ghost" href="bootcamp.html">打開 Boot Camp</a>
           </article>
           <article class="content-card">
-            <span class="zone-badge teacher">Board & Library</span>
-            <h3>板子與套件資源</h3>
-            <p>這些是之後做電路板入門或擴充教學時會用到的資源，目前先放在延伸區。</p>
-            <div class="download-grid compact-grid">
-              <article class="download-card">
-                <span class="download-type">ZIP</span>
-                <h3>Mango Library</h3>
-                <a class="button ghost block" href="downloads/extensions/board-library/mango-library.zip">下載 ZIP</a>
-              </article>
-              <article class="download-card">
-                <span class="download-type">PDF</span>
-                <h3>Robot Programming Practice</h3>
-                <a class="button ghost block" href="downloads/robot-programming-practice-python.pdf">下載 PDF</a>
-              </article>
-              <article class="download-card">
-                <span class="download-type">PDF</span>
-                <h3>Robot Code Jumpstart</h3>
-                <a class="button ghost block" href="downloads/robot-code-jumpstart.pdf">下載 PDF</a>
-              </article>
-            </div>
+            <span class="zone-badge teacher">Code Viewer</span>
+            <h3>程式檢視頁</h3>
+            <p>可用來顯示目前網站中保留的獨立 Python 範例。</p>
+            <a class="button ghost" href="code-viewer.html?file=keyboard-car-control">打開程式頁</a>
           </article>
         </div>
       </section>
     </main>
   </div>
-  <script src="script.js?v=20260411-topic"></script>
+  <script src="script.js?v=20260423-cases"></script>
 </body>
 </html>

@@ -1,105 +1,77 @@
-# Raspberry Pi Pico 小車入門教學站
+# Raspberry Pi Pico 小車主題教材
 
 網站入口：
 - [GitHub Pages 網站](https://kennethwylee.github.io/microcar/)
 - [GitHub Repository](https://github.com/KennethWYLee/microcar)
 
-這個網站以 `Raspberry Pi Pico` 小車為主軸，將原本分散的教材整理成「依主題學習」的教學網站。網站不再以教師或學生身分區分，而是讓每一個主題都帶著使用者完成一個明確功能，先做出結果，再理解程式。
+這個網站將機器人課程教材整理成 5 個主題，讓學習者可以依序從基礎輸出入、感測器、馬達控制，一路走到無人車應用與專題任務。
 
-## 目前主題
+## 目前 5 個主題
 
-1. `1 hr Boot Camp`
-說明：在 1 小時內完成電腦與小車連線，使用 Thonny 貼上完整程式，並透過 `W / A / S / D / X` 控制小車。
+1. `入門：LED、按鈕與狀態控制`
+說明：建立輸出、輸入、判斷與狀態概念。
 
-2. `感測器的操控`
-說明：讀取距離感測器數值，使用 `if / elif / else` 搭配 RGB LED 表現距離變化。
+2. `感測與輸出：蜂鳴器、RGB 與超音波`
+說明：把感測資料轉成聲音、燈號與距離回饋。
 
-3. `循跡入門`
-說明：從左右循跡感測值出發，先用最基本的四種規則讓小車沿著黑線前進。這一題重點是學規則。
+3. `小車移動：馬達、速度與控制模組`
+說明：從單顆馬達測試走到雙輪小車與速度控制。
 
-4. `循跡進階`
-說明：把固定規則升級成速度差控制，並加入 PD / PID 與閉迴路控制的入門觀念。這一題重點是學穩定修正。
+4. `無人車：差速、避障、循跡與伺服掃描`
+說明：把感測器與馬達整合成無人車策略。
 
-5. `循跡演算法`
-說明：把規則式、P、PD、PID 放在一起比較，並提供可直接複製到 Thonny 的程式版本。這一題重點是比較與選擇。
-
-額外模組：
-- `電路板入門`
+5. `專題化：任務設計、策略比較與成果評量`
+說明：整合前面技巧，並加入規則式、P、PD、PID 循跡演算法延伸 cases。
 
 ## 網站結構
 
 - `index.html`
-  網站首頁與主題地圖。
-- `bootcamp.html`
-  主題 1：1 小時 Boot Camp。
-- `sensor-control.html`
-  主題 2：感測器的操控。
-- `line-following-intro.html`
-  主題 3：循跡入門。
-- `line-following-advanced.html`
-  主題 4：循跡進階。
-- `line-following-algorithms.html`
-  主題 5：循跡演算法。
-- `student-handout.html`
-  Boot Camp 學習單，可投影或列印。
+  網站首頁與 5 主題地圖。
+- `topic-01-intro.html`
+  主題 1：LED、按鈕與狀態控制。
+- `topic-02-sensor-output.html`
+  主題 2：蜂鳴器、RGB 與超音波。
+- `topic-03-car-motion.html`
+  主題 3：馬達、速度與控制模組。
+- `topic-04-autonomous-car.html`
+  主題 4：差速、避障、循跡與伺服掃描。
+- `topic-05-project-cases.html`
+  主題 5：任務設計、策略比較與成果評量。
 - `downloads.html`
-  依主題整理的下載區。
+  依主題整理的 Markdown 教材下載區。
+- `bootcamp.html`
+  1 小時體驗課支援頁，保留作為快速入門活動，不列入正式 5 主題。
 - `code-viewer.html`
-  在網站中直接查看與複製程式。
-- `styles.css`
-  網站樣式。
-- `script.js`
-  動畫、程式載入與複製按鈕邏輯。
+  程式檢視與複製支援頁。
 
-## 下載區分類
+## 教材來源
 
-### 主題 1：Boot Camp
-- `student-handout.html`
-- `one-hour-bootcamp-teaching-plan.txt`
-- `keyboard-car-control.py`
-- `basic-motor-functions.py`
+網頁主題內容由下列 Markdown 教材轉成 HTML：
 
-### 主題 2：感測器的操控
-- `sensor-rgb-warmup.py`
-- `distance-sensor-rgb.py`
+- `01_入門_cases.md`
+- `02_感測輸出_cases.md`
+- `03_小車移動_cases.md`
+- `04_無人車_cases.md`
+- `05_專題化_cases.md`
 
-### 主題 3：循跡入門
-- `line-sensor-read.py`
-- `line-following-intro.py`
+網站中的 Markdown 下載檔放在：
 
-### 主題 4：循跡進階
-- `line-error-to-speed.py`
-- `line-following-advanced.py`
-
-### 主題 5：循跡演算法
-- `line-following-p.py`
-- `line-following-pid.py`
-
-### 延伸教材
-- `AmebaAI / AmebaNN`
-- `Mango Library`
-- 其他 PDF 與板子相關資源
+- `downloads/case-md/`
 
 ## 教學使用方式
 
-第一堂課建議直接從 `bootcamp.html` 開始，讓學生：
+建議依照主題順序上課：
 
-1. 接上 Raspberry Pi Pico 小車。
-2. 打開 Thonny。
-3. 在 Boot Camp 頁面照著 12 個步驟完成操作。
-4. 把完整程式貼到 Thonny，按下 Run。
-5. 在 Shell 輸入 `W / A / S / D / X` 控制小車。
+1. 先完成 LED、按鈕與狀態控制。
+2. 再加入蜂鳴器、RGB 與超音波感測器。
+3. 接著練習馬達方向、速度與小車移動。
+4. 再把小車推進到避障、循跡與伺服掃描。
+5. 最後進入專題任務與循跡演算法比較。
 
-第二堂課再進入 `sensor-control.html`，讓學生先觀察 RGB LED 的變化，再理解距離感測器與條件判斷。
-
-第三堂課可以接著打開 `line-following-intro.html`，讓學生把感測器值和小車轉向規則連在一起，開始做最基本的循跡。
-
-第四堂課可以打開 `line-following-advanced.html`，讓學生從固定規則跨到速度差控制，開始理解 error、correction、PD / PID 這些進階觀念。
-
-第五堂課可以打開 `line-following-algorithms.html`，讓學生比較規則式、P、PD、PID 的差異，並直接從網站複製不同演算法的程式去測試。
+每個 case 都保留固定結構：主題、分階段教學、完整程式碼、最終成果、應用題與解答。
 
 ## 備註
 
-- 目前公開導覽已全面改成主題式結構。
-- 舊版身分分流頁面僅保留作為歷史參考，不再作為網站主線。
+- 舊的 `循跡入門 / 循跡進階 / 循跡演算法` 獨立主題已從公開主線移除。
+- 循跡演算法中較有價值的規則式、P、PD、PID 內容已整合到 `05_專題化_cases.md`。
 - 網站設計進度請見 [WEB_DESIGN_PROGRESS.md](./WEB_DESIGN_PROGRESS.md)。
