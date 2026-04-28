@@ -26,6 +26,7 @@
 - `index.html`：首頁與 8 主題總覽。
 - `setup.html`：開始前設定，包含 `mango` 函式庫上傳、import 測試與馬達校正。
 - `bootcamp.html`：BootCamp 快速體驗課。
+- `firmware.html`：Firmware 區，提供 Pico / Pico W / Pico 2 / Pico 2 W 對應的 UF2 韌體下載、對應表與刷機步驟。
 - `topic-01-intro.html` 到 `topic-05-project-cases.html`：五個小車核心主題。
 - `topic-06-bluetooth-car.html`：Flutter App 與 Pico BLE 藍芽遙控小車。
 - `topic-07-board-python.html`：依 `機器人程式設計實務-Python.pdf` 整理的電路板與腳位導讀。
@@ -42,6 +43,20 @@
 - `downloads/extensions/board-library/mango-library.zip`：上傳到 Pico 的 `mango` 函式庫。
 - `downloads/mango-import-test.py`：確認 `mango` 函式庫可正常 import。
 - `downloads/motor-calibration.py`：確認右輪、左輪、前進、後退與左右轉方向。
+
+Firmware 雲端下載檔放在：
+
+- `downloads/firmware/mango_lite_pico1.uf2`
+- `downloads/firmware/mango_lite_pico1w.uf2`
+- `downloads/firmware/mango_lite_pico2.uf2`
+- `downloads/firmware/mango_lite_pico2w.uf2`
+
+對應關係：
+
+1. `mango_lite_pico1.uf2`：`Raspberry Pi Pico / RP2040`
+2. `mango_lite_pico1w.uf2`：`Raspberry Pi Pico W / RP2040`
+3. `mango_lite_pico2.uf2`：`Raspberry Pi Pico 2 / RP2350`
+4. `mango_lite_pico2w.uf2`：`Raspberry Pi Pico 2 W / RP2350`
 
 ## 檔案位置觀念
 

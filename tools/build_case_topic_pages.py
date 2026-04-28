@@ -23,7 +23,56 @@ ROBOT_HANDOUT_DIR = ROBOT_DIR / "講義"
 ROBOT_WEB_DIR = ROBOT_DIR / "無人車網頁開發"
 DOWNLOAD_TOPIC_06_DIR = REPO / "downloads" / "topic-06-bluetooth-car"
 DOWNLOAD_TOPIC_08_DIR = REPO / "downloads" / "topic-08-fan-application"
-ASSET_VERSION = "20260423-license"
+FIRMWARE_SOURCE_DIR = REPO.parent / "機器人" / "firmware"
+DOWNLOAD_FIRMWARE_DIR = REPO / "downloads" / "firmware"
+ASSET_VERSION = "20260428-firmware"
+
+FIRMWARE_TARGETS: tuple[dict[str, str], ...] = (
+    {
+        "source_dir": "mango_lite_pico1",
+        "filename": "mango_lite_pico1.uf2",
+        "title": "mango_lite_pico1",
+        "board": "Raspberry Pi Pico",
+        "chip": "RP2040",
+        "wireless": "No",
+        "use_when": "一般 Raspberry Pi Pico（非 W）",
+        "summary": "給 RP2040 的 Raspberry Pi Pico 使用，不包含 Wi-Fi。",
+        "banner": "MANGO_LITE_PICO",
+    },
+    {
+        "source_dir": "mango_lite_pico1w",
+        "filename": "mango_lite_pico1w.uf2",
+        "title": "mango_lite_pico1w",
+        "board": "Raspberry Pi Pico W",
+        "chip": "RP2040",
+        "wireless": "Yes",
+        "use_when": "Raspberry Pi Pico W（有 Wi-Fi）",
+        "summary": "給 RP2040 的 Pico W 使用，內含 CYW43 與 network 支援。",
+        "banner": "MANGO_LITE_PICO_W",
+    },
+    {
+        "source_dir": "mango_lite_pico2",
+        "filename": "mango_lite_pico2.uf2",
+        "title": "mango_lite_pico2",
+        "board": "Raspberry Pi Pico 2",
+        "chip": "RP2350",
+        "wireless": "No",
+        "use_when": "一般 Raspberry Pi Pico 2（非 W）",
+        "summary": "給 RP2350 的 Raspberry Pi Pico 2 使用，不包含 Wi-Fi。",
+        "banner": "MANGO_LITE_PICO2",
+    },
+    {
+        "source_dir": "mango_lite_pico2w",
+        "filename": "mango_lite_pico2w.uf2",
+        "title": "mango_lite_pico2w",
+        "board": "Raspberry Pi Pico 2 W",
+        "chip": "RP2350",
+        "wireless": "Yes",
+        "use_when": "Raspberry Pi Pico 2 W（有 Wi-Fi）",
+        "summary": "給 RP2350 的 Pico 2 W 使用，內含 CYW43 與 network 支援。",
+        "banner": "MANGO_LITE_PICO2_W",
+    },
+)
 
 
 @dataclass(frozen=True)
@@ -678,7 +727,7 @@ def split_cases(markdown: str) -> tuple[str, list[dict[str, object]]]:
 def nav_html(active_output: str | None = None) -> str:
     links = [("bootcamp.html", "BootCamp"), ("setup.html", "開始設定")] + [
         (topic.output, topic.title.split("：", 1)[0]) for topic in all_topics()
-    ]
+    ] + [("firmware.html", "Firmware")]
     link_html = "\n".join(
         f'        <a href="{href}"{" aria-current=\"page\"" if href == active_output else ""}>{label}</a>'
         for href, label in links
@@ -728,6 +777,200 @@ def footer_html() -> str:
         </div>
       </div>
     </footer>
+"""
+
+
+def format_file_size(size: int) -> str:
+    mib = size / (1024 * 1024)
+    return f"{mib:.2f} MB"
+
+
+def firmware_records() -> list[dict[str, str]]:
+    records: list[dict[str, str]] = []
+    for item in FIRMWARE_TARGETS:
+        record = dict(item)
+        target = DOWNLOAD_FIRMWARE_DIR / item["filename"]
+        if target.exists():
+            record["size"] = format_file_size(target.stat().st_size)
+            record["download_href"] = f"downloads/firmware/{item['filename']}"
+        else:
+            record["size"] = "檔案尚未同步"
+            record["download_href"] = "#"
+        records.append(record)
+    return records
+
+
+def render_firmware_cards() -> str:
+    cards = []
+    for record in firmware_records():
+        disabled = "" if record["download_href"] != "#" else ' aria-disabled="true"'
+        cards.append(
+            f"""          <article class="download-card">
+            <span class="download-type">{html.escape(record["chip"])}</span>
+            <h3>{html.escape(record["board"])}</h3>
+            <p>{html.escape(record["summary"])}</p>
+            <p><strong>對應檔名：</strong><code>{html.escape(record["filename"])}</code></p>
+            <p><strong>檔案大小：</strong>{html.escape(record["size"])}</p>
+            <a class="button primary block" href="{record["download_href"]}"{disabled}>下載 UF2</a>
+          </article>"""
+        )
+    return "\n".join(cards)
+
+
+def render_firmware_page() -> str:
+    firmware_table = render_table(
+        [
+            "| 韌體檔名 | 適用板子 | MCU | Wi-Fi | 什麼時候選這個 |",
+            "| --- | --- | --- | --- | --- |",
+            *[
+                f"| `{record['filename']}` | {record['board']} | `{record['chip']}` | {record['wireless']} | {record['use_when']} |"
+                for record in firmware_records()
+            ],
+        ]
+    )
+    detail_cards = "\n".join(
+        f"""          <article class="content-card resource-step">
+            <span class="zone-badge student">{html.escape(record["banner"])}</span>
+            <strong>{html.escape(record["board"])}</strong>
+            <p>{html.escape(record["summary"])}</p>
+            <p><strong>建議使用：</strong>{html.escape(record["use_when"])}</p>
+          </article>"""
+        for record in firmware_records()
+    )
+    return f"""<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Firmware 區 | Raspberry Pi Pico 小車主題教材</title>
+  <meta name="description" content="下載 Raspberry Pi Pico / Pico W / Pico 2 / Pico 2 W 對應的 mango lite UF2 firmware，並查看板子對應表與刷機步驟。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v={ASSET_VERSION}">
+</head>
+<body class="downloads-page">
+  <div class="page-shell">
+{header_html("firmware.html")}
+
+    <main>
+      <section class="subpage-hero reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">Firmware</p>
+          <h1>Firmware 區</h1>
+          <p class="hero-text">
+            這一頁把 4 份 Mango Lite UF2 韌體放到網站雲端下載，並整理成板子對應表。你可以直接用 GitHub Pages / Repository 下載，再依照板子型號選對應的 firmware。
+          </p>
+          <div class="action-row">
+            <a class="button primary" href="#firmware-downloads">下載 UF2</a>
+            <a class="button secondary" href="#firmware-map">查看對應表</a>
+            <a class="button ghost" href="downloads.html">回下載區</a>
+          </div>
+        </div>
+        <div class="subpage-aside">
+          <article class="aside-card">
+            <span class="zone-badge teacher">Cloud</span>
+            <h3>雲端下載來源</h3>
+            <p>這 4 份韌體已同步到網站 repo 中，等於同時有 GitHub Repository 與 GitHub Pages 兩個下載入口。</p>
+          </article>
+          <article class="aside-card">
+            <span class="zone-badge student">Warning</span>
+            <h3>先選對板子再刷</h3>
+            <p>RP2040 與 RP2350、W 與非 W 版不能混刷。選錯韌體，常見結果是無法正常開機、Wi-Fi 功能失效，或板子表現異常。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="firmware-map" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Mapping Table</p>
+          <h2>4 份 firmware 對應 4 種板子</h2>
+          <p>判斷方式很簡單：先看你手上的板子是 Pico 還是 Pico 2，再看它是不是 W 版。對應錯誤時，不要硬刷第二次，先回來確認板型。</p>
+        </div>
+        {firmware_table}
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Board Notes</p>
+          <h2>每一份 firmware 的實際定位</h2>
+          <p>這 4 份不是同一個檔名改一改，而是對不同板型分開編譯的 Mango Lite 客製 MicroPython 韌體。</p>
+        </div>
+        <div class="resource-roadmap">
+{detail_cards}
+        </div>
+      </section>
+
+      <section id="firmware-downloads" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Cloud Downloads</p>
+          <h2>直接下載 UF2 韌體</h2>
+          <p>下載到電腦後，再進入板子的刷機模式把對應的 UF2 拖曳進去。這一步不是用 Thonny 上傳 Python 檔，而是刷整份 firmware。</p>
+        </div>
+        <div class="download-grid">
+{render_firmware_cards()}
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">How To Flash</p>
+          <h2>建議刷機流程</h2>
+          <p>先確認板型，再刷對應檔案。整個流程不需要先打開 Thonny。</p>
+        </div>
+        <div class="resource-roadmap">
+          <article class="content-card resource-step">
+            <span class="zone-badge student">Step 01</span>
+            <strong>先辨識板子型號</strong>
+            <p>先分清楚你手上是 Raspberry Pi Pico、Pico W、Pico 2，還是 Pico 2 W。</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge student">Step 02</span>
+            <strong>下載對應 UF2</strong>
+            <p>從這一頁下載正確的韌體檔，不要只看檔名像不像，要對照板子與 MCU。</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge student">Step 03</span>
+            <strong>進入板子刷機模式</strong>
+            <p>讓板子進入可接收 UF2 的 USB 磁碟模式，再把剛剛的檔案拖曳進去。</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge student">Step 04</span>
+            <strong>重新連回 Thonny 驗證</strong>
+            <p>刷完後再用 Thonny 連線，確認板子能正常啟動，並看到對應的 Mango Lite / MicroPython 版本資訊。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Important</p>
+          <h2>刷錯版最常見的問題</h2>
+        </div>
+        <div class="page-grid">
+          <article class="content-card">
+            <span class="zone-badge teacher">RP2040 vs RP2350</span>
+            <h3>Pico 1 與 Pico 2 不能互刷</h3>
+            <p>`pico1` / `pico1w` 是 RP2040，`pico2` / `pico2w` 是 RP2350。這兩代不是同一顆 MCU。</p>
+          </article>
+          <article class="content-card">
+            <span class="zone-badge student">W vs Non-W</span>
+            <h3>W 版要用 W 韌體</h3>
+            <p>`w` 版內部有 CYW43 與 network 支援。非 W 版不應刷 W 韌體，W 版也不應刷非 W 韌體。</p>
+          </article>
+          <article class="content-card">
+            <span class="zone-badge teacher">Teaching Tip</span>
+            <h3>先建立板子貼紙或清單</h3>
+            <p>如果教室裡有多種板子，建議先在每塊板子貼上型號標籤，避免學生下載錯誤韌體。</p>
+          </article>
+        </div>
+      </section>
+    </main>
+{footer_html()}
+  </div>
+  <script src="script.js?v={ASSET_VERSION}"></script>
+</body>
+</html>
 """
 
 
@@ -1889,6 +2132,28 @@ def render_index() -> str:
 {chr(10).join(download_cards)}
         </div>
       </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Firmware</p>
+          <h2>已新增韌體雲端下載區</h2>
+          <p>如果你需要刷 Mango Lite 韌體到 Raspberry Pi Pico / Pico W / Pico 2 / Pico 2 W，現在可以直接到 Firmware 區下載對應 UF2，並查看板子對應表。</p>
+        </div>
+        <div class="page-grid">
+          <article class="content-card">
+            <span class="zone-badge teacher">Firmware</span>
+            <h3>4 份 UF2 對應 4 種板子</h3>
+            <p>已整理 `pico1`、`pico1w`、`pico2`、`pico2w` 四份韌體，並標出 RP2040 / RP2350 與 W / 非 W 的差異。</p>
+            <a class="button primary" href="firmware.html">打開 Firmware 區</a>
+          </article>
+          <article class="content-card">
+            <span class="zone-badge student">Cloud</span>
+            <h3>從網站直接下載</h3>
+            <p>韌體已同步進網站 repo，學生與老師都可以從 GitHub Pages 或 Repository 直接抓取對應檔案。</p>
+            <a class="button ghost" href="downloads.html">先看下載總覽</a>
+          </article>
+        </div>
+      </section>
     </main>
 {footer_html()}
   </div>
@@ -2006,6 +2271,28 @@ def render_downloads() -> str:
 
       <section class="section reveal">
         <div class="section-heading">
+          <p class="eyebrow">Firmware Files</p>
+          <h2>韌體雲端下載區</h2>
+          <p>如果你要刷板子，不是下載 Python 檔，而是下載對應的 UF2 firmware。這一區已整理 4 份 Mango Lite 韌體與板子對應表。</p>
+        </div>
+        <div class="page-grid">
+          <article class="content-card">
+            <span class="zone-badge teacher">UF2</span>
+            <h3>前往 Firmware 區</h3>
+            <p>查看 Pico / Pico W / Pico 2 / Pico 2 W 的對應表、刷機步驟與下載連結。</p>
+            <a class="button primary" href="firmware.html">打開 Firmware 區</a>
+          </article>
+          <article class="content-card">
+            <span class="zone-badge student">Reminder</span>
+            <h3>韌體不是用 Thonny 上傳</h3>
+            <p>`.uf2` 是整份板子韌體，流程和複製 Python 程式碼不同。刷之前請先確認板型與 MCU。</p>
+            <a class="button ghost" href="firmware.html#firmware-map">先看對應表</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
           <p class="eyebrow">Support</p>
           <h2>其他輔助頁面</h2>
           <p>若需要 1 小時體驗課或程式檢視器，仍可從這裡進入，但它們不再列為正式主題。</p>
@@ -2022,6 +2309,12 @@ def render_downloads() -> str:
             <h3>程式檢視頁</h3>
             <p>可用來顯示目前網站中保留的獨立 Python 範例。</p>
             <a class="button ghost" href="code-viewer.html?file=keyboard-car-control">打開程式頁</a>
+          </article>
+          <article class="content-card">
+            <span class="zone-badge teacher">Firmware</span>
+            <h3>UF2 韌體專區</h3>
+            <p>整理 4 份 Mango Lite 韌體，適合備課時快速比對板型與下載對應檔案。</p>
+            <a class="button ghost" href="firmware.html">打開 Firmware 區</a>
           </article>
         </div>
       </section>
@@ -2050,6 +2343,7 @@ def copy_markdown_sources() -> None:
 def copy_extra_sources() -> None:
     DOWNLOAD_TOPIC_06_DIR.mkdir(parents=True, exist_ok=True)
     DOWNLOAD_TOPIC_08_DIR.mkdir(parents=True, exist_ok=True)
+    DOWNLOAD_FIRMWARE_DIR.mkdir(parents=True, exist_ok=True)
 
     flutter_dir = ROBOT_WEB_DIR / "01_Flutter介面程式"
     preview_dir = ROBOT_WEB_DIR / "02_介面預覽與輸出"
@@ -2109,12 +2403,19 @@ def copy_extra_sources() -> None:
                 if member in names:
                     (REPO / "assets" / target_name).write_bytes(archive.read(member))
 
+    for item in FIRMWARE_TARGETS:
+        source = FIRMWARE_SOURCE_DIR / item["source_dir"] / "firmware.uf2"
+        target = DOWNLOAD_FIRMWARE_DIR / item["filename"]
+        if source.exists():
+            shutil.copy2(source, target)
+
 
 def main() -> None:
     copy_markdown_sources()
     copy_extra_sources()
     write_text(REPO / "index.html", render_index())
     write_text(REPO / "downloads.html", render_downloads())
+    write_text(REPO / "firmware.html", render_firmware_page())
     write_text(REPO / "setup.html", render_setup_page())
     for topic in TOPICS:
         write_text(REPO / topic.output, render_topic_page(topic))
