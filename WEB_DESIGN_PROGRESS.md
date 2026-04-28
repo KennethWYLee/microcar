@@ -21,6 +21,10 @@
 
 ## 這一輪完成內容
 
+- 新增 `firmware.html`，把 4 份 Mango Lite UF2 韌體整理成獨立 Firmware 區。
+- 已把 `機器人/firmware` 中的 4 份韌體同步到 repo 的 `downloads/firmware/`，作為 GitHub Repository / Pages 的雲端下載來源。
+- 新增板子對應表，清楚區分 `Pico / Pico W / Pico 2 / Pico 2 W` 與 `RP2040 / RP2350`、`W / 非 W`。
+- 首頁、導覽列與下載區都加入 Firmware 入口，避免使用者不知道去哪裡抓 `.uf2`。
 - 全站頁尾新增 Creative Commons BY-NC-SA 4.0 授權標章，並清楚標示只涵蓋「除另有標示外的文字教材與自製教學圖片」。
 - 授權聲明中特別排除程式碼、第三方素材、PDF、PPT、商標、外部引用圖片與原始教材檔案，避免誤授權。
 - 全站最上方新增「網站建置中」提醒，明確告知教材、程式碼與操作流程仍在持續驗證，實際上課前需以教師現場測試與最新版本為準。

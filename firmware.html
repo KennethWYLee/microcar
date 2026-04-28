@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Firmware 區 | Raspberry Pi Pico 小車主題教材</title>
+  <meta name="description" content="下載 Raspberry Pi Pico / Pico W / Pico 2 / Pico 2 W 對應的 mango lite UF2 firmware，並查看板子對應表與刷機步驟。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260428-firmware">
+</head>
+<body class="downloads-page">
+  <div class="page-shell">
+    <aside class="site-notice" aria-label="網站狀態提醒">
+      <span class="notice-label">網站建置中</span>
+      <span>本網站教材、所有程式碼與操作流程仍在持續驗證。實際上課前，請以教師現場測試與最新版本為準。</span>
+    </aside>
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">MC</span>
+        <span class="brand-copy">
+          <strong>Raspberry Pi Pico 小車主題教材</strong>
+          <small>Topic-based Microcar Course</small>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="主題導覽">
+        <a href="bootcamp.html">BootCamp</a>
+        <a href="setup.html">開始設定</a>
+        <a href="topic-01-intro.html">01 入門</a>
+        <a href="topic-02-sensor-output.html">02 感測與輸出</a>
+        <a href="topic-03-car-motion.html">03 小車移動</a>
+        <a href="topic-04-autonomous-car.html">04 無人車</a>
+        <a href="topic-05-project-cases.html">05 專題化</a>
+        <a href="topic-06-bluetooth-car.html">06 藍芽遙控小車</a>
+        <a href="topic-07-board-python.html">07 電路板教材</a>
+        <a href="topic-08-fan-application.html">08 電路板應用</a>
+        <a href="firmware.html" aria-current="page">Firmware</a>
+        <a href="downloads.html">下載區</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="subpage-hero reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">Firmware</p>
+          <h1>Firmware 區</h1>
+          <p class="hero-text">
+            這一頁把 4 份 Mango Lite UF2 韌體放到網站雲端下載，並整理成板子對應表。你可以直接用 GitHub Pages / Repository 下載，再依照板子型號選對應的 firmware。
+          </p>
+          <div class="action-row">
+            <a class="button primary" href="#firmware-downloads">下載 UF2</a>
+            <a class="button secondary" href="#firmware-map">查看對應表</a>
+            <a class="button ghost" href="downloads.html">回下載區</a>
+          </div>
+        </div>
+        <div class="subpage-aside">
+          <article class="aside-card">
+            <span class="zone-badge teacher">Cloud</span>
+            <h3>雲端下載來源</h3>
+            <p>這 4 份韌體已同步到網站 repo 中，等於同時有 GitHub Repository 與 GitHub Pages 兩個下載入口。</p>
+          </article>
+          <article class="aside-card">
+            <span class="zone-badge student">Warning</span>
+            <h3>先選對板子再刷</h3>
+            <p>RP2040 與 RP2350、W 與非 W 版不能混刷。選錯韌體，常見結果是無法正常開機、Wi-Fi 功能失效，或板子表現異常。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="firmware-map" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Mapping Table</p>
+          <h2>4 份 firmware 對應 4 種板子</h2>
+          <p>判斷方式很簡單：先看你手上的板子是 Pico 還是 Pico 2，再看它是不是 W 版。對應錯誤時，不要硬刷第二次，先回來確認板型。</p>
+        </div>
+        <div class="table-wrap"><table class="topic-table"><thead><tr><th>韌體檔名</th><th>適用板子</th><th>MCU</th><th>Wi-Fi</th><th>什麼時候選這個</th></tr></thead><tbody><tr><td><code>mango_lite_pico1.uf2</code></td><td>Raspberry Pi Pico</td><td><code>RP2040</code></td><td>No</td><td>一般 Raspberry Pi Pico（非 W）</td></tr>
+<tr><td><code>mango_lite_pico1w.uf2</code></td><td>Raspberry Pi Pico W</td><td><code>RP2040</code></td><td>Yes</td><td>Raspberry Pi Pico W（有 Wi-Fi）</td></tr>
+<tr><td><code>mango_lite_pico2.uf2</code></td><td>Raspberry Pi Pico 2</td><td><code>RP2350</code></td><td>No</td><td>一般 Raspberry Pi Pico 2（非 W）</td></tr>
+<tr><td><code>mango_lite_pico2w.uf2</code></td><td>Raspberry Pi Pico 2 W</td><td><code>RP2350</code></td><td>Yes</td><td>Raspberry Pi Pico 2 W（有 Wi-Fi）</td></tr></tbody></table></div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Board Notes</p>
+          <h2>每一份 firmware 的實際定位</h2>
+          <p>這 4 份不是同一個檔名改一改，而是對不同板型分開編譯的 Mango Lite 客製 MicroPython 韌體。</p>
+        </div>
+        <div class="resource-roadmap">
+          <article class="content-card resource-step">
+            <span class="zone-badge student">MANGO_LITE_PICO</span>
+            <strong>Raspberry Pi Pico</strong>
+            <p>給 RP2040 的 Raspberry Pi Pico 使用，不包含 Wi-Fi。</p>
+            <p><strong>建議使用：</strong>一般 Raspberry Pi Pico（非 W）</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge student">MANGO_LITE_PICO_W</span>
+            <strong>Raspberry Pi Pico W</strong>
+            <p>給 RP2040 的 Pico W 使用，內含 CYW43 與 network 支援。</p>
+            <p><strong>建議使用：</strong>Raspberry Pi Pico W（有 Wi-Fi）</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge student">MANGO_LITE_PICO2</span>
+            <strong>Raspberry Pi Pico 2</strong>
+            <p>給 RP2350 的 Raspberry Pi Pico 2 使用，不包含 Wi-Fi。</p>
+            <p><strong>建議使用：</strong>一般 Raspberry Pi Pico 2（非 W）</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge student">MANGO_LITE_PICO2_W</span>
+            <strong>Raspberry Pi Pico 2 W</strong>
+            <p>給 RP2350 的 Pico 2 W 使用，內含 CYW43 與 network 支援。</p>
+            <p><strong>建議使用：</strong>Raspberry Pi Pico 2 W（有 Wi-Fi）</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="firmware-downloads" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Cloud Downloads</p>
+          <h2>直接下載 UF2 韌體</h2>
+          <p>下載到電腦後，再進入板子的刷機模式把對應的 UF2 拖曳進去。這一步不是用 Thonny 上傳 Python 檔，而是刷整份 firmware。</p>
+        </div>
+        <div class="download-grid">
+          <article class="download-card">
+            <span class="download-type">RP2040</span>
+            <h3>Raspberry Pi Pico</h3>
+            <p>給 RP2040 的 Raspberry Pi Pico 使用，不包含 Wi-Fi。</p>
+            <p><strong>對應檔名：</strong><code>mango_lite_pico1.uf2</code></p>
+            <p><strong>檔案大小：</strong>1.20 MB</p>
+            <a class="button primary block" href="downloads/firmware/mango_lite_pico1.uf2">下載 UF2</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">RP2040</span>
+            <h3>Raspberry Pi Pico W</h3>
+            <p>給 RP2040 的 Pico W 使用，內含 CYW43 與 network 支援。</p>
+            <p><strong>對應檔名：</strong><code>mango_lite_pico1w.uf2</code></p>
+            <p><strong>檔案大小：</strong>2.24 MB</p>
+            <a class="button primary block" href="downloads/firmware/mango_lite_pico1w.uf2">下載 UF2</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">RP2350</span>
+            <h3>Raspberry Pi Pico 2</h3>
+            <p>給 RP2350 的 Raspberry Pi Pico 2 使用，不包含 Wi-Fi。</p>
+            <p><strong>對應檔名：</strong><code>mango_lite_pico2.uf2</code></p>
+            <p><strong>檔案大小：</strong>1.19 MB</p>
+            <a class="button primary block" href="downloads/firmware/mango_lite_pico2.uf2">下載 UF2</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">RP2350</span>
+            <h3>Raspberry Pi Pico 2 W</h3>
+            <p>給 RP2350 的 Pico 2 W 使用，內含 CYW43 與 network 支援。</p>
+            <p><strong>對應檔名：</strong><code>mango_lite_pico2w.uf2</code></p>
+            <p><strong>檔案大小：</strong>2.21 MB</p>
+            <a class="button primary block" href="downloads/firmware/mango_lite_pico2w.uf2">下載 UF2</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">How To Flash</p>
+          <h2>建議刷機流程</h2>
+          <p>先確認板型，再刷對應檔案。整個流程不需要先打開 Thonny。</p>
+        </div>
+        <div class="resource-roadmap">
+          <article class="content-card resource-step">
+            <span class="zone-badge student">Step 01</span>
+            <strong>先辨識板子型號</strong>
+            <p>先分清楚你手上是 Raspberry Pi Pico、Pico W、Pico 2，還是 Pico 2 W。</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge student">Step 02</span>
+            <strong>下載對應 UF2</strong>
+            <p>從這一頁下載正確的韌體檔，不要只看檔名像不像，要對照板子與 MCU。</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge student">Step 03</span>
+            <strong>進入板子刷機模式</strong>
+            <p>讓板子進入可接收 UF2 的 USB 磁碟模式，再把剛剛的檔案拖曳進去。</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge student">Step 04</span>
+            <strong>重新連回 Thonny 驗證</strong>
+            <p>刷完後再用 Thonny 連線，確認板子能正常啟動，並看到對應的 Mango Lite / MicroPython 版本資訊。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Important</p>
+          <h2>刷錯版最常見的問題</h2>
+        </div>
+        <div class="page-grid">
+          <article class="content-card">
+            <span class="zone-badge teacher">RP2040 vs RP2350</span>
+            <h3>Pico 1 與 Pico 2 不能互刷</h3>
+            <p>`pico1` / `pico1w` 是 RP2040，`pico2` / `pico2w` 是 RP2350。這兩代不是同一顆 MCU。</p>
+          </article>
+          <article class="content-card">
+            <span class="zone-badge student">W vs Non-W</span>
+            <h3>W 版要用 W 韌體</h3>
+            <p>`w` 版內部有 CYW43 與 network 支援。非 W 版不應刷 W 韌體，W 版也不應刷非 W 韌體。</p>
+          </article>
+          <article class="content-card">
+            <span class="zone-badge teacher">Teaching Tip</span>
+            <h3>先建立板子貼紙或清單</h3>
+            <p>如果教室裡有多種板子，建議先在每塊板子貼上型號標籤，避免學生下載錯誤韌體。</p>
+          </article>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="license-card">
+        <a class="cc-badge" rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hant">
+          <img src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" alt="Creative Commons BY-NC-SA 4.0 授權標章">
+        </a>
+        <div>
+          <h2>授權與使用聲明</h2>
+          <p>
+            除另有標示外，本網站文字教材與自製教學圖片採用
+            <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hant">Creative Commons 姓名標示-非商業性-相同方式分享 4.0 國際授權條款</a>。
+          </p>
+          <p>
+            程式碼、第三方素材、PDF、PPT、商標、外部引用圖片與原始教材檔案，依各自檔案或來源授權為準。教材與程式仍在驗證中，實際上課前請先由教師測試。
+          </p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+  <script src="script.js?v=20260428-firmware"></script>
+</body>
+</html>

@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260423-license">
+  <link rel="stylesheet" href="styles.css?v=20260428-firmware">
 </head>
 <body class="downloads-page">
   <div class="page-shell">
@@ -35,6 +35,7 @@
         <a href="topic-06-bluetooth-car.html">06 藍芽遙控小車</a>
         <a href="topic-07-board-python.html">07 電路板教材</a>
         <a href="topic-08-fan-application.html">08 電路板應用</a>
+        <a href="firmware.html">Firmware</a>
         <a href="downloads.html">下載區</a>
       </nav>
     </header>
@@ -206,6 +207,28 @@
 
       <section class="section reveal">
         <div class="section-heading">
+          <p class="eyebrow">Firmware Files</p>
+          <h2>韌體雲端下載區</h2>
+          <p>如果你要刷板子，不是下載 Python 檔，而是下載對應的 UF2 firmware。這一區已整理 4 份 Mango Lite 韌體與板子對應表。</p>
+        </div>
+        <div class="page-grid">
+          <article class="content-card">
+            <span class="zone-badge teacher">UF2</span>
+            <h3>前往 Firmware 區</h3>
+            <p>查看 Pico / Pico W / Pico 2 / Pico 2 W 的對應表、刷機步驟與下載連結。</p>
+            <a class="button primary" href="firmware.html">打開 Firmware 區</a>
+          </article>
+          <article class="content-card">
+            <span class="zone-badge student">Reminder</span>
+            <h3>韌體不是用 Thonny 上傳</h3>
+            <p>`.uf2` 是整份板子韌體，流程和複製 Python 程式碼不同。刷之前請先確認板型與 MCU。</p>
+            <a class="button ghost" href="firmware.html#firmware-map">先看對應表</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
           <p class="eyebrow">Support</p>
           <h2>其他輔助頁面</h2>
           <p>若需要 1 小時體驗課或程式檢視器，仍可從這裡進入，但它們不再列為正式主題。</p>
@@ -222,6 +245,12 @@
             <h3>程式檢視頁</h3>
             <p>可用來顯示目前網站中保留的獨立 Python 範例。</p>
             <a class="button ghost" href="code-viewer.html?file=keyboard-car-control">打開程式頁</a>
+          </article>
+          <article class="content-card">
+            <span class="zone-badge teacher">Firmware</span>
+            <h3>UF2 韌體專區</h3>
+            <p>整理 4 份 Mango Lite 韌體，適合備課時快速比對板型與下載對應檔案。</p>
+            <a class="button ghost" href="firmware.html">打開 Firmware 區</a>
           </article>
         </div>
       </section>
@@ -245,6 +274,6 @@
     </footer>
 
   </div>
-  <script src="script.js?v=20260423-license"></script>
+  <script src="script.js?v=20260428-firmware"></script>
 </body>
 </html>
