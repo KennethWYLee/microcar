@@ -1,63 +1,69 @@
-# 檔案：bot.py
 from machine import Pin, PWM
-import time
 
 FREQUENCY = 1000
 
-# 根據您之前的測試修正的腳位
-m1_a_pwm = PWM(Pin(13))
-m1_b_pwm = PWM(Pin(12))
-m2_a_pwm = PWM(Pin(10))
-m2_b_pwm = PWM(Pin(11))
+right_a = PWM(Pin(12))
+right_b = PWM(Pin(13))
+left_a = PWM(Pin(11))
+left_b = PWM(Pin(10))
 
-m1_a_pwm.freq(FREQUENCY)
-m1_b_pwm.freq(FREQUENCY)
-m2_a_pwm.freq(FREQUENCY)
-m2_b_pwm.freq(FREQUENCY)
+for pwm in (right_a, right_b, left_a, left_b):
+    pwm.freq(FREQUENCY)
+
+LEFT_POLARITY = -1
+RIGHT_POLARITY = -1
+
+
+def _duty(speed):
+    speed = abs(speed)
+    if speed <= 100:
+        return int(speed / 100 * 65535)
+    return min(65535, int(speed))
+
+
+def _set_motor(a_pwm, b_pwm, value):
+    if value > 0:
+        a_pwm.duty_u16(_duty(value))
+        b_pwm.duty_u16(0)
+    elif value < 0:
+        a_pwm.duty_u16(0)
+        b_pwm.duty_u16(_duty(value))
+    else:
+        a_pwm.duty_u16(0)
+        b_pwm.duty_u16(0)
+
+
+def drive(left, right):
+    _set_motor(left_a, left_b, left * LEFT_POLARITY)
+    _set_motor(right_a, right_b, right * RIGHT_POLARITY)
+
 
 def stop():
-    m1_a_pwm.duty_u16(0)
-    m1_b_pwm.duty_u16(0)
-    m2_a_pwm.duty_u16(0)
-    m2_b_pwm.duty_u16(0)
+    drive(0, 0)
 
-def forward(speed):
-    m1_a_pwm.duty_u16(speed)
-    m1_b_pwm.duty_u16(0)
-    m2_a_pwm.duty_u16(speed)
-    m2_b_pwm.duty_u16(0)
 
-def backward(speed):
-    m1_a_pwm.duty_u16(0)
-    m1_b_pwm.duty_u16(speed)
-    m2_a_pwm.duty_u16(0)
-    m2_b_pwm.duty_u16(speed)
+def forward(speed=40):
+    drive(speed, speed)
 
-def turn_left(speed):
-    m1_a_pwm.duty_u16(speed)
-    m1_b_pwm.duty_u16(0)
-    m2_a_pwm.duty_u16(0)
-    m2_b_pwm.duty_u16(speed)
 
-def turn_right(speed):
-    m1_a_pwm.duty_u16(0)
-    m1_b_pwm.duty_u16(speed)
-    m2_a_pwm.duty_u16(speed)
-    m2_b_pwm.duty_u16(0)
+def backward(speed=40):
+    drive(-speed, -speed)
 
-# --- 斜向移動 (差速控制) ---
-def forward_left(speed):
-    # 左前：右輪快，左輪慢(20%)
-    inner = int(speed * 0.2)
-    m1_a_pwm.duty_u16(speed)
-    m1_b_pwm.duty_u16(0)
-    m2_a_pwm.duty_u16(inner)
-    m2_b_pwm.duty_u16(0)
 
-def forward_right(speed):
-    # 右前：左輪快，右輪慢(20%)
-    inner = int(speed * 0.2)
-    m1_a_pwm.duty_u16(inner)
-    m1_b_pwm.duty_u16(0)
-    m2_a_pwm.duty_u16(speed)
-    m2_b_pwm.duty_u16(0)
+def turn_left(speed=40):
+    drive(-speed, speed)
+
+
+def turn_right(speed=40):
+    drive(speed, -speed)
+
+
+def forward_left(speed=40):
+    drive(speed * 0.25, speed)
+
+
+def forward_right(speed=40):
+    drive(speed, speed * 0.25)
+
+
+stop()

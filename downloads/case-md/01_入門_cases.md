@@ -1,5 +1,7 @@
 # 01 入門延伸 Cases：平台、LED、按鈕與狀態控制
 
+> 2026-05-06 修正版：本頁「完整程式碼」已同步 `website_cases` 安全版；會移動的 case 採用 GP3 button 啟停、馬達方向 polarity、停止 cleanup。
+
 本篇延伸原教材第 1-30 頁，目標是讓學生從最小的硬體控制開始，逐步建立「輸出、輸入、判斷、狀態」的概念。所有案例都以 Raspberry Pi Pico / MicroPython 的 `machine.Pin` 為核心，並配合芒果機器人主板常用腳位。
 
 參考資料：
@@ -10,6 +12,8 @@
 - MicroPython RP2 quick reference：https://docs.micropython.org/en/latest/rp2/quickref.html
 
 ## Case 1：內建 LED 閃爍
+
+> 安全修正版來源：`website_cases/01入門_case01.py`
 
 ### 1. 要做的主題
 
@@ -41,11 +45,15 @@ import time
 
 led = Pin(25, Pin.OUT)
 
-while True:
-    led.on()
-    time.sleep(1)
+try:
+    while True:
+        led.on()
+        time.sleep(1)
+        led.off()
+        time.sleep(1)
+except KeyboardInterrupt:
     led.off()
-    time.sleep(1)
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -76,6 +84,8 @@ while True:
 
 ## Case 2：LED 訊號節奏設計
 
+> 安全修正版來源：`website_cases/01入門_case02.py`
+
 ### 1. 要做的主題
 
 用陣列設計 LED 閃爍節奏，讓學生理解「資料可以控制行為」。
@@ -105,17 +115,19 @@ from machine import Pin
 import time
 
 led = Pin(25, Pin.OUT)
-
 pattern = [0.15, 0.15, 0.15, 0.6]
 
-while True:
-    for duration in pattern:
-        led.on()
-        time.sleep(duration)
-        led.off()
-        time.sleep(0.15)
-
-    time.sleep(1)
+try:
+    while True:
+        for duration in pattern:
+            led.on()
+            time.sleep(duration)
+            led.off()
+            time.sleep(0.15)
+        time.sleep(1)
+except KeyboardInterrupt:
+    led.off()
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -152,6 +164,8 @@ while True:
 
 ## Case 3：按鈕即時控制 LED
 
+> 安全修正版來源：`website_cases/01入門_case03.py`
+
 ### 1. 要做的主題
 
 讀取板載按鈕，按下時 LED 亮，放開時 LED 滅。
@@ -180,21 +194,16 @@ LED 是輸出，按鈕是輸入。
 from machine import Pin
 import time
 
-BUTTON_ACTIVE = 1
-
 led = Pin(25, Pin.OUT)
-btn = Pin(3, Pin.IN)
+button = Pin(3, Pin.IN, Pin.PULL_DOWN)
 
-while True:
-    value = btn.value()
-    print("button =", value)
-
-    if value == BUTTON_ACTIVE:
-        led.on()
-    else:
-        led.off()
-
-    time.sleep(0.1)
+try:
+    while True:
+        led.value(button.value())
+        time.sleep_ms(20)
+except KeyboardInterrupt:
+    led.off()
+    print("Stopped")
 ```
 
 如果你的按鈕按下時讀到 `0`，把這行改成：
@@ -233,6 +242,8 @@ while True:
 
 ## Case 4：按鈕切換 LED 狀態
 
+> 安全修正版來源：`website_cases/01入門_case04.py`
+
 ### 1. 要做的主題
 
 讓按鈕從「按住才亮」變成「按一下切換一次狀態」。這是小車啟動/停止控制的基礎。
@@ -261,28 +272,24 @@ while True:
 from machine import Pin
 import time
 
-BUTTON_ACTIVE = 1
-
 led = Pin(25, Pin.OUT)
-btn = Pin(3, Pin.IN)
-
+button = Pin(3, Pin.IN, Pin.PULL_DOWN)
 led_state = False
 
-while True:
-    if btn.value() == BUTTON_ACTIVE:
-        led_state = not led_state
-
-        if led_state:
-            led.on()
-        else:
-            led.off()
-
-        time.sleep_ms(250)
-
-        while btn.value() == BUTTON_ACTIVE:
-            time.sleep_ms(20)
-
-    time.sleep_ms(20)
+try:
+    while True:
+        if button.value() == 1:
+            time.sleep_ms(30)
+            if button.value() == 1:
+                led_state = not led_state
+                led.value(1 if led_state else 0)
+                print("LED", "ON" if led_state else "OFF")
+                while button.value() == 1:
+                    time.sleep_ms(20)
+        time.sleep_ms(20)
+except KeyboardInterrupt:
+    led.off()
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -329,6 +336,8 @@ while True:
 
 ## Case 5：短按與長按判斷
 
+> 安全修正版來源：`website_cases/01入門_case05.py`
+
 ### 1. 要做的主題
 
 判斷學生是短按還是長按按鈕。短按可用於切換模式，長按可用於重置或停止。
@@ -357,41 +366,24 @@ while True:
 from machine import Pin
 import time
 
-BUTTON_ACTIVE = 1
-LONG_PRESS_MS = 1000
-
 led = Pin(25, Pin.OUT)
-btn = Pin(3, Pin.IN)
+button = Pin(3, Pin.IN, Pin.PULL_DOWN)
+SHORT_MS = 800
 
-led_state = False
-
-def blink(times, delay_ms):
-    for i in range(times):
-        led.on()
-        time.sleep_ms(delay_ms)
-        led.off()
-        time.sleep_ms(delay_ms)
-
-while True:
-    if btn.value() == BUTTON_ACTIVE:
-        start = time.ticks_ms()
-
-        while btn.value() == BUTTON_ACTIVE:
-            time.sleep_ms(20)
-
-        duration = time.ticks_diff(time.ticks_ms(), start)
-        print("press ms =", duration)
-
-        if duration >= LONG_PRESS_MS:
-            blink(3, 120)
-            led_state = False
-        else:
-            led_state = not led_state
-            led.value(1 if led_state else 0)
-
-        time.sleep_ms(200)
-
-    time.sleep_ms(20)
+try:
+    while True:
+        if button.value() == 1:
+            start = time.ticks_ms()
+            led.on()
+            while button.value() == 1:
+                time.sleep_ms(20)
+            held = time.ticks_diff(time.ticks_ms(), start)
+            led.off()
+            print("short press" if held < SHORT_MS else "long press", held)
+        time.sleep_ms(20)
+except KeyboardInterrupt:
+    led.off()
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -435,6 +427,8 @@ while True:
 
 ## Case 6：小車啟動前狀態燈
 
+> 安全修正版來源：`website_cases/01入門_case06.py`
+
 ### 1. 要做的主題
 
 設計小車啟動前的狀態控制：待機慢閃、按下後進入啟動狀態、再按一次回待機。
@@ -463,39 +457,30 @@ while True:
 from machine import Pin
 import time
 
-BUTTON_ACTIVE = 1
-
 led = Pin(25, Pin.OUT)
-btn = Pin(3, Pin.IN)
-
+button = Pin(3, Pin.IN, Pin.PULL_DOWN)
 running = False
-blink_on = False
-last_blink = time.ticks_ms()
 
-def wait_button_release():
-    while btn.value() == BUTTON_ACTIVE:
-        time.sleep_ms(20)
-
-while True:
-    if btn.value() == BUTTON_ACTIVE:
-        running = not running
-        print("running =", running)
-        time.sleep_ms(250)
-        wait_button_release()
-
-    if running:
-        led.on()
-    else:
-        now = time.ticks_ms()
-        if time.ticks_diff(now, last_blink) >= 700:
-            blink_on = not blink_on
-            led.value(1 if blink_on else 0)
-            last_blink = now
-
-    time.sleep_ms(20)
+try:
+    print("Press button to toggle ready state")
+    while True:
+        if button.value() == 1:
+            time.sleep_ms(30)
+            if button.value() == 1:
+                running = not running
+                print("READY" if running else "STANDBY")
+                while button.value() == 1:
+                    time.sleep_ms(20)
+        led.value(1 if running else 0)
+        time.sleep_ms(100)
+except KeyboardInterrupt:
+    led.off()
+    print("Stopped")
 ```
 
 ## Case 7：按鈕中斷計數器
+
+> 安全修正版來源：`website_cases/01入門_case07.py`
 
 ### 1. 要做的主題
 
@@ -526,29 +511,30 @@ from machine import Pin
 import time
 
 led = Pin(25, Pin.OUT)
-btn = Pin(3, Pin.IN)
+button = Pin(3, Pin.IN, Pin.PULL_DOWN)
+count = 0
+pressed_flag = False
 
-press_count = 0
-last_irq_time = 0
 
-def button_irq(pin):
-    global press_count, last_irq_time
-    now = time.ticks_ms()
-    if time.ticks_diff(now, last_irq_time) > 250:
-        press_count += 1
-        last_irq_time = now
+def on_button(pin):
+    global pressed_flag
+    pressed_flag = True
 
-btn.irq(trigger=Pin.IRQ_RISING, handler=button_irq)
 
-last_count = -1
+button.irq(trigger=Pin.IRQ_RISING, handler=on_button)
 
-while True:
-    if press_count != last_count:
-        print("press count =", press_count)
-        led.value(press_count % 2)
-        last_count = press_count
-
-    time.sleep_ms(50)
+try:
+    while True:
+        if pressed_flag:
+            pressed_flag = False
+            count += 1
+            print("count =", count)
+            led.toggle()
+        time.sleep_ms(20)
+except KeyboardInterrupt:
+    button.irq(handler=None)
+    led.off()
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -598,6 +584,8 @@ while True:
 
 ## Case 8：非阻塞式待機燈與按鈕模式
 
+> 安全修正版來源：`website_cases/01入門_case08.py`
+
 ### 1. 要做的主題
 
 讓 LED 持續慢閃，同時還能立即偵測按鈕，建立非阻塞式程式設計概念。
@@ -626,44 +614,31 @@ while True:
 from machine import Pin
 import time
 
-BUTTON_ACTIVE = 1
-
 led = Pin(25, Pin.OUT)
-btn = Pin(3, Pin.IN)
-
+button = Pin(3, Pin.IN, Pin.PULL_DOWN)
 mode = 0
-led_on = False
 last_blink = time.ticks_ms()
+led_state = False
 
-def wait_release():
-    while btn.value() == BUTTON_ACTIVE:
+try:
+    while True:
+        if button.value() == 1:
+            time.sleep_ms(30)
+            if button.value() == 1:
+                mode = (mode + 1) % 3
+                print("mode =", mode)
+                while button.value() == 1:
+                    time.sleep_ms(20)
+        now = time.ticks_ms()
+        interval = [1000, 300, 80][mode]
+        if time.ticks_diff(now, last_blink) >= interval:
+            last_blink = now
+            led_state = not led_state
+            led.value(1 if led_state else 0)
         time.sleep_ms(20)
-
-while True:
-    if btn.value() == BUTTON_ACTIVE:
-        mode = (mode + 1) % 3
-        print("mode =", mode)
-        time.sleep_ms(250)
-        wait_release()
-
-    now = time.ticks_ms()
-
-    if mode == 0:
-        interval = 700
-        if time.ticks_diff(now, last_blink) >= interval:
-            led_on = not led_on
-            led.value(1 if led_on else 0)
-            last_blink = now
-    elif mode == 1:
-        led.on()
-    else:
-        interval = 120
-        if time.ticks_diff(now, last_blink) >= interval:
-            led_on = not led_on
-            led.value(1 if led_on else 0)
-            last_blink = now
-
-    time.sleep_ms(20)
+except KeyboardInterrupt:
+    led.off()
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -726,6 +701,8 @@ while True:
 
 ## Case 9：Shell 指令控制 LED
 
+> 安全修正版來源：`website_cases/01入門_case09.py`
+
 ### 1. 要做的主題
 
 透過 Thonny Shell 輸入文字指令，控制 LED 開、關、閃爍，讓學生理解「命令式控制」。
@@ -752,34 +729,29 @@ while True:
 
 ```python
 from machine import Pin
+import sys
 import time
 
 led = Pin(25, Pin.OUT)
+print("Type on/off/toggle/exit")
 
-def blink(times=3):
-    for i in range(times):
-        led.on()
-        time.sleep_ms(200)
-        led.off()
-        time.sleep_ms(200)
-
-while True:
-    cmd = input("command(on/off/blink/quit): ").strip().lower()
-
-    if cmd == "on":
-        led.on()
-        print("LED on")
-    elif cmd == "off":
-        led.off()
-        print("LED off")
-    elif cmd == "blink":
-        blink(3)
-    elif cmd == "quit":
-        led.off()
-        print("bye")
-        break
-    else:
-        print("unknown command")
+try:
+    while True:
+        cmd = sys.stdin.readline().strip().lower()
+        if cmd == "on":
+            led.on()
+        elif cmd == "off":
+            led.off()
+        elif cmd == "toggle":
+            led.toggle()
+        elif cmd == "exit":
+            break
+        else:
+            print("unknown command")
+        time.sleep_ms(20)
+finally:
+    led.off()
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -828,6 +800,8 @@ while True:
 
 ## Case 10：開機自我測試程式
 
+> 安全修正版來源：`website_cases/01入門_case10.py`
+
 ### 1. 要做的主題
 
 設計一段可存成 `main.py` 的開機自我測試：LED 先閃爍，等待按鈕確認後才進入待機。
@@ -856,36 +830,25 @@ LED 慢閃代表準備好。
 from machine import Pin
 import time
 
-BUTTON_ACTIVE = 1
-
 led = Pin(25, Pin.OUT)
-btn = Pin(3, Pin.IN)
+button = Pin(3, Pin.IN, Pin.PULL_DOWN)
 
-def flash(times, delay_ms):
-    for i in range(times):
+try:
+    print("Self test start")
+    for i in range(3):
         led.on()
-        time.sleep_ms(delay_ms)
+        time.sleep_ms(150)
         led.off()
-        time.sleep_ms(delay_ms)
-
-print("boot self-test")
-flash(5, 100)
-
-print("press button to enter ready mode")
-while btn.value() != BUTTON_ACTIVE:
+        time.sleep_ms(150)
+    print("Press button to finish self test")
+    while button.value() == 0:
+        led.toggle()
+        time.sleep_ms(250)
     led.on()
-    time.sleep_ms(50)
+    print("Self test passed")
+except KeyboardInterrupt:
     led.off()
-    time.sleep_ms(450)
-
-while btn.value() == BUTTON_ACTIVE:
-    time.sleep_ms(20)
-
-print("ready")
-
-while True:
-    led.toggle()
-    time.sleep_ms(700)
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現

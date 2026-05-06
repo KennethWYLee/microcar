@@ -1,33 +1,58 @@
-from machine import Pin     # 控制 GPIO
-import time                 # 雖未使用，但可保留
+from machine import Pin
 
-# 小車馬達腳位（與你 USB 測試結果一致）
-M1_A = Pin(12, Pin.OUT)     # 左馬達 A 相
-M1_B = Pin(13, Pin.OUT)     # 左馬達 B 相
-M2_A = Pin(10, Pin.OUT)     # 右馬達 A 相
-M2_B = Pin(11, Pin.OUT)     # 右馬達 B 相
+# GP12/GP13 = right motor, GP11/GP10 = left motor
+right_a = Pin(12, Pin.OUT)
+right_b = Pin(13, Pin.OUT)
+left_a = Pin(11, Pin.OUT)
+left_b = Pin(10, Pin.OUT)
+
+LEFT_POLARITY = -1
+RIGHT_POLARITY = -1
+
+
+def _set_motor(pin_a, pin_b, value):
+    if value > 0:
+        pin_a.value(1)
+        pin_b.value(0)
+    elif value < 0:
+        pin_a.value(0)
+        pin_b.value(1)
+    else:
+        pin_a.value(0)
+        pin_b.value(0)
+
+
+def drive(left, right):
+    _set_motor(left_a, left_b, left * LEFT_POLARITY)
+    _set_motor(right_a, right_b, right * RIGHT_POLARITY)
+
 
 def stop():
-    # 四個腳位都設成 0 → 馬達停止
-    M1_A.value(0); M1_B.value(0)
-    M2_A.value(0); M2_B.value(0)
+    drive(0, 0)
 
-def forward():
-    # 左右兩個馬達都正轉
-    M1_A.value(1); M1_B.value(0)
-    M2_A.value(1); M2_B.value(0)
 
-def backward():
-    # 左右兩個馬達都反轉
-    M1_A.value(0); M1_B.value(1)
-    M2_A.value(0); M2_B.value(1)
+def forward(speed=None):
+    drive(1, 1)
 
-def turn_left():
-    # 左輪反轉 + 右輪前進 → 原地左轉
-    M1_A.value(0); M1_B.value(1)
-    M2_A.value(1); M2_B.value(0)
 
-def turn_right():
-    # 左輪前進 + 右輪反轉 → 原地右轉
-    M1_A.value(1); M1_B.value(0)
-    M2_A.value(0); M2_B.value(1)
+def backward(speed=None):
+    drive(-1, -1)
+
+
+def turn_left(speed=None):
+    drive(-1, 1)
+
+
+def turn_right(speed=None):
+    drive(1, -1)
+
+
+def forward_left(speed=None):
+    drive(0.3, 1)
+
+
+def forward_right(speed=None):
+    drive(1, 0.3)
+
+
+stop()

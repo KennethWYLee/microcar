@@ -1,5 +1,7 @@
 # 03 小車移動延伸 Cases：馬達、速度與控制模組
 
+> 2026-05-06 修正版：本頁「完整程式碼」已同步 `website_cases` 安全版；會移動的 case 採用 GP3 button 啟停、馬達方向 polarity、停止 cleanup。
+
 本篇延伸原教材第 45-58 頁，重點是讓學生從一顆馬達的正反轉，逐步走到雙輪小車、PWM 速度控制、校正與模組化。
 
 參考資料：
@@ -11,6 +13,8 @@
 - Raspberry Pi Pico MicroPython examples：https://github.com/raspberrypi/pico-micropython-examples
 
 ## Case 1：單顆馬達方向測試
+
+> 安全修正版來源：`website_cases/03小車移動_case01.py`
 
 ### 1. 要做的主題
 
@@ -37,24 +41,113 @@
 ### 3. 完整程式碼
 
 ```python
-from machine import Pin
+from machine import Pin, PWM
 import time
 
-a = Pin(12, Pin.OUT)
-b = Pin(13, Pin.OUT)
+BUTTON_PIN = 3
+button = Pin(BUTTON_PIN, Pin.IN, Pin.PULL_DOWN)
 
-def set_motor(av, bv, label, seconds=2):
-    print(label, "a =", av, "b =", bv)
-    a.value(av)
-    b.value(bv)
-    time.sleep(seconds)
+right_a = Pin(12, Pin.OUT)
+right_b = Pin(13, Pin.OUT)
+left_a = Pin(11, Pin.OUT)
+left_b = Pin(10, Pin.OUT)
 
-set_motor(0, 0, "stop")
-set_motor(0, 1, "direction 1")
-set_motor(0, 0, "stop", 1)
-set_motor(1, 0, "direction 2")
-set_motor(1, 1, "brake", 1)
-set_motor(0, 0, "stop")
+LEFT_POLARITY = -1
+RIGHT_POLARITY = -1
+
+
+def set_motor(pin_a, pin_b, value):
+    if value > 0:
+        pin_a.value(1)
+        pin_b.value(0)
+    elif value < 0:
+        pin_a.value(0)
+        pin_b.value(1)
+    else:
+        pin_a.value(0)
+        pin_b.value(0)
+
+
+def drive(left, right):
+    set_motor(left_a, left_b, left * LEFT_POLARITY)
+    set_motor(right_a, right_b, right * RIGHT_POLARITY)
+
+
+def stop():
+    drive(0, 0)
+
+running = False
+
+
+def button_pressed():
+    return button.value() == 1
+
+
+def on_start():
+    pass
+
+
+def on_stop():
+    stop()
+
+
+def check_button_toggle():
+    global running
+
+    if button_pressed():
+        time.sleep_ms(30)
+        if button_pressed():
+            running = not running
+            print("START" if running else "STOP")
+
+            if running:
+                on_start()
+            else:
+                on_stop()
+
+            while button_pressed():
+                time.sleep_ms(20)
+
+            time.sleep_ms(200)
+            return True
+
+    return False
+
+
+def wait_for_start():
+    print("Press button to start/stop")
+    while not running:
+        check_button_toggle()
+        time.sleep_ms(20)
+
+
+def sleep_with_button_check(ms):
+    start = time.ticks_ms()
+    while time.ticks_diff(time.ticks_ms(), start) < ms:
+        if check_button_toggle() and not running:
+            stop()
+            return False
+        time.sleep_ms(20)
+    return True
+
+
+
+def run_case():
+    tests = [(0, "stop"), (1, "direction 1"), (0, "stop"), (-1, "direction 2"), (0, "stop")]
+    for value, label in tests:
+        print(label)
+        set_motor(right_a, right_b, value)
+        if not sleep_with_button_check(1000):
+            return
+    stop()
+
+try:
+    stop()
+    wait_for_start()
+    run_case()
+finally:
+    stop()
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -89,6 +182,8 @@ motor_stop()
 
 ## Case 2：雙馬達基本移動
 
+> 安全修正版來源：`website_cases/03小車移動_case02.py`
+
 ### 1. 要做的主題
 
 控制 M1、M2 兩顆馬達，做出小車前進、後退、左轉、右轉與停止。
@@ -114,53 +209,115 @@ M1 使用 `12, 13`，M2 使用 `11, 10`。
 ### 3. 完整程式碼
 
 ```python
-from machine import Pin
+from machine import Pin, PWM
 import time
 
-m1a = Pin(12, Pin.OUT)
-m1b = Pin(13, Pin.OUT)
-m2a = Pin(11, Pin.OUT)
-m2b = Pin(10, Pin.OUT)
+BUTTON_PIN = 3
+button = Pin(BUTTON_PIN, Pin.IN, Pin.PULL_DOWN)
 
-def forward():
-    m1a.value(1)
-    m1b.value(0)
-    m2a.value(1)
-    m2b.value(0)
+right_a = Pin(12, Pin.OUT)
+right_b = Pin(13, Pin.OUT)
+left_a = Pin(11, Pin.OUT)
+left_b = Pin(10, Pin.OUT)
 
-def backward():
-    m1a.value(0)
-    m1b.value(1)
-    m2a.value(0)
-    m2b.value(1)
+LEFT_POLARITY = -1
+RIGHT_POLARITY = -1
 
-def turn_left():
-    m1a.value(1)
-    m1b.value(0)
-    m2a.value(0)
-    m2b.value(0)
 
-def turn_right():
-    m1a.value(0)
-    m1b.value(0)
-    m2a.value(1)
-    m2b.value(0)
+def set_motor(pin_a, pin_b, value):
+    if value > 0:
+        pin_a.value(1)
+        pin_b.value(0)
+    elif value < 0:
+        pin_a.value(0)
+        pin_b.value(1)
+    else:
+        pin_a.value(0)
+        pin_b.value(0)
+
+
+def drive(left, right):
+    set_motor(left_a, left_b, left * LEFT_POLARITY)
+    set_motor(right_a, right_b, right * RIGHT_POLARITY)
+
 
 def stop():
-    m1a.value(0)
-    m1b.value(0)
-    m2a.value(0)
-    m2b.value(0)
+    drive(0, 0)
 
-forward()
-time.sleep(2)
-backward()
-time.sleep(2)
-turn_left()
-time.sleep(1)
-turn_right()
-time.sleep(1)
-stop()
+running = False
+
+
+def button_pressed():
+    return button.value() == 1
+
+
+def on_start():
+    pass
+
+
+def on_stop():
+    stop()
+
+
+def check_button_toggle():
+    global running
+
+    if button_pressed():
+        time.sleep_ms(30)
+        if button_pressed():
+            running = not running
+            print("START" if running else "STOP")
+
+            if running:
+                on_start()
+            else:
+                on_stop()
+
+            while button_pressed():
+                time.sleep_ms(20)
+
+            time.sleep_ms(200)
+            return True
+
+    return False
+
+
+def wait_for_start():
+    print("Press button to start/stop")
+    while not running:
+        check_button_toggle()
+        time.sleep_ms(20)
+
+
+def sleep_with_button_check(ms):
+    start = time.ticks_ms()
+    while time.ticks_diff(time.ticks_ms(), start) < ms:
+        if check_button_toggle() and not running:
+            stop()
+            return False
+        time.sleep_ms(20)
+    return True
+
+
+
+def run_case():
+    script = [(60, 60, "forward", 2000), (-60, -60, "backward", 2000), (-60, 60, "left", 1000), (60, -60, "right", 1000)]
+    for left, right, label, ms in script:
+        print(label)
+        drive(left, right)
+        if not sleep_with_button_check(ms):
+            return
+        stop()
+        if not sleep_with_button_check(300):
+            return
+
+try:
+    stop()
+    wait_for_start()
+    run_case()
+finally:
+    stop()
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -211,6 +368,8 @@ stop()
 
 ## Case 3：PWM 馬達速度控制
 
+> 安全修正版來源：`website_cases/03小車移動_case03.py`
+
 ### 1. 要做的主題
 
 把馬達從「全速/停止」提升到「可調速度」，用百分比控制 PWM duty。
@@ -239,33 +398,99 @@ MicroPython 的 `duty_u16` 使用 `0-65535`。
 from machine import Pin, PWM
 import time
 
-FULL_DUTY = 65535
+button = Pin(3, Pin.IN, Pin.PULL_DOWN)
+a = PWM(Pin(12))
+b = Pin(13, Pin.OUT)
+a.freq(1000)
+POLARITY = -1
+running = False
 
-m1a = PWM(Pin(12, Pin.OUT), freq=1000)
-m1b = PWM(Pin(13, Pin.OUT), freq=1000)
 
-def speed_to_duty(speed):
-    if speed < 0:
-        speed = 0
-    if speed > 100:
-        speed = 100
-    return int(FULL_DUTY * speed / 100)
+def stop():
+    a.duty_u16(0)
+    b.value(0)
+
+
+running = False
+
+
+def button_pressed():
+    return button.value() == 1
+
+
+def on_start():
+    pass
+
+
+def on_stop():
+    stop()
+
+
+def check_button_toggle():
+    global running
+
+    if button_pressed():
+        time.sleep_ms(30)
+        if button_pressed():
+            running = not running
+            print("START" if running else "STOP")
+
+            if running:
+                on_start()
+            else:
+                on_stop()
+
+            while button_pressed():
+                time.sleep_ms(20)
+
+            time.sleep_ms(200)
+            return True
+
+    return False
+
+
+def wait_for_start():
+    print("Press button to start/stop")
+    while not running:
+        check_button_toggle()
+        time.sleep_ms(20)
+
+
+def sleep_with_button_check(ms):
+    start = time.ticks_ms()
+    while time.ticks_diff(time.ticks_ms(), start) < ms:
+        if check_button_toggle() and not running:
+            stop()
+            return False
+        time.sleep_ms(20)
+    return True
+
 
 def motor_speed(speed):
-    duty = speed_to_duty(speed)
-    m1a.duty_u16(duty)
-    m1b.duty_u16(0)
+    value = speed * POLARITY
+    if value >= 0:
+        b.value(0)
+        a.duty_u16(min(65535, int(value * 655)))
+    else:
+        a.duty_u16(0)
+        b.value(1)
 
-def motor_stop():
-    m1a.duty_u16(0)
-    m1b.duty_u16(0)
 
-for speed in [20, 50, 80]:
-    print("speed =", speed)
-    motor_speed(speed)
-    time.sleep(2)
+def run_case():
+    for speed in [20, 40, 60, 80, 100, 0]:
+        print("speed =", speed)
+        motor_speed(speed)
+        if not sleep_with_button_check(1000):
+            return
 
-motor_stop()
+try:
+    stop()
+    wait_for_start()
+    run_case()
+finally:
+    stop()
+    a.deinit()
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -300,6 +525,8 @@ m1b.duty_u16(0)
 
 ## Case 4：雙輪速度差轉向
 
+> 安全修正版來源：`website_cases/03小車移動_case04.py`
+
 ### 1. 要做的主題
 
 用左右輪不同速度控制小車弧線轉向，理解差速控制。
@@ -328,37 +555,112 @@ m1b.duty_u16(0)
 from machine import Pin, PWM
 import time
 
-m1a = PWM(Pin(12, Pin.OUT), freq=1000)  # right motor
-m1b = PWM(Pin(13, Pin.OUT), freq=1000)
-m2a = PWM(Pin(11, Pin.OUT), freq=1000)  # left motor
-m2b = PWM(Pin(10, Pin.OUT), freq=1000)
+BUTTON_PIN = 3
+button = Pin(BUTTON_PIN, Pin.IN, Pin.PULL_DOWN)
 
-def duty(speed):
-    if speed < 0:
-        speed = 0
-    if speed > 100:
-        speed = 100
-    return int(65535 * speed / 100)
+right_a = Pin(12, Pin.OUT)
+right_b = Pin(13, Pin.OUT)
+left_a = Pin(11, Pin.OUT)
+left_b = Pin(10, Pin.OUT)
 
-def run(left_speed, right_speed):
-    m1a.duty_u16(duty(right_speed))
-    m1b.duty_u16(0)
-    m2a.duty_u16(duty(left_speed))
-    m2b.duty_u16(0)
+LEFT_POLARITY = -1
+RIGHT_POLARITY = -1
+
+
+def set_motor(pin_a, pin_b, value):
+    if value > 0:
+        pin_a.value(1)
+        pin_b.value(0)
+    elif value < 0:
+        pin_a.value(0)
+        pin_b.value(1)
+    else:
+        pin_a.value(0)
+        pin_b.value(0)
+
+
+def drive(left, right):
+    set_motor(left_a, left_b, left * LEFT_POLARITY)
+    set_motor(right_a, right_b, right * RIGHT_POLARITY)
+
 
 def stop():
-    m1a.duty_u16(0)
-    m1b.duty_u16(0)
-    m2a.duty_u16(0)
-    m2b.duty_u16(0)
+    drive(0, 0)
 
-run(30, 30)   # straight
-time.sleep(2)
-run(10, 35)   # arc left
-time.sleep(2)
-run(35, 10)   # arc right
-time.sleep(2)
-stop()
+running = False
+
+
+def button_pressed():
+    return button.value() == 1
+
+
+def on_start():
+    pass
+
+
+def on_stop():
+    stop()
+
+
+def check_button_toggle():
+    global running
+
+    if button_pressed():
+        time.sleep_ms(30)
+        if button_pressed():
+            running = not running
+            print("START" if running else "STOP")
+
+            if running:
+                on_start()
+            else:
+                on_stop()
+
+            while button_pressed():
+                time.sleep_ms(20)
+
+            time.sleep_ms(200)
+            return True
+
+    return False
+
+
+def wait_for_start():
+    print("Press button to start/stop")
+    while not running:
+        check_button_toggle()
+        time.sleep_ms(20)
+
+
+def sleep_with_button_check(ms):
+    start = time.ticks_ms()
+    while time.ticks_diff(time.ticks_ms(), start) < ms:
+        if check_button_toggle() and not running:
+            stop()
+            return False
+        time.sleep_ms(20)
+    return True
+
+
+
+def run_case():
+    script = [(40, 40, "straight"), (15, 45, "arc left"), (45, 15, "arc right")]
+    for left, right, label in script:
+        print(label, left, right)
+        drive(left, right)
+        if not sleep_with_button_check(2000):
+            return
+        stop()
+        if not sleep_with_button_check(300):
+            return
+
+try:
+    stop()
+    wait_for_start()
+    run_case()
+finally:
+    stop()
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -406,6 +708,8 @@ stop()
 
 ## Case 5：使用 `mango.motor.Motor` 控制馬達
 
+> 安全修正版來源：`website_cases/03小車移動_case05.py`
+
 ### 1. 要做的主題
 
 使用本機 Mango 函式庫中的 `Motor` 類別，簡化 PWM 馬達控制。
@@ -432,28 +736,100 @@ stop()
 
 ```python
 from mango import Motor
+from machine import Pin
 import time
+
+BUTTON_PIN = 3
+button = Pin(BUTTON_PIN, Pin.IN, Pin.PULL_DOWN)
 
 right_motor = Motor(a_pin=12, b_pin=13)
 left_motor = Motor(a_pin=11, b_pin=10)
 
-def forward(speed=20):
-    right_motor.speed(speed)
-    left_motor.speed(speed)
+LEFT_POLARITY = -1
+RIGHT_POLARITY = -1
 
-def backward(speed=20):
-    right_motor.speed(-speed)
-    left_motor.speed(-speed)
+
+def drive(left, right):
+    left_motor.speed(left * LEFT_POLARITY)
+    right_motor.speed(right * RIGHT_POLARITY)
+
 
 def stop():
-    right_motor.stop()
     left_motor.stop()
+    right_motor.stop()
 
-forward(20)
-time.sleep(2)
-backward(20)
-time.sleep(2)
-stop()
+running = False
+
+
+def button_pressed():
+    return button.value() == 1
+
+
+def on_start():
+    pass
+
+
+def on_stop():
+    stop()
+
+
+def check_button_toggle():
+    global running
+
+    if button_pressed():
+        time.sleep_ms(30)
+        if button_pressed():
+            running = not running
+            print("START" if running else "STOP")
+
+            if running:
+                on_start()
+            else:
+                on_stop()
+
+            while button_pressed():
+                time.sleep_ms(20)
+
+            time.sleep_ms(200)
+            return True
+
+    return False
+
+
+def wait_for_start():
+    print("Press button to start/stop")
+    while not running:
+        check_button_toggle()
+        time.sleep_ms(20)
+
+
+def sleep_with_button_check(ms):
+    start = time.ticks_ms()
+    while time.ticks_diff(time.ticks_ms(), start) < ms:
+        if check_button_toggle() and not running:
+            stop()
+            return False
+        time.sleep_ms(20)
+    return True
+
+
+
+def run_case():
+    script = [(60, 60, "forward"), (-60, -60, "backward"), (0, 0, "stop")]
+    for left, right, label in script:
+        print(label)
+        drive(left, right)
+        if not sleep_with_button_check(2000):
+            return
+        stop()
+
+try:
+    stop()
+    wait_for_start()
+    run_case()
+finally:
+    stop()
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -488,6 +864,8 @@ stop()
 
 ## Case 6：小車控制模組化
 
+> 安全修正版來源：`website_cases/03小車移動_case06.py`
+
 ### 1. 要做的主題
 
 把小車動作整理成 `bot.py` 模組，讓主程式只負責任務流程。
@@ -516,33 +894,118 @@ stop()
 
 ```python
 from mango import Motor
+from machine import Pin
+import time
+
+BUTTON_PIN = 3
+button = Pin(BUTTON_PIN, Pin.IN, Pin.PULL_DOWN)
 
 right_motor = Motor(a_pin=12, b_pin=13)
 left_motor = Motor(a_pin=11, b_pin=10)
 
-def forward(speed=20):
-    right_motor.speed(speed)
-    left_motor.speed(speed)
+LEFT_POLARITY = -1
+RIGHT_POLARITY = -1
 
-def backward(speed=20):
-    right_motor.speed(-speed)
-    left_motor.speed(-speed)
 
-def turn(left_speed, right_speed):
-    left_motor.speed(left_speed)
-    right_motor.speed(right_speed)
+def drive(left, right):
+    left_motor.speed(left * LEFT_POLARITY)
+    right_motor.speed(right * RIGHT_POLARITY)
 
-def spin_left(speed=20):
-    left_motor.speed(-speed)
-    right_motor.speed(speed)
-
-def spin_right(speed=20):
-    left_motor.speed(speed)
-    right_motor.speed(-speed)
 
 def stop():
     left_motor.stop()
     right_motor.stop()
+
+running = False
+
+
+def button_pressed():
+    return button.value() == 1
+
+
+def on_start():
+    pass
+
+
+def on_stop():
+    stop()
+
+
+def check_button_toggle():
+    global running
+
+    if button_pressed():
+        time.sleep_ms(30)
+        if button_pressed():
+            running = not running
+            print("START" if running else "STOP")
+
+            if running:
+                on_start()
+            else:
+                on_stop()
+
+            while button_pressed():
+                time.sleep_ms(20)
+
+            time.sleep_ms(200)
+            return True
+
+    return False
+
+
+def wait_for_start():
+    print("Press button to start/stop")
+    while not running:
+        check_button_toggle()
+        time.sleep_ms(20)
+
+
+def sleep_with_button_check(ms):
+    start = time.ticks_ms()
+    while time.ticks_diff(time.ticks_ms(), start) < ms:
+        if check_button_toggle() and not running:
+            stop()
+            return False
+        time.sleep_ms(20)
+    return True
+
+
+
+def forward(speed=60):
+    drive(speed, speed)
+
+
+def backward(speed=60):
+    drive(-speed, -speed)
+
+
+def turn_left(speed=70):
+    drive(-speed, speed)
+
+
+def turn_right(speed=70):
+    drive(speed, -speed)
+
+
+def run_case():
+    actions = [(forward, "forward", 2000), (backward, "backward", 2000), (turn_left, "left", 1000), (turn_right, "right", 1000)]
+    for func, label, ms in actions:
+        print(label)
+        func()
+        if not sleep_with_button_check(ms):
+            return
+        stop()
+        if not sleep_with_button_check(300):
+            return
+
+try:
+    stop()
+    wait_for_start()
+    run_case()
+finally:
+    stop()
+    print("Stopped")
 ```
 
 `main.py`
@@ -608,6 +1071,8 @@ square(20)
 
 ## Case 7：雙馬達方向校正工具
 
+> 安全修正版來源：`website_cases/03小車移動_case07.py`
+
 ### 1. 要做的主題
 
 建立一支校正程式，快速測試左右馬達正負速度是否符合「正值前進、負值後退」的約定。
@@ -634,35 +1099,102 @@ square(20)
 
 ```python
 from mango import Motor
+from machine import Pin
 import time
+
+BUTTON_PIN = 3
+button = Pin(BUTTON_PIN, Pin.IN, Pin.PULL_DOWN)
 
 right_motor = Motor(a_pin=12, b_pin=13)
 left_motor = Motor(a_pin=11, b_pin=10)
 
-LEFT_SIGN = 1
-RIGHT_SIGN = 1
+LEFT_POLARITY = -1
+RIGHT_POLARITY = -1
+
 
 def drive(left, right):
-    left_motor.speed(left * LEFT_SIGN)
-    right_motor.speed(right * RIGHT_SIGN)
+    left_motor.speed(left * LEFT_POLARITY)
+    right_motor.speed(right * RIGHT_POLARITY)
+
 
 def stop():
     left_motor.stop()
     right_motor.stop()
 
-tests = [
-    ("left wheel forward", 20, 0, 1.5),
-    ("right wheel forward", 0, 20, 1.5),
-    ("both wheels forward", 20, 20, 2),
-    ("both wheels backward", -20, -20, 2),
-]
+running = False
 
-for name, left, right, seconds in tests:
-    print(name, "left =", left, "right =", right)
-    drive(left, right)
-    time.sleep(seconds)
+
+def button_pressed():
+    return button.value() == 1
+
+
+def on_start():
+    pass
+
+
+def on_stop():
     stop()
-    time.sleep(1)
+
+
+def check_button_toggle():
+    global running
+
+    if button_pressed():
+        time.sleep_ms(30)
+        if button_pressed():
+            running = not running
+            print("START" if running else "STOP")
+
+            if running:
+                on_start()
+            else:
+                on_stop()
+
+            while button_pressed():
+                time.sleep_ms(20)
+
+            time.sleep_ms(200)
+            return True
+
+    return False
+
+
+def wait_for_start():
+    print("Press button to start/stop")
+    while not running:
+        check_button_toggle()
+        time.sleep_ms(20)
+
+
+def sleep_with_button_check(ms):
+    start = time.ticks_ms()
+    while time.ticks_diff(time.ticks_ms(), start) < ms:
+        if check_button_toggle() and not running:
+            stop()
+            return False
+        time.sleep_ms(20)
+    return True
+
+
+
+def run_case():
+    tests = [(30, 30, "both positive"), (-30, -30, "both negative"), (-30, 30, "spin left"), (30, -30, "spin right")]
+    for left, right, label in tests:
+        print(label, "left =", left, "right =", right)
+        drive(left, right)
+        if not sleep_with_button_check(1200):
+            return
+        stop()
+        if not sleep_with_button_check(500):
+            return
+
+try:
+    stop()
+    wait_for_start()
+    run_case()
+finally:
+    stop()
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -700,6 +1232,8 @@ stop()
 
 ## Case 8：軟啟動與軟停止
 
+> 安全修正版來源：`website_cases/03小車移動_case08.py`
+
 ### 1. 要做的主題
 
 讓小車速度逐步增加與逐步降低，避免一啟動就暴衝，也讓學生理解速度曲線的概念。
@@ -726,17 +1260,85 @@ stop()
 
 ```python
 from mango import Motor
+from machine import Pin
 import time
+
+BUTTON_PIN = 3
+button = Pin(BUTTON_PIN, Pin.IN, Pin.PULL_DOWN)
 
 right_motor = Motor(a_pin=12, b_pin=13)
 left_motor = Motor(a_pin=11, b_pin=10)
 
+LEFT_POLARITY = -1
+RIGHT_POLARITY = -1
+
+
+def drive(left, right):
+    left_motor.speed(left * LEFT_POLARITY)
+    right_motor.speed(right * RIGHT_POLARITY)
+
+
+def stop():
+    left_motor.stop()
+    right_motor.stop()
+
+running = False
+
+
+def button_pressed():
+    return button.value() == 1
+
+
+def on_start():
+    pass
+
+
+def on_stop():
+    stop()
+
+
+def check_button_toggle():
+    global running
+
+    if button_pressed():
+        time.sleep_ms(30)
+        if button_pressed():
+            running = not running
+            print("START" if running else "STOP")
+
+            if running:
+                on_start()
+            else:
+                on_stop()
+
+            while button_pressed():
+                time.sleep_ms(20)
+
+            time.sleep_ms(200)
+            return True
+
+    return False
+
+
+def wait_for_start():
+    print("Press button to start/stop")
+    while not running:
+        check_button_toggle()
+        time.sleep_ms(20)
+
+
+def sleep_with_button_check(ms):
+    start = time.ticks_ms()
+    while time.ticks_diff(time.ticks_ms(), start) < ms:
+        if check_button_toggle() and not running:
+            stop()
+            return False
+        time.sleep_ms(20)
+    return True
+
 current_left = 0
 current_right = 0
 
-def drive(left, right):
-    left_motor.speed(left)
-    right_motor.speed(right)
 
 def approach(current, target, step):
     if current < target:
@@ -745,26 +1347,32 @@ def approach(current, target, step):
         return max(current - step, target)
     return current
 
-def ramp_to(target_left, target_right, step=2, delay_ms=80):
-    global current_left, current_right
 
+def ramp_to(target_left, target_right, step=4, delay_ms=80):
+    global current_left, current_right
     while current_left != target_left or current_right != target_right:
         current_left = approach(current_left, target_left, step)
         current_right = approach(current_right, target_right, step)
         drive(current_left, current_right)
-        print("speed =", current_left, current_right)
-        time.sleep_ms(delay_ms)
+        if not sleep_with_button_check(delay_ms):
+            return False
+    return True
 
-def stop():
+
+def run_case():
+    if not ramp_to(60, 60):
+        return
+    if not sleep_with_button_check(1500):
+        return
     ramp_to(0, 0)
-    left_motor.stop()
-    right_motor.stop()
 
-ramp_to(30, 30)
-time.sleep(2)
-ramp_to(10, 35)
-time.sleep(2)
-stop()
+try:
+    stop()
+    wait_for_start()
+    run_case()
+finally:
+    stop()
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -832,6 +1440,8 @@ hard_stop()
 
 ## Case 9：動作腳本播放器
 
+> 安全修正版來源：`website_cases/03小車移動_case09.py`
+
 ### 1. 要做的主題
 
 把小車動作寫成一份腳本清單，讓程式依序播放前進、轉彎、停止等動作。
@@ -858,36 +1468,107 @@ hard_stop()
 
 ```python
 from mango import Motor
+from machine import Pin
 import time
+
+BUTTON_PIN = 3
+button = Pin(BUTTON_PIN, Pin.IN, Pin.PULL_DOWN)
 
 right_motor = Motor(a_pin=12, b_pin=13)
 left_motor = Motor(a_pin=11, b_pin=10)
 
+LEFT_POLARITY = -1
+RIGHT_POLARITY = -1
+
+
 def drive(left, right):
-    left_motor.speed(left)
-    right_motor.speed(right)
+    left_motor.speed(left * LEFT_POLARITY)
+    right_motor.speed(right * RIGHT_POLARITY)
+
 
 def stop():
     left_motor.stop()
     right_motor.stop()
 
-def play_script(script):
-    for name, left, right, seconds in script:
-        print("action =", name, "left =", left, "right =", right)
-        drive(left, right)
-        time.sleep(seconds)
-        stop()
-        time.sleep_ms(300)
+running = False
 
-path = [
-    ("forward 1", 22, 22, 1.5),
-    ("turn right", 24, -24, 0.55),
-    ("forward 2", 22, 22, 1.5),
-    ("turn left", -24, 24, 0.55),
-    ("finish", 0, 0, 0.5),
+
+def button_pressed():
+    return button.value() == 1
+
+
+def on_start():
+    pass
+
+
+def on_stop():
+    stop()
+
+
+def check_button_toggle():
+    global running
+
+    if button_pressed():
+        time.sleep_ms(30)
+        if button_pressed():
+            running = not running
+            print("START" if running else "STOP")
+
+            if running:
+                on_start()
+            else:
+                on_stop()
+
+            while button_pressed():
+                time.sleep_ms(20)
+
+            time.sleep_ms(200)
+            return True
+
+    return False
+
+
+def wait_for_start():
+    print("Press button to start/stop")
+    while not running:
+        check_button_toggle()
+        time.sleep_ms(20)
+
+
+def sleep_with_button_check(ms):
+    start = time.ticks_ms()
+    while time.ticks_diff(time.ticks_ms(), start) < ms:
+        if check_button_toggle() and not running:
+            stop()
+            return False
+        time.sleep_ms(20)
+    return True
+
+script = [
+    (60, 60, 1500, "forward 1"),
+    (60, -60, 600, "turn right"),
+    (60, 60, 1500, "forward 2"),
+    (-60, 60, 600, "turn left"),
 ]
 
-play_script(path)
+
+def run_case():
+    for left, right, ms, label in script:
+        print(label)
+        drive(left, right)
+        if not sleep_with_button_check(ms):
+            return
+        stop()
+        if not sleep_with_button_check(300):
+            return
+
+try:
+    stop()
+    wait_for_start()
+    run_case()
+finally:
+    stop()
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -936,6 +1617,8 @@ stop()
 
 ## Case 10：Shell 文字指令遙控車
 
+> 安全修正版來源：`website_cases/03小車移動_case10.py`
+
 ### 1. 要做的主題
 
 使用 Thonny Shell 輸入文字指令控制小車，建立簡易的人機介面。
@@ -962,50 +1645,121 @@ stop()
 
 ```python
 from mango import Motor
+from machine import Pin
 import time
+
+BUTTON_PIN = 3
+button = Pin(BUTTON_PIN, Pin.IN, Pin.PULL_DOWN)
 
 right_motor = Motor(a_pin=12, b_pin=13)
 left_motor = Motor(a_pin=11, b_pin=10)
 
-SPEED = 22
-MOVE_TIME = 0.6
+LEFT_POLARITY = -1
+RIGHT_POLARITY = -1
+
 
 def drive(left, right):
-    left_motor.speed(left)
-    right_motor.speed(right)
+    left_motor.speed(left * LEFT_POLARITY)
+    right_motor.speed(right * RIGHT_POLARITY)
+
 
 def stop():
     left_motor.stop()
     right_motor.stop()
 
+running = False
+
+
+def button_pressed():
+    return button.value() == 1
+
+
+def on_start():
+    pass
+
+
+def on_stop():
+    stop()
+
+
+def check_button_toggle():
+    global running
+
+    if button_pressed():
+        time.sleep_ms(30)
+        if button_pressed():
+            running = not running
+            print("START" if running else "STOP")
+
+            if running:
+                on_start()
+            else:
+                on_stop()
+
+            while button_pressed():
+                time.sleep_ms(20)
+
+            time.sleep_ms(200)
+            return True
+
+    return False
+
+
+def wait_for_start():
+    print("Press button to start/stop")
+    while not running:
+        check_button_toggle()
+        time.sleep_ms(20)
+
+
+def sleep_with_button_check(ms):
+    start = time.ticks_ms()
+    while time.ticks_diff(time.ticks_ms(), start) < ms:
+        if check_button_toggle() and not running:
+            stop()
+            return False
+        time.sleep_ms(20)
+    return True
+
+import sys
+
+MOVE_TIME_MS = 500
+
+
 def run_command(cmd):
     if cmd == "f":
-        drive(SPEED, SPEED)
+        drive(60, 60)
     elif cmd == "b":
-        drive(-SPEED, -SPEED)
+        drive(-60, -60)
     elif cmd == "l":
-        drive(-SPEED, SPEED)
+        drive(-60, 60)
     elif cmd == "r":
-        drive(SPEED, -SPEED)
+        drive(60, -60)
     elif cmd == "s":
         stop()
         return
     else:
-        print("commands: f b l r s q")
+        print("unknown command")
         return
-
-    time.sleep(MOVE_TIME)
+    sleep_with_button_check(MOVE_TIME_MS)
     stop()
 
-while True:
-    command = input("car> ").strip().lower()
-
-    if command == "q":
-        stop()
-        print("bye")
-        break
-
-    run_command(command)
+try:
+    stop()
+    print("Press button to arm. Then type f/b/l/r/s in Shell.")
+    while True:
+        check_button_toggle()
+        cmd = sys.stdin.readline().strip().lower()
+        if cmd == "exit":
+            break
+        if running:
+            run_command(cmd)
+        else:
+            stop()
+            print("standby: press button first")
+finally:
+    stop()
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現

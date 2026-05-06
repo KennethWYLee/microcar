@@ -1,5 +1,7 @@
 # 02 感測與輸出延伸 Cases：蜂鳴器、RGB 與超音波
 
+> 2026-05-06 修正版：本頁「完整程式碼」已同步 `website_cases` 安全版；會移動的 case 採用 GP3 button 啟停、馬達方向 polarity、停止 cleanup。
+
 本篇延伸原教材第 31-44 頁，從 PWM 蜂鳴器、WS2812B RGB 燈，到 RUS04 超音波測距。教學順序是：先控制輸出，再讀取感測器，最後把感測值轉成聲光回饋。
 
 參考資料：
@@ -11,6 +13,8 @@
 - Raspberry Pi Pico MicroPython examples：https://github.com/raspberrypi/pico-micropython-examples
 
 ## Case 1：蜂鳴器單音控制
+
+> 安全修正版來源：`website_cases/02感測輸出_case01.py`
 
 ### 1. 要做的主題
 
@@ -40,21 +44,16 @@
 from machine import Pin, PWM
 import time
 
-buzzer = PWM(Pin(6, Pin.OUT))
+buzzer = PWM(Pin(6))
 
-def beep(freq=800, duration_ms=300, duty=5000):
-    buzzer.freq(freq)
-    buzzer.duty_u16(duty)
-    time.sleep_ms(duration_ms)
+try:
+    buzzer.freq(880)
+    buzzer.duty_u16(5000)
+    time.sleep(1)
+finally:
     buzzer.duty_u16(0)
-
-beep(500, 300)
-time.sleep(0.5)
-beep(900, 300)
-time.sleep(0.5)
-beep(1200, 300)
-
-buzzer.deinit()
+    buzzer.deinit()
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -89,6 +88,8 @@ buzzer.deinit()
 
 ## Case 2：蜂鳴器旋律播放器
 
+> 安全修正版來源：`website_cases/02感測輸出_case02.py`
+
 ### 1. 要做的主題
 
 用陣列儲存旋律，讓蜂鳴器依序播放音符。
@@ -117,33 +118,20 @@ buzzer.deinit()
 from machine import Pin, PWM
 import time
 
-buzzer = PWM(Pin(6, Pin.OUT))
+buzzer = PWM(Pin(6))
+melody = [(523, 200), (587, 200), (659, 200), (784, 350)]
 
-melody = [
-    (523, 200),  # C5
-    (587, 200),  # D5
-    (659, 200),  # E5
-    (0,   150),  # pause
-    (659, 200),
-    (587, 200),
-    (523, 400),
-]
-
-def play_tone(freq, duration_ms, duty=5000):
-    if freq == 0:
-        buzzer.duty_u16(0)
-    else:
+try:
+    for freq, ms in melody:
         buzzer.freq(freq)
-        buzzer.duty_u16(duty)
-
-    time.sleep_ms(duration_ms)
+        buzzer.duty_u16(5000)
+        time.sleep_ms(ms)
+        buzzer.duty_u16(0)
+        time.sleep_ms(80)
+finally:
     buzzer.duty_u16(0)
-    time.sleep_ms(60)
-
-for freq, duration in melody:
-    play_tone(freq, duration)
-
-buzzer.deinit()
+    buzzer.deinit()
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -178,6 +166,8 @@ buzzer.deinit()
 
 ## Case 3：RGB 狀態燈
 
+> 安全修正版來源：`website_cases/02感測輸出_case03.py`
+
 ### 1. 要做的主題
 
 使用芒果平台的 `WS2812B` 控制 RGB 彩燈，建立紅、綠、藍三種狀態。
@@ -203,32 +193,19 @@ buzzer.deinit()
 ### 3. 完整程式碼
 
 ```python
-from mango import WS2812B
+from mango import RUS04
 import time
 
-rgb = WS2812B(pin=2, leds=6, sm_id=4, brightness=0.2)
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
+colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255)]
 
-STATUS_COLORS = {
-    "ready": (0, 0, 255),
-    "run": (0, 255, 0),
-    "warn": (255, 150, 0),
-    "danger": (255, 0, 0),
-    "off": (0, 0, 0),
-}
-
-def show_status(name):
-    color = STATUS_COLORS[name]
-    rgb.show_all(color)
-
-show_status("ready")
-time.sleep(1)
-show_status("run")
-time.sleep(1)
-show_status("warn")
-time.sleep(1)
-show_status("danger")
-time.sleep(1)
-show_status("off")
+try:
+    for color in colors:
+        sensor.rgb_all(color)
+        time.sleep(1)
+finally:
+    sensor.rgb_all((0, 0, 0))
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -266,6 +243,8 @@ show_status("off")
 
 ## Case 4：RGB 跑馬燈
 
+> 安全修正版來源：`website_cases/02感測輸出_case04.py`
+
 ### 1. 要做的主題
 
 讓 6 顆 RGB 燈依序亮起，製作小車啟動動畫。
@@ -291,24 +270,20 @@ show_status("off")
 ### 3. 完整程式碼
 
 ```python
-from mango import WS2812B
+from mango import RUS04
 import time
 
-rgb = WS2812B(pin=2, leds=6, sm_id=4, brightness=0.2)
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
+colors = [(255, 0, 0), (255, 150, 0), (0, 255, 0), (0, 0, 255)]
 
-def clear():
-    rgb.show_all((0, 0, 0))
-
-def chase(color=(0, 255, 0), rounds=3, delay_ms=120):
-    for r in range(rounds):
-        for i in range(6):
-            clear()
-            rgb.set_pixels(i, color)
-            rgb.show()
-            time.sleep_ms(delay_ms)
-
-chase((0, 255, 0), rounds=3)
-clear()
+try:
+    while True:
+        for color in colors:
+            sensor.rgb_all(color)
+            time.sleep_ms(250)
+except KeyboardInterrupt:
+    sensor.rgb_all((0, 0, 0))
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -340,6 +315,8 @@ rgb.close()
 
 ## Case 5：超音波距離監測
 
+> 安全修正版來源：`website_cases/02感測輸出_case05.py`
+
 ### 1. 要做的主題
 
 使用 `RUS04` 超音波模組讀取距離，並在 Shell 中印出公分值。
@@ -370,10 +347,21 @@ import time
 
 sensor = RUS04(sensor_pin=15, rgb_pin=14)
 
-while True:
-    dist = sensor.ping()
-    print("distance =", dist, "cm")
-    time.sleep_ms(200)
+def safe_ping():
+    try:
+        return sensor.ping()
+    except Exception as e:
+        print("ping error:", e)
+        return 999
+
+try:
+    while True:
+        dist = safe_ping()
+        print("dist =", dist)
+        time.sleep_ms(200)
+except KeyboardInterrupt:
+    sensor.rgb_all((0, 0, 0))
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -403,6 +391,8 @@ while True:
 
 ## Case 6：距離警示器
 
+> 安全修正版來源：`website_cases/02感測輸出_case06.py`
+
 ### 1. 要做的主題
 
 整合超音波、RGB 與蜂鳴器：距離越近，燈色越危險，蜂鳴器提示越急促。
@@ -428,38 +418,48 @@ while True:
 ### 3. 完整程式碼
 
 ```python
-from machine import Pin, PWM
 from mango import RUS04
+from machine import Pin, PWM
 import time
 
 sensor = RUS04(sensor_pin=15, rgb_pin=14)
-buzzer = PWM(Pin(6, Pin.OUT))
+buzzer = PWM(Pin(6))
 
-def beep(freq=900, duration_ms=80):
-    buzzer.freq(freq)
-    buzzer.duty_u16(5000)
-    time.sleep_ms(duration_ms)
+def safe_ping():
+    try:
+        return sensor.ping()
+    except Exception as e:
+        print("ping error:", e)
+        return 999
+
+try:
+    while True:
+        dist = safe_ping()
+        print("dist =", dist)
+        if dist < 20:
+            sensor.rgb_all((255, 0, 0))
+            buzzer.freq(1200)
+            buzzer.duty_u16(4000)
+        elif dist < 40:
+            sensor.rgb_all((255, 150, 0))
+            buzzer.freq(700)
+            buzzer.duty_u16(2000)
+        else:
+            sensor.rgb_all((0, 255, 0))
+            buzzer.duty_u16(0)
+        time.sleep_ms(150)
+except KeyboardInterrupt:
+    pass
+finally:
     buzzer.duty_u16(0)
-
-while True:
-    dist = sensor.ping()
-    print("distance =", dist, "cm")
-
-    if dist < 15:
-        sensor.rgb_all((255, 0, 0))
-        beep(1200, 80)
-        time.sleep_ms(80)
-    elif dist < 35:
-        sensor.rgb_all((255, 150, 0))
-        beep(600, 120)
-        time.sleep_ms(250)
-    else:
-        sensor.rgb_all((0, 255, 0))
-        buzzer.duty_u16(0)
-        time.sleep_ms(200)
+    buzzer.deinit()
+    sensor.rgb_all((0, 0, 0))
+    print("Stopped")
 ```
 
 ## Case 7：ADC 旋鈕控制 LED 亮度
+
+> 安全修正版來源：`website_cases/02感測輸出_case07.py`
 
 ### 1. 要做的主題
 
@@ -489,15 +489,20 @@ LED 的 `duty_u16()` 也使用 0 到 65535，因此可以直接把 ADC 數值當
 from machine import Pin, PWM, ADC
 import time
 
-pot = ADC(Pin(26))
-led = PWM(Pin(7, Pin.OUT))
+led = PWM(Pin(25))
 led.freq(1000)
+knob = ADC(Pin(26))
 
-while True:
-    raw = pot.read_u16()
-    led.duty_u16(raw)
-    print("adc =", raw, "duty =", raw)
-    time.sleep_ms(100)
+try:
+    while True:
+        value = knob.read_u16()
+        led.duty_u16(value)
+        print("adc =", value)
+        time.sleep_ms(100)
+finally:
+    led.duty_u16(0)
+    led.deinit()
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -528,6 +533,8 @@ while True:
 
 ## Case 8：ADC 旋鈕控制蜂鳴器音高
 
+> 安全修正版來源：`website_cases/02感測輸出_case08.py`
+
 ### 1. 要做的主題
 
 把 ADC 讀到的旋鈕數值轉換成蜂鳴器頻率，做出可以手動調音高的小樂器。
@@ -556,19 +563,21 @@ while True:
 from machine import Pin, PWM, ADC
 import time
 
-pot = ADC(Pin(26))
-buzzer = PWM(Pin(6, Pin.OUT))
+buzzer = PWM(Pin(6))
+knob = ADC(Pin(26))
 
-def map_range(value, in_min, in_max, out_min, out_max):
-    return out_min + (value - in_min) * (out_max - out_min) // (in_max - in_min)
-
-while True:
-    raw = pot.read_u16()
-    freq = map_range(raw, 0, 65535, 200, 2000)
-    buzzer.freq(freq)
-    buzzer.duty_u16(4000)
-    print("adc =", raw, "freq =", freq)
-    time.sleep_ms(50)
+try:
+    while True:
+        value = knob.read_u16()
+        freq = 200 + value // 80
+        buzzer.freq(freq)
+        buzzer.duty_u16(2500)
+        print("freq =", freq)
+        time.sleep_ms(80)
+finally:
+    buzzer.duty_u16(0)
+    buzzer.deinit()
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -608,6 +617,8 @@ while True:
 
 ## Case 9：超音波距離 RGB 條形圖
 
+> 安全修正版來源：`website_cases/02感測輸出_case09.py`
+
 ### 1. 要做的主題
 
 使用超音波測距，把距離轉成 RGB 燈條顯示：越接近，亮起的燈越多，並用顏色表示危險程度。
@@ -633,45 +644,33 @@ while True:
 ### 3. 完整程式碼
 
 ```python
-from mango import RUS04, WS2812B
+from mango import RUS04
 import time
 
 sensor = RUS04(sensor_pin=15, rgb_pin=14)
-bar = WS2812B(pin=2, leds=6, sm_id=4, brightness=0.2)
 
-def clamp(value, low, high):
-    if value < low:
-        return low
-    if value > high:
-        return high
-    return value
+def safe_ping():
+    try:
+        return sensor.ping()
+    except Exception as e:
+        print("ping error:", e)
+        return 999
 
-def distance_to_count(dist):
-    dist = clamp(dist, 5, 60)
-    return 1 + (60 - dist) * 5 // 55
-
-def distance_to_color(dist):
-    if dist < 15:
-        return (255, 0, 0)
-    if dist < 35:
-        return (255, 120, 0)
-    return (0, 255, 0)
-
-def show_bar(count, color):
-    for i in range(6):
-        if i < count:
-            bar.set_pixels(i, color)
+try:
+    while True:
+        dist = safe_ping()
+        if dist < 20:
+            color = (255, 0, 0)
+        elif dist < 50:
+            color = (255, 150, 0)
         else:
-            bar.set_pixels(i, (0, 0, 0))
-    bar.show()
-
-while True:
-    dist = sensor.ping()
-    count = distance_to_count(dist)
-    color = distance_to_color(dist)
-    show_bar(count, color)
-    print("distance =", dist, "leds =", count)
-    time.sleep_ms(100)
+            color = (0, 255, 0)
+        sensor.rgb_all(color)
+        print("dist =", dist)
+        time.sleep_ms(120)
+except KeyboardInterrupt:
+    sensor.rgb_all((0, 0, 0))
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -720,6 +719,8 @@ while True:
 
 ## Case 10：距離移動平均濾波警示器
 
+> 安全修正版來源：`website_cases/02感測輸出_case10.py`
+
 ### 1. 要做的主題
 
 使用移動平均降低超音波測距跳動，讓 RGB 與蜂鳴器警示更穩定。
@@ -745,43 +746,44 @@ while True:
 ### 3. 完整程式碼
 
 ```python
-from machine import Pin, PWM
 from mango import RUS04
+from machine import Pin, PWM
 import time
 
 sensor = RUS04(sensor_pin=15, rgb_pin=14)
-buzzer = PWM(Pin(6, Pin.OUT))
-samples = []
+buzzer = PWM(Pin(6))
+values = []
+WINDOW = 5
 
-def add_sample(value):
-    samples.append(value)
-    if len(samples) > 5:
-        samples.pop(0)
-    return sum(samples) / len(samples)
+def safe_ping():
+    try:
+        return sensor.ping()
+    except Exception as e:
+        print("ping error:", e)
+        return 999
 
-def beep(freq, duration_ms):
-    buzzer.freq(freq)
-    buzzer.duty_u16(5000)
-    time.sleep_ms(duration_ms)
+try:
+    while True:
+        values.append(safe_ping())
+        if len(values) > WINDOW:
+            values.pop(0)
+        avg = sum(values) / len(values)
+        print("avg =", avg)
+        if avg < 25:
+            sensor.rgb_all((255, 0, 0))
+            buzzer.freq(1000)
+            buzzer.duty_u16(3500)
+        else:
+            sensor.rgb_all((0, 255, 0))
+            buzzer.duty_u16(0)
+        time.sleep_ms(150)
+except KeyboardInterrupt:
+    pass
+finally:
     buzzer.duty_u16(0)
-
-while True:
-    raw = sensor.ping()
-    avg = add_sample(raw)
-    print("raw =", raw, "avg =", avg)
-
-    if avg < 15:
-        sensor.rgb_all((255, 0, 0))
-        beep(1400, 60)
-        time.sleep_ms(80)
-    elif avg < 35:
-        sensor.rgb_all((255, 120, 0))
-        beep(700, 80)
-        time.sleep_ms(220)
-    else:
-        sensor.rgb_all((0, 255, 0))
-        buzzer.duty_u16(0)
-        time.sleep_ms(120)
+    buzzer.deinit()
+    sensor.rgb_all((0, 0, 0))
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現

@@ -219,6 +219,7 @@ class _ControllerScreenState extends State<ControllerScreen> {
 
   @override
   void dispose() {
+    sendCommand("0");
     widget.device.disconnect();
     super.dispose();
   }

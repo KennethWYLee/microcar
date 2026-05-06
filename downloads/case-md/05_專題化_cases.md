@@ -1,5 +1,7 @@
 # 05 專題化延伸 Cases：任務設計、策略比較與成果評量
 
+> 2026-05-06 修正版：本頁「完整程式碼」已同步 `website_cases` 安全版；會移動的 case 採用 GP3 button 啟停、馬達方向 polarity、停止 cleanup。
+
 本篇延伸整份教材，將 LED、按鈕、蜂鳴器、RGB、超音波、馬達、循跡與伺服整合成專題任務。每個 case 都適合作為課堂挑戰或分組活動。
 
 參考資料：
@@ -13,6 +15,8 @@
 - Raspberry Pi Pico MicroPython examples：https://github.com/raspberrypi/pico-micropython-examples
 
 ## Case 1：按鈕啟停避障車
+
+> 安全修正版來源：`website_cases/05專題_case01.py`
 
 ### 1. 要做的主題
 
@@ -39,53 +43,147 @@
 ### 3. 完整程式碼
 
 ```python
-from machine import Pin
 from mango import Motor, RUS04
+from machine import Pin
 import time
 
-BUTTON_ACTIVE = 1
+BUTTON_PIN = 3
+button = Pin(BUTTON_PIN, Pin.IN, Pin.PULL_DOWN)
 
-btn = Pin(3, Pin.IN)
-sensor = RUS04(sensor_pin=15, rgb_pin=14)
 right_motor = Motor(a_pin=12, b_pin=13)
 left_motor = Motor(a_pin=11, b_pin=10)
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
 
-running = False
+LEFT_POLARITY = -1
+RIGHT_POLARITY = -1
+
 
 def drive(left, right):
-    left_motor.speed(left)
-    right_motor.speed(right)
+    left_motor.speed(left * LEFT_POLARITY)
+    right_motor.speed(right * RIGHT_POLARITY)
+
 
 def stop():
     left_motor.stop()
     right_motor.stop()
 
-def wait_release():
-    while btn.value() == BUTTON_ACTIVE:
+
+def safe_ping():
+    try:
+        dist = sensor.ping()
+        print("dist =", dist)
+        return dist
+    except Exception as e:
+        print("ping error:", e)
+        return 999
+
+running = False
+
+
+def button_pressed():
+    return button.value() == 1
+
+
+def on_start():
+    pass
+
+
+def on_stop():
+    stop()
+
+
+def check_button_toggle():
+    global running
+
+    if button_pressed():
+        time.sleep_ms(30)
+        if button_pressed():
+            running = not running
+            print("START" if running else "STOP")
+
+            if running:
+                on_start()
+            else:
+                on_stop()
+
+            while button_pressed():
+                time.sleep_ms(20)
+
+            time.sleep_ms(200)
+            return True
+
+    return False
+
+
+def wait_for_start():
+    print("Press button to start/stop")
+    while not running:
+        check_button_toggle()
         time.sleep_ms(20)
 
-while True:
-    if btn.value() == BUTTON_ACTIVE:
-        running = not running
-        print("running =", running)
-        time.sleep_ms(250)
-        wait_release()
 
-    if running:
-        dist = sensor.ping()
-        print("distance =", dist)
+def sleep_with_button_check(ms):
+    start = time.ticks_ms()
+    while time.ticks_diff(time.ticks_ms(), start) < ms:
+        if check_button_toggle() and not running:
+            stop()
+            return False
+        time.sleep_ms(20)
+    return True
 
-        if dist < 20:
-            sensor.rgb_all((255, 0, 0))
-            drive(5, 30)
+FORWARD_SPEED = 55
+BACKWARD_SPEED = -55
+TURN_SPEED = 65
+OBSTACLE_DISTANCE = 25
+turn_left_next = True
+
+
+def avoid():
+    global turn_left_next
+    print("avoid strategy =", "right")
+    stop()
+    if not sleep_with_button_check(150):
+        return
+    drive(BACKWARD_SPEED, BACKWARD_SPEED)
+    if not sleep_with_button_check(600):
+        return
+    if "right" == "left":
+        drive(-TURN_SPEED, TURN_SPEED)
+    elif "right" == "alternate":
+        if turn_left_next:
+            drive(-TURN_SPEED, TURN_SPEED)
         else:
-            sensor.rgb_all((0, 255, 0))
-            drive(18, 18)
+            drive(TURN_SPEED, -TURN_SPEED)
+        turn_left_next = not turn_left_next
     else:
-        stop()
-        sensor.rgb_all((0, 0, 255))
+        drive(TURN_SPEED, -TURN_SPEED)
+    sleep_with_button_check(750)
+    stop()
 
-    time.sleep_ms(100)
+try:
+    stop()
+    sensor.rgb_all((0, 0, 255))
+    print("Case 1: press button to start/stop")
+    while True:
+        check_button_toggle()
+        if running:
+            dist = safe_ping()
+            if dist < OBSTACLE_DISTANCE:
+                sensor.rgb_all((255, 0, 0))
+                avoid()
+            else:
+                sensor.rgb_all((0, 255, 0))
+                drive(FORWARD_SPEED, FORWARD_SPEED)
+        else:
+            stop()
+            sensor.rgb_all((0, 0, 255))
+        time.sleep_ms(100)
+except KeyboardInterrupt:
+    pass
+finally:
+    stop()
+    sensor.rgb_all((0, 0, 0))
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -149,6 +247,8 @@ while True:
 
 ## Case 2：避障策略比較實驗
 
+> 安全修正版來源：`website_cases/05專題_case02.py`
+
 ### 1. 要做的主題
 
 讓學生用同一台小車比較不同避障策略：固定左轉、固定右轉、左右交替。
@@ -175,59 +275,146 @@ while True:
 
 ```python
 from mango import Motor, RUS04
+from machine import Pin
 import time
 
-strategy = 2  # 0=left, 1=right, 2=alternate
-turn_left_next = True
-avoid_count = 0
+BUTTON_PIN = 3
+button = Pin(BUTTON_PIN, Pin.IN, Pin.PULL_DOWN)
 
-sensor = RUS04(sensor_pin=15, rgb_pin=14)
 right_motor = Motor(a_pin=12, b_pin=13)
 left_motor = Motor(a_pin=11, b_pin=10)
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
+
+LEFT_POLARITY = -1
+RIGHT_POLARITY = -1
+
 
 def drive(left, right):
-    left_motor.speed(left)
-    right_motor.speed(right)
+    left_motor.speed(left * LEFT_POLARITY)
+    right_motor.speed(right * RIGHT_POLARITY)
+
 
 def stop():
     left_motor.stop()
     right_motor.stop()
 
+
+def safe_ping():
+    try:
+        dist = sensor.ping()
+        print("dist =", dist)
+        return dist
+    except Exception as e:
+        print("ping error:", e)
+        return 999
+
+running = False
+
+
+def button_pressed():
+    return button.value() == 1
+
+
+def on_start():
+    pass
+
+
+def on_stop():
+    stop()
+
+
+def check_button_toggle():
+    global running
+
+    if button_pressed():
+        time.sleep_ms(30)
+        if button_pressed():
+            running = not running
+            print("START" if running else "STOP")
+
+            if running:
+                on_start()
+            else:
+                on_stop()
+
+            while button_pressed():
+                time.sleep_ms(20)
+
+            time.sleep_ms(200)
+            return True
+
+    return False
+
+
+def wait_for_start():
+    print("Press button to start/stop")
+    while not running:
+        check_button_toggle()
+        time.sleep_ms(20)
+
+
+def sleep_with_button_check(ms):
+    start = time.ticks_ms()
+    while time.ticks_diff(time.ticks_ms(), start) < ms:
+        if check_button_toggle() and not running:
+            stop()
+            return False
+        time.sleep_ms(20)
+    return True
+
+FORWARD_SPEED = 55
+BACKWARD_SPEED = -55
+TURN_SPEED = 65
+OBSTACLE_DISTANCE = 25
+turn_left_next = True
+
+
 def avoid():
-    global turn_left_next, avoid_count
-    avoid_count += 1
-    print("avoid count =", avoid_count)
-
+    global turn_left_next
+    print("avoid strategy =", "alternate")
     stop()
-    time.sleep_ms(150)
-    drive(-18, -18)
-    time.sleep_ms(400)
-
-    if strategy == 0:
-        drive(-20, 20)
-    elif strategy == 1:
-        drive(20, -20)
-    else:
+    if not sleep_with_button_check(150):
+        return
+    drive(BACKWARD_SPEED, BACKWARD_SPEED)
+    if not sleep_with_button_check(600):
+        return
+    if "alternate" == "left":
+        drive(-TURN_SPEED, TURN_SPEED)
+    elif "alternate" == "alternate":
         if turn_left_next:
-            drive(-20, 20)
+            drive(-TURN_SPEED, TURN_SPEED)
         else:
-            drive(20, -20)
+            drive(TURN_SPEED, -TURN_SPEED)
         turn_left_next = not turn_left_next
-
-    time.sleep_ms(650)
+    else:
+        drive(TURN_SPEED, -TURN_SPEED)
+    sleep_with_button_check(750)
     stop()
 
-while True:
-    dist = sensor.ping()
-
-    if dist < 20:
-        sensor.rgb_all((255, 0, 0))
-        avoid()
-    else:
-        sensor.rgb_all((0, 255, 0))
-        drive(18, 18)
-
-    time.sleep_ms(100)
+try:
+    stop()
+    sensor.rgb_all((0, 0, 255))
+    print("Case 2: press button to start/stop")
+    while True:
+        check_button_toggle()
+        if running:
+            dist = safe_ping()
+            if dist < OBSTACLE_DISTANCE:
+                sensor.rgb_all((255, 0, 0))
+                avoid()
+            else:
+                sensor.rgb_all((0, 255, 0))
+                drive(FORWARD_SPEED, FORWARD_SPEED)
+        else:
+            stop()
+            sensor.rgb_all((0, 0, 255))
+        time.sleep_ms(100)
+except KeyboardInterrupt:
+    pass
+finally:
+    stop()
+    sensor.rgb_all((0, 0, 0))
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -272,6 +459,8 @@ def avoid():
 
 ## Case 3：測試紀錄與參數調整
 
+> 安全修正版來源：`website_cases/05專題_case03.py`
+
 ### 1. 要做的主題
 
 把避障測試資料寫入開發板檔案，讓學生用數據調整速度與距離門檻。
@@ -298,51 +487,121 @@ def avoid():
 
 ```python
 from mango import Motor, RUS04
+from machine import Pin
 import time
 
-SPEED = 18
-THRESHOLD = 25
-LOG_FILE = "avoid_log.csv"
+BUTTON_PIN = 3
+button = Pin(BUTTON_PIN, Pin.IN, Pin.PULL_DOWN)
 
-sensor = RUS04(sensor_pin=15, rgb_pin=14)
 right_motor = Motor(a_pin=12, b_pin=13)
 left_motor = Motor(a_pin=11, b_pin=10)
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
+
+LEFT_POLARITY = -1
+RIGHT_POLARITY = -1
+
 
 def drive(left, right):
-    left_motor.speed(left)
-    right_motor.speed(right)
+    left_motor.speed(left * LEFT_POLARITY)
+    right_motor.speed(right * RIGHT_POLARITY)
+
 
 def stop():
     left_motor.stop()
     right_motor.stop()
 
-def log_event(dist):
-    with open(LOG_FILE, "a") as f:
-        line = "{},{},{}\n".format(time.ticks_ms(), dist, SPEED)
-        f.write(line)
 
-def avoid(dist):
-    log_event(dist)
-    sensor.rgb_all((255, 0, 0))
-    drive(-18, -18)
-    time.sleep_ms(400)
-    drive(20, -20)
-    time.sleep_ms(600)
+def safe_ping():
+    try:
+        dist = sensor.ping()
+        print("dist =", dist)
+        return dist
+    except Exception as e:
+        print("ping error:", e)
+        return 999
+
+running = False
+
+
+def button_pressed():
+    return button.value() == 1
+
+
+def on_start():
+    pass
+
+
+def on_stop():
     stop()
 
-with open(LOG_FILE, "w") as f:
-    f.write("ticks_ms,distance,speed\n")
 
-while True:
-    dist = sensor.ping()
+def check_button_toggle():
+    global running
 
-    if dist < THRESHOLD:
-        avoid(dist)
-    else:
-        sensor.rgb_all((0, 255, 0))
-        drive(SPEED, SPEED)
+    if button_pressed():
+        time.sleep_ms(30)
+        if button_pressed():
+            running = not running
+            print("START" if running else "STOP")
 
-    time.sleep_ms(100)
+            if running:
+                on_start()
+            else:
+                on_stop()
+
+            while button_pressed():
+                time.sleep_ms(20)
+
+            time.sleep_ms(200)
+            return True
+
+    return False
+
+
+def wait_for_start():
+    print("Press button to start/stop")
+    while not running:
+        check_button_toggle()
+        time.sleep_ms(20)
+
+
+def sleep_with_button_check(ms):
+    start = time.ticks_ms()
+    while time.ticks_diff(time.ticks_ms(), start) < ms:
+        if check_button_toggle() and not running:
+            stop()
+            return False
+        time.sleep_ms(20)
+    return True
+
+SPEED = 50
+OBSTACLE_DISTANCE = 25
+
+try:
+    stop()
+    sensor.rgb_all((0, 0, 255))
+    print("time_ms,dist,speed")
+    print("Press button to start/stop")
+    while True:
+        check_button_toggle()
+        if running:
+            dist = safe_ping()
+            print(time.ticks_ms(), ",", dist, ",", SPEED)
+            if dist < OBSTACLE_DISTANCE:
+                stop()
+                sensor.rgb_all((255, 0, 0))
+            else:
+                sensor.rgb_all((0, 255, 0))
+                drive(SPEED, SPEED)
+        else:
+            stop()
+        time.sleep_ms(100)
+except KeyboardInterrupt:
+    pass
+finally:
+    stop()
+    sensor.rgb_all((0, 0, 0))
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -372,6 +631,8 @@ with open(LOG_FILE, "w") as f:
 
 ## Case 4：循跡挑戰賽
 
+> 安全修正版來源：`website_cases/05專題_case04.py`
+
 ### 1. 要做的主題
 
 設計一個循跡挑戰：小車沿黑線前進，離線時自動搜尋路線。
@@ -397,42 +658,125 @@ with open(LOG_FILE, "w") as f:
 ### 3. 完整程式碼
 
 ```python
-from mango import GraySensor8
-from mango import bus
-from mango import Motor
+from mango import Motor, I2CBus, GraySensor8
+from machine import Pin
 import time
 
-line = GraySensor8(i2c=bus.i2c, digital_channels='4')
+BUTTON_PIN = 3
+button = Pin(BUTTON_PIN, Pin.IN, Pin.PULL_DOWN)
+
 right_motor = Motor(a_pin=12, b_pin=13)
 left_motor = Motor(a_pin=11, b_pin=10)
+bus = I2CBus()
+line = GraySensor8(i2c=bus.i2c, digital_channels='4')
 
-last_dir = "left"
+LEFT_POLARITY = -1
+RIGHT_POLARITY = -1
+
 
 def drive(left, right):
-    left_motor.speed(left)
-    right_motor.speed(right)
+    left_motor.speed(left * LEFT_POLARITY)
+    right_motor.speed(right * RIGHT_POLARITY)
 
-while True:
-    state = line.digital_state
-    print(state)
 
-    if state == "0110":
-        drive(20, 20)
-    elif state in ("1100", "1000", "0100"):
-        drive(8, 25)
-        last_dir = "left"
-    elif state in ("0011", "0001", "0010"):
-        drive(25, 8)
-        last_dir = "right"
-    elif state == "0000":
-        if last_dir == "left":
-            drive(-10, 12)
-        else:
-            drive(12, -10)
+def stop():
+    left_motor.stop()
+    right_motor.stop()
+
+
+def read_line_state():
+    try:
+        state = line.digital_state
+        print("line =", state)
+        return state
+    except Exception as e:
+        print("line error:", e)
+        return "0000"
+
+running = False
+
+
+def button_pressed():
+    return button.value() == 1
+
+
+def on_start():
+    pass
+
+
+def on_stop():
+    stop()
+
+
+def check_button_toggle():
+    global running
+
+    if button_pressed():
+        time.sleep_ms(30)
+        if button_pressed():
+            running = not running
+            print("START" if running else "STOP")
+
+            if running:
+                on_start()
+            else:
+                on_stop()
+
+            while button_pressed():
+                time.sleep_ms(20)
+
+            time.sleep_ms(200)
+            return True
+
+    return False
+
+
+def wait_for_start():
+    print("Press button to start/stop")
+    while not running:
+        check_button_toggle()
+        time.sleep_ms(20)
+
+
+def sleep_with_button_check(ms):
+    start = time.ticks_ms()
+    while time.ticks_diff(time.ticks_ms(), start) < ms:
+        if check_button_toggle() and not running:
+            stop()
+            return False
+        time.sleep_ms(20)
+    return True
+
+BASE_SPEED = 30
+TURN_SPEED = 40
+
+
+def run_line():
+    state = read_line_state()
+    if state in ("0110", "0010", "0100"):
+        drive(BASE_SPEED, BASE_SPEED)
+    elif "1" in state[:2]:
+        drive(-TURN_SPEED, TURN_SPEED)
+    elif "1" in state[2:]:
+        drive(TURN_SPEED, -TURN_SPEED)
     else:
-        drive(12, 12)
+        stop()
 
-    time.sleep_ms(20)
+try:
+    stop()
+    print("Press button to start/stop")
+    while True:
+        check_button_toggle()
+        if running:
+            run_line()
+        else:
+            stop()
+        time.sleep_ms(60)
+except KeyboardInterrupt:
+    pass
+finally:
+    stop()
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -457,6 +801,8 @@ elif state in ("0011", "0001", "0010"):
 ```
 
 ## Case 5：伺服閘門運送任務
+
+> 安全修正版來源：`website_cases/05專題_case05.py`
 
 ### 1. 要做的主題
 
@@ -484,49 +830,94 @@ elif state in ("0011", "0001", "0010"):
 
 ```python
 from mango import Motor, RUS04, Servo
+from machine import Pin
 import time
 
-right_motor = Motor(a_pin=12, b_pin=13)
-left_motor = Motor(a_pin=11, b_pin=10)
+button = Pin(3, Pin.IN, Pin.PULL_DOWN)
 sensor = RUS04(sensor_pin=15, rgb_pin=14)
 gate = Servo(pin=6)
+right_motor = Motor(a_pin=12, b_pin=13)
+left_motor = Motor(a_pin=11, b_pin=10)
+LEFT_POLARITY = -1
+RIGHT_POLARITY = -1
+running = False
+
 
 def drive(left, right):
-    left_motor.speed(left)
-    right_motor.speed(right)
+    left_motor.speed(left * LEFT_POLARITY)
+    right_motor.speed(right * RIGHT_POLARITY)
+
 
 def stop():
     left_motor.stop()
     right_motor.stop()
+    gate.release()
 
-def gate_open():
-    gate.position(110)
 
-def gate_close():
-    gate.position(10)
+def safe_ping():
+    try:
+        return sensor.ping()
+    except Exception as e:
+        print("ping error:", e)
+        return 999
 
-gate_close()
 
-while True:
-    dist = sensor.ping()
-    print("distance =", dist)
+def button_pressed():
+    return button.value() == 1
 
-    if dist < 12:
-        stop()
-        sensor.rgb_all((0, 0, 255))
-        gate_open()
-        time.sleep(2)
-        gate_close()
-        time.sleep_ms(500)
-        drive(-15, -15)
-        time.sleep(1)
-        stop()
-        break
-    else:
-        sensor.rgb_all((0, 255, 0))
-        drive(15, 15)
 
-    time.sleep_ms(100)
+def check_button_toggle():
+    global running
+    if button_pressed():
+        time.sleep_ms(30)
+        if button_pressed():
+            running = not running
+            print("START" if running else "STOP")
+            if running:
+                gate.reset()
+                gate.position(20)
+            else:
+                stop()
+            while button_pressed():
+                time.sleep_ms(20)
+            time.sleep_ms(200)
+            return True
+    return False
+
+
+def sleep_with_button_check(ms):
+    start = time.ticks_ms()
+    while time.ticks_diff(time.ticks_ms(), start) < ms:
+        if check_button_toggle() and not running:
+            stop()
+            return False
+        time.sleep_ms(20)
+    return True
+
+try:
+    stop()
+    sensor.rgb_all((0, 0, 255))
+    print("Press button to start/stop")
+    while True:
+        check_button_toggle()
+        if running:
+            dist = safe_ping()
+            if dist < 15:
+                stop()
+                sensor.rgb_all((255, 0, 0))
+                gate.position(90)
+                sleep_with_button_check(1000)
+                gate.position(20)
+            else:
+                sensor.rgb_all((0, 255, 0))
+                drive(45, 45)
+        else:
+            stop()
+        time.sleep_ms(100)
+except KeyboardInterrupt:
+    stop()
+    sensor.rgb_all((0, 0, 0))
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -562,6 +953,8 @@ buzzer.deinit()
 
 ## Case 6：總整合任務：可啟停的避障任務車
 
+> 安全修正版來源：`website_cases/05專題_case06.py`
+
 ### 1. 要做的主題
 
 整合按鈕、RGB、蜂鳴器、超音波與馬達，完成一台可啟停、有狀態回饋的避障任務車。
@@ -587,77 +980,147 @@ buzzer.deinit()
 ### 3. 完整程式碼
 
 ```python
-from machine import Pin, PWM
 from mango import Motor, RUS04
+from machine import Pin
 import time
 
-BUTTON_ACTIVE = 1
+BUTTON_PIN = 3
+button = Pin(BUTTON_PIN, Pin.IN, Pin.PULL_DOWN)
 
-btn = Pin(3, Pin.IN)
-buzzer = PWM(Pin(6, Pin.OUT))
-sensor = RUS04(sensor_pin=15, rgb_pin=14)
 right_motor = Motor(a_pin=12, b_pin=13)
 left_motor = Motor(a_pin=11, b_pin=10)
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
 
-running = False
-blink_on = False
-last_blink = time.ticks_ms()
+LEFT_POLARITY = -1
+RIGHT_POLARITY = -1
+
 
 def drive(left, right):
-    left_motor.speed(left)
-    right_motor.speed(right)
+    left_motor.speed(left * LEFT_POLARITY)
+    right_motor.speed(right * RIGHT_POLARITY)
+
 
 def stop():
     left_motor.stop()
     right_motor.stop()
 
-def beep(freq=1000, duration_ms=100):
-    buzzer.freq(freq)
-    buzzer.duty_u16(5000)
-    time.sleep_ms(duration_ms)
-    buzzer.duty_u16(0)
 
-def wait_release():
-    while btn.value() == BUTTON_ACTIVE:
+def safe_ping():
+    try:
+        dist = sensor.ping()
+        print("dist =", dist)
+        return dist
+    except Exception as e:
+        print("ping error:", e)
+        return 999
+
+running = False
+
+
+def button_pressed():
+    return button.value() == 1
+
+
+def on_start():
+    pass
+
+
+def on_stop():
+    stop()
+
+
+def check_button_toggle():
+    global running
+
+    if button_pressed():
+        time.sleep_ms(30)
+        if button_pressed():
+            running = not running
+            print("START" if running else "STOP")
+
+            if running:
+                on_start()
+            else:
+                on_stop()
+
+            while button_pressed():
+                time.sleep_ms(20)
+
+            time.sleep_ms(200)
+            return True
+
+    return False
+
+
+def wait_for_start():
+    print("Press button to start/stop")
+    while not running:
+        check_button_toggle()
         time.sleep_ms(20)
 
+
+def sleep_with_button_check(ms):
+    start = time.ticks_ms()
+    while time.ticks_diff(time.ticks_ms(), start) < ms:
+        if check_button_toggle() and not running:
+            stop()
+            return False
+        time.sleep_ms(20)
+    return True
+
+FORWARD_SPEED = 55
+BACKWARD_SPEED = -55
+TURN_SPEED = 65
+OBSTACLE_DISTANCE = 25
+turn_left_next = True
+
+
 def avoid():
-    sensor.rgb_all((255, 0, 0))
+    global turn_left_next
+    print("avoid strategy =", "right")
     stop()
-    time.sleep_ms(150)
-    drive(-18, -18)
-    time.sleep_ms(400)
-    drive(20, -20)
-    time.sleep_ms(650)
-    stop()
-
-while True:
-    if btn.value() == BUTTON_ACTIVE:
-        running = not running
-        beep(1200, 100)
-        wait_release()
-
-    if running:
-        dist = sensor.ping()
-        print("distance =", dist)
-
-        if dist < 20:
-            avoid()
+    if not sleep_with_button_check(150):
+        return
+    drive(BACKWARD_SPEED, BACKWARD_SPEED)
+    if not sleep_with_button_check(600):
+        return
+    if "right" == "left":
+        drive(-TURN_SPEED, TURN_SPEED)
+    elif "right" == "alternate":
+        if turn_left_next:
+            drive(-TURN_SPEED, TURN_SPEED)
         else:
-            sensor.rgb_all((0, 255, 0))
-            drive(18, 18)
+            drive(TURN_SPEED, -TURN_SPEED)
+        turn_left_next = not turn_left_next
     else:
-        stop()
-        now = time.ticks_ms()
-        if time.ticks_diff(now, last_blink) > 700:
-            blink_on = not blink_on
-            if blink_on:
-                sensor.rgb_all((0, 0, 255))
-            else:
-                sensor.rgb_all((0, 0, 0))
-            last_blink = now
+        drive(TURN_SPEED, -TURN_SPEED)
+    sleep_with_button_check(750)
+    stop()
 
-    time.sleep_ms(80)
+try:
+    stop()
+    sensor.rgb_all((0, 0, 255))
+    print("Case 6: press button to start/stop")
+    while True:
+        check_button_toggle()
+        if running:
+            dist = safe_ping()
+            if dist < OBSTACLE_DISTANCE:
+                sensor.rgb_all((255, 0, 0))
+                avoid()
+            else:
+                sensor.rgb_all((0, 255, 0))
+                drive(FORWARD_SPEED, FORWARD_SPEED)
+        else:
+            stop()
+            sensor.rgb_all((0, 0, 255))
+        time.sleep_ms(100)
+except KeyboardInterrupt:
+    pass
+finally:
+    stop()
+    sensor.rgb_all((0, 0, 0))
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -694,6 +1157,8 @@ def avoid():
 
 ## Case 7：任務計時賽
 
+> 安全修正版來源：`website_cases/05專題_case07.py`
+
 ### 1. 要做的主題
 
 設計一個按鈕啟動的計時賽：按下按鈕後小車出發，接近終點牆時停止，並在 Shell 顯示完成時間。
@@ -719,75 +1184,133 @@ def avoid():
 ### 3. 完整程式碼
 
 ```python
-from machine import Pin, PWM
 from mango import Motor, RUS04
+from machine import Pin
 import time
 
-BUTTON_ACTIVE = 1
-btn = Pin(3, Pin.IN)
-buzzer = PWM(Pin(6, Pin.OUT))
-sensor = RUS04(sensor_pin=15, rgb_pin=14)
+BUTTON_PIN = 3
+button = Pin(BUTTON_PIN, Pin.IN, Pin.PULL_DOWN)
+
 right_motor = Motor(a_pin=12, b_pin=13)
 left_motor = Motor(a_pin=11, b_pin=10)
+sensor = RUS04(sensor_pin=15, rgb_pin=14)
 
-running = False
-start_ticks = 0
+LEFT_POLARITY = -1
+RIGHT_POLARITY = -1
+
 
 def drive(left, right):
-    left_motor.speed(left)
-    right_motor.speed(right)
+    left_motor.speed(left * LEFT_POLARITY)
+    right_motor.speed(right * RIGHT_POLARITY)
+
 
 def stop():
     left_motor.stop()
     right_motor.stop()
 
-def beep(freq=1200, duration_ms=120):
-    buzzer.freq(freq)
-    buzzer.duty_u16(5000)
-    time.sleep_ms(duration_ms)
-    buzzer.duty_u16(0)
 
-def wait_release():
-    while btn.value() == BUTTON_ACTIVE:
+def safe_ping():
+    try:
+        dist = sensor.ping()
+        print("dist =", dist)
+        return dist
+    except Exception as e:
+        print("ping error:", e)
+        return 999
+
+running = False
+
+
+def button_pressed():
+    return button.value() == 1
+
+
+def on_start():
+    pass
+
+
+def on_stop():
+    stop()
+
+
+def check_button_toggle():
+    global running
+
+    if button_pressed():
+        time.sleep_ms(30)
+        if button_pressed():
+            running = not running
+            print("START" if running else "STOP")
+
+            if running:
+                on_start()
+            else:
+                on_stop()
+
+            while button_pressed():
+                time.sleep_ms(20)
+
+            time.sleep_ms(200)
+            return True
+
+    return False
+
+
+def wait_for_start():
+    print("Press button to start/stop")
+    while not running:
+        check_button_toggle()
         time.sleep_ms(20)
 
-def start_race():
-    global running, start_ticks
-    running = True
-    start_ticks = time.ticks_ms()
+
+def sleep_with_button_check(ms):
+    start = time.ticks_ms()
+    while time.ticks_diff(time.ticks_ms(), start) < ms:
+        if check_button_toggle() and not running:
+            stop()
+            return False
+        time.sleep_ms(20)
+    return True
+
+MISSION_MS = 20000
+OBSTACLE_DISTANCE = 25
+start_time = 0
+
+
+def on_start():
+    global start_time
+    start_time = time.ticks_ms()
     sensor.rgb_all((0, 255, 0))
-    beep(1000, 100)
-    print("race start")
 
-def finish_race():
-    global running
-    running = False
+try:
     stop()
-    elapsed_ms = time.ticks_diff(time.ticks_ms(), start_ticks)
-    sensor.rgb_all((255, 180, 0))
-    print("finish time =", elapsed_ms / 1000, "s")
-    for i in range(3):
-        beep(1500, 80)
-        time.sleep_ms(80)
-
-while True:
-    if not running:
-        sensor.rgb_all((0, 0, 255))
-        stop()
-
-        if btn.value() == BUTTON_ACTIVE:
-            wait_release()
-            start_race()
-    else:
-        dist = sensor.ping()
-        print("distance =", dist)
-
-        if dist < 12:
-            finish_race()
+    sensor.rgb_all((0, 0, 255))
+    print("Press button to start/stop")
+    while True:
+        check_button_toggle()
+        if running:
+            elapsed = time.ticks_diff(time.ticks_ms(), start_time)
+            if elapsed > MISSION_MS:
+                print("mission complete")
+                running = False
+                stop()
+                sensor.rgb_all((0, 0, 255))
+            elif safe_ping() < OBSTACLE_DISTANCE:
+                drive(-50, -50)
+                sleep_with_button_check(400)
+                drive(60, -60)
+                sleep_with_button_check(700)
+            else:
+                drive(50, 50)
         else:
-            drive(20, 20)
-
-    time.sleep_ms(60)
+            stop()
+        time.sleep_ms(100)
+except KeyboardInterrupt:
+    pass
+finally:
+    stop()
+    sensor.rgb_all((0, 0, 0))
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -821,6 +1344,8 @@ def finish_race():
 
 ## Case 8：多模式任務車
 
+> 安全修正版來源：`website_cases/05專題_case08.py`
+
 ### 1. 要做的主題
 
 用同一台車支援多種任務模式：待機、展示路徑、避障、循跡，並用按鈕切換模式。
@@ -846,97 +1371,91 @@ def finish_race():
 ### 3. 完整程式碼
 
 ```python
+from mango import Motor, RUS04, I2CBus, GraySensor8
 from machine import Pin
-from mango import GraySensor8
-from mango import bus
-from mango import Motor, RUS04
 import time
 
-BUTTON_ACTIVE = 1
-btn = Pin(3, Pin.IN)
+button = Pin(3, Pin.IN, Pin.PULL_DOWN)
 sensor = RUS04(sensor_pin=15, rgb_pin=14)
-line = GraySensor8(i2c=bus.i2c, digital_channels='4')
 right_motor = Motor(a_pin=12, b_pin=13)
 left_motor = Motor(a_pin=11, b_pin=10)
-
+bus = I2CBus()
+line = GraySensor8(i2c=bus.i2c, digital_channels='4')
+LEFT_POLARITY = -1
+RIGHT_POLARITY = -1
 MODES = ["standby", "demo", "avoid", "line"]
 mode_index = 0
+running = False
+
 
 def drive(left, right):
-    left_motor.speed(left)
-    right_motor.speed(right)
+    left_motor.speed(left * LEFT_POLARITY)
+    right_motor.speed(right * RIGHT_POLARITY)
+
 
 def stop():
     left_motor.stop()
     right_motor.stop()
 
-def wait_release():
-    while btn.value() == BUTTON_ACTIVE:
-        time.sleep_ms(20)
 
-def switch_mode():
+def next_mode():
     global mode_index
     mode_index = (mode_index + 1) % len(MODES)
     print("mode =", MODES[mode_index])
 
-def run_standby():
-    sensor.rgb_all((0, 0, 255))
+
+def button_pressed():
+    return button.value() == 1
+
+
+def safe_ping():
+    try:
+        return sensor.ping()
+    except Exception:
+        return 999
+
+try:
     stop()
-
-def run_demo():
-    sensor.rgb_all((120, 0, 255))
-    drive(20, 20)
-    time.sleep_ms(600)
-    drive(20, -20)
-    time.sleep_ms(400)
+    print("Short press changes mode; long press runs/stops")
+    while True:
+        if button_pressed():
+            start = time.ticks_ms()
+            while button_pressed():
+                time.sleep_ms(20)
+            held = time.ticks_diff(time.ticks_ms(), start)
+            if held > 800:
+                running = not running
+                print("START" if running else "STOP")
+                if not running:
+                    stop()
+            else:
+                next_mode()
+        if running:
+            mode = MODES[mode_index]
+            if mode == "demo":
+                drive(45, 45)
+            elif mode == "avoid":
+                if safe_ping() < 25:
+                    drive(60, -60)
+                else:
+                    drive(50, 50)
+            elif mode == "line":
+                state = line.digital_state
+                if "1" in state[:2]:
+                    drive(-35, 35)
+                elif "1" in state[2:]:
+                    drive(35, -35)
+                else:
+                    drive(30, 30)
+            else:
+                stop()
+        else:
+            stop()
+        time.sleep_ms(80)
+except KeyboardInterrupt:
     stop()
-    time.sleep_ms(400)
-
-def run_avoid():
-    dist = sensor.ping()
-    print("avoid distance =", dist)
-
-    if dist < 20:
-        sensor.rgb_all((255, 0, 0))
-        drive(-18, -18)
-        time.sleep_ms(350)
-        drive(20, -20)
-        time.sleep_ms(500)
-    else:
-        sensor.rgb_all((255, 80, 0))
-        drive(18, 18)
-
-def run_line():
-    state = line.digital_state
-    sensor.rgb_all((0, 255, 0))
-    print("line =", state)
-
-    if state == "0110":
-        drive(18, 18)
-    elif state in ("1100", "1000"):
-        drive(5, 22)
-    elif state in ("0011", "0001"):
-        drive(22, 5)
-    else:
-        drive(12, 12)
-
-while True:
-    if btn.value() == BUTTON_ACTIVE:
-        wait_release()
-        switch_mode()
-
-    mode = MODES[mode_index]
-
-    if mode == "standby":
-        run_standby()
-    elif mode == "demo":
-        run_demo()
-    elif mode == "avoid":
-        run_avoid()
-    elif mode == "line":
-        run_line()
-
-    time.sleep_ms(80)
+    sensor.rgb_all((0, 0, 0))
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -1060,6 +1579,8 @@ while True:
 
 ## Case 9：循跡參數實驗與資料記錄
 
+> 安全修正版來源：`website_cases/05專題_case09.py`
+
 ### 1. 要做的主題
 
 讓學生用同一條跑道測試多組循跡參數，並把時間、誤差與馬達輸出印成 CSV 形式，方便比較。
@@ -1085,94 +1606,140 @@ Shell 印出 `trial,time_ms,state,error,left,right`，學生可以複製到試�
 ### 3. 完整程式碼
 
 ```python
+from mango import Motor, I2CBus, GraySensor8
 from machine import Pin
-from mango import GraySensor8
-from mango import bus
-from mango import Motor
 import time
 
-BUTTON_ACTIVE = 1
-btn = Pin(3, Pin.IN)
-line = GraySensor8(i2c=bus.i2c, digital_channels='4')
+BUTTON_PIN = 3
+button = Pin(BUTTON_PIN, Pin.IN, Pin.PULL_DOWN)
+
 right_motor = Motor(a_pin=12, b_pin=13)
 left_motor = Motor(a_pin=11, b_pin=10)
+bus = I2CBus()
+line = GraySensor8(i2c=bus.i2c, digital_channels='4')
 
-WEIGHTS = [-2, -1, 1, 2]
-CONFIGS = [
-    (16, 4),
-    (18, 5),
-    (20, 6),
-]
+LEFT_POLARITY = -1
+RIGHT_POLARITY = -1
 
-last_error = 0
-
-def wait_press():
-    while btn.value() != BUTTON_ACTIVE:
-        time.sleep_ms(20)
-    while btn.value() == BUTTON_ACTIVE:
-        time.sleep_ms(20)
-
-def clamp(value, low, high):
-    if value < low:
-        return low
-    if value > high:
-        return high
-    return value
 
 def drive(left, right):
-    left_motor.speed(left)
-    right_motor.speed(right)
+    left_motor.speed(left * LEFT_POLARITY)
+    right_motor.speed(right * RIGHT_POLARITY)
+
 
 def stop():
     left_motor.stop()
     right_motor.stop()
 
-def get_error(state):
-    global last_error
-    total = 0
-    count = 0
 
-    for i in range(4):
-        if state[i] == "1":
-            total += WEIGHTS[i]
-            count += 1
-
-    if count == 0:
-        return last_error
-
-    last_error = total / count
-    return last_error
-
-def run_trial(trial_id, base_speed, kp, duration_ms=8000):
-    global last_error
-    last_error = 0
-    start = time.ticks_ms()
-    print("trial,time_ms,state,error,left,right")
-
-    while time.ticks_diff(time.ticks_ms(), start) < duration_ms:
-        now = time.ticks_ms()
-        elapsed = time.ticks_diff(now, start)
+def read_line_state():
+    try:
         state = line.digital_state
-        error = get_error(state)
-        correction = int(error * kp)
-        left = clamp(base_speed + correction, -35, 35)
-        right = clamp(base_speed - correction, -35, 35)
-        drive(left, right)
-        print(trial_id, elapsed, state, error, left, right, sep=",")
-        time.sleep_ms(80)
+        print("line =", state)
+        return state
+    except Exception as e:
+        print("line error:", e)
+        return "0000"
 
+running = False
+
+
+def button_pressed():
+    return button.value() == 1
+
+
+def on_start():
+    pass
+
+
+def on_stop():
     stop()
 
-for trial_id, config in enumerate(CONFIGS, start=1):
-    base_speed, kp = config
-    print("ready trial", trial_id, "base =", base_speed, "kp =", kp)
-    print("press button to start")
-    wait_press()
-    run_trial(trial_id, base_speed, kp)
-    time.sleep(1)
 
-stop()
-print("all trials done")
+def check_button_toggle():
+    global running
+
+    if button_pressed():
+        time.sleep_ms(30)
+        if button_pressed():
+            running = not running
+            print("START" if running else "STOP")
+
+            if running:
+                on_start()
+            else:
+                on_stop()
+
+            while button_pressed():
+                time.sleep_ms(20)
+
+            time.sleep_ms(200)
+            return True
+
+    return False
+
+
+def wait_for_start():
+    print("Press button to start/stop")
+    while not running:
+        check_button_toggle()
+        time.sleep_ms(20)
+
+
+def sleep_with_button_check(ms):
+    start = time.ticks_ms()
+    while time.ticks_diff(time.ticks_ms(), start) < ms:
+        if check_button_toggle() and not running:
+            stop()
+            return False
+        time.sleep_ms(20)
+    return True
+
+PARAMS = [(20, 8), (25, 10), (30, 12)]
+TRIAL_MS = 8000
+weights = [-2, -1, 1, 2]
+
+
+def clamp(value, low, high):
+    return max(low, min(high, value))
+
+
+def get_error():
+    state = read_line_state()
+    hits = [weights[i] for i, ch in enumerate(state[:4]) if ch == "1"]
+    if not hits:
+        return 0
+    return sum(hits) / len(hits)
+
+
+def run_trial(base_speed, kp):
+    start = time.ticks_ms()
+    print("time_ms,error,left,right")
+    while running and time.ticks_diff(time.ticks_ms(), start) < TRIAL_MS:
+        error = get_error()
+        correction = kp * error
+        left = clamp(base_speed + correction, -40, 40)
+        right = clamp(base_speed - correction, -40, 40)
+        print(time.ticks_diff(time.ticks_ms(), start), ",", error, ",", left, ",", right)
+        drive(left, right)
+        if not sleep_with_button_check(80):
+            return False
+    stop()
+    return True
+
+try:
+    stop()
+    for base_speed, kp in PARAMS:
+        print("ready trial base =", base_speed, "kp =", kp)
+        wait_for_start()
+        if not run_trial(base_speed, kp):
+            break
+        running = False
+        stop()
+    print("all trials done")
+finally:
+    stop()
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -1210,6 +1777,8 @@ def run_trial(trial_id, base_speed, kp, duration_ms=8000):
 
 ## Case 10：期末專題骨架：狀態機任務車
 
+> 安全修正版來源：`website_cases/05專題_case10.py`
+
 ### 1. 要做的主題
 
 建立一個可擴充的期末專題程式骨架，使用狀態機整合待機、循跡、避障與完成任務。
@@ -1235,152 +1804,73 @@ def run_trial(trial_id, base_speed, kp, duration_ms=8000):
 ### 3. 完整程式碼
 
 ```python
-from machine import Pin, PWM
-from mango import GraySensor8
-from mango import bus
 from mango import Motor, RUS04
+from machine import Pin
 import time
 
-BUTTON_ACTIVE = 1
-WAIT = "WAIT"
-RUN = "RUN"
-AVOID = "AVOID"
-FINISH = "FINISH"
-
-btn = Pin(3, Pin.IN)
-buzzer = PWM(Pin(6, Pin.OUT))
-line = GraySensor8(i2c=bus.i2c, digital_channels='4')
+button = Pin(3, Pin.IN, Pin.PULL_DOWN)
 sensor = RUS04(sensor_pin=15, rgb_pin=14)
 right_motor = Motor(a_pin=12, b_pin=13)
 left_motor = Motor(a_pin=11, b_pin=10)
+LEFT_POLARITY = -1
+RIGHT_POLARITY = -1
+state = "standby"
 
-state = WAIT
-mission_start = 0
-last_error = 0
-avoid_left_next = True
-
-WEIGHTS = [-2, -1, 1, 2]
-BASE_SPEED = 18
-KP = 5
-MISSION_LIMIT_MS = 30000
 
 def drive(left, right):
-    left_motor.speed(left)
-    right_motor.speed(right)
+    left_motor.speed(left * LEFT_POLARITY)
+    right_motor.speed(right * RIGHT_POLARITY)
+
 
 def stop():
     left_motor.stop()
     right_motor.stop()
 
-def beep(freq=1200, duration_ms=100):
-    buzzer.freq(freq)
-    buzzer.duty_u16(5000)
-    time.sleep_ms(duration_ms)
-    buzzer.duty_u16(0)
 
-def wait_release():
-    while btn.value() == BUTTON_ACTIVE:
-        time.sleep_ms(20)
+def safe_ping():
+    try:
+        return sensor.ping()
+    except Exception:
+        return 999
 
-def clamp(value, low, high):
-    if value < low:
-        return low
-    if value > high:
-        return high
-    return value
 
-def get_line_error():
-    global last_error
+def set_state(new_state):
+    global state
+    state = new_state
+    print("state =", state)
 
-    state_text = line.digital_state
-    total = 0
-    count = 0
-
-    for i in range(4):
-        if state_text[i] == "1":
-            total += WEIGHTS[i]
-            count += 1
-
-    if count == 0:
-        return last_error
-
-    last_error = total / count
-    return last_error
-
-def follow_line_step():
-    error = get_line_error()
-    correction = int(error * KP)
-    left = clamp(BASE_SPEED + correction, -35, 35)
-    right = clamp(BASE_SPEED - correction, -35, 35)
-    drive(left, right)
-
-def run_wait():
-    global state, mission_start
+try:
     stop()
     sensor.rgb_all((0, 0, 255))
-
-    if btn.value() == BUTTON_ACTIVE:
-        wait_release()
-        mission_start = time.ticks_ms()
-        beep(1000, 120)
-        state = RUN
-
-def run_mission():
-    global state
-    sensor.rgb_all((0, 255, 0))
-
-    elapsed = time.ticks_diff(time.ticks_ms(), mission_start)
-    dist = sensor.ping()
-
-    if elapsed > MISSION_LIMIT_MS:
-        state = FINISH
-        return
-
-    if dist < 18:
-        state = AVOID
-        return
-
-    follow_line_step()
-
-def run_avoid():
-    global state, avoid_left_next
-    sensor.rgb_all((255, 0, 0))
+    while True:
+        if button.value() == 1:
+            time.sleep_ms(30)
+            if button.value() == 1:
+                set_state("run" if state == "standby" else "standby")
+                while button.value() == 1:
+                    time.sleep_ms(20)
+        if state == "standby":
+            stop()
+            sensor.rgb_all((0, 0, 255))
+        elif state == "run":
+            sensor.rgb_all((0, 255, 0))
+            if safe_ping() < 25:
+                set_state("avoid")
+            else:
+                drive(50, 50)
+        elif state == "avoid":
+            sensor.rgb_all((255, 0, 0))
+            drive(-50, -50)
+            time.sleep_ms(400)
+            drive(60, -60)
+            time.sleep_ms(700)
+            stop()
+            set_state("run")
+        time.sleep_ms(80)
+except KeyboardInterrupt:
     stop()
-    time.sleep_ms(120)
-    drive(-18, -18)
-    time.sleep_ms(400)
-
-    if avoid_left_next:
-        drive(-22, 22)
-    else:
-        drive(22, -22)
-
-    time.sleep_ms(650)
-    stop()
-    avoid_left_next = not avoid_left_next
-    state = RUN
-
-def run_finish():
-    global state
-    stop()
-    sensor.rgb_all((255, 180, 0))
-    beep(1500, 150)
-    time.sleep_ms(120)
-    beep(1800, 150)
-    print("mission finish")
-    state = WAIT
-
-while True:
-    if state == WAIT:
-        run_wait()
-    elif state == RUN:
-        run_mission()
-    elif state == AVOID:
-        run_avoid()
-    elif state == FINISH:
-        run_finish()
-
-    time.sleep_ms(60)
+    sensor.rgb_all((0, 0, 0))
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -1416,6 +1906,8 @@ def run_mission():
 
 ## Case 11：規則式循跡演算法比較
 
+> 安全修正版來源：`website_cases/05專題_case11.py`
+
 ### 1. 要做的主題
 
 把四路循跡感測器的狀態轉成固定規則，讓小車可以依照「偏左、偏右、在線上、失去線」做出不同動作。這是最容易理解的循跡演算法，也是後續 P、PD、PID 控制的基礎。
@@ -1441,53 +1933,153 @@ def run_mission():
 ### 3. 完整程式碼
 
 ```python
-from mango import GraySensor8
-from mango import bus
-from mango import Motor
+from mango import Motor, I2CBus, GraySensor8
+from machine import Pin
 import time
 
-line = GraySensor8(i2c=bus.i2c, digital_channels='4')
+BUTTON_PIN = 3
+button = Pin(BUTTON_PIN, Pin.IN, Pin.PULL_DOWN)
+
 right_motor = Motor(a_pin=12, b_pin=13)
 left_motor = Motor(a_pin=11, b_pin=10)
+bus = I2CBus()
+line = GraySensor8(i2c=bus.i2c, digital_channels='4')
 
-BASE_SPEED = 20
-TURN_SPEED = 16
-last_turn = "stop"
+LEFT_POLARITY = -1
+RIGHT_POLARITY = -1
+
 
 def drive(left, right):
-    left_motor.speed(left)
-    right_motor.speed(right)
+    left_motor.speed(left * LEFT_POLARITY)
+    right_motor.speed(right * RIGHT_POLARITY)
+
 
 def stop():
     left_motor.stop()
     right_motor.stop()
 
-def rule_follow_step():
-    global last_turn
 
-    state = line.digital_state
-    print("line =", state)
+def read_line_state():
+    try:
+        state = line.digital_state
+        print("line =", state)
+        return state
+    except Exception as e:
+        print("line error:", e)
+        return "0000"
 
-    if state in ("0110", "1111", "0010", "0100"):
-        drive(BASE_SPEED, BASE_SPEED)
-        last_turn = "forward"
-    elif state in ("1000", "1100", "0100"):
-        drive(-TURN_SPEED, TURN_SPEED)
-        last_turn = "left"
-    elif state in ("0001", "0011", "0010"):
-        drive(TURN_SPEED, -TURN_SPEED)
-        last_turn = "right"
-    else:
-        if last_turn == "left":
-            drive(-12, 12)
-        elif last_turn == "right":
-            drive(12, -12)
+running = False
+
+
+def button_pressed():
+    return button.value() == 1
+
+
+def on_start():
+    pass
+
+
+def on_stop():
+    stop()
+
+
+def check_button_toggle():
+    global running
+
+    if button_pressed():
+        time.sleep_ms(30)
+        if button_pressed():
+            running = not running
+            print("START" if running else "STOP")
+
+            if running:
+                on_start()
+            else:
+                on_stop()
+
+            while button_pressed():
+                time.sleep_ms(20)
+
+            time.sleep_ms(200)
+            return True
+
+    return False
+
+
+def wait_for_start():
+    print("Press button to start/stop")
+    while not running:
+        check_button_toggle()
+        time.sleep_ms(20)
+
+
+def sleep_with_button_check(ms):
+    start = time.ticks_ms()
+    while time.ticks_diff(time.ticks_ms(), start) < ms:
+        if check_button_toggle() and not running:
+            stop()
+            return False
+        time.sleep_ms(20)
+    return True
+
+ALGORITHM = "rules"
+KP = 0
+KD = 0
+KI = 0
+BASE_SPEED = 28
+last_error = 0
+integral = 0
+weights = [-2, -1, 1, 2]
+
+
+def clamp(value, low, high):
+    return max(low, min(high, value))
+
+
+def get_error():
+    global last_error
+    state = read_line_state()
+    hits = [weights[i] for i, ch in enumerate(state[:4]) if ch == "1"]
+    if not hits:
+        return last_error
+    last_error = sum(hits) / len(hits)
+    return last_error
+
+
+def follow_line_step():
+    global last_error, integral
+    error = get_error()
+    if ALGORITHM == "rules":
+        if error < 0:
+            drive(-35, 35)
+        elif error > 0:
+            drive(35, -35)
+        else:
+            drive(BASE_SPEED, BASE_SPEED)
+        return
+    derivative = error - last_error
+    integral = clamp(integral + error, -50, 50)
+    correction = KP * error + KD * derivative + KI * integral
+    left = clamp(BASE_SPEED + correction, -45, 45)
+    right = clamp(BASE_SPEED - correction, -45, 45)
+    drive(left, right)
+    last_error = error
+
+try:
+    stop()
+    print("Case 11: press button to start/stop")
+    while True:
+        check_button_toggle()
+        if running:
+            follow_line_step()
         else:
             stop()
-
-while True:
-    rule_follow_step()
-    time.sleep_ms(60)
+        time.sleep_ms(60)
+except KeyboardInterrupt:
+    pass
+finally:
+    stop()
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -1505,6 +2097,8 @@ TURN_SPEED = 12
 ```
 
 ## Case 12：P 比例循跡控制
+
+> 安全修正版來源：`website_cases/05專題_case12.py`
 
 ### 1. 要做的主題
 
@@ -1531,59 +2125,153 @@ TURN_SPEED = 12
 ### 3. 完整程式碼
 
 ```python
-from mango import GraySensor8
-from mango import bus
-from mango import Motor
+from mango import Motor, I2CBus, GraySensor8
+from machine import Pin
 import time
 
-line = GraySensor8(i2c=bus.i2c, digital_channels='4')
+BUTTON_PIN = 3
+button = Pin(BUTTON_PIN, Pin.IN, Pin.PULL_DOWN)
+
 right_motor = Motor(a_pin=12, b_pin=13)
 left_motor = Motor(a_pin=11, b_pin=10)
+bus = I2CBus()
+line = GraySensor8(i2c=bus.i2c, digital_channels='4')
 
-WEIGHTS = [-2, -1, 1, 2]
-BASE_SPEED = 20
-KP = 6
-last_error = 0
+LEFT_POLARITY = -1
+RIGHT_POLARITY = -1
 
-def clamp(value, low, high):
-    if value < low:
-        return low
-    if value > high:
-        return high
-    return value
 
 def drive(left, right):
-    left_motor.speed(left)
-    right_motor.speed(right)
+    left_motor.speed(left * LEFT_POLARITY)
+    right_motor.speed(right * RIGHT_POLARITY)
+
+
+def stop():
+    left_motor.stop()
+    right_motor.stop()
+
+
+def read_line_state():
+    try:
+        state = line.digital_state
+        print("line =", state)
+        return state
+    except Exception as e:
+        print("line error:", e)
+        return "0000"
+
+running = False
+
+
+def button_pressed():
+    return button.value() == 1
+
+
+def on_start():
+    pass
+
+
+def on_stop():
+    stop()
+
+
+def check_button_toggle():
+    global running
+
+    if button_pressed():
+        time.sleep_ms(30)
+        if button_pressed():
+            running = not running
+            print("START" if running else "STOP")
+
+            if running:
+                on_start()
+            else:
+                on_stop()
+
+            while button_pressed():
+                time.sleep_ms(20)
+
+            time.sleep_ms(200)
+            return True
+
+    return False
+
+
+def wait_for_start():
+    print("Press button to start/stop")
+    while not running:
+        check_button_toggle()
+        time.sleep_ms(20)
+
+
+def sleep_with_button_check(ms):
+    start = time.ticks_ms()
+    while time.ticks_diff(time.ticks_ms(), start) < ms:
+        if check_button_toggle() and not running:
+            stop()
+            return False
+        time.sleep_ms(20)
+    return True
+
+ALGORITHM = "p"
+KP = 10
+KD = 0
+KI = 0
+BASE_SPEED = 28
+last_error = 0
+integral = 0
+weights = [-2, -1, 1, 2]
+
+
+def clamp(value, low, high):
+    return max(low, min(high, value))
+
 
 def get_error():
     global last_error
-
-    state = line.digital_state
-    total = 0
-    count = 0
-
-    for i in range(4):
-        if state[i] == "1":
-            total += WEIGHTS[i]
-            count += 1
-
-    if count == 0:
+    state = read_line_state()
+    hits = [weights[i] for i, ch in enumerate(state[:4]) if ch == "1"]
+    if not hits:
         return last_error
-
-    last_error = total / count
+    last_error = sum(hits) / len(hits)
     return last_error
 
-while True:
+
+def follow_line_step():
+    global last_error, integral
     error = get_error()
-    correction = KP * error
+    if ALGORITHM == "rules":
+        if error < 0:
+            drive(-35, 35)
+        elif error > 0:
+            drive(35, -35)
+        else:
+            drive(BASE_SPEED, BASE_SPEED)
+        return
+    derivative = error - last_error
+    integral = clamp(integral + error, -50, 50)
+    correction = KP * error + KD * derivative + KI * integral
+    left = clamp(BASE_SPEED + correction, -45, 45)
+    right = clamp(BASE_SPEED - correction, -45, 45)
+    drive(left, right)
+    last_error = error
 
-    left_speed = clamp(BASE_SPEED + correction, -35, 35)
-    right_speed = clamp(BASE_SPEED - correction, -35, 35)
-
-    drive(left_speed, right_speed)
-    print("error =", error, "left =", left_speed, "right =", right_speed)
-    time.sleep_ms(50)
+try:
+    stop()
+    print("Case 12: press button to start/stop")
+    while True:
+        check_button_toggle()
+        if running:
+            follow_line_step()
+        else:
+            stop()
+        time.sleep_ms(60)
+except KeyboardInterrupt:
+    pass
+finally:
+    stop()
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -1601,6 +2289,8 @@ KP = 8
 ```
 
 ## Case 13：PD 循跡控制與擺動修正
+
+> 安全修正版來源：`website_cases/05專題_case13.py`
 
 ### 1. 要做的主題
 
@@ -1627,62 +2317,153 @@ D 項會抑制太突然的變化，讓小車轉向更平滑。
 ### 3. 完整程式碼
 
 ```python
-from mango import GraySensor8
-from mango import bus
-from mango import Motor
+from mango import Motor, I2CBus, GraySensor8
+from machine import Pin
 import time
 
-line = GraySensor8(i2c=bus.i2c, digital_channels='4')
+BUTTON_PIN = 3
+button = Pin(BUTTON_PIN, Pin.IN, Pin.PULL_DOWN)
+
 right_motor = Motor(a_pin=12, b_pin=13)
 left_motor = Motor(a_pin=11, b_pin=10)
+bus = I2CBus()
+line = GraySensor8(i2c=bus.i2c, digital_channels='4')
 
-WEIGHTS = [-2, -1, 1, 2]
-BASE_SPEED = 20
-KP = 6
-KD = 4
-last_error = 0
+LEFT_POLARITY = -1
+RIGHT_POLARITY = -1
 
-def clamp(value, low, high):
-    if value < low:
-        return low
-    if value > high:
-        return high
-    return value
 
 def drive(left, right):
-    left_motor.speed(left)
-    right_motor.speed(right)
+    left_motor.speed(left * LEFT_POLARITY)
+    right_motor.speed(right * RIGHT_POLARITY)
+
+
+def stop():
+    left_motor.stop()
+    right_motor.stop()
+
+
+def read_line_state():
+    try:
+        state = line.digital_state
+        print("line =", state)
+        return state
+    except Exception as e:
+        print("line error:", e)
+        return "0000"
+
+running = False
+
+
+def button_pressed():
+    return button.value() == 1
+
+
+def on_start():
+    pass
+
+
+def on_stop():
+    stop()
+
+
+def check_button_toggle():
+    global running
+
+    if button_pressed():
+        time.sleep_ms(30)
+        if button_pressed():
+            running = not running
+            print("START" if running else "STOP")
+
+            if running:
+                on_start()
+            else:
+                on_stop()
+
+            while button_pressed():
+                time.sleep_ms(20)
+
+            time.sleep_ms(200)
+            return True
+
+    return False
+
+
+def wait_for_start():
+    print("Press button to start/stop")
+    while not running:
+        check_button_toggle()
+        time.sleep_ms(20)
+
+
+def sleep_with_button_check(ms):
+    start = time.ticks_ms()
+    while time.ticks_diff(time.ticks_ms(), start) < ms:
+        if check_button_toggle() and not running:
+            stop()
+            return False
+        time.sleep_ms(20)
+    return True
+
+ALGORITHM = "pd"
+KP = 10
+KD = 4
+KI = 0
+BASE_SPEED = 28
+last_error = 0
+integral = 0
+weights = [-2, -1, 1, 2]
+
+
+def clamp(value, low, high):
+    return max(low, min(high, value))
+
 
 def get_error():
     global last_error
-
-    state = line.digital_state
-    total = 0
-    count = 0
-
-    for i in range(4):
-        if state[i] == "1":
-            total += WEIGHTS[i]
-            count += 1
-
-    if count == 0:
+    state = read_line_state()
+    hits = [weights[i] for i, ch in enumerate(state[:4]) if ch == "1"]
+    if not hits:
         return last_error
+    last_error = sum(hits) / len(hits)
+    return last_error
 
-    return total / count
 
-while True:
+def follow_line_step():
+    global last_error, integral
     error = get_error()
+    if ALGORITHM == "rules":
+        if error < 0:
+            drive(-35, 35)
+        elif error > 0:
+            drive(35, -35)
+        else:
+            drive(BASE_SPEED, BASE_SPEED)
+        return
     derivative = error - last_error
-    correction = KP * error + KD * derivative
-
-    left_speed = clamp(BASE_SPEED + correction, -35, 35)
-    right_speed = clamp(BASE_SPEED - correction, -35, 35)
-
-    drive(left_speed, right_speed)
-    print("error =", error, "d =", derivative)
-
+    integral = clamp(integral + error, -50, 50)
+    correction = KP * error + KD * derivative + KI * integral
+    left = clamp(BASE_SPEED + correction, -45, 45)
+    right = clamp(BASE_SPEED - correction, -45, 45)
+    drive(left, right)
     last_error = error
-    time.sleep_ms(50)
+
+try:
+    stop()
+    print("Case 13: press button to start/stop")
+    while True:
+        check_button_toggle()
+        if running:
+            follow_line_step()
+        else:
+            stop()
+        time.sleep_ms(60)
+except KeyboardInterrupt:
+    pass
+finally:
+    stop()
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
@@ -1700,6 +2481,8 @@ KD = 6
 ```
 
 ## Case 14：PID 循跡調參挑戰
+
+> 安全修正版來源：`website_cases/05專題_case14.py`
 
 ### 1. 要做的主題
 
@@ -1726,68 +2509,153 @@ I 項會累積偏差，適合處理小車長時間偏向某一邊的情況。
 ### 3. 完整程式碼
 
 ```python
-from mango import GraySensor8
-from mango import bus
-from mango import Motor
+from mango import Motor, I2CBus, GraySensor8
+from machine import Pin
 import time
 
-line = GraySensor8(i2c=bus.i2c, digital_channels='4')
+BUTTON_PIN = 3
+button = Pin(BUTTON_PIN, Pin.IN, Pin.PULL_DOWN)
+
 right_motor = Motor(a_pin=12, b_pin=13)
 left_motor = Motor(a_pin=11, b_pin=10)
+bus = I2CBus()
+line = GraySensor8(i2c=bus.i2c, digital_channels='4')
 
-WEIGHTS = [-2, -1, 1, 2]
-BASE_SPEED = 20
-KP = 6
-KI = 1
-KD = 4
-INTEGRAL_LIMIT = 8
+LEFT_POLARITY = -1
+RIGHT_POLARITY = -1
 
-last_error = 0
-sum_error = 0
-
-def clamp(value, low, high):
-    if value < low:
-        return low
-    if value > high:
-        return high
-    return value
 
 def drive(left, right):
-    left_motor.speed(left)
-    right_motor.speed(right)
+    left_motor.speed(left * LEFT_POLARITY)
+    right_motor.speed(right * RIGHT_POLARITY)
+
+
+def stop():
+    left_motor.stop()
+    right_motor.stop()
+
+
+def read_line_state():
+    try:
+        state = line.digital_state
+        print("line =", state)
+        return state
+    except Exception as e:
+        print("line error:", e)
+        return "0000"
+
+running = False
+
+
+def button_pressed():
+    return button.value() == 1
+
+
+def on_start():
+    pass
+
+
+def on_stop():
+    stop()
+
+
+def check_button_toggle():
+    global running
+
+    if button_pressed():
+        time.sleep_ms(30)
+        if button_pressed():
+            running = not running
+            print("START" if running else "STOP")
+
+            if running:
+                on_start()
+            else:
+                on_stop()
+
+            while button_pressed():
+                time.sleep_ms(20)
+
+            time.sleep_ms(200)
+            return True
+
+    return False
+
+
+def wait_for_start():
+    print("Press button to start/stop")
+    while not running:
+        check_button_toggle()
+        time.sleep_ms(20)
+
+
+def sleep_with_button_check(ms):
+    start = time.ticks_ms()
+    while time.ticks_diff(time.ticks_ms(), start) < ms:
+        if check_button_toggle() and not running:
+            stop()
+            return False
+        time.sleep_ms(20)
+    return True
+
+ALGORITHM = "pid"
+KP = 10
+KD = 4
+KI = 0.02
+BASE_SPEED = 28
+last_error = 0
+integral = 0
+weights = [-2, -1, 1, 2]
+
+
+def clamp(value, low, high):
+    return max(low, min(high, value))
+
 
 def get_error():
     global last_error
-
-    state = line.digital_state
-    total = 0
-    count = 0
-
-    for i in range(4):
-        if state[i] == "1":
-            total += WEIGHTS[i]
-            count += 1
-
-    if count == 0:
+    state = read_line_state()
+    hits = [weights[i] for i, ch in enumerate(state[:4]) if ch == "1"]
+    if not hits:
         return last_error
+    last_error = sum(hits) / len(hits)
+    return last_error
 
-    return total / count
 
-while True:
+def follow_line_step():
+    global last_error, integral
     error = get_error()
+    if ALGORITHM == "rules":
+        if error < 0:
+            drive(-35, 35)
+        elif error > 0:
+            drive(35, -35)
+        else:
+            drive(BASE_SPEED, BASE_SPEED)
+        return
     derivative = error - last_error
-    sum_error = clamp(sum_error + error, -INTEGRAL_LIMIT, INTEGRAL_LIMIT)
-
-    correction = KP * error + KI * sum_error + KD * derivative
-
-    left_speed = clamp(BASE_SPEED + correction, -35, 35)
-    right_speed = clamp(BASE_SPEED - correction, -35, 35)
-
-    drive(left_speed, right_speed)
-    print("P =", error, "I =", sum_error, "D =", derivative)
-
+    integral = clamp(integral + error, -50, 50)
+    correction = KP * error + KD * derivative + KI * integral
+    left = clamp(BASE_SPEED + correction, -45, 45)
+    right = clamp(BASE_SPEED - correction, -45, 45)
+    drive(left, right)
     last_error = error
-    time.sleep_ms(50)
+
+try:
+    stop()
+    print("Case 14: press button to start/stop")
+    while True:
+        check_button_toggle()
+        if running:
+            follow_line_step()
+        else:
+            stop()
+        time.sleep_ms(60)
+except KeyboardInterrupt:
+    pass
+finally:
+    stop()
+    print("Stopped")
 ```
 
 ### 4. 最終成果展現
