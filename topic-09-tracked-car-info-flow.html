@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>09 履帶車網路資訊流：V1-V5 遠端控制與影像串流 | Raspberry Pi Pico 小車主題教材</title>
+  <meta name="description" content="本主題整理履帶車 V1-V5 開發歷程，聚焦 UDP 控制、UART 轉接、AMB82、X3/RP2040、RTSP 影像串流、延遲與跨網段中繼。">
+  <link rel="stylesheet" href="styles.css?v=20260428-firmware">
+</head>
+<body class="topic-page">
+  <div class="page-shell">
+    <aside class="site-notice" aria-label="網站狀態提醒">
+      <span class="notice-label">網站建置中</span>
+      <span>本網站教材、所有程式碼與操作流程仍在持續驗證。實際上課前，請以教師現場測試與最新版本為準。</span>
+    </aside>
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">MC</span>
+        <span class="brand-copy">
+          <strong>Raspberry Pi Pico 小車主題教材</strong>
+          <small>Topic-based Microcar Course</small>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="主題導覽">
+        <a href="bootcamp.html">BootCamp</a>
+        <a href="setup.html">開始設定</a>
+        <a href="topic-01-intro.html">01 入門</a>
+        <a href="topic-02-sensor-output.html">02 感測與輸出</a>
+        <a href="topic-03-car-motion.html">03 小車移動</a>
+        <a href="topic-04-autonomous-car.html">04 無人車</a>
+        <a href="topic-05-project-cases.html">05 專題化</a>
+        <a href="topic-06-bluetooth-car.html">06 藍芽遙控小車</a>
+        <a href="topic-07-board-python.html">07 電路板教材</a>
+        <a href="topic-08-fan-application.html">08 電路板應用</a>
+        <a href="topic-09-tracked-car-info-flow.html" aria-current="page">09 履帶車資訊流</a>
+        <a href="firmware.html">Firmware</a>
+        <a href="downloads.html">下載區</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="subpage-hero reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">主題 09</p>
+          <h1>09 履帶車網路資訊流：V1-V5 遠端控制與影像串流</h1>
+          <p class="hero-text">
+            本主題把履帶車從 V1 到 V5 的開發歷程整理成教學版。重點不是多背名詞，而是看懂一個按鈕如何經過 UDP、AMB82、UART、X3/RP2040 變成車輪動作，以及 RTSP 影像為什麼會延遲、黑畫面或需要中繼。
+          </p>
+          <div class="chip-list compact">
+            <span>UDP</span>
+            <span>UART</span>
+            <span>RTSP</span>
+            <span>AMB82</span>
+            <span>X3/RP2040</span>
+          </div>
+          <div class="action-row">
+            <a class="button primary" href="#learning-route">查看 V1-V5 路線</a>
+            <a class="button secondary" href="#classroom-flow">進入教學流程</a>
+            <a class="button ghost" href="downloads/topic-09-tracked-car-info-flow/tracked-car-v1-v5-56slides.pdf">下載 56 張 PDF</a>
+          </div>
+        </div>
+        <div class="subpage-aside">
+          <article class="aside-card">
+            <img class="teaching-visual diagram-visual" src="assets/tracked-car-info-flow-contact-sheet.png" alt="履帶車 V1-V5 網路資訊流教材總覽">
+            <p class="visual-note">本頁只放精簡基準版教材；完整研發版、逐頁 PNG、教師筆記與產生腳本保留在本機 RD 資料夾。</p>
+          </article>
+          <article class="aside-card">
+            <span class="zone-badge teacher">Advanced Topic</span>
+            <h3>這是進階研發主題</h3>
+            <p>09 不屬於 Pico 小車核心必修。它適合在學生已理解小車控制後，進一步學習網路控制、影像串流與系統除錯。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Scope</p>
+          <h2>這一章只上傳精簡教學版</h2>
+          <p>原始資料夾包含多個版本的 PDF、PPTX、學生講義、教師筆記、逐頁 PNG 與產生腳本。公開網站不適合整包放上來，所以本頁只保留最適合上課使用的基準檔。</p>
+        </div>
+        <div class="download-grid">
+          <article class="download-card">
+            <span class="download-type">PDF</span>
+            <h3>56 張基準版 PDF</h3>
+            <p>適合學生直接閱讀，也適合教師投影講解 V1-V5 的資訊流主線。</p>
+            <a class="button primary block" href="downloads/topic-09-tracked-car-info-flow/tracked-car-v1-v5-56slides.pdf">下載 PDF</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">PPTX</span>
+            <h3>56 張基準版 PPTX</h3>
+            <p>只提供基準投影片，方便教師依課堂時間微調；75/83 張延伸版暫不公開。</p>
+            <a class="button ghost block" href="downloads/topic-09-tracked-car-info-flow/tracked-car-v1-v5-56slides.pptx">下載 PPTX</a>
+          </article>
+          <article class="download-card">
+            <span class="download-type">Handout</span>
+            <h3>學生講義 Markdown</h3>
+            <p>保留給教師備課或轉成課堂講義，不包含教師備註與研發用生成腳本。</p>
+            <a class="button ghost block" href="downloads/topic-09-tracked-car-info-flow/tracked-car-v1-v5-student-handout.md">下載學生講義</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="file-location" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">File Location</p>
+          <h2>09 履帶車教材的檔案放置方式</h2>
+          <p>這一章多數檔案是閱讀與授課教材，不是要上傳到 Pico 的 MicroPython 練習檔。</p>
+        </div>
+        <div class="file-map-grid">
+          <article class="file-tree-card">
+            <span class="zone-badge teacher">Computer</span>
+            <h3>電腦本機端與網站下載區</h3>
+            <pre class="file-tree"><code>downloads/topic-09-tracked-car-info-flow/
+├─ tracked-car-v1-v5-56slides.pdf
+├─ tracked-car-v1-v5-56slides.pptx
+└─ tracked-car-v1-v5-student-handout.md</code></pre>
+          </article>
+          <article class="file-tree-card">
+            <span class="zone-badge student">Car System</span>
+            <h3>履帶車端概念分工</h3>
+            <pre class="file-tree"><code>App / Computer
+└─ UDP command
+   └─ AMB82
+      ├─ RTSP camera stream
+      └─ UART command
+         └─ X3/RP2040
+            └─ motor driver</code></pre>
+          </article>
+        </div>
+        <article class="content-card file-flow-card">
+          <span class="zone-badge student">Class Flow</span>
+          <h3>上課時學生照這樣理解</h3>
+          <ol class="file-flow-list">
+            <li>先把「控制指令」和「影像串流」分成兩條線。</li>
+            <li>控制線看 UDP、AMB82、UART、X3/RP2040 與馬達。</li>
+            <li>影像線看 RTSP、frame、buffer、FPS、bitrate 與延遲。</li>
+            <li>除錯時不要只看車有沒有動，要從 App log、AMB82 monitor、X3/RP2040 log 分段判斷。</li>
+          </ol>
+        </article>
+      </section>
+
+      <section id="learning-route" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">V1-V5 Route</p>
+          <h2>履帶車從 V1 到 V5 的學習路線</h2>
+          <p>這一組教材最有價值的地方，是把版本演進當成系統思考：每一版都解決一個真實問題，也帶出下一個限制。</p>
+        </div>
+        <div class="resource-roadmap">
+          <article class="content-card resource-step">
+            <span class="zone-badge student">V1</span>
+            <strong>只處理移動控制</strong>
+            <p>App 按鈕把方向狀態包成 UDP 封包，AMB82 收到後轉成 UART，X3/RP2040 再控制馬達。</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge student">V2</span>
+            <strong>加入 RTSP 影像</strong>
+            <p>學生開始理解影像不是一個命令，而是一串 frame 與 RTSP session。</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge teacher">V3</span>
+            <strong>控制優先，影像按需啟動</strong>
+            <p>加入 heartbeat、start-once 與 failsafe，避免控制被影像流程拖住。</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge teacher">V4A</span>
+            <strong>穩定優先</strong>
+            <p>用 buffer 換取畫面穩定，但延遲會變大，適合討論可靠度與反應速度的取捨。</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge teacher">V4B</span>
+            <strong>低延遲優先</strong>
+            <p>降低等待時間，但需要更精準地處理 UI thread、FPS、bitrate 與網路品質。</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge teacher">V5</span>
+            <strong>跨校園需要中繼</strong>
+            <p>同一個 Wi-Fi 名稱不代表能直接連。跨網段時通常需要 server、gateway、relay 或 WebRTC 架構。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Two Flows</p>
+          <h2>先分清楚兩條主線：控制與影像</h2>
+          <p>學生最容易混在一起的是「按了按鈕車不動」和「畫面卡住」。這兩件事可能是不同路徑出問題。</p>
+        </div>
+        <div class="page-grid">
+          <article class="content-card">
+            <span class="zone-badge student">Control Flow</span>
+            <h3>控制指令路線</h3>
+            <p>App 按鈕 → UDP 封包 → AMB82 → UART 文字 → X3/RP2040 → GPIO / 馬達驅動板。</p>
+            <p>適合用來判斷「按鈕有送出，但車不動」到底卡在哪一段。</p>
+          </article>
+          <article class="content-card">
+            <span class="zone-badge teacher">Video Flow</span>
+            <h3>影像串流路線</h3>
+            <p>Camera frame → encoder → RTSP session → RTP/播放器 → 畫面顯示。</p>
+            <p>適合用來判斷黑畫面、延遲、sf:0、keepalive timeout 或 getImage 卡住。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="classroom-flow" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Classroom Flow</p>
+          <h2>建議教學順序</h2>
+          <p>這一章適合用「看路徑、看 log、判斷問題段落」的方式教，而不是一開始就要求學生改所有程式。</p>
+        </div>
+        <div class="resource-roadmap">
+          <article class="content-card resource-step">
+            <span class="zone-badge student">01</span>
+            <strong>先畫完整資訊流</strong>
+            <p>讓學生知道 App、AMB82、X3/RP2040、camera、server/gateway 各自扮演什麼角色。</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge student">02</span>
+            <strong>用生活比喻理解網路</strong>
+            <p>IP 像地址，port 像門口，payload 像信件內容，UART 像兩塊板子之間的簡訊。</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge teacher">03</span>
+            <strong>對照三段 log</strong>
+            <p>App Sent、AMB82 X3:、X3/RP2040 Received 分別對應三段路徑。</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge teacher">04</span>
+            <strong>比較 V4A 與 V4B</strong>
+            <p>讓學生討論穩定與低延遲的取捨，理解工程不是只有一個標準答案。</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge teacher">05</span>
+            <strong>最後看跨網段中繼</strong>
+            <p>用 V5 說明為什麼校園網路、NAT、server、gateway 與 WebRTC 會影響遠端控制。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Debug Table</p>
+          <h2>用症狀回推問題段落</h2>
+          <p>本主題適合訓練學生用 log 與現象定位問題，而不是只重開機或重接線。</p>
+        </div>
+        <div class="table-wrap">
+          <table class="topic-table">
+            <thead>
+              <tr><th>現象</th><th>優先檢查</th><th>教學重點</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>App 顯示 Sent，但 AMB82 沒反應</td><td>IP、port、同網段、UDP 入口</td><td>送出不等於對方收到</td></tr>
+              <tr><td>AMB82 有 X3:，但 X3/RP2040 沒 Received</td><td>UART 腳位、baudrate、兩板連線</td><td>網路成功不代表板間通訊成功</td></tr>
+              <tr><td>X3/RP2040 有 Received，但車不動</td><td>馬達電源、驅動板、GPIO、boot.py</td><td>命令到達後還要能執行硬體動作</td></tr>
+              <tr><td>RTSP 可以連，但畫面黑</td><td>camera frame、encoder、sf:0、getImage</td><td>RTSP session 成立不等於影像源正常</td></tr>
+              <tr><td>畫面穩但慢</td><td>buffer、FPS、bitrate、網路品質</td><td>穩定與低延遲常常需要取捨</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="completion-check" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Completion Check</p>
+          <h2>完成這個主題前，學生應該做得到</h2>
+          <p>這一章的成果不是背會所有協定，而是能用資訊流思考問題。</p>
+        </div>
+        <div class="check-grid">
+          <article class="check-card">
+            <span class="zone-badge student">Check 1</span>
+            <h3>控制線</h3>
+            <p>我能說明 App 按鈕如何變成履帶車的馬達動作。</p>
+          </article>
+          <article class="check-card">
+            <span class="zone-badge student">Check 2</span>
+            <h3>影像線</h3>
+            <p>我知道 RTSP 影像是 frame 與 session，不是一個單純的開關命令。</p>
+          </article>
+          <article class="check-card">
+            <span class="zone-badge student">Check 3</span>
+            <h3>除錯線</h3>
+            <p>我能用 App log、AMB82 monitor 和 X3/RP2040 log 判斷卡在哪一段。</p>
+          </article>
+          <article class="check-card">
+            <span class="zone-badge student">Check 4</span>
+            <h3>系統線</h3>
+            <p>我能說明為什麼跨校園控制通常需要 server、gateway 或 relay。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Continue</p>
+          <h2>繼續使用教材</h2>
+        </div>
+        <div class="page-grid">
+          <article class="content-card">
+            <span class="zone-badge student">上一個</span>
+            <h3>08 電路板應用：擺頭電扇</h3>
+            <p>如果學生還沒有接觸過延伸作品，可以先回到 08 看電路板控制如何進入真實作品。</p>
+            <a class="button ghost" href="topic-08-fan-application.html">打開上一個主題</a>
+          </article>
+          <article class="content-card">
+            <span class="zone-badge teacher">下載</span>
+            <h3>前往下載區</h3>
+            <p>下載 09 的精簡版 PDF、PPTX 與學生講義，或回到總下載區查看其他主題教材。</p>
+            <a class="button primary" href="downloads.html#topic-09-tracked-car-info-flow">打開下載區</a>
+          </article>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="license-card">
+        <a class="cc-badge" rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hant">
+          <img src="assets/cc-by-nc-sa.svg" alt="Creative Commons BY-NC-SA 4.0 授權標章">
+        </a>
+        <div>
+          <h2>授權與使用聲明</h2>
+          <p>
+            除另有標示外，本網站文字教材與自製教學圖片採用
+            <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hant">Creative Commons 姓名標示-非商業性-相同方式分享 4.0 國際授權條款</a>。
+          </p>
+          <p>
+            程式碼、第三方素材、PDF、PPT、商標、外部引用圖片與原始教材檔案，依各自檔案或來源授權為準。教材與程式仍在驗證中，實際上課前請先由教師測試。
+          </p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+  <script src="script.js?v=20260428-firmware"></script>
+</body>
+</html>

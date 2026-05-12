@@ -4,13 +4,13 @@
 - [GitHub Pages 網站](https://kennethwylee.github.io/microcar/)
 - [GitHub Repository](https://github.com/KennethWYLee/microcar)
 
-這個網站將機器人課程教材整理成可依序學習的主題式教學網站。課程從 Raspberry Pi Pico 小車的基本輸出入開始，逐步進入感測器、馬達控制、無人車任務、專題化整合、藍芽遙控，以及電路板作品應用。
+這個網站將機器人課程教材整理成可依序學習的主題式教學網站。課程從 Raspberry Pi Pico 小車的基本輸出入開始，逐步進入感測器、馬達控制、無人車任務、專題化整合、藍芽遙控、電路板作品應用，以及履帶車網路資訊流。
 
 `開始前設定` 是所有自學者的第一站，先完成 Thonny 連線、MicroPython 解譯器、`mango` 函式庫上傳、import 測試與馬達方向校正。完成後再進入 `BootCamp` 或 01-05 小車核心主線。
 
-`BootCamp` 保留為一小時快速體驗課入口，適合第一次上課時讓學生先用 Thonny 連接小車、貼上程式並完成前進、後退、左右轉與停止。它不是正式 01-08 主題的一部分。
+`BootCamp` 保留為一小時快速體驗課入口，適合第一次上課時讓學生先用 Thonny 連接小車、貼上程式並完成前進、後退、左右轉與停止。它不是正式 01-09 主題的一部分。
 
-## 目前 8 個主題
+## 目前 9 個主題
 
 1. `01 入門：LED、按鈕與狀態控制`
 2. `02 感測與輸出：蜂鳴器、RGB 與超音波`
@@ -20,12 +20,13 @@
 6. `06 藍芽遙控小車：Flutter App 與 Pico BLE`
 7. `07 電路板教材：Python 控制與腳位導讀`
 8. `08 電路板應用：擺頭電扇`
+9. `09 履帶車網路資訊流：V1-V5 遠端控制與影像串流`
 
-`09 Ameba82 智慧無人車` 已在 `機器人` 教材資料夾中建立為未來正式教材出口，目前仍在研發整理階段，尚未整合進網站。
+`09 履帶車網路資訊流` 來自 `robo_dev/RD/course_tracked_car_v1_v5_complete`，目前只整理精簡基準版到網站，不整包上傳研發資料夾。
 
 ## 網站頁面
 
-- `index.html`：首頁與 8 主題總覽。
+- `index.html`：首頁與 9 主題總覽。
 - `setup.html`：開始前設定，包含 `mango` 函式庫上傳、import 測試與馬達校正。
 - `bootcamp.html`：BootCamp 快速體驗課。
 - `firmware.html`：Firmware 區，提供 Pico / Pico W / Pico 2 / Pico 2 W 對應的 UF2 韌體下載、對應表與刷機步驟。
@@ -33,12 +34,22 @@
 - `topic-06-bluetooth-car.html`：Flutter App 與 Pico BLE 藍芽遙控小車。
 - `topic-07-board-python.html`：依 `機器人程式設計實務-Python.pdf` 整理的電路板與腳位導讀。
 - `topic-08-fan-application.html`：依 `擺頭電扇-課程簡報.pptx` 整理的電路板應用作品。
+- `topic-09-tracked-car-info-flow.html`：依履帶車 V1-V5 開發教材整理的網路資訊流、遠端控制與影像串流主題。
 - `downloads.html`：依主題整理的教材、程式、PDF 與簡報下載區。
 - `code-viewer.html`：可顯示網站中保留的獨立 Python 範例。
 
 ## 教材來源與下載
 
-01-05 主題由 Markdown cases 產生，原始檔放在 `downloads/case-md/`。06 主題提供 Flutter `main.dart` 與 Pico BLE 小車端程式，07 主題提供 Python PDF，08 主題提供擺頭電扇課程簡報。
+01-05 主題由 Markdown cases 產生，原始檔放在 `downloads/case-md/`。06 主題提供 Flutter `main.dart` 與 Pico BLE 小車端程式，07 主題提供 Python PDF，08 主題提供擺頭電扇課程簡報，09 主題提供履帶車 V1-V5 的 56 張基準版 PDF/PPTX 與學生講義。
+
+09 主題只上傳精簡教材：
+
+- `downloads/topic-09-tracked-car-info-flow/tracked-car-v1-v5-56slides.pdf`
+- `downloads/topic-09-tracked-car-info-flow/tracked-car-v1-v5-56slides.pptx`
+- `downloads/topic-09-tracked-car-info-flow/tracked-car-v1-v5-student-handout.md`
+- `assets/tracked-car-info-flow-contact-sheet.png`
+
+未上傳內容包含 75/83 張延伸版、教師筆記、逐頁 PNG、產生腳本與 `__pycache__`，這些仍留在本機 RD 研發資料夾。
 
 開始前必備檔案放在下載區：
 
@@ -100,7 +111,7 @@ Raspberry Pi Pico /
 
 自學或正式授課建議先從 `開始前設定` 開始，確認環境、函式庫與馬達方向都正確。第一次上課可接著使用 `BootCamp`，讓學生建立「電腦連到小車、程式貼上去、小車會動」的成功經驗。後續課程再依序進入 01-05 主題建立小車能力。
 
-06 是進階藍芽遙控主題，建議學生已完成 03 小車移動後再做。07 是電路板與腳位查表導讀，適合備課與除錯。08 是延伸作品，把小車課程中的控制概念移植到擺頭電扇，不屬於小車核心必修。
+06 是進階藍芽遙控主題，建議學生已完成 03 小車移動後再做。07 是電路板與腳位查表導讀，適合備課與除錯。08 是延伸作品，把小車課程中的控制概念移植到擺頭電扇，不屬於小車核心必修。09 是履帶車研發導讀，適合在學生具備小車與通訊基礎後，討論 UDP、UART、RTSP、延遲與跨網段中繼。
 
 更多網站設計進度請見 [WEB_DESIGN_PROGRESS.md](./WEB_DESIGN_PROGRESS.md)。
 

@@ -11,7 +11,7 @@
 
 ## 目前網站架構
 
-網站目前定位為 Raspberry Pi Pico 小車主題教材。首頁保留「網站建置中，所有 code 跟流程都還在驗證」提醒，避免學生或老師把尚未實機確認的內容視為最終版。
+網站目前定位為 Raspberry Pi Pico 小車與履帶車主題教材。首頁保留「網站建置中，所有 code 跟流程都還在驗證」提醒，避免學生或老師把尚未實機確認的內容視為最終版。
 
 目前線上主頁面包含：
 
@@ -25,8 +25,9 @@
 8. `06 藍芽遙控小車`：Flutter App 與 Pico BLE。
 9. `07 電路板教材`：Python 控制與腳位導讀。
 10. `08 電路板應用`：擺頭電扇。
-11. `Firmware`：Pico / Pico W / Pico 2 / Pico 2 W 對應 Mango Lite UF2。
-12. `下載區`：彙整程式、Markdown、PDF、PPT、firmware 與延伸素材。
+11. `09 履帶車網路資訊流`：V1-V5 遠端控制、影像串流與系統除錯。
+12. `Firmware`：Pico / Pico W / Pico 2 / Pico 2 W 對應 Mango Lite UF2。
+13. `下載區`：彙整程式、Markdown、PDF、PPT、firmware 與延伸素材。
 
 ## 2026-05-12 修正
 
@@ -35,6 +36,19 @@
 - 移除所有 HTML 內的 Google Fonts 外部載入，避免網站本體依賴 `fonts.googleapis.com` 或 `fonts.gstatic.com`。
 - 將 Creative Commons 標章圖片改為本機檔案：`assets/cc-by-nc-sa.svg`。
 - 保留 Creative Commons 授權條款、MicroPython、Raspberry Pi、Pololu、Thonny 等外部文件連結，這些是參考連結，不是網站載入資源。
+
+## 2026-05-12 新增主題 09
+
+- 新增 `09 履帶車網路資訊流：V1-V5 遠端控制與影像串流`。
+- 來源資料夾：`C:\Users\User\Documents\Lecture materials\robo_dev\RD\course_tracked_car_v1_v5_complete`。
+- 主題命名理由：教材核心不是單純履帶車操作，而是 V1-V5 開發歷程中的 UDP 控制、UART 轉接、AMB82、X3/RP2040、RTSP 影像、延遲、log 判讀與跨網段中繼。
+- 上傳策略：只放 56 張基準版 PDF/PPTX、學生講義與總覽圖；不公開 75/83 張延伸版、教師筆記、逐頁 PNG、產生腳本與 `__pycache__`。
+- 新增公開檔案：
+  - `topic-09-tracked-car-info-flow.html`
+  - `downloads/topic-09-tracked-car-info-flow/tracked-car-v1-v5-56slides.pdf`
+  - `downloads/topic-09-tracked-car-info-flow/tracked-car-v1-v5-56slides.pptx`
+  - `downloads/topic-09-tracked-car-info-flow/tracked-car-v1-v5-student-handout.md`
+  - `assets/tracked-car-info-flow-contact-sheet.png`
 
 ## 網路資料來源政策
 
@@ -63,7 +77,7 @@
 
 ## 後續建議
 
-1. 上課前建立一份「已實機驗證」狀態表，區分教材頁面可讀、程式碼可執行、已在 Pico 2 W 實測三種等級。
-2. 逐步把 01-08 每個 case 對應到明確的 Pico 檔案位置與電腦端檔案位置。
+1. 上課前建立一份「已實機驗證」狀態表，區分教材頁面可讀、程式碼可執行、已在 Pico 2 W 或履帶車系統實測三種等級。
+2. 逐步把 01-09 每個 case 或教材檔對應到明確的板子端檔案位置與電腦端檔案位置。
 3. 將 `robo_dev/website_cases` 視為日後網站程式碼的穩定來源，減少從舊資料夾取檔造成版本混亂。
-4. 若未來要把 09 AmebaAI / AmebaNN 車納入網站，建議另開延伸主題，不混入目前 Pico 小車主線。
+4. 若未來要把 AmebaAI / AmebaNN 車納入網站，建議另開延伸主題，不混入目前 Pico 小車與履帶車主線。
