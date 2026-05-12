@@ -1,90 +1,69 @@
 # 網頁設計進度紀錄
 
-最後更新：2026-05-06
+最後更新：2026-05-12
 
-## 目前定位
+## 目前位置
 
-網站目前是「開始前設定 + BootCamp 快速體驗課 + 8 個正式教材主題 + Firmware 區」。
+- 本機網站專案：`C:\Users\User\Documents\Lecture materials\robo_dev\microcar`
+- GitHub Repository：`https://github.com/KennethWYLee/microcar`
+- GitHub Pages：`https://kennethwylee.github.io/microcar/`
+- 發布分支：`main`
 
-`開始前設定` 是自學與正式授課的第一站，用來完成 Thonny、MicroPython、`mango` 函式庫、import 測試與馬達方向校正。
+## 目前網站架構
 
-`BootCamp` 是第一堂課或短課程使用的快速入口，不列入正式 01-08 主題。正式主題目前為：
+網站目前定位為 Raspberry Pi Pico 小車主題教材。首頁保留「網站建置中，所有 code 跟流程都還在驗證」提醒，避免學生或老師把尚未實機確認的內容視為最終版。
 
-1. `01 入門：LED、按鈕與狀態控制`
-2. `02 感測與輸出：蜂鳴器、RGB 與超音波`
-3. `03 小車移動：馬達、速度與控制模組`
-4. `04 無人車：差速、避障、循跡與伺服掃描`
-5. `05 專題化：任務設計、策略比較與成果評量`
-6. `06 藍芽遙控小車：Flutter App 與 Pico BLE`
-7. `07 電路板教材：Python 控制與腳位導讀`
-8. `08 電路板應用：擺頭電扇`
+目前線上主頁面包含：
 
-`Firmware` 是支援區，不列入正式主題編號；目前提供 Pico / Pico W / Pico 2 / Pico 2 W 對應的 Mango Lite UF2 韌體下載與對應表。
+1. `BootCamp`：一小時快速體驗課。
+2. `開始前設定`：Thonny、MicroPython、mango、import 測試與馬達校正。
+3. `01 入門`：LED、按鈕與狀態控制。
+4. `02 感測與輸出`：蜂鳴器、RGB 與超音波。
+5. `03 小車移動`：馬達、速度與控制模組。
+6. `04 無人車`：差速、避障、循跡與伺服掃描。
+7. `05 專題化`：任務設計、策略比較與成果評量。
+8. `06 藍芽遙控小車`：Flutter App 與 Pico BLE。
+9. `07 電路板教材`：Python 控制與腳位導讀。
+10. `08 電路板應用`：擺頭電扇。
+11. `Firmware`：Pico / Pico W / Pico 2 / Pico 2 W 對應 Mango Lite UF2。
+12. `下載區`：彙整程式、Markdown、PDF、PPT、firmware 與延伸素材。
 
-`09_Ameba82_智慧無人車` 已在 `機器人` 教材資料夾中建立為未來正式教材出口，但目前尚未整合進網站。它仍處於研發整理階段，主線資料來源是 `機器人\研發區\tracked_car_automode`。
+## 2026-05-12 修正
 
-## 2026-05-06 資料夾整理後的狀態
+- 確認 `WEB_DESIGN_PROGRESS.md` 原始檔本身是 UTF-8 正常中文；先前看到亂碼是 PowerShell 顯示編碼造成。
+- 重新整理本紀錄檔，避免日後從終端輸出時誤判為內容損壞。
+- 移除所有 HTML 內的 Google Fonts 外部載入，避免網站本體依賴 `fonts.googleapis.com` 或 `fonts.gstatic.com`。
+- 將 Creative Commons 標章圖片改為本機檔案：`assets/cc-by-nc-sa.svg`。
+- 保留 Creative Commons 授權條款、MicroPython、Raspberry Pi、Pololu、Thonny 等外部文件連結，這些是參考連結，不是網站載入資源。
 
-- `機器人\README.md` 已重新定義資料夾分工，將教材分成正式教材、網站案例、研發區、共用資源、原始素材、舊版備份與待整理散檔。
-- `機器人\website_cases` 被標示為未來網站程式碼的穩定來源；目前已包含 01-05 cases、06 藍牙小車案例與 `mango` 函式庫副本。
-- 01-05 Markdown cases 已出現 `website_cases` 安全修正版標記，包含 `KeyboardInterrupt` cleanup、GP3 button 啟停、馬達方向 polarity 與停止 cleanup 等教學安全調整。
-- `機器人\09_Ameba82_智慧無人車` 已建立 `cases` 與 `website_cases` 佔位資料夾，但內容仍是 README，尚未有可直接上線的正式 case。
-- `機器人\研發區\tracked_car_automode` 是 Ameba82 智慧無人車目前的研發主線。等硬體、韌體、App 與自動模式穩定後，再整理進 09 主題。
-- `機器人\80_共用函式庫` 保存 `tank`、`xbot` 等可重複使用的舊套件或輔助函式庫。
-- `機器人\90_原始素材` 保存原始下載、參考素材、媒體預覽與 AMBEA 相關來源。
-- `機器人\91_舊版備份` 保存壓縮檔與暫時不作為主線的舊版本。
-- `機器人\92_待整理_根目錄散檔` 保存從根目錄收進來、尚未分類成正式教材的散檔。
-- `機器人\firmware` 保留在原位，並已同步到網站 repo 的 `downloads/firmware/` 作為雲端下載來源。
+## 網路資料來源政策
 
-## 這一輪完成內容
+網站本體資料應來自 `microcar` repo，也就是線上 URL 應落在：
 
-- 新增 `firmware.html`，把 4 份 Mango Lite UF2 韌體整理成獨立 Firmware 區。
-- 已把 `機器人/firmware` 中的 4 份韌體同步到 repo 的 `downloads/firmware/`，作為 GitHub Repository / Pages 的雲端下載來源。
-- 新增板子對應表，清楚區分 `Pico / Pico W / Pico 2 / Pico 2 W` 與 `RP2040 / RP2350`、`W / 非 W`。
-- 首頁、導覽列與下載區都加入 Firmware 入口，避免使用者不知道去哪裡抓 `.uf2`。
-- 全站頁尾新增 Creative Commons BY-NC-SA 4.0 授權標章，並清楚標示只涵蓋「除另有標示外的文字教材與自製教學圖片」。
-- 授權聲明中特別排除程式碼、第三方素材、PDF、PPT、商標、外部引用圖片與原始教材檔案，避免誤授權。
-- 全站最上方新增「網站建置中」提醒，明確告知教材、程式碼與操作流程仍在持續驗證，實際上課前需以教師現場測試與最新版本為準。
-- 在 `開始前設定`、`BootCamp`、下載區與 01-08 主題補上「File Location」區塊，用樹狀圖說明電腦本機端與 Pico 板子端的檔案差異。
-- 每個主題都加入「上課時學生照這樣做」流程，明確說明先複製、開新檔、Run 測試、需要時才存到 Pico 或改成 `main.py`。
-- 針對 06 藍芽遙控小車特別分開 Flutter App 端與 Pico BLE Python 檔案，避免學生把 App 專案整包上傳到 Pico。
-- 針對 07 PDF 與 08 PPT 明確標示它們是電腦端閱讀教材，不需要上傳到 Pico。
-- 新增 `setup.html`，把環境設定、`mango` 函式庫上傳、import 測試與馬達校正集中成開始前必做流程。
-- 新增「從零到能操控小車」主線：開始前設定、BootCamp、01、02、03、04、05。
-- 在每個主題補上開始前確認與完成檢查表，讓學生知道是否能進入下一步。
-- 新增 `downloads/mango-import-test.py` 與 `downloads/motor-calibration.py`。
-- 統一 BootCamp 與輔助馬達程式的腳位說明：右馬達 `GP12/GP13`，左馬達 `GP11/GP10`。
-- 將 `06` 標示為進階藍芽遙控主題，將 `08` 標示為延伸作品主題。
-- 保留 `BootCamp`，並維持首頁與導覽列入口。
-- 新增 `06 藍芽遙控小車`，使用 `無人車網頁開發` 中的 Flutter `main.dart`、App 預覽圖與 Pico BLE 小車端程式。
-- 新增 `07 電路板教材`，使用 `機器人程式設計實務-Python.pdf` 與教材相容性驗證報告整理腳位導讀。
-- 新增 `08 電路板應用：擺頭電扇`，使用 `擺頭電扇-課程簡報.pptx` 的真實圖片、機構重點、Pico X2 腳位與 PWM 控制概念。
-- 更新首頁、導覽列、下載區、README 與產生器，使網站主線從 5 主題擴充為 8 主題。
-- 產生器 `tools/build_case_topic_pages.py` 會自動複製 06-08 的必要下載檔與圖片素材。
+- `https://kennethwylee.github.io/microcar/`
+- `https://github.com/KennethWYLee/microcar`
 
-## 已保留的素材策略
+本體資料包含：
 
-- 01-05：由 Markdown cases 產生網頁與下載檔。
-- 06：保留 Flutter App 程式、App 預覽圖、標準版與變速版 Pico BLE 小車端程式。
-- 07：保留 Python PDF，並產生一張 PDF 代表頁作為網站視覺輔助。
-- 08：保留擺頭電扇課程簡報，並從簡報抽出成品、控制板、齒輪、連桿與積木程式圖片。
-- 09：已建立 Ameba82 智慧無人車正式教材出口，但尚未放入網站。正式內容會等 `研發區\tracked_car_automode` 穩定後再整理。
-- `website_cases`：未來應逐步成為網站程式碼案例的穩定來源；目前產生器仍沿用既有 Markdown 與既有素材路徑，尚未完全切換到 `website_cases`。
-- 01-05：2026-05-06 重新產生後，下載區 Markdown 與 01-05 主題頁已同步到安全修正版 cases。
+- HTML 頁面。
+- CSS 與 JavaScript。
+- 圖片、GIF、影片、SVG。
+- 下載檔案。
+- firmware UF2。
+- 課程用 Markdown、Python、Dart、PDF、PPTX、ZIP/7Z。
+
+外部文件連結可保留，但只能作為參考閱讀，不應作為網站畫面載入所需的資料。這類連結目前包含 Creative Commons 授權條款、MicroPython 文件、Raspberry Pi 文件、Thonny 官網與相關技術參考。
 
 ## 驗證狀態
 
-- `tools/build_case_topic_pages.py` 已通過 Python 語法檢查。
-- 全站 HTML 連結與圖片路徑已掃描，未發現缺檔。
-- 06-08 頁面與 Firmware 區已由產生器輸出，下載區連結已同步更新。
-- 2026-05-06 資料夾整理後，產生器仍可正常執行；目前舊來源路徑仍保留，因此網站尚未因整理而斷線。
-- 2026-05-06 重新產生後，全站 HTML 連結掃描結果為 `missing 0`。
+- 主要線上頁面已確認可回應 `200`。
+- 本機主要 HTML、CSS、JS、圖片與下載檔案均存在。
+- 2026-05-12 修正後，網站本體載入資源已改為相對路徑或 `microcar` 站內路徑。
+- 若要確認線上版已套用最新修正，需要 commit 並 push 到 `main` 後，等待 GitHub Pages 部署完成，再重新掃描線上頁面。
 
-## 後續可做
+## 後續建議
 
-1. 將網站產生器逐步改成優先讀取 `機器人\website_cases`，讓網站案例來源與新資料夾規則一致。
-2. 等 `研發區\tracked_car_automode` 穩定後，整理成 `09_Ameba82_智慧無人車` 的正式 cases 與網站頁面。
-3. 針對 06 的 Flutter App 補一份「手機端建置與安裝」教學。
-4. 針對 07 補更多 PDF 代表頁或腳位圖，讓板子導讀更像互動式手冊。
-5. 針對 08 補一份「擺頭電扇實作流程」學生版步驟表。
-
+1. 上課前建立一份「已實機驗證」狀態表，區分教材頁面可讀、程式碼可執行、已在 Pico 2 W 實測三種等級。
+2. 逐步把 01-08 每個 case 對應到明確的 Pico 檔案位置與電腦端檔案位置。
+3. 將 `robo_dev/website_cases` 視為日後網站程式碼的穩定來源，減少從舊資料夾取檔造成版本混亂。
+4. 若未來要把 09 AmebaAI / AmebaNN 車納入網站，建議另開延伸主題，不混入目前 Pico 小車主線。

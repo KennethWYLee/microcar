@@ -29,7 +29,7 @@ html {
 body {
   margin: 0;
   color: var(--text);
-  font-family: "Noto Sans TC", sans-serif;
+  font-family: "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", sans-serif;
   background:
     linear-gradient(rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.62)),
     radial-gradient(circle at top, rgba(29, 79, 122, 0.09), transparent 32%),
@@ -56,7 +56,7 @@ pre,
 .zone-badge,
 .site-nav,
 .brand small {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: "Cascadia Mono", "Consolas", "IBM Plex Mono", monospace;
 }
 
 .page-shell {
@@ -1075,7 +1075,7 @@ pre.markdown-code code {
   justify-content: center;
   padding: 8px 12px;
   border-radius: 999px;
-  font-family: "IBM Plex Mono", monospace;
+  font-family: "Cascadia Mono", "Consolas", "IBM Plex Mono", monospace;
 }
 
 .flow-no {
@@ -1610,7 +1610,7 @@ pre code {
   justify-content: center;
   padding: 7px 12px;
   border-radius: 999px;
-  font-family: "IBM Plex Mono", monospace;
+  font-family: "Cascadia Mono", "Consolas", "IBM Plex Mono", monospace;
   font-size: 0.78rem;
   color: #3d4d5b;
   background: rgba(255, 255, 255, 0.86);
@@ -1644,14 +1644,14 @@ pre code {
 }
 
 .code-surface {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: "Cascadia Mono", "Consolas", "IBM Plex Mono", monospace;
   font-size: 0.86rem;
   color: #1d2f41;
   background: linear-gradient(180deg, rgba(234, 244, 251, 0.8), rgba(255, 255, 255, 0.98));
 }
 
 .thonny-shell {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: "Cascadia Mono", "Consolas", "IBM Plex Mono", monospace;
   font-size: 0.9rem;
   color: #1d2f41;
   background: #fffdfb;
