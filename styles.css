@@ -100,8 +100,8 @@ pre,
   display: grid;
   grid-template-columns: 1fr;
   align-items: start;
-  gap: 8px;
-  padding: 12px 18px 10px;
+  gap: 10px;
+  padding: 14px 18px 12px;
   margin-bottom: 24px;
   border: 1px solid rgba(255, 255, 255, 0.72);
   border-radius: 30px;
@@ -149,27 +149,27 @@ pre,
   min-width: 0;
   width: 100%;
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   justify-content: flex-start;
-  gap: 4px;
-  padding: 8px 0 0;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 0 0;
   border-top: 1px solid rgba(29, 79, 122, 0.08);
-  overflow-x: auto;
-  white-space: nowrap;
-  scrollbar-width: none;
+  overflow: visible;
+  white-space: normal;
   font-size: 0.76rem;
-  scroll-padding-inline: 18px;
-}
-
-.site-nav::-webkit-scrollbar {
-  display: none;
 }
 
 .site-nav a {
-  flex: 0 0 auto;
-  padding: 8px 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 1 auto;
+  min-height: 34px;
+  padding: 7px 10px;
   border-radius: 999px;
   color: var(--muted);
+  line-height: 1.15;
 }
 
 .site-header > .button {
@@ -181,6 +181,28 @@ pre,
 .site-nav a[aria-current="page"] {
   color: var(--navy);
   background: rgba(29, 79, 122, 0.08);
+}
+
+.site-nav a[href="firmware.html"],
+.site-nav a[href="downloads.html"] {
+  font-weight: 800;
+  color: var(--navy);
+  border: 1px solid rgba(29, 79, 122, 0.16);
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.site-nav a[href="downloads.html"] {
+  color: white;
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--navy), var(--teal));
+  box-shadow: 0 8px 18px rgba(29, 79, 122, 0.18);
+}
+
+.site-nav a[href="downloads.html"]:hover,
+.site-nav a[href="downloads.html"]:focus-visible,
+.site-nav a[href="downloads.html"][aria-current="page"] {
+  color: white;
+  background: linear-gradient(135deg, #173f63, #1f7069);
 }
 
 .site-footer {
