@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>下載區 | Raspberry Pi Pico 小車主題教材</title>
   <meta name="description" content="下載 Raspberry Pi Pico 小車與履帶車 9 個主題教材、原始程式、PDF、PPTX 與講義。">
-  <link rel="stylesheet" href="styles.css?v=20260512-nav">
+  <link rel="stylesheet" href="styles.css?v=20260512-terms">
 </head>
 <body class="downloads-page">
   <div class="page-shell">
@@ -109,7 +109,7 @@
           <p>這些檔案不是額外補充，而是讓 01-05 小車主線能順利執行的前置工具。</p>
         </div>
         <div class="download-grid">
-          <article class="download-card">
+          <article class="download-card" id="setup-thonny">
             <span class="download-type">Start Here</span>
             <h3>開始前設定頁</h3>
             <p>照步驟完成 Thonny、MicroPython、mango 函式庫、import 測試與馬達校正。</p>
@@ -134,6 +134,44 @@
             <p>用最短程式確認 Pico 上已經可以載入 mango 函式庫。</p>
             <a class="button primary block" href="code-viewer.html?file=mango-import-test">檢視程式</a>
             <a class="button ghost block" href="downloads/mango-import-test.py">下載 mango-import-test.py</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="bootcamp-downloads" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">BootCamp Files</p>
+          <h2>BootCamp 程式與教學檔</h2>
+          <p>這一區保留 BootCamp 教師區與學生區會連到的檔案。學生若只照網頁複製程式，可以不用下載；教師備課或離線上課時再下載。</p>
+        </div>
+        <div class="download-grid">
+          <article class="download-card" id="download-teaching-plan">
+            <span class="download-type">Teaching Plan</span>
+            <h3>1 小時授課建議</h3>
+            <p>整理 BootCamp 的授課節奏、完成線與課堂提醒，適合教師課前快速確認。</p>
+            <a class="button primary block" href="downloads/one-hour-bootcamp-teaching-plan.txt">下載 teaching plan</a>
+            <a class="button ghost block" href="teacher-zone.html">回教師支援頁</a>
+          </article>
+          <article class="download-card" id="download-keyboard">
+            <span class="download-type">Keyboard Car</span>
+            <h3>小車鍵盤控制範例</h3>
+            <p>BootCamp 第一個主要程式，用 W、A、S、D、X 控制前進、左轉、後退、右轉與停止。</p>
+            <a class="button primary block" href="code-viewer.html?file=keyboard-car-control">檢視程式</a>
+            <a class="button ghost block" href="downloads/keyboard-car-control.py">下載 keyboard-car-control.py</a>
+          </article>
+          <article class="download-card" id="download-motor">
+            <span class="download-type">Motor</span>
+            <h3>馬達基本函式</h3>
+            <p>適合教師補充說明 forward、backward、turn_left、turn_right 與 stop 等基本動作。</p>
+            <a class="button primary block" href="code-viewer.html?file=basic-motor-functions">檢視程式</a>
+            <a class="button ghost block" href="downloads/basic-motor-functions.py">下載 basic-motor-functions.py</a>
+          </article>
+          <article class="download-card" id="download-sensor">
+            <span class="download-type">Sensor</span>
+            <h3>距離感測與 RGB 範例</h3>
+            <p>建議留到下一堂或延伸課，再把距離判斷、RGB 提示與感測器邏輯加入小車控制。</p>
+            <a class="button primary block" href="code-viewer.html?file=distance-sensor-rgb">檢視程式</a>
+            <a class="button ghost block" href="downloads/distance-sensor-rgb.py">下載 distance-sensor-rgb.py</a>
           </article>
         </div>
       </section>

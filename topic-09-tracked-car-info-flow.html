@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>09 履帶車網路資訊流：V1-V5 遠端控制與影像串流 | Raspberry Pi Pico 小車主題教材</title>
   <meta name="description" content="本主題整理履帶車 V1-V5 開發歷程，聚焦 UDP 控制、UART 轉接、AMB82、X3/RP2040、RTSP 影像串流、延遲與跨網段中繼。">
-  <link rel="stylesheet" href="styles.css?v=20260512-nav">
+  <link rel="stylesheet" href="styles.css?v=20260512-terms">
 </head>
 <body class="topic-page">
   <div class="page-shell">
@@ -47,14 +47,16 @@
             本主題把履帶車從 V1 到 V5 的開發歷程整理成教學版。重點不是多背名詞，而是看懂一個按鈕如何經過 UDP、AMB82、UART、X3/RP2040 變成車輪動作，以及 RTSP 影像為什麼會延遲、黑畫面或需要中繼。
           </p>
           <div class="chip-list compact">
-            <span>UDP</span>
-            <span>UART</span>
-            <span>RTSP</span>
-            <span>AMB82</span>
-            <span>X3/RP2040</span>
+            <a href="#term-udp">UDP</a>
+            <a href="#term-uart">UART</a>
+            <a href="#term-rtsp">RTSP</a>
+            <a href="#term-amb82">AMB82</a>
+            <a href="#term-x3-rp2040">X3/RP2040</a>
           </div>
+          <p class="visual-note">點上方名詞會跳到下方圖解與解釋，先看它在控制線或影像線的哪一段。</p>
           <div class="action-row">
-            <a class="button primary" href="#learning-route">查看 V1-V5 路線</a>
+            <a class="button primary" href="#info-flow-glossary">看名詞圖解</a>
+            <a class="button secondary" href="#learning-route">查看 V1-V5 路線</a>
             <a class="button secondary" href="#classroom-flow">進入教學流程</a>
             <a class="button ghost" href="downloads/topic-09-tracked-car-info-flow/tracked-car-v1-v5-56slides.pdf">下載 56 張 PDF</a>
           </div>
@@ -96,6 +98,124 @@
             <h3>學生講義 Markdown</h3>
             <p>保留給教師備課或轉成課堂講義，不包含教師備註與研發用生成腳本。</p>
             <a class="button ghost block" href="downloads/topic-09-tracked-car-info-flow/tracked-car-v1-v5-student-handout.md">下載學生講義</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="info-flow-glossary" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Info Flow Map</p>
+          <h2>先看懂這五個名詞在車上哪裡出現</h2>
+          <p>這幾個名詞不是分開背的。控制小車時，UDP 把 App 的命令送進 AMB82，AMB82 再用 UART 轉給 X3/RP2040；看畫面時，AMB82 的 camera 會透過 RTSP 把影像串回 App 或播放器。</p>
+        </div>
+
+        <article class="info-flow-map">
+          <div class="flow-lane control-lane">
+            <div class="flow-lane-head">
+              <span class="zone-badge student">控制線</span>
+              <strong>按下前進、後退、左轉、右轉時</strong>
+            </div>
+            <div class="flow-node-row" aria-label="控制指令資訊流">
+              <div class="flow-node">
+                <small>01</small>
+                <strong>App / 電腦</strong>
+                <span>產生方向命令</span>
+              </div>
+              <div class="flow-arrow">→</div>
+              <a class="flow-node flow-node-link" href="#term-udp">
+                <small>02</small>
+                <strong>UDP</strong>
+                <span>把命令送到車上</span>
+              </a>
+              <div class="flow-arrow">→</div>
+              <a class="flow-node flow-node-link" href="#term-amb82">
+                <small>03</small>
+                <strong>AMB82</strong>
+                <span>接收 Wi-Fi 指令</span>
+              </a>
+              <div class="flow-arrow">→</div>
+              <a class="flow-node flow-node-link" href="#term-uart">
+                <small>04</small>
+                <strong>UART</strong>
+                <span>板子之間傳文字命令</span>
+              </a>
+              <div class="flow-arrow">→</div>
+              <a class="flow-node flow-node-link" href="#term-x3-rp2040">
+                <small>05</small>
+                <strong>X3/RP2040</strong>
+                <span>轉成馬達動作</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="flow-lane video-lane">
+            <div class="flow-lane-head">
+              <span class="zone-badge teacher">影像線</span>
+              <strong>手機或電腦要看車上攝影機畫面時</strong>
+            </div>
+            <div class="flow-node-row" aria-label="影像串流資訊流">
+              <div class="flow-node">
+                <small>A</small>
+                <strong>Camera</strong>
+                <span>產生一張張 frame</span>
+              </div>
+              <div class="flow-arrow">→</div>
+              <a class="flow-node flow-node-link" href="#term-amb82">
+                <small>B</small>
+                <strong>AMB82</strong>
+                <span>處理影像來源</span>
+              </a>
+              <div class="flow-arrow">→</div>
+              <a class="flow-node flow-node-link" href="#term-rtsp">
+                <small>C</small>
+                <strong>RTSP</strong>
+                <span>建立影像串流連線</span>
+              </a>
+              <div class="flow-arrow">→</div>
+              <div class="flow-node">
+                <small>D</small>
+                <strong>App / 播放器</strong>
+                <span>顯示畫面</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flow-note-strip">
+            <strong>快速判斷：</strong>
+            <span>車不動先查控制線；畫面黑或延遲先查影像線；兩者都異常時，再查 Wi-Fi、IP、電源與 AMB82 狀態。</span>
+          </div>
+        </article>
+
+        <div class="term-grid">
+          <article id="term-udp" class="term-card">
+            <span class="download-type">UDP</span>
+            <h3>UDP：App 把控制命令丟到車上的方式</h3>
+            <p>UDP 像「很快丟出去的小紙條」。它適合方向控制，因為前進、停止、左轉這類命令需要快速送出；但它不保證每張紙條一定送到，所以要搭配 log 或重複送命令確認。</p>
+            <p><strong>在本車的位置：</strong>App / 電腦 → AMB82。</p>
+          </article>
+          <article id="term-uart" class="term-card">
+            <span class="download-type">UART</span>
+            <h3>UART：AMB82 跟 X3/RP2040 之間的板間簡訊</h3>
+            <p>UART 是兩塊板子之間的序列通訊。可以把它想成 AMB82 收到網路命令後，用一條線把「F、B、L、R、S」這類文字命令傳給負責馬達的控制板。</p>
+            <p><strong>在本車的位置：</strong>AMB82 → X3/RP2040。</p>
+          </article>
+          <article id="term-rtsp" class="term-card">
+            <span class="download-type">RTSP</span>
+            <h3>RTSP：把攝影機畫面串回 App 的影像路線</h3>
+            <p>RTSP 不是控制命令，而是影像串流的連線方式。它處理的是一連串 frame，所以常見問題會是黑畫面、延遲、buffer、FPS 或 bitrate，而不是「左轉右轉」命令。</p>
+            <p><strong>在本車的位置：</strong>AMB82 camera → App / 播放器。</p>
+          </article>
+          <article id="term-amb82" class="term-card">
+            <span class="download-type">AMB82</span>
+            <h3>AMB82：網路與影像的入口板</h3>
+            <p>AMB82 在這台履帶車裡像「前台櫃台」。它接收 Wi-Fi / UDP 控制命令，也處理 camera 與 RTSP 影像；再把需要執行的移動命令轉交給 X3/RP2040。</p>
+            <p><strong>在本車的位置：</strong>網路入口、影像入口、UART 轉接。</p>
+          </article>
+          <article id="term-x3-rp2040" class="term-card">
+            <span class="download-type">X3/RP2040</span>
+            <h3>X3/RP2040：真正讓馬達動起來的控制板</h3>
+            <p>X3/RP2040 收到 UART 命令後，負責把命令轉成 GPIO、PWM 或馬達驅動板訊號。也就是說，App 顯示送出成功不代表車一定會動，還要確認這一段有收到並正確執行。</p>
+            <p><strong>在本車的位置：</strong>UART 接收 → GPIO / PWM → 馬達驅動。</p>
           </article>
         </div>
       </section>

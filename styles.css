@@ -636,6 +636,159 @@ button.button {
   margin-top: 0.45rem;
 }
 
+.info-flow-map {
+  display: grid;
+  gap: 18px;
+  padding: 24px;
+  border: 1px solid rgba(29, 79, 122, 0.12);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at top left, rgba(34, 124, 116, 0.12), transparent 32%),
+    linear-gradient(180deg, rgba(255, 253, 249, 0.98), rgba(246, 249, 247, 0.94));
+  box-shadow: 0 18px 48px rgba(31, 43, 58, 0.08);
+}
+
+.flow-lane {
+  display: grid;
+  gap: 16px;
+  padding: 18px;
+  border: 1px solid rgba(31, 43, 58, 0.08);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.control-lane {
+  border-left: 6px solid var(--teal);
+}
+
+.video-lane {
+  border-left: 6px solid var(--gold);
+}
+
+.flow-lane-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.flow-lane-head strong {
+  color: var(--text);
+}
+
+.flow-node-row {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.flow-node {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  min-width: 150px;
+  padding: 16px;
+  border: 1px solid rgba(29, 79, 122, 0.1);
+  border-radius: 20px;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 10px 22px rgba(31, 43, 58, 0.06);
+}
+
+.flow-node small {
+  width: fit-content;
+  padding: 4px 9px;
+  border-radius: 999px;
+  color: var(--navy);
+  font-weight: 900;
+  background: rgba(29, 79, 122, 0.08);
+}
+
+.flow-node strong {
+  font-size: 1.02rem;
+}
+
+.flow-node span {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.flow-node-link {
+  border-color: rgba(34, 124, 116, 0.2);
+  text-decoration: none;
+}
+
+.flow-node-link:hover,
+.flow-node-link:focus-visible {
+  color: var(--text);
+  border-color: rgba(29, 79, 122, 0.28);
+  background: rgba(255, 251, 241, 0.98);
+  transform: translateY(-2px);
+}
+
+.flow-arrow {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  color: var(--navy);
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+.flow-note-strip {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 14px 16px;
+  border-radius: 18px;
+  color: var(--text);
+  background: rgba(242, 181, 68, 0.16);
+}
+
+.flow-note-strip span {
+  color: var(--muted);
+}
+
+.term-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.term-card {
+  display: grid;
+  gap: 12px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 14px 32px rgba(31, 43, 58, 0.06);
+  scroll-margin-top: 140px;
+}
+
+.term-card:target {
+  border-color: rgba(242, 181, 68, 0.72);
+  box-shadow: 0 0 0 5px rgba(242, 181, 68, 0.16), 0 18px 42px rgba(31, 43, 58, 0.08);
+}
+
+.term-card h3,
+.term-card p {
+  margin: 0;
+}
+
+.term-card p {
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.term-card strong {
+  color: var(--text);
+}
+
 .visual-story-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -1147,12 +1300,28 @@ pre.markdown-code code {
   margin: 18px 0 14px;
 }
 
-.chip-list span {
+.chip-list span,
+.chip-list a {
   padding: 11px 12px;
   border-radius: 999px;
   text-align: center;
   font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--teal);
   background: rgba(34, 124, 116, 0.08);
+}
+
+.chip-list a {
+  border: 1px solid rgba(34, 124, 116, 0.14);
+  box-shadow: 0 8px 16px rgba(34, 124, 116, 0.07);
+  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+
+.chip-list a:hover,
+.chip-list a:focus-visible {
+  color: white;
+  background: linear-gradient(135deg, var(--navy), var(--teal));
+  transform: translateY(-2px);
 }
 
 .chip-list.playful span {
@@ -1720,6 +1889,7 @@ pre code {
   .subpage-hero,
   .product-rail,
   .flow-stage-grid,
+  .term-grid,
   .thonny-visual-grid,
   .code-highlight-grid,
   .visual-story-grid,
@@ -1756,6 +1926,11 @@ pre code {
     grid-template-columns: 1fr;
   }
 
+  .flow-node-row {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+
   .brand-copy strong {
     font-size: 0.88rem;
   }
@@ -1779,6 +1954,19 @@ pre code {
 
   .site-nav {
     justify-content: flex-start;
+  }
+
+  .flow-node-row {
+    flex-direction: column;
+  }
+
+  .flow-node {
+    min-width: 0;
+  }
+
+  .flow-arrow {
+    min-height: 18px;
+    transform: rotate(90deg);
   }
 
   .hero,
