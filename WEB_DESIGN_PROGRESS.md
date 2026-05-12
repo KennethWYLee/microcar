@@ -42,13 +42,17 @@
 - 新增 `09 履帶車網路資訊流：V1-V5 遠端控制與影像串流`。
 - 來源資料夾：`C:\Users\User\Documents\Lecture materials\robo_dev\RD\course_tracked_car_v1_v5_complete`。
 - 主題命名理由：教材核心不是單純履帶車操作，而是 V1-V5 開發歷程中的 UDP 控制、UART 轉接、AMB82、X3/RP2040、RTSP 影像、延遲、log 判讀與跨網段中繼。
-- 上傳策略：只放 56 張基準版 PDF/PPTX、學生講義與總覽圖；不公開 75/83 張延伸版、教師筆記、逐頁 PNG、產生腳本與 `__pycache__`。
+- 上傳策略：放 56 張基準版與 83 張課堂強化版 PDF/PPTX、學生講義與總覽圖；不公開 75 張延伸版、早期 171 張完整名詞版、教師筆記、逐頁 PNG、產生腳本與 `__pycache__`。
 - 新增公開檔案：
   - `topic-09-tracked-car-info-flow.html`
   - `downloads/topic-09-tracked-car-info-flow/tracked-car-v1-v5-56slides.pdf`
   - `downloads/topic-09-tracked-car-info-flow/tracked-car-v1-v5-56slides.pptx`
   - `downloads/topic-09-tracked-car-info-flow/tracked-car-v1-v5-student-handout.md`
   - `assets/tracked-car-info-flow-contact-sheet.png`
+  - `downloads/topic-09-tracked-car-info-flow/tracked-car-v1-v5-83slides-classroom.pdf`
+  - `downloads/topic-09-tracked-car-info-flow/tracked-car-v1-v5-83slides-classroom.pptx`
+  - `downloads/topic-09-tracked-car-info-flow/tracked-car-v1-v5-83slides-student-handout.md`
+  - `assets/tracked-car-info-flow-contact-sheet-83slides.png`
 
 ## 網路資料來源政策
 
