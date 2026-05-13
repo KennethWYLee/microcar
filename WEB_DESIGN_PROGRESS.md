@@ -1,6 +1,6 @@
 # 網頁設計進度紀錄
 
-最後更新：2026-05-12
+最後更新：2026-05-13
 
 ## 目前位置
 
@@ -8,6 +8,12 @@
 - GitHub Repository：`https://github.com/KennethWYLee/microcar`
 - GitHub Pages：`https://kennethwylee.github.io/microcar/`
 - 發布分支：`main`
+
+## 專案維護準則
+
+- 後續整份 `microcar` 專案維護需先遵循 `C:\Users\User\Documents\Lecture materials\CLAUDE.md`。
+- 工作方式以先釐清假設、保持簡單、只做必要修改、修改後驗證為原則。
+- `CLAUDE.md` 中針對其他 codebase 的專用路徑規則不硬套到本靜態網站；但「不要亂改無關內容、不要覆蓋正式資料、驗證後再交付」仍作為本專案共同準則。
 
 ## 目前網站架構
 
