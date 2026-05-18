@@ -32,7 +32,7 @@
 9. `07 電路板教材`：Python 控制與腳位導讀。
 10. `08 電路板應用`：擺頭電扇。
 11. `09 履帶車網路資訊流`：V1-V5 遠端控制、影像串流與系統除錯。
-12. `Firmware`：Pico / Pico W / Pico 2 / Pico 2 W 對應 Mango Lite UF2。
+12. `Firmware`：Pico / Pico W / Pico 2 / Pico 2 W 對應 Mango Lite UF2，以及履帶車韌體包。
 13. `下載區`：彙整程式、Markdown、PDF、PPT、firmware 與延伸素材。
 
 ## 2026-05-12 修正
@@ -59,6 +59,12 @@
   - `downloads/topic-09-tracked-car-info-flow/tracked-car-v1-v5-83slides-classroom.pptx`
   - `downloads/topic-09-tracked-car-info-flow/tracked-car-v1-v5-83slides-student-handout.md`
   - `assets/tracked-car-info-flow-contact-sheet-83slides.png`
+
+## 2026-05-18 新增履帶車韌體
+
+- 將 `C:\Users\User\Documents\Lecture materials\robo_dev\track_car_firmware.zip` 移入網站 repo：`downloads/firmware/track_car_firmware.zip`。
+- zip 內含 `firmware.uf2`，外層保留履帶車命名，避免使用者直接看到泛用 `firmware.uf2` 而誤判用途。
+- 更新 `firmware.html`、`downloads.html`、`topic-09-tracked-car-info-flow.html` 與首頁下載入口，讓履帶車韌體可從 Firmware 區與 09 主題找到。
 
 ## 網路資料來源政策
 
