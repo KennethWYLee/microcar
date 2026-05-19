@@ -32,8 +32,8 @@
 9. `07 電路板教材`：Python 控制與腳位導讀。
 10. `08 電路板應用`：擺頭電扇。
 11. `09 履帶車網路資訊流`：V1-V5 遠端控制、影像串流與系統除錯。
-12. `Firmware`：Pico / Pico W / Pico 2 / Pico 2 W 對應 Mango Lite UF2，以及 RP2040 板子韌體。
-13. `下載區`：彙整程式、Markdown、PDF、PPT、firmware 與延伸素材。
+12. `Firmware`：Pico / Pico W / Pico 2 / Pico 2 W 的官方 MicroPython 韌體下載入口與板型對應表。
+13. `下載區`：彙整程式、Markdown、PDF、PPT、官方 firmware 入口與延伸素材。
 
 ## 2026-05-12 修正
 
@@ -64,11 +64,11 @@
 
 - 原先加入的履帶車 ZIP 韌體已確認為錯誤檔案，後續需移除。
 
-## 2026-05-19 修正 RP2040 板子韌體
+## 2026-05-19 修正韌體下載策略
 
 - 移除錯誤的履帶車 ZIP 韌體檔。
-- 將正確檔案 `C:\Users\User\Documents\Lecture materials\robo_dev\RPI_PICO-20260406-v1.28.0.uf2` 移入網站 repo，並正名為 `downloads/firmware/rp2040-board-firmware.uf2`。
-- 更新 `firmware.html`、`downloads.html`、`topic-09-tracked-car-info-flow.html` 與首頁下載入口，統一標示為 `RP2040 板子韌體`。
+- 依照「韌體官方網頁已有提供」的策略，移除網站 repo 內的 UF2 韌體檔。
+- 更新 `firmware.html`、`downloads.html`、`topic-09-tracked-car-info-flow.html` 與首頁下載入口，改為依板子名稱連到 MicroPython 官方下載頁。
 
 ## 網路資料來源政策
 
@@ -83,7 +83,7 @@
 - CSS 與 JavaScript。
 - 圖片、GIF、影片、SVG。
 - 下載檔案。
-- firmware UF2。
+- 韌體 UF2 檔不放入網站 repo，只保留官方下載頁連結。
 - 課程用 Markdown、Python、Dart、PDF、PPTX、ZIP/7Z。
 
 外部文件連結可保留，但只能作為參考閱讀，不應作為網站畫面載入所需的資料。這類連結目前包含 Creative Commons 授權條款、MicroPython 文件、Raspberry Pi 文件、Thonny 官網與相關技術參考。

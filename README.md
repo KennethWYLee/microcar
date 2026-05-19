@@ -33,7 +33,7 @@
 - `index.html`：首頁與 9 主題總覽。
 - `setup.html`：開始前設定，包含 `mango` 函式庫上傳、import 測試與馬達校正。
 - `bootcamp.html`：BootCamp 快速體驗課。
-- `firmware.html`：Firmware 區，提供 Pico / Pico W / Pico 2 / Pico 2 W 對應的 UF2 韌體、RP2040 板子韌體、對應表與刷機步驟。
+- `firmware.html`：Firmware 區，依 Pico / Pico W / Pico 2 / Pico 2 W 板子名稱連到 MicroPython 官方下載頁，並提供對應表與刷機步驟。
 - `topic-01-intro.html` 到 `topic-05-project-cases.html`：五個小車核心主題。
 - `topic-06-bluetooth-car.html`：Flutter App 與 Pico BLE 藍芽遙控小車。
 - `topic-07-board-python.html`：依 `機器人程式設計實務-Python.pdf` 整理的電路板與腳位導讀。
@@ -56,7 +56,6 @@
 - `downloads/topic-09-tracked-car-info-flow/tracked-car-v1-v5-83slides-classroom.pptx`
 - `downloads/topic-09-tracked-car-info-flow/tracked-car-v1-v5-83slides-student-handout.md`
 - `assets/tracked-car-info-flow-contact-sheet-83slides.png`
-- `downloads/firmware/rp2040-board-firmware.uf2`
 
 未上傳內容包含 75 張延伸版、早期 171 張完整名詞版、教師筆記、逐頁 PNG、產生腳本與 `__pycache__`，這些仍留在本機 RD 研發資料夾。
 
@@ -66,21 +65,12 @@
 - `downloads/mango-import-test.py`：確認 `mango` 函式庫可正常 import。
 - `downloads/motor-calibration.py`：確認右輪、左輪、前進、後退與左右轉方向。
 
-Firmware 雲端下載檔放在：
+Firmware 不再保存於網站 repo。請依板子名稱前往 MicroPython 官方下載頁：
 
-- `downloads/firmware/mango_lite_pico1.uf2`
-- `downloads/firmware/mango_lite_pico1w.uf2`
-- `downloads/firmware/mango_lite_pico2.uf2`
-- `downloads/firmware/mango_lite_pico2w.uf2`
-- `downloads/firmware/rp2040-board-firmware.uf2`
-
-對應關係：
-
-1. `mango_lite_pico1.uf2`：`Raspberry Pi Pico / RP2040`
-2. `mango_lite_pico1w.uf2`：`Raspberry Pi Pico W / RP2040`
-3. `mango_lite_pico2.uf2`：`Raspberry Pi Pico 2 / RP2350`
-4. `mango_lite_pico2w.uf2`：`Raspberry Pi Pico 2 W / RP2350`
-5. `rp2040-board-firmware.uf2`：RP2040 板子韌體
+1. `Raspberry Pi Pico / RP2040`：https://micropython.org/download/RPI_PICO/
+2. `Raspberry Pi Pico W / RP2040`：https://micropython.org/download/RPI_PICO_W/
+3. `Raspberry Pi Pico 2 / RP2350`：https://micropython.org/download/RPI_PICO2/
+4. `Raspberry Pi Pico 2 W / RP2350`：https://micropython.org/download/RPI_PICO2_W/
 
 ## 檔案位置觀念
 
