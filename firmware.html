@@ -44,7 +44,7 @@
           <p class="eyebrow">Firmware</p>
           <h1>Firmware 區</h1>
           <p class="hero-text">
-            這一頁把 Pico 系列 Mango Lite UF2 與履帶車韌體包放到網站雲端下載，並整理成板子對應表。你可以直接用 GitHub Pages / Repository 下載，再依照板子型號或車型選對應的 firmware。
+            這一頁把 Pico 系列 Mango Lite UF2 與 RP2040 板子韌體放到網站雲端下載，並整理成板子對應表。你可以直接用 GitHub Pages / Repository 下載，再依照板子型號選對應的 firmware。
           </p>
           <div class="action-row">
             <a class="button primary" href="#firmware-downloads">下載 UF2</a>
@@ -69,14 +69,14 @@
       <section id="firmware-map" class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">Mapping Table</p>
-          <h2>先區分 Pico 小車與履帶車韌體</h2>
-          <p>Pico 小車使用下方 4 份 Mango Lite UF2；履帶車使用獨立的 `track_car_firmware.zip`。對應錯誤時，不要硬刷第二次，先回來確認板型與車型。</p>
+          <h2>先選對 RP2040 / RP2350 板子韌體</h2>
+          <p>Pico 小車使用下方 4 份 Mango Lite UF2；RP2040 板子請使用獨立的 `rp2040-board-firmware.uf2`。對應錯誤時，不要硬刷第二次，先回來確認板型。</p>
         </div>
         <div class="table-wrap"><table class="topic-table"><thead><tr><th>韌體檔名</th><th>適用板子</th><th>MCU</th><th>Wi-Fi</th><th>什麼時候選這個</th></tr></thead><tbody><tr><td><code>mango_lite_pico1.uf2</code></td><td>Raspberry Pi Pico</td><td><code>RP2040</code></td><td>No</td><td>一般 Raspberry Pi Pico（非 W）</td></tr>
 <tr><td><code>mango_lite_pico1w.uf2</code></td><td>Raspberry Pi Pico W</td><td><code>RP2040</code></td><td>Yes</td><td>Raspberry Pi Pico W（有 Wi-Fi）</td></tr>
 <tr><td><code>mango_lite_pico2.uf2</code></td><td>Raspberry Pi Pico 2</td><td><code>RP2350</code></td><td>No</td><td>一般 Raspberry Pi Pico 2（非 W）</td></tr>
 <tr><td><code>mango_lite_pico2w.uf2</code></td><td>Raspberry Pi Pico 2 W</td><td><code>RP2350</code></td><td>Yes</td><td>Raspberry Pi Pico 2 W（有 Wi-Fi）</td></tr>
-<tr><td><code>track_car_firmware.zip</code></td><td>履帶車韌體包</td><td>依履帶車套件</td><td>依履帶車套件</td><td>履帶車專用，zip 內含 <code>firmware.uf2</code></td></tr></tbody></table></div>
+<tr><td><code>rp2040-board-firmware.uf2</code></td><td>RP2040 板子韌體</td><td><code>RP2040</code></td><td>依板子而定</td><td>使用 RP2040 板子時選這個檔案</td></tr></tbody></table></div>
       </section>
 
       <section class="section reveal">
@@ -117,7 +117,7 @@
         <div class="section-heading">
           <p class="eyebrow">Cloud Downloads</p>
           <h2>直接下載韌體</h2>
-          <p>下載到電腦後，再進入板子的刷機模式把對應的 UF2 拖曳進去。履帶車韌體包需先解壓縮，再使用裡面的 <code>firmware.uf2</code>。</p>
+          <p>下載到電腦後，再進入板子的刷機模式把對應的 UF2 拖曳進去。這一步不是用 Thonny 上傳 Python 檔，而是刷整份 firmware。</p>
         </div>
         <div class="download-grid">
           <article class="download-card">
@@ -152,13 +152,13 @@
             <p><strong>檔案大小：</strong>2.21 MB</p>
             <a class="button primary block" href="downloads/firmware/mango_lite_pico2w.uf2">下載 UF2</a>
           </article>
-          <article class="download-card" id="track-car-firmware">
-            <span class="download-type">Tracked Car</span>
-            <h3>履帶車韌體包</h3>
-            <p>履帶車專用韌體下載包，zip 內含 <code>firmware.uf2</code>。請先解壓縮，再依履帶車刷機流程使用。</p>
-            <p><strong>對應檔名：</strong><code>track_car_firmware.zip</code></p>
-            <p><strong>ZIP 檔案大小：</strong>386 KB；內含 UF2 約 1.22 MB</p>
-            <a class="button primary block" href="downloads/firmware/track_car_firmware.zip">下載履帶車韌體 ZIP</a>
+          <article class="download-card" id="rp2040-board-firmware">
+            <span class="download-type">RP2040</span>
+            <h3>RP2040 板子韌體</h3>
+            <p>這是指定給 RP2040 板子使用的正確 UF2 韌體。請直接下載 UF2，不需要解壓縮。</p>
+            <p><strong>對應檔名：</strong><code>rp2040-board-firmware.uf2</code></p>
+            <p><strong>檔案大小：</strong>660 KB</p>
+            <a class="button primary block" href="downloads/firmware/rp2040-board-firmware.uf2">下載 RP2040 韌體 UF2</a>
             <a class="button ghost block" href="topic-09-tracked-car-info-flow.html">查看 09 履帶車主題</a>
           </article>
         </div>
