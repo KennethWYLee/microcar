@@ -70,6 +70,12 @@
 - 依照「韌體官方網頁已有提供」的策略，移除網站 repo 內的 UF2 韌體檔。
 - 更新 `firmware.html`、`downloads.html`、`topic-09-tracked-car-info-flow.html` 與首頁下載入口，改為依板子名稱連到 MicroPython 官方下載頁。
 
+## 2026-05-21 新增 Port 消失救援流程
+
+- 在 `firmware.html` 新增 `Port 消失救援` solution。
+- 說明當 Thonny 沒有出現 Pico Port 時，可先進入 BOOTSEL，使用 Raspberry Pi 官方 `flash_nuke.uf2` 清空外部 flash，再重新刷入正確的 MicroPython 韌體。
+- 仍維持不把 UF2 檔案放進網站 repo 的策略，只保留官方文件與官方 UF2 入口。
+
 ## 網路資料來源政策
 
 網站本體資料應來自 `microcar` repo，也就是線上 URL 應落在：

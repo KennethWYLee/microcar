@@ -33,7 +33,7 @@
 - `index.html`：首頁與 9 主題總覽。
 - `setup.html`：開始前設定，包含 `mango` 函式庫上傳、import 測試與馬達校正。
 - `bootcamp.html`：BootCamp 快速體驗課。
-- `firmware.html`：Firmware 區，依 Pico / Pico W / Pico 2 / Pico 2 W 板子名稱連到 MicroPython 官方下載頁，並提供對應表與刷機步驟。
+- `firmware.html`：Firmware 區，依 Pico / Pico W / Pico 2 / Pico 2 W 板子名稱連到 MicroPython 官方下載頁，並提供對應表、刷機步驟與 Port 消失時的 flash_nuke 救援流程。
 - `topic-01-intro.html` 到 `topic-05-project-cases.html`：五個小車核心主題。
 - `topic-06-bluetooth-car.html`：Flutter App 與 Pico BLE 藍芽遙控小車。
 - `topic-07-board-python.html`：依 `機器人程式設計實務-Python.pdf` 整理的電路板與腳位導讀。

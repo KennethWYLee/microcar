@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Firmware 區 | Raspberry Pi Pico 小車主題教材</title>
-  <meta name="description" content="下載 Raspberry Pi Pico / Pico W / Pico 2 / Pico 2 W 對應的 mango lite UF2 firmware，並查看板子對應表與刷機步驟。">
+  <meta name="description" content="依 Raspberry Pi Pico / Pico W / Pico 2 / Pico 2 W 板子名稱前往 MicroPython 官方 firmware 下載頁，並查看刷機與 Port 消失救援流程。">
   <link rel="stylesheet" href="styles.css?v=20260512-terms">
 </head>
 <body class="downloads-page">
@@ -49,6 +49,7 @@
           <div class="action-row">
             <a class="button primary" href="#firmware-downloads">選擇板子</a>
             <a class="button secondary" href="#firmware-map">查看對應表</a>
+            <a class="button ghost" href="#port-recovery">Port 消失救援</a>
             <a class="button ghost" href="downloads.html">回下載區</a>
           </div>
         </div>
@@ -175,7 +176,40 @@
           <article class="content-card resource-step">
             <span class="zone-badge student">Step 04</span>
             <strong>重新連回 Thonny 驗證</strong>
-            <p>刷完後再用 Thonny 連線，確認板子能正常啟動，並看到對應的 Mango Lite / MicroPython 版本資訊。</p>
+            <p>刷完後再用 Thonny 連線，確認板子能正常啟動，並看到對應的 MicroPython 版本資訊。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="port-recovery" class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Solution</p>
+          <h2>Thonny 沒有出現 Port 時</h2>
+          <p>如果今天刷完韌體後，Thonny 看不到 Pico 的 Port，可以先用 flash_nuke 清空板子的外部 flash，再重新刷入正確的 MicroPython 韌體。這是救援流程，不是一般上課每次都要做的步驟。</p>
+        </div>
+        <div class="resource-roadmap">
+          <article class="content-card resource-step">
+            <span class="zone-badge student">Recover 01</span>
+            <strong>拔掉 USB，按住 BOOTSEL</strong>
+            <p>先拔掉 Pico 的 USB 線，按住板子上的 <code>BOOTSEL</code>，再把 USB 插回電腦。看到 <code>RPI-RP2</code> 或 <code>RP2350</code> 磁碟後再放開。</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge student">Recover 02</span>
+            <strong>拖入 flash_nuke.uf2 清空板子</strong>
+            <p>把 Raspberry Pi 官方的 flash nuke UF2 拖到剛出現的磁碟。板子會自動退出並重開，這一步會清空外部 flash，因此板子上的程式也會被清掉。</p>
+            <a class="button ghost block" href="https://www.raspberrypi.com/documentation/microcontrollers/pico-series.html#reset-flash-memory">查看官方說明</a>
+            <a class="button ghost block" href="https://datasheets.raspberrypi.com/soft/flash_nuke.uf2">官方 flash_nuke.uf2</a>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge student">Recover 03</span>
+            <strong>再進一次 BOOTSEL</strong>
+            <p>清空後，重新按住 <code>BOOTSEL</code> 接上 USB，讓電腦再次出現可拖曳 UF2 的磁碟。</p>
+          </article>
+          <article class="content-card resource-step">
+            <span class="zone-badge student">Recover 04</span>
+            <strong>刷回 MicroPython 韌體</strong>
+            <p>回到本頁上方的板子對應表，依照實際板型下載官方 MicroPython UF2，拖入 Pico 磁碟。完成後再打開 Thonny 檢查 Port 是否恢復。</p>
+            <a class="button primary block" href="#firmware-downloads">回到官方韌體入口</a>
           </article>
         </div>
       </section>
