@@ -12,7 +12,7 @@
 
 ## 維護準則
 
-本專案後續維護需先遵循 `C:\Users\User\Documents\Lecture materials\CLAUDE.md`。實作時以先釐清假設、保持簡單、只做必要修改、修改後驗證為原則；若 `CLAUDE.md` 中有針對其他 codebase 的專用路徑規則，則不硬套到本靜態網站，但保留其謹慎變更與可驗證交付的精神。
+本專案後續維護需先遵循 `C:\Users\User\Documents\Lecture materials\robodev\CLAUDE.md`。實作時以先釐清假設、保持簡單、只做必要修改、修改後驗證為原則；若 `CLAUDE.md` 中有針對其他 codebase 的專用路徑規則，則不硬套到本靜態網站，但保留其謹慎變更與可驗證交付的精神。
 
 ## 目前 9 個主題
 
@@ -26,7 +26,9 @@
 8. `08 電路板應用：擺頭電扇`
 9. `09 履帶車網路資訊流：V1-V5 遠端控制與影像串流`
 
-`09 履帶車網路資訊流` 來自 `robo_dev/RD/course_tracked_car_v1_v5_complete`，目前整理 56 張基準版與 83 張課堂強化版到網站，不整包上傳研發資料夾。
+`09 履帶車網路資訊流` 來自
+`robodev/trackedcar/course_materials/course_tracked_car_v1_v5_complete`，
+目前整理 56 張基準版與 83 張課堂強化版到網站，不整包上傳開發資料夾。
 
 ## 網站頁面
 
@@ -44,6 +46,10 @@
 
 ## 教材來源與下載
 
+網站原始檔位於 `webdev/`；microcar 的程式與課程教材來源位於
+`../microcar/`，trackedcar 的來源位於 `../trackedcar/`。網站只保存經過
+篩選後需要公開的教材副本，不把兩種車的完整研發資料一起上傳。
+
 01-05 主題由 Markdown cases 產生，原始檔放在 `downloads/case-md/`。06 主題提供 Flutter `main.dart` 與 Pico BLE 小車端程式，07 主題提供 Python PDF，08 主題提供擺頭電扇課程簡報，09 主題提供履帶車 V1-V5 的 56 張基準版與 83 張課堂強化版 PDF/PPTX 與學生講義。
 
 09 主題只上傳正式授課會用到的精簡教材：
@@ -57,7 +63,9 @@
 - `downloads/topic-09-tracked-car-info-flow/tracked-car-v1-v5-83slides-student-handout.md`
 - `assets/tracked-car-info-flow-contact-sheet-83slides.png`
 
-未上傳內容包含 75 張延伸版、早期 171 張完整名詞版、教師筆記、逐頁 PNG、產生腳本與 `__pycache__`，這些仍留在本機 RD 研發資料夾。
+未上傳內容包含 75 張延伸版、早期 171 張完整名詞版、教師筆記、逐頁 PNG、
+產生腳本與 `__pycache__`，這些仍留在本機
+`trackedcar/course_materials/`。
 
 開始前必備檔案放在下載區：
 
@@ -77,7 +85,7 @@ Firmware 不再保存於網站 repo。請依板子名稱前往 MicroPython 官�
 本教材特別把「電腦本機端」與「Pico 板子端」分開說明。網站、PDF、PPT、Markdown 與下載素材會先留在電腦；只有 Pico 需要 import 的函式庫，或要直接執行的 MicroPython 程式，才需要用 Thonny 上傳到 Pico。
 
 ```text
-電腦本機 microcar/
+電腦本機 webdev/
 ├─ index.html / setup.html / topic-xx.html
 ├─ downloads/
 │  ├─ case-md/

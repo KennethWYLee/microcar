@@ -1,19 +1,26 @@
 # 網頁設計進度紀錄
 
-最後更新：2026-05-13
+最後更新：2026-08-23
 
 ## 目前位置
 
-- 本機網站專案：`C:\Users\User\Documents\Lecture materials\robo_dev\microcar`
+- 本機網站專案：`C:\Users\User\Documents\Lecture materials\robodev\webdev`
 - GitHub Repository：`https://github.com/KennethWYLee/microcar`
 - GitHub Pages：`https://kennethwylee.github.io/microcar/`
 - 發布分支：`main`
 
 ## 專案維護準則
 
-- 後續整份 `microcar` 專案維護需先遵循 `C:\Users\User\Documents\Lecture materials\CLAUDE.md`。
+- 後續整份 `microcar` 專案維護需先遵循 `C:\Users\User\Documents\Lecture materials\robodev\CLAUDE.md`。
 - 工作方式以先釐清假設、保持簡單、只做必要修改、修改後驗證為原則。
 - `CLAUDE.md` 中針對其他 codebase 的專用路徑規則不硬套到本靜態網站；但「不要亂改無關內容、不要覆蓋正式資料、驗證後再交付」仍作為本專案共同準則。
+
+## 本機開發來源
+
+- `C:\Users\User\Documents\Lecture materials\robodev\microcar\website_cases`：microcar 的 MicroPython 案例來源。
+- `C:\Users\User\Documents\Lecture materials\robodev\trackedcar\website_cases\09_Ameba82_智慧無人車`：trackedcar 主題可供網站整理的案例來源。
+- `C:\Users\User\Documents\Lecture materials\robodev\microcar\無人車網頁開發`：microcar 的 Flutter 介面、預覽輸出與藍牙控制整合素材。
+- 上述來源都放在 `webdev` 網站 repo 外；完成內容、授權與發布範圍檢查後，才把需要公開的副本放入網站正式路徑。
 
 ## 目前網站架構
 
@@ -46,7 +53,7 @@
 ## 2026-05-12 新增主題 09
 
 - 新增 `09 履帶車網路資訊流：V1-V5 遠端控制與影像串流`。
-- 來源資料夾：`C:\Users\User\Documents\Lecture materials\robo_dev\RD\course_tracked_car_v1_v5_complete`。
+- 來源資料夾：`C:\Users\User\Documents\Lecture materials\robodev\trackedcar\course_materials\course_tracked_car_v1_v5_complete`。
 - 主題命名理由：教材核心不是單純履帶車操作，而是 V1-V5 開發歷程中的 UDP 控制、UART 轉接、AMB82、X3/RP2040、RTSP 影像、延遲、log 判讀與跨網段中繼。
 - 上傳策略：放 56 張基準版與 83 張課堂強化版 PDF/PPTX、學生講義與總覽圖；不公開 75 張延伸版、早期 171 張完整名詞版、教師筆記、逐頁 PNG、產生腳本與 `__pycache__`。
 - 新增公開檔案：
@@ -105,5 +112,5 @@
 
 1. 上課前建立一份「已實機驗證」狀態表，區分教材頁面可讀、程式碼可執行、已在 Pico 2 W 或履帶車系統實測三種等級。
 2. 逐步把 01-09 每個 case 或教材檔對應到明確的板子端檔案位置與電腦端檔案位置。
-3. 將 `robo_dev/website_cases` 視為日後網站程式碼的穩定來源，減少從舊資料夾取檔造成版本混亂。
+3. 將 `robodev/microcar/website_cases` 視為日後網站程式碼的穩定來源，減少從舊資料夾取檔造成版本混亂。
 4. 若未來要把 AmebaAI / AmebaNN 車納入網站，建議另開延伸主題，不混入目前 Pico 小車與履帶車主線。

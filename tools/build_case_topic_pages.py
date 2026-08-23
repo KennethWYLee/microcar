@@ -11,7 +11,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 SOURCE_DIR = (
     REPO.parent
-    / "機器人"
+    / "microcar"
     / "主題整理"
     / "01_課程講義與教材"
     / "講義"
@@ -23,7 +23,7 @@ ROBOT_HANDOUT_DIR = ROBOT_DIR / "講義"
 ROBOT_WEB_DIR = ROBOT_DIR / "無人車網頁開發"
 DOWNLOAD_TOPIC_06_DIR = REPO / "downloads" / "topic-06-bluetooth-car"
 DOWNLOAD_TOPIC_08_DIR = REPO / "downloads" / "topic-08-fan-application"
-FIRMWARE_SOURCE_DIR = REPO.parent / "機器人" / "firmware"
+FIRMWARE_SOURCE_DIR = ROBOT_DIR / "firmware"
 DOWNLOAD_FIRMWARE_DIR = REPO / "downloads" / "firmware"
 ASSET_VERSION = "20260428-firmware"
 
@@ -763,7 +763,7 @@ def footer_html() -> str:
     return """    <footer class="site-footer">
       <div class="license-card">
         <a class="cc-badge" rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hant">
-          <img src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" alt="Creative Commons BY-NC-SA 4.0 授權標章">
+          <img src="assets/cc-by-nc-sa.svg" alt="Creative Commons BY-NC-SA 4.0 授權標章">
         </a>
         <div>
           <h2>授權與使用聲明</h2>
@@ -844,9 +844,6 @@ def render_firmware_page() -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Firmware 區 | Raspberry Pi Pico 小車主題教材</title>
   <meta name="description" content="下載 Raspberry Pi Pico / Pico W / Pico 2 / Pico 2 W 對應的 mango lite UF2 firmware，並查看板子對應表與刷機步驟。">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v={ASSET_VERSION}">
 </head>
 <body class="downloads-page">
@@ -1180,9 +1177,6 @@ def render_topic_page(topic: Topic) -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{html.escape(topic.title)} | Raspberry Pi Pico 小車主題教材</title>
   <meta name="description" content="{html.escape(topic.summary)}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v={ASSET_VERSION}">
 </head>
 <body class="topic-page">
@@ -1310,9 +1304,6 @@ def render_static_topic_page(topic: StaticTopic, body_html: str) -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{html.escape(topic.title)} | Raspberry Pi Pico 小車主題教材</title>
   <meta name="description" content="{html.escape(topic.summary)}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v={ASSET_VERSION}">
 </head>
 <body class="topic-page">
@@ -1837,9 +1828,6 @@ stop()"""
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>開始前設定 | Raspberry Pi Pico 小車主題教材</title>
   <meta name="description" content="開始 Raspberry Pi Pico 小車課程前，先完成 Thonny、MicroPython、mango 函式庫、馬達校正與自學檢查。">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v={ASSET_VERSION}">
 </head>
 <body class="topic-page">
@@ -2013,9 +2001,6 @@ def render_index() -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Raspberry Pi Pico 小車主題教材</title>
   <meta name="description" content="以 8 個主題整理 Raspberry Pi Pico 小車教材：入門、感測輸出、小車移動、無人車、專題化、藍芽遙控、電路板教材與擺頭電扇應用。">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v={ASSET_VERSION}">
 </head>
 <body class="home-page">
@@ -2188,9 +2173,6 @@ def render_downloads() -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>下載區 | Raspberry Pi Pico 小車主題教材</title>
   <meta name="description" content="下載 Raspberry Pi Pico 小車 8 個主題教材、原始程式、PDF 與擺頭電扇簡報。">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v={ASSET_VERSION}">
 </head>
 <body class="downloads-page">
