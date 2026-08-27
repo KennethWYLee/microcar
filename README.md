@@ -12,7 +12,7 @@
 
 ## 維護準則
 
-本專案後續維護需先遵循 `C:\Users\User\Documents\Lecture materials\robodev\CLAUDE.md`。實作時以先釐清假設、保持簡單、只做必要修改、修改後驗證為原則；若 `CLAUDE.md` 中有針對其他 codebase 的專用路徑規則，則不硬套到本靜態網站，但保留其謹慎變更與可驗證交付的精神。
+本專案後續維護需先遵循 `C:\Users\User\Documents\Lecture materials\CLAUDE.md`。實作時以先釐清假設、保持簡單、只做必要修改、修改後驗證為原則；若 `CLAUDE.md` 中有針對其他 codebase 的專用路徑規則，則不硬套到本靜態網站，但保留其謹慎變更與可驗證交付的精神。
 
 ## 目前 9 個主題
 
