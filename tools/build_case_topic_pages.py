@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import html
 import re
 import shutil
@@ -25,7 +26,50 @@ DOWNLOAD_TOPIC_06_DIR = REPO / "downloads" / "topic-06-bluetooth-car"
 DOWNLOAD_TOPIC_08_DIR = REPO / "downloads" / "topic-08-fan-application"
 FIRMWARE_SOURCE_DIR = ROBOT_DIR / "firmware"
 DOWNLOAD_FIRMWARE_DIR = REPO / "downloads" / "firmware"
-ASSET_VERSION = "20260428-firmware"
+TRACKED_CAR_COURSE_DIR = (
+    REPO.parent
+    / "trackedcar"
+    / "course_materials"
+    / "course_tracked_car_v1_v5_complete"
+)
+DOWNLOAD_TOPIC_09_DIR = REPO / "downloads" / "topic-09-tracked-car-info-flow"
+ASSET_VERSION = "20260512-terms"
+
+# These pages contain hand-maintained content that this script must not overwrite.
+MANUALLY_MAINTAINED_PAGES = (
+    "index.html",
+    "downloads.html",
+    "firmware.html",
+    "setup.html",
+    "topic-09-tracked-car-info-flow.html",
+)
+
+TRACKED_CAR_DOWNLOADS: tuple[tuple[str, str], ...] = (
+    (
+        "tracked_car_v1_to_v5_micro_flow_course_56slides.pdf",
+        "tracked-car-v1-v5-56slides.pdf",
+    ),
+    (
+        "tracked_car_v1_to_v5_micro_flow_course_56slides.pptx",
+        "tracked-car-v1-v5-56slides.pptx",
+    ),
+    (
+        "tracked_car_v1_to_v5_micro_flow_student_handout_56slides.md",
+        "tracked-car-v1-v5-student-handout.md",
+    ),
+    (
+        "tracked_car_v1_to_v5_micro_flow_course_classroom.pdf",
+        "tracked-car-v1-v5-83slides-classroom.pdf",
+    ),
+    (
+        "tracked_car_v1_to_v5_micro_flow_course_classroom.pptx",
+        "tracked-car-v1-v5-83slides-classroom.pptx",
+    ),
+    (
+        "tracked_car_v1_to_v5_micro_flow_student_handout_classroom.md",
+        "tracked-car-v1-v5-83slides-student-handout.md",
+    ),
+)
 
 FIRMWARE_TARGETS: tuple[dict[str, str], ...] = (
     {
@@ -198,6 +242,19 @@ SUPPLEMENT_TOPICS: tuple[StaticTopic, ...] = (
         download_href="downloads/topic-08-fan-application/fan-course-slides.pptx",
         download_label="下載擺頭電扇簡報",
     ),
+)
+
+TRACKED_CAR_TOPIC = StaticTopic(
+    output="topic-09-tracked-car-info-flow.html",
+    label="主題 09",
+    title="09 履帶車網路資訊流",
+    subtitle="從控制指令到即時影像，理解跨板通訊與網路資料流",
+    summary="本主題整理履帶車 V1-V5 開發歷程，聚焦 UDP 控制、UART 轉接、RTSP 影像串流、延遲與跨網段中繼。",
+    chips=("UDP", "UART", "Video"),
+    accent="product-advanced",
+    image="assets/tracked-car-system-map.png",
+    download_href="downloads/topic-09-tracked-car-info-flow/tracked-car-v1-v5-83slides-classroom.pdf",
+    download_label="下載 83 頁課堂版 PDF",
 )
 
 
@@ -727,7 +784,10 @@ def split_cases(markdown: str) -> tuple[str, list[dict[str, object]]]:
 def nav_html(active_output: str | None = None) -> str:
     links = [("bootcamp.html", "BootCamp"), ("setup.html", "開始設定")] + [
         (topic.output, topic.title.split("：", 1)[0]) for topic in all_topics()
-    ] + [("firmware.html", "Firmware")]
+    ] + [
+        (TRACKED_CAR_TOPIC.output, "09 履帶車資訊流"),
+        ("firmware.html", "Firmware"),
+    ]
     link_html = "\n".join(
         f'        <a href="{href}"{" aria-current=\"page\"" if href == active_output else ""}>{label}</a>'
         for href, label in links
@@ -1295,7 +1355,11 @@ def render_code_card(title: str, code: str, note: str = "") -> str:
 def render_static_topic_page(topic: StaticTopic, body_html: str) -> str:
     chips = "\n".join(f"<span>{html.escape(chip)}</span>" for chip in topic.chips)
     topic_order = all_topics()
-    next_topic = topic_order[(topic_order.index(topic) + 1) % len(topic_order)]
+    next_topic = (
+        TRACKED_CAR_TOPIC
+        if topic.output == "topic-08-fan-application.html"
+        else topic_order[(topic_order.index(topic) + 1) % len(topic_order)]
+    )
     prev_topic = topic_order[(topic_order.index(topic) - 1) % len(topic_order)]
     return f"""<!DOCTYPE html>
 <html lang="zh-Hant">
@@ -1501,7 +1565,7 @@ def render_board_topic_page(topic: StaticTopic) -> str:
 import time
 
 led = Pin(25, Pin.OUT)
-button = Pin(3, Pin.IN)
+button = Pin(3, Pin.IN, Pin.PULL_DOWN)
 
 while True:
     if button.value() == 1:
@@ -1559,7 +1623,7 @@ def set_motor(pin_a, pin_b, direction):
             "| 超音波 / 距離 RGB | RGB `GP14`，聲波 `GP15` | 感測輸出與避障任務使用 |",
             "| 右馬達 M1 | `GP12` / `GP13` | 小車移動與無人車任務使用 |",
             "| 左馬達 M2 | `GP11` / `GP10` | 小車移動與無人車任務使用 |",
-            "| I2C | SDA `GP20`，SCL `GP21` | 四路循跡感測器使用 |",
+            "| I2C | SDA `GP4`，SCL `GP5` | 現行 `mango.bus` 實作；實際 Mango 板接頭仍需實機核對 |",
             "| 類比輸入 A0 | `GP26` | 電位器與類比輸入 cases 使用 |",
             "| 外接 LED D7 | `GP7` | PWM LED cases 使用 |",
         ])}
@@ -2325,7 +2389,7 @@ def copy_markdown_sources() -> None:
 def copy_extra_sources() -> None:
     DOWNLOAD_TOPIC_06_DIR.mkdir(parents=True, exist_ok=True)
     DOWNLOAD_TOPIC_08_DIR.mkdir(parents=True, exist_ok=True)
-    DOWNLOAD_FIRMWARE_DIR.mkdir(parents=True, exist_ok=True)
+    DOWNLOAD_TOPIC_09_DIR.mkdir(parents=True, exist_ok=True)
 
     flutter_dir = ROBOT_WEB_DIR / "01_Flutter介面程式"
     preview_dir = ROBOT_WEB_DIR / "02_介面預覽與輸出"
@@ -2385,24 +2449,116 @@ def copy_extra_sources() -> None:
                 if member in names:
                     (REPO / "assets" / target_name).write_bytes(archive.read(member))
 
-    for item in FIRMWARE_TARGETS:
-        source = FIRMWARE_SOURCE_DIR / item["source_dir"] / "firmware.uf2"
-        target = DOWNLOAD_FIRMWARE_DIR / item["filename"]
+    for source_name, target_name in TRACKED_CAR_DOWNLOADS:
+        source = TRACKED_CAR_COURSE_DIR / source_name
         if source.exists():
-            shutil.copy2(source, target)
+            shutil.copy2(source, DOWNLOAD_TOPIC_09_DIR / target_name)
+
+
+def generated_pages() -> dict[Path, str]:
+    pages = {REPO / topic.output: render_topic_page(topic) for topic in TOPICS}
+    pages.update(
+        {
+            REPO / topic.output: render_supplement_topic_page(topic)
+            for topic in SUPPLEMENT_TOPICS
+        }
+    )
+    return pages
+
+
+def required_source_copies() -> list[tuple[Path, Path]]:
+    copies = [
+        (SOURCE_DIR / topic.source, DOWNLOAD_MD_DIR / topic.source)
+        for topic in TOPICS
+    ]
+    report = SOURCE_DIR / "教材相容性驗證報告.md"
+    if report.exists():
+        copies.append((report, DOWNLOAD_MD_DIR / report.name))
+
+    flutter_dir = ROBOT_WEB_DIR / "01_Flutter介面程式"
+    preview_dir = ROBOT_WEB_DIR / "02_介面預覽與輸出"
+    ble_dir = ROBOT_WEB_DIR / "03_藍牙小車專案"
+    copies.extend(
+        (
+            (flutter_dir / "main.dart", DOWNLOAD_TOPIC_06_DIR / "main.dart"),
+            (
+                preview_dir / "main.png",
+                DOWNLOAD_TOPIC_06_DIR / "flutter-app-preview.png",
+            ),
+            (
+                ROBOT_HANDOUT_DIR / "機器人程式設計實務-Python.pdf",
+                REPO / "downloads" / "robot-programming-practice-python.pdf",
+            ),
+            (
+                ROBOT_HANDOUT_DIR / "擺頭電扇-課程簡報.pptx",
+                DOWNLOAD_TOPIC_08_DIR / "fan-course-slides.pptx",
+            ),
+        )
+    )
+    for archive_name in ("controler_ble.7z", "controler_ble_v2_speed variable.7z"):
+        copies.append(
+            (
+                ble_dir / archive_name,
+                DOWNLOAD_TOPIC_06_DIR / archive_name.replace(" ", "-"),
+            )
+        )
+    for source_name, target_name in (
+        ("標準版_controler_ble", "standard-controler-ble"),
+        ("變速版_controler_ble_v2", "speed-variable-controler-ble-v2"),
+    ):
+        source_dir = ble_dir / source_name
+        target_dir = DOWNLOAD_TOPIC_06_DIR / target_name
+        if source_dir.exists():
+            copies.extend(
+                (source, target_dir / source.relative_to(source_dir))
+                for source in source_dir.rglob("*")
+                if source.is_file()
+            )
+    copies.extend(
+        (TRACKED_CAR_COURSE_DIR / source, DOWNLOAD_TOPIC_09_DIR / target)
+        for source, target in TRACKED_CAR_DOWNLOADS
+    )
+    return copies
+
+
+def check_generated_files() -> list[str]:
+    problems: list[str] = []
+    for target, expected in generated_pages().items():
+        if not target.exists() or target.read_text(encoding="utf-8") != expected:
+            problems.append(f"頁面需要重建：{target.relative_to(REPO)}")
+    for source, target in required_source_copies():
+        if not source.exists():
+            problems.append(f"來源不存在：{source}")
+        elif not target.exists() or target.read_bytes() != source.read_bytes():
+            problems.append(f"下載副本需要同步：{target.relative_to(REPO)}")
+    if DOWNLOAD_FIRMWARE_DIR.exists():
+        problems.append("網站不得保存本機 UF2：downloads/firmware/")
+    return problems
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="重建 01-08 主題頁並同步核准的教材下載副本。"
+    )
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="只檢查主題頁與來源副本是否需要更新，不寫入檔案。",
+    )
+    args = parser.parse_args()
+
+    if args.check:
+        problems = check_generated_files()
+        if problems:
+            print("\n".join(problems))
+            raise SystemExit(1)
+        print("01-08 主題頁與核准下載副本均為最新版本。")
+        return
+
     copy_markdown_sources()
     copy_extra_sources()
-    write_text(REPO / "index.html", render_index())
-    write_text(REPO / "downloads.html", render_downloads())
-    write_text(REPO / "firmware.html", render_firmware_page())
-    write_text(REPO / "setup.html", render_setup_page())
-    for topic in TOPICS:
-        write_text(REPO / topic.output, render_topic_page(topic))
-    for topic in SUPPLEMENT_TOPICS:
-        write_text(REPO / topic.output, render_supplement_topic_page(topic))
+    for target, page in generated_pages().items():
+        write_text(target, page)
 
 
 if __name__ == "__main__":

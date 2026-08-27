@@ -162,7 +162,7 @@
 <tr><td>超音波 / 距離 RGB</td><td>RGB <code>GP14</code>，聲波 <code>GP15</code></td><td>感測輸出與避障任務使用</td></tr>
 <tr><td>右馬達 M1</td><td><code>GP12</code> / <code>GP13</code></td><td>小車移動與無人車任務使用</td></tr>
 <tr><td>左馬達 M2</td><td><code>GP11</code> / <code>GP10</code></td><td>小車移動與無人車任務使用</td></tr>
-<tr><td>I2C</td><td>SDA <code>GP20</code>，SCL <code>GP21</code></td><td>四路循跡感測器使用</td></tr>
+<tr><td>I2C</td><td>SDA <code>GP4</code>，SCL <code>GP5</code></td><td>現行 <code>mango.bus</code> 實作；實際 Mango 板接頭仍需實機核對</td></tr>
 <tr><td>類比輸入 A0</td><td><code>GP26</code></td><td>電位器與類比輸入 cases 使用</td></tr>
 <tr><td>外接 LED D7</td><td><code>GP7</code></td><td>PWM LED cases 使用</td></tr></tbody></table></div>
       </section>
@@ -178,7 +178,7 @@
 import time
 
 led = Pin(25, Pin.OUT)
-button = Pin(3, Pin.IN)
+button = Pin(3, Pin.IN, Pin.PULL_DOWN)
 
 while True:
     if button.value() == 1:
@@ -304,6 +304,6 @@ def set_motor(pin_a, pin_b, direction):
     </footer>
 
   </div>
-  <script src="script.js?v=20260428-firmware"></script>
+  <script src="script.js?v=20260512-terms"></script>
 </body>
 </html>

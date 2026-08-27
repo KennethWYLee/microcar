@@ -15,7 +15,7 @@
 
 ## Case 1：差速控制展示
 
-> 安全修正版來源：`website_cases/04無人車_case01.py`
+> 安全修正版來源：`microcar/website_cases/04無人車_case01.py`
 
 ### 1. 要做的主題
 
@@ -181,7 +181,7 @@ stop()
 
 ## Case 2：固定左轉避障車
 
-> 安全修正版來源：`website_cases/04無人車_case02.py`
+> 安全修正版來源：`microcar/website_cases/04無人車_case02.py`
 
 ### 1. 要做的主題
 
@@ -328,7 +328,7 @@ finally:
 
 ## Case 3：倒車後轉向避障
 
-> 安全修正版來源：`website_cases/04無人車_case03.py`
+> 安全修正版來源：`microcar/website_cases/04無人車_case03.py`
 
 ### 1. 要做的主題
 
@@ -532,7 +532,7 @@ while True:
 
 ## Case 4：左右交替避障策略
 
-> 安全修正版來源：`website_cases/04無人車_case04.py`
+> 安全修正版來源：`microcar/website_cases/04無人車_case04.py`
 
 ### 1. 要做的主題
 
@@ -756,7 +756,7 @@ while True:
 
 ## Case 5：尋跡感測器讀值與基礎循跡
 
-> 安全修正版來源：`website_cases/04無人車_case05.py`
+> 安全修正版來源：`microcar/website_cases/04無人車_case05.py`
 
 ### 1. 要做的主題
 
@@ -948,7 +948,7 @@ while True:
 
 ## Case 6：伺服掃描式避障
 
-> 安全修正版來源：`website_cases/04無人車_case06.py`
+> 安全修正版來源：`microcar/website_cases/04無人車_case06.py`
 
 ### 1. 要做的主題
 
@@ -1195,7 +1195,7 @@ while True:
 ```
 ## Case 7：I2C 掃描與尋跡感測器診斷
 
-> 安全修正版來源：`website_cases/04無人車_case07.py`
+> 安全修正版來源：`microcar/website_cases/04無人車_case07.py`
 
 ### 1. 要做的主題
 
@@ -1263,7 +1263,7 @@ while True:
 
 ## Case 8：加權循跡比例控制
 
-> 安全修正版來源：`website_cases/04無人車_case08.py`
+> 安全修正版來源：`microcar/website_cases/04無人車_case08.py`
 
 ### 1. 要做的主題
 
@@ -1502,7 +1502,7 @@ while True:
 
 ## Case 9：循跡結合超音波避障
 
-> 安全修正版來源：`website_cases/04無人車_case09.py`
+> 安全修正版來源：`microcar/website_cases/04無人車_case09.py`
 
 ### 1. 要做的主題
 
@@ -1744,7 +1744,7 @@ while True:
 
 ## Case 10：伺服多角度環境掃描
 
-> 安全修正版來源：`website_cases/04無人車_case10.py`
+> 安全修正版來源：`microcar/website_cases/04無人車_case10.py`
 
 ### 1. 要做的主題
 

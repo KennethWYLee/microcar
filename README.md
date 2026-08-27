@@ -50,6 +50,30 @@
 `../microcar/`，trackedcar 的來源位於 `../trackedcar/`。網站只保存經過
 篩選後需要公開的教材副本，不把兩種車的完整研發資料一起上傳。
 
+`tools/build_case_topic_pages.py` 只重建 01-08 主題頁，並把核准公開的
+microcar 與 trackedcar 教材同步到 `downloads/`。首頁、下載總覽、Firmware
+頁、開始設定與 09 主題含有人工整理內容，產生器不會覆寫這五頁。
+
+```powershell
+python -B tools/build_case_topic_pages.py --check
+python -B tools/build_case_topic_pages.py
+python -B tools/build_case_topic_pages.py --check
+```
+
+第一個指令只檢查頁面與來源副本；第二個指令才會重建與同步；最後再確認沒有
+過期副本。產生器不建立 `downloads/firmware/`，網站只連到 MicroPython
+官方韌體下載頁。
+
+完整網站檢查使用：
+
+```powershell
+python -B tools/verify_site.py
+```
+
+此指令檢查本機連結與頁內錨點、圖片替代文字、程式檢視器對應、Python 與
+JavaScript 語法、ZIP/PPTX 結構、PDF/7z 檔頭、程式碼可讀性樣式，以及網站
+是否誤放本機 UF2。它不取代實體車測試或人工畫面檢查。
+
 01-05 主題由 Markdown cases 產生，原始檔放在 `downloads/case-md/`。06 主題提供 Flutter `main.dart` 與 Pico BLE 小車端程式，07 主題提供 Python PDF，08 主題提供擺頭電扇課程簡報，09 主題提供履帶車 V1-V5 的 56 張基準版與 83 張課堂強化版 PDF/PPTX 與學生講義。
 
 09 主題只上傳正式授課會用到的精簡教材：

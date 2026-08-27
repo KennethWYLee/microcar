@@ -14,7 +14,7 @@
 
 ## Case 1：蜂鳴器單音控制
 
-> 安全修正版來源：`website_cases/02感測輸出_case01.py`
+> 安全修正版來源：`microcar/website_cases/02感測輸出_case01.py`
 
 ### 1. 要做的主題
 
@@ -88,7 +88,7 @@ buzzer.deinit()
 
 ## Case 2：蜂鳴器旋律播放器
 
-> 安全修正版來源：`website_cases/02感測輸出_case02.py`
+> 安全修正版來源：`microcar/website_cases/02感測輸出_case02.py`
 
 ### 1. 要做的主題
 
@@ -166,7 +166,7 @@ buzzer.deinit()
 
 ## Case 3：RGB 狀態燈
 
-> 安全修正版來源：`website_cases/02感測輸出_case03.py`
+> 安全修正版來源：`microcar/website_cases/02感測輸出_case03.py`
 
 ### 1. 要做的主題
 
@@ -243,7 +243,7 @@ show_status("off")
 
 ## Case 4：RGB 跑馬燈
 
-> 安全修正版來源：`website_cases/02感測輸出_case04.py`
+> 安全修正版來源：`microcar/website_cases/02感測輸出_case04.py`
 
 ### 1. 要做的主題
 
@@ -315,7 +315,7 @@ rgb.close()
 
 ## Case 5：超音波距離監測
 
-> 安全修正版來源：`website_cases/02感測輸出_case05.py`
+> 安全修正版來源：`microcar/website_cases/02感測輸出_case05.py`
 
 ### 1. 要做的主題
 
@@ -391,7 +391,7 @@ while True:
 
 ## Case 6：距離警示器
 
-> 安全修正版來源：`website_cases/02感測輸出_case06.py`
+> 安全修正版來源：`microcar/website_cases/02感測輸出_case06.py`
 
 ### 1. 要做的主題
 
@@ -459,7 +459,7 @@ finally:
 
 ## Case 7：ADC 旋鈕控制 LED 亮度
 
-> 安全修正版來源：`website_cases/02感測輸出_case07.py`
+> 安全修正版來源：`microcar/website_cases/02感測輸出_case07.py`
 
 ### 1. 要做的主題
 
@@ -533,7 +533,7 @@ while True:
 
 ## Case 8：ADC 旋鈕控制蜂鳴器音高
 
-> 安全修正版來源：`website_cases/02感測輸出_case08.py`
+> 安全修正版來源：`microcar/website_cases/02感測輸出_case08.py`
 
 ### 1. 要做的主題
 
@@ -617,7 +617,7 @@ while True:
 
 ## Case 9：超音波距離 RGB 條形圖
 
-> 安全修正版來源：`website_cases/02感測輸出_case09.py`
+> 安全修正版來源：`microcar/website_cases/02感測輸出_case09.py`
 
 ### 1. 要做的主題
 
@@ -719,7 +719,7 @@ while True:
 
 ## Case 10：距離移動平均濾波警示器
 
-> 安全修正版來源：`website_cases/02感測輸出_case10.py`
+> 安全修正版來源：`microcar/website_cases/02感測輸出_case10.py`
 
 ### 1. 要做的主題
 

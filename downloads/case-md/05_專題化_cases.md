@@ -16,7 +16,7 @@
 
 ## Case 1：按鈕啟停避障車
 
-> 安全修正版來源：`website_cases/05專題_case01.py`
+> 安全修正版來源：`microcar/website_cases/05專題_case01.py`
 
 ### 1. 要做的主題
 
@@ -247,7 +247,7 @@ while True:
 
 ## Case 2：避障策略比較實驗
 
-> 安全修正版來源：`website_cases/05專題_case02.py`
+> 安全修正版來源：`microcar/website_cases/05專題_case02.py`
 
 ### 1. 要做的主題
 
@@ -459,7 +459,7 @@ def avoid():
 
 ## Case 3：測試紀錄與參數調整
 
-> 安全修正版來源：`website_cases/05專題_case03.py`
+> 安全修正版來源：`microcar/website_cases/05專題_case03.py`
 
 ### 1. 要做的主題
 
@@ -631,7 +631,7 @@ with open(LOG_FILE, "w") as f:
 
 ## Case 4：循跡挑戰賽
 
-> 安全修正版來源：`website_cases/05專題_case04.py`
+> 安全修正版來源：`microcar/website_cases/05專題_case04.py`
 
 ### 1. 要做的主題
 
@@ -802,7 +802,7 @@ elif state in ("0011", "0001", "0010"):
 
 ## Case 5：伺服閘門運送任務
 
-> 安全修正版來源：`website_cases/05專題_case05.py`
+> 安全修正版來源：`microcar/website_cases/05專題_case05.py`
 
 ### 1. 要做的主題
 
@@ -953,7 +953,7 @@ buzzer.deinit()
 
 ## Case 6：總整合任務：可啟停的避障任務車
 
-> 安全修正版來源：`website_cases/05專題_case06.py`
+> 安全修正版來源：`microcar/website_cases/05專題_case06.py`
 
 ### 1. 要做的主題
 
@@ -1157,7 +1157,7 @@ def avoid():
 
 ## Case 7：任務計時賽
 
-> 安全修正版來源：`website_cases/05專題_case07.py`
+> 安全修正版來源：`microcar/website_cases/05專題_case07.py`
 
 ### 1. 要做的主題
 
@@ -1344,7 +1344,7 @@ def finish_race():
 
 ## Case 8：多模式任務車
 
-> 安全修正版來源：`website_cases/05專題_case08.py`
+> 安全修正版來源：`microcar/website_cases/05專題_case08.py`
 
 ### 1. 要做的主題
 
@@ -1579,7 +1579,7 @@ while True:
 
 ## Case 9：循跡參數實驗與資料記錄
 
-> 安全修正版來源：`website_cases/05專題_case09.py`
+> 安全修正版來源：`microcar/website_cases/05專題_case09.py`
 
 ### 1. 要做的主題
 
@@ -1777,7 +1777,7 @@ def run_trial(trial_id, base_speed, kp, duration_ms=8000):
 
 ## Case 10：期末專題骨架：狀態機任務車
 
-> 安全修正版來源：`website_cases/05專題_case10.py`
+> 安全修正版來源：`microcar/website_cases/05專題_case10.py`
 
 ### 1. 要做的主題
 
@@ -1906,7 +1906,7 @@ def run_mission():
 
 ## Case 11：規則式循跡演算法比較
 
-> 安全修正版來源：`website_cases/05專題_case11.py`
+> 安全修正版來源：`microcar/website_cases/05專題_case11.py`
 
 ### 1. 要做的主題
 
@@ -2098,7 +2098,7 @@ TURN_SPEED = 12
 
 ## Case 12：P 比例循跡控制
 
-> 安全修正版來源：`website_cases/05專題_case12.py`
+> 安全修正版來源：`microcar/website_cases/05專題_case12.py`
 
 ### 1. 要做的主題
 
@@ -2290,7 +2290,7 @@ KP = 8
 
 ## Case 13：PD 循跡控制與擺動修正
 
-> 安全修正版來源：`website_cases/05專題_case13.py`
+> 安全修正版來源：`microcar/website_cases/05專題_case13.py`
 
 ### 1. 要做的主題
 
@@ -2482,7 +2482,7 @@ KD = 6
 
 ## Case 14：PID 循跡調參挑戰
 
-> 安全修正版來源：`website_cases/05專題_case14.py`
+> 安全修正版來源：`microcar/website_cases/05專題_case14.py`
 
 ### 1. 要做的主題
 

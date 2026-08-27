@@ -14,7 +14,7 @@
 
 ## Case 1：單顆馬達方向測試
 
-> 安全修正版來源：`website_cases/03小車移動_case01.py`
+> 安全修正版來源：`microcar/website_cases/03小車移動_case01.py`
 
 ### 1. 要做的主題
 
@@ -182,7 +182,7 @@ motor_stop()
 
 ## Case 2：雙馬達基本移動
 
-> 安全修正版來源：`website_cases/03小車移動_case02.py`
+> 安全修正版來源：`microcar/website_cases/03小車移動_case02.py`
 
 ### 1. 要做的主題
 
@@ -368,7 +368,7 @@ stop()
 
 ## Case 3：PWM 馬達速度控制
 
-> 安全修正版來源：`website_cases/03小車移動_case03.py`
+> 安全修正版來源：`microcar/website_cases/03小車移動_case03.py`
 
 ### 1. 要做的主題
 
@@ -525,7 +525,7 @@ m1b.duty_u16(0)
 
 ## Case 4：雙輪速度差轉向
 
-> 安全修正版來源：`website_cases/03小車移動_case04.py`
+> 安全修正版來源：`microcar/website_cases/03小車移動_case04.py`
 
 ### 1. 要做的主題
 
@@ -708,7 +708,7 @@ stop()
 
 ## Case 5：使用 `mango.motor.Motor` 控制馬達
 
-> 安全修正版來源：`website_cases/03小車移動_case05.py`
+> 安全修正版來源：`microcar/website_cases/03小車移動_case05.py`
 
 ### 1. 要做的主題
 
@@ -864,7 +864,7 @@ stop()
 
 ## Case 6：小車控制模組化
 
-> 安全修正版來源：`website_cases/03小車移動_case06.py`
+> 安全修正版來源：`microcar/website_cases/03小車移動_case06.py`
 
 ### 1. 要做的主題
 
@@ -1071,7 +1071,7 @@ square(20)
 
 ## Case 7：雙馬達方向校正工具
 
-> 安全修正版來源：`website_cases/03小車移動_case07.py`
+> 安全修正版來源：`microcar/website_cases/03小車移動_case07.py`
 
 ### 1. 要做的主題
 
@@ -1232,7 +1232,7 @@ stop()
 
 ## Case 8：軟啟動與軟停止
 
-> 安全修正版來源：`website_cases/03小車移動_case08.py`
+> 安全修正版來源：`microcar/website_cases/03小車移動_case08.py`
 
 ### 1. 要做的主題
 
@@ -1440,7 +1440,7 @@ hard_stop()
 
 ## Case 9：動作腳本播放器
 
-> 安全修正版來源：`website_cases/03小車移動_case09.py`
+> 安全修正版來源：`microcar/website_cases/03小車移動_case09.py`
 
 ### 1. 要做的主題
 
@@ -1617,7 +1617,7 @@ stop()
 
 ## Case 10：Shell 文字指令遙控車
 
-> 安全修正版來源：`website_cases/03小車移動_case10.py`
+> 安全修正版來源：`microcar/website_cases/03小車移動_case10.py`
 
 ### 1. 要做的主題
 

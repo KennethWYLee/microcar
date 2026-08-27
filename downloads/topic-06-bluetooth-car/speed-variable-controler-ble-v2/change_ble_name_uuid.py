@@ -1,4 +1,4 @@
-import blue        # 匯入您的 blue.py
+import blue  # 匯入您的 blue.py
 import time
 
 print("======== 開始更改晶片設定 ========")
@@ -12,7 +12,7 @@ time.sleep(1)  # 等待寫入
 # 2. 修改 UUID (這是之前缺少的步驟)
 # 根據您的 blue.py，這會將 UUID 設定為 FFA0
 print("2. 正在修改 Service UUID 為 FFA0...")
-blue.update_uuid() 
+blue.update_uuid()
 time.sleep(1)
 
 print("==================================")

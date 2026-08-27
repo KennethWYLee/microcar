@@ -13,7 +13,7 @@
 
 ## Case 1：內建 LED 閃爍
 
-> 安全修正版來源：`website_cases/01入門_case01.py`
+> 安全修正版來源：`microcar/website_cases/01入門_case01.py`
 
 ### 1. 要做的主題
 
@@ -84,7 +84,7 @@ while True:
 
 ## Case 2：LED 訊號節奏設計
 
-> 安全修正版來源：`website_cases/01入門_case02.py`
+> 安全修正版來源：`microcar/website_cases/01入門_case02.py`
 
 ### 1. 要做的主題
 
@@ -164,7 +164,7 @@ while True:
 
 ## Case 3：按鈕即時控制 LED
 
-> 安全修正版來源：`website_cases/01入門_case03.py`
+> 安全修正版來源：`microcar/website_cases/01入門_case03.py`
 
 ### 1. 要做的主題
 
@@ -242,7 +242,7 @@ while True:
 
 ## Case 4：按鈕切換 LED 狀態
 
-> 安全修正版來源：`website_cases/01入門_case04.py`
+> 安全修正版來源：`microcar/website_cases/01入門_case04.py`
 
 ### 1. 要做的主題
 
@@ -336,7 +336,7 @@ while True:
 
 ## Case 5：短按與長按判斷
 
-> 安全修正版來源：`website_cases/01入門_case05.py`
+> 安全修正版來源：`microcar/website_cases/01入門_case05.py`
 
 ### 1. 要做的主題
 
@@ -427,7 +427,7 @@ while True:
 
 ## Case 6：小車啟動前狀態燈
 
-> 安全修正版來源：`website_cases/01入門_case06.py`
+> 安全修正版來源：`microcar/website_cases/01入門_case06.py`
 
 ### 1. 要做的主題
 
@@ -480,7 +480,7 @@ except KeyboardInterrupt:
 
 ## Case 7：按鈕中斷計數器
 
-> 安全修正版來源：`website_cases/01入門_case07.py`
+> 安全修正版來源：`microcar/website_cases/01入門_case07.py`
 
 ### 1. 要做的主題
 
@@ -584,7 +584,7 @@ while True:
 
 ## Case 8：非阻塞式待機燈與按鈕模式
 
-> 安全修正版來源：`website_cases/01入門_case08.py`
+> 安全修正版來源：`microcar/website_cases/01入門_case08.py`
 
 ### 1. 要做的主題
 
@@ -701,7 +701,7 @@ while True:
 
 ## Case 9：Shell 指令控制 LED
 
-> 安全修正版來源：`website_cases/01入門_case09.py`
+> 安全修正版來源：`microcar/website_cases/01入門_case09.py`
 
 ### 1. 要做的主題
 
@@ -800,7 +800,7 @@ while True:
 
 ## Case 10：開機自我測試程式
 
-> 安全修正版來源：`website_cases/01入門_case10.py`
+> 安全修正版來源：`microcar/website_cases/01入門_case10.py`
 
 ### 1. 要做的主題
 

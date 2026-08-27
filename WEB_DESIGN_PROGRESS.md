@@ -1,6 +1,6 @@
 # 網頁設計進度紀錄
 
-最後更新：2026-08-23
+最後更新：2026-08-27
 
 ## 目前位置
 
@@ -106,11 +106,27 @@
 - 主要線上頁面已確認可回應 `200`。
 - 本機主要 HTML、CSS、JS、圖片與下載檔案均存在。
 - 2026-05-12 修正後，網站本體載入資源已改為相對路徑或 `microcar` 站內路徑。
+- 2026-08-27：`tools/build_case_topic_pages.py --check` 通過。產生器只重建
+  01-08 主題頁，不覆寫首頁、下載總覽、Firmware、開始設定與 09 主題，且
+  不會建立 `downloads/firmware/` 或複製 UF2。
+- 2026-08-27：五份 case Markdown、相容性報告、06 藍牙程式與 09 履帶車
+  56/83 頁授課檔均已與 `../microcar/`、`../trackedcar/` 現行來源同步。
+- 2026-08-27：`tools/verify_site.py` 檢查 19 個 HTML、677 個本機連結與
+  錨點、12 個程式載入路徑、25 個網站 Python 檔、JavaScript、6 個
+  ZIP/PPTX、4 個 PDF 與 2 個 7z，未發現阻擋問題。
+- 2026-08-27：Edge 已渲染檢查桌面首頁、桌面 07 主題與 390px 手機首頁；
+  未發現圖片、標題或按鈕重疊。手機導覽保留橫向捲動。
+- 實體 Pico / Mango 小車與 AMB82 + X3/RP2040 履帶車仍未測試；Flutter、
+  Dart 與 7-Zip 工具在目前環境不可用，因此 App 編譯與 7z 解壓內容未驗證。
 - 若要確認線上版已套用最新修正，需要 commit 並 push 到 `main` 後，等待 GitHub Pages 部署完成，再重新掃描線上頁面。
 
 ## 後續建議
 
-1. 上課前建立一份「已實機驗證」狀態表，區分教材頁面可讀、程式碼可執行、已在 Pico 2 W 或履帶車系統實測三種等級。
-2. 逐步把 01-09 每個 case 或教材檔對應到明確的板子端檔案位置與電腦端檔案位置。
-3. 將 `robodev/microcar/website_cases` 視為日後網站程式碼的穩定來源，減少從舊資料夾取檔造成版本混亂。
-4. 若未來要把 AmebaAI / AmebaNN 車納入網站，建議另開延伸主題，不混入目前 Pico 小車與履帶車主線。
+1. 先依 `../microcar/docs/hardware_test_plan.md` 完成 Pico / Mango 小車實機
+   測試。完成條件是板型、供電、停止、馬達方向、感測器、I2C 與 BootCamp
+   都有可追溯結果。
+2. 小車完成後，再依 `../trackedcar/docs/hardware_test_plan.md` 測試 AMB82 +
+   X3/RP2040 履帶車，不沿用小車的腳位與供電假設。
+3. 逐步把 01-09 每個 case 或教材檔對應到明確的板子端檔案位置與電腦端檔案位置。
+4. 將 `robodev/microcar/website_cases` 視為日後網站程式碼的穩定來源，減少從舊資料夾取檔造成版本混亂。
+5. 若未來要把 AmebaAI / AmebaNN 車納入網站，另開延伸主題，不混入目前 Pico 小車與履帶車主線。

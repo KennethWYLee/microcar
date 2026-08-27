@@ -1,6 +1,6 @@
 # 履帶小車 V1-V5 微拆解資訊流講義
 
-這份講義用一張總圖建立全貌，再把 App、Wi-Fi、AMB82、UART、X3/RP2040、RTSP、server、gateway 之間的資料傳遞拆成小段。
+這份講義用一張總圖建立全貌，再把 App、Wi-Fi、AMB82、UART、X3/RP2040、RTSP、WebSocketViewer、server、gateway 之間的資料傳遞拆成小段。
 
 ## 001. V1-V5 的完整資訊流
 
@@ -9,7 +9,7 @@
 個案分析：
 - 現象：先看整張地圖，再把每一小段拆開。
 - 判讀：本頁只切開「操作端 → Wi-Fi → AMB82 → UART → X3/RP2040 → Motor」這一段，不把後面所有問題混在一起。
-- 處理：遠端鏈：V5 多了 server 與 gateway，但車內控制鏈仍沿用已驗證的 AMB82 到 X3/RP2040。
+- 處理：遠端鏈：V5 先把影像觀看方式換成 WebSocket，再思考 server 與 gateway。
 
 名詞解釋：
 - 資訊流: 定義：資料從哪裡產生、經過哪裡、最後造成什麼效果。 本案：在本頁對應到「操作端 → Wi-Fi → AMB82 → UART → X3/RP2040 → Motor」這段資訊流。
@@ -18,16 +18,16 @@
 
 ## 002. V1-V5 的主題與遇到的問題
 
-流程：V1 移動 -> V2 影像 -> V3 穩定 -> V4 延遲 -> V5 遠端
+流程：V1 移動 -> V2 影像 -> V3 穩定 -> V4 延遲 -> V5 Future
 
 個案分析：
 - 現象：每一版不是重新開始，而是解決上一版暴露出的問題。
-- 判讀：本頁只切開「V1 移動 → V2 影像 → V3 穩定 → V4 延遲 → V5 遠端」這一段，不把後面所有問題混在一起。
-- 處理：V3 到 V5 分別處理控制/影像分流、低延遲、跨校園中繼。
+- 判讀：本頁只切開「V1 移動 → V2 影像 → V3 穩定 → V4 延遲 → V5 Future」這一段，不把後面所有問題混在一起。
+- 處理：V3 到 V5 分別處理控制/影像分流、低延遲、以及 WebSocket 影像路線。
 
 名詞解釋：
-- 版本: 定義：每一版代表一個工程目標，不是只改名字。 本案：在本頁對應到「V1 移動 → V2 影像 → V3 穩定 → V4 延遲 → V5 遠端」這段資訊流。
-- 問題導向: 定義：先描述現象，再用 log 與資訊流找出是哪一段出問題。 本案：在本頁對應到「V1 移動 → V2 影像 → V3 穩定 → V4 延遲 → V5 遠端」這段資訊流。
+- 版本: 定義：每版代表一個工程目標。 本案：V1 到 V5 對應控制、影像、穩定、延遲與 WebSocket future work。
+- 問題導向: 定義：先看現象，再看資料流。 本案：先看現象，再沿資料流找出問題卡在哪一段。
 
 
 ## 003. 兩條主線：控制與影像
@@ -814,158 +814,158 @@
 - 延遲: 定義：看到畫面落後現場多少時間。 本案：在本頁對應到「V4A → V4B」這段資訊流。
 
 
-## 059. V5 總圖：跨校園需要中繼
+## 059. V5 Future Work：影像改走 WebSocket
 
-流程：Lab Computer -> Server -> Car Gateway -> AMB82/X3/RP2040
+流程：V4B -> V5 -> Future
 
 個案分析：
-- 現象：小車離開同一個 LAN 後，lab 電腦無法假設可以直接打到車上的 IP。
-- 判讀：本頁只切開「Lab Computer → Server → Car Gateway → AMB82/X3/RP2040」這一段，不把後面所有問題混在一起。
-- 處理：讓車上 gateway 主動連 server，再由 server 轉發控制與影像資料。
+- 現象：V5 不是重寫控制鏈，而是把影像從 RTSP player 轉向 WebSocketViewer，作為後續遠端影像的起點。
+- 判讀：本頁只切開「V4B → V5 → Future」這一段，不把後面所有問題混在一起。
+- 處理：先把 V5 定義成 future work：保留 UDP 控制，單獨驗證 WebSocketViewer 影像路線。
 
 名詞解釋：
-- relay: 定義：中繼轉送。 本案：在 V5 是 server 把 lab 的命令或車上的影像轉送給另一端。
+- Future Work: 定義：下一階段要探索的方向。 本案：在本案代表下一階段要驗證的方向，不代表已經完成跨校園部署。
+- WS Viewer: 定義：AMB82 官方提供的瀏覽器影像頁。 本案：在 V5 指 AMB82 官方 WebSocketViewer，用瀏覽器觀看影像。
+
+
+## 060. RTSP 像監視器串流
+
+流程：VLC / Player -> AMB82 RTSP -> Buffer
+
+個案分析：
+- 現象：RTSP 適合監視器式串流，但播放器 buffer 可能讓畫面穩定卻延遲變長。
+- 判讀：本頁只切開「VLC / Player → AMB82 RTSP → Buffer」這一段，不把後面所有問題混在一起。
+- 處理：用這頁說明 RTSP 的 session、RTP frame 與 buffer，讓學生理解為何會 lag。
+
+名詞解釋：
+- RTSP: 定義：建立與控制影音播放會話。 本案：在本案是播放器向 AMB82 要求開始看影像的控制流程。
+- buffer: 定義：播放器先累積一段資料再播放。 本案：在本案讓影像較穩，但也會讓畫面晚幾秒。
+
+
+## 061. WebSocket 像一條持續開著的資料管
+
+流程：Browser -> WebSocket -> AMB82
+
+個案分析：
+- 現象：WebSocket 讓瀏覽器和 AMB82 保持長連線，較容易做自訂的最新畫面策略。
+- 判讀：本頁只切開「Browser → WebSocket → AMB82」這一段，不把後面所有問題混在一起。
+- 處理：用 browser 與 AMB82 的長連線解釋 WebSocketViewer，不把它講成 WebRTC。
+
+名詞解釋：
+- WebSocket: 定義：瀏覽器與設備之間的雙向長連線。 本案：在 V5 用來讓瀏覽器與 AMB82 或未來 gateway/server 維持長連線。
+- HTTP upgrade: 定義：從一般網頁連線升級成 WebSocket。 本案：在 V5 是瀏覽器先用 HTTP 進入，再升級成 WebSocket 長連線。
+
+
+## 062. 為什麼 WebSocket 較容易處理 lag
+
+流程：Frame #100 -> Frame #110 -> Browser
+
+個案分析：
+- 現象：開車時寧可少看幾張，也不要看 8 秒前的畫面；這就是 latest frame wins 的需求。
+- 判讀：本頁只切開「Frame #100 → Frame #110 → Browser」這一段，不把後面所有問題混在一起。
+- 處理：示範丟舊 frame、看最新 frame 的概念，說明低延遲不等於每張都播放。
+
+名詞解釋：
+- latest frame wins: 定義：延遲時丟掉舊畫面，優先顯示最新畫面。 本案：在 V5 future work 中代表延遲時丟舊 frame，優先看最新畫面。
+- lag: 定義：畫面落後真實車況的時間。 本案：在本頁對應到「Frame #100 → Frame #110 → Browser」這段資訊流。
+
+
+## 063. 但 WebSocket 也不是萬能
+
+流程：Wi-Fi jitter -> TCP stream -> Viewer
+
+個案分析：
+- 現象：WebSocket 仍跑在 TCP 上，網路很差時可能因前面資料卡住而等待。
+- 判讀：本頁只切開「Wi-Fi jitter → TCP stream → Viewer」這一段，不把後面所有問題混在一起。
+- 處理：補上限制：WebSocket 可降低播放器複雜度，但網路品質差仍會卡。
+
+名詞解釋：
+- TCP: 定義：可靠、有順序的傳輸。 本案：在本案常出現在 RTSP 控制連線；可靠但卡住時可能累積延遲。
+- HOL blocking: 定義：前面資料卡住，後面也要排隊。 本案：Head-of-line blocking 的縮寫；在 V5 用來提醒 WebSocket 仍跑在 TCP 上，前面卡住後面也可能等。
+
+
+## 064. 目前 V5：AMB82 開 WebSocketViewer
+
+流程：Camera -> StreamIO -> WebSocketViewer
+
+個案分析：
+- 現象：目前 V5 的實作是 AMB82 用 Camera -> StreamIO -> WebSocketViewer，Flutter 只負責啟動與控車。
+- 判讀：本頁只切開「Camera → StreamIO → WebSocketViewer」這一段，不把後面所有問題混在一起。
+- 處理：對照 V5 firmware marker 與 START_VIEWER，確認影像是被按需啟動。
+
+名詞解釋：
+- StreamIO: 定義：AMB82 內部的影像資料管線。 本案：在 V5 是 AMB82 把 camera stream 接到 WebSocketViewer 的內部管線。
+- START cmd: 定義：啟動 WebSocketViewer 的 UDP 命令。 本案：在 V5 是 Flutter 送出的 START_VIEWER 命令，用來啟動 AMB82 WebSocketViewer。
+
+
+## 065. V5 App 不再內嵌播放器
+
+流程：Flutter App -> Browser -> AMB82
+
+個案分析：
+- 現象：V5 把影像交給瀏覽器，降低 Flutter 內嵌播放器與 RTSP cache 的干擾。
+- 判讀：本頁只切開「Flutter App → Browser → AMB82」這一段，不把後面所有問題混在一起。
+- 處理：讓學生記住：App 控車、Browser 看影像，兩條線分開測。
+
+名詞解釋：
+- browser viewer: 定義：用瀏覽器開 AMB82 提供的影像頁。 本案：在 V5 是把影像播放交給瀏覽器，不再由 Flutter 內嵌 RTSP 播放器處理。
+- media_kit: 定義：先前 Flutter 內嵌播放器用到的套件。 本案：在 V4 是 Flutter 內嵌播放器相關套件；V5 已把它移出主要影像路徑。
+
+
+## 066. V5 的控制鏈仍然沿用 V4B
+
+流程：Flutter -> AMB82 -> X3/RP2040
+
+個案分析：
+- 現象：V5 改影像路徑，但 FORWARD/STOP 仍走 Flutter -> UDP -> AMB82 -> UART -> X3/RP2040。
+- 判讀：本頁只切開「Flutter → AMB82 → X3/RP2040」這一段，不把後面所有問題混在一起。
+- 處理：不要重寫已穩定的車內控制鏈，只替換影像觀看路線。
+
+名詞解釋：
+- watchdog: 定義：長時間沒收到控制 heartbeat 時自動停車。 本案：在本頁對應到「Flutter → AMB82 → X3/RP2040」這段資訊流。
+- failsafe: 定義：斷線或程式卡住時避免車繼續跑的保護。 本案：在本案是 X3/RP2040 收不到新命令時自動停車，避免斷線後繼續跑。
+
+
+## 067. Future Work：把 WebSocketViewer 接到 server
+
+流程：AMB82 -> Gateway -> Server
+
+個案分析：
+- 現象：未來若要跨校園，WebSocketViewer 需要 gateway/server 中繼，不能只靠 lab 直接連車上 IP。
+- 判讀：本頁只切開「AMB82 → Gateway → Server」這一段，不把後面所有問題混在一起。
+- 處理：下一步才規劃 gateway 主動連 server，再把影像與控制狀態 relay 出去。
+
+名詞解釋：
 - gateway: 定義：車上負責對外連線與對內轉接的設備。 本案：在 V5 是車上的手機/電腦，負責外部網路和車內 AMB82 的橋接。
+- relay: 定義：把一端資料轉送到另一端。 本案：在 V5 是 server 把 lab 的命令或車上的影像轉送給另一端。
 
 
-## 060. 同一個 LAN 才容易直接連
+## 068. Future Work：server 需要的能力
 
-流程：Computer -> AMB82
-
-個案分析：
-- 現象：V1-V4 大多建立在同一個 Wi-Fi 網段。
-- 判讀：本頁只切開「Computer → AMB82」這一段，不把後面所有問題混在一起。
-- 處理：跨校園時，這個條件通常不成立。
-
-名詞解釋：
-- LAN: 定義：同一區域網路。 本案：在本頁對應到「Computer → AMB82」這段資訊流。
-- subnet: 定義：同一段 IP 網路範圍。 本案：在本頁對應到「Computer → AMB82」這段資訊流。
-
-
-## 061. NAT 會擋住外部主動連入
-
-流程：Public Internet -> Phone NAT -> Car
+流程：Server -> Firewall -> Dashboard
 
 個案分析：
-- 現象：小車離開同一個 LAN 後，lab 電腦無法假設可以直接打到車上的 IP。
-- 判讀：本頁只切開「Public Internet → Phone NAT → Car」這一段，不把後面所有問題混在一起。
-- 處理：讓車上 gateway 主動連 server，再由 server 轉發控制與影像資料。
-
-名詞解釋：
-- NAT: 定義：內外網地址轉換。 本案：在 V5 會讓外部電腦難以直接連進車上的設備，因此需要中繼架構。
-- public IP: 定義：外部網路可以直接看到的地址。 本案：在本頁對應到「Public Internet → Phone NAT → Car」這段資訊流。
-
-
-## 062. 控制命令先到 server
-
-流程：Lab App -> Server
-
-個案分析：
-- 現象：Lab 不直接找車，而是把命令交給固定入口。
-- 判讀：本頁只切開「Lab App → Server」這一段，不把後面所有問題混在一起。
-- 處理：命令格式仍可保持簡短，例如 direction=FORWARD。
-
-名詞解釋：
-- token: 定義：操作端與車端的通行證。 本案：在 V5 用來限制誰可以控制車，避免任何人都能送命令。
-- domain: 定義：例如 car.ntub.edu.tw 這類固定名稱。 本案：在本頁對應到「Lab App → Server」這段資訊流。
-
-
-## 063. 車上 gateway 保持長連線
-
-流程：Gateway -> Server
-
-個案分析：
-- 現象：車端主動連 server，避開 NAT 的限制。
-- 判讀：本頁只切開「Gateway → Server」這一段，不把後面所有問題混在一起。
-- 處理：這比讓外部直接連進車上的 AMB82 更可行。
-
-名詞解釋：
-- WebSocket: 定義：適合雙向長連線。 本案：在 V5 可讓車上 gateway 與 server 長時間保持雙向連線。
-- MQTT: 定義：用 topic 發布與訂閱訊息。 本案：在 V5 可用 topic 發送控制命令與回報 telemetry。
-
-
-## 064. gateway 再轉回 AMB82 UDP
-
-流程：Gateway -> AMB82 -> X3/RP2040
-
-個案分析：
-- 現象：車外路徑改了，車內路徑不一定要改。
-- 判讀：本頁只切開「Gateway → AMB82 → X3/RP2040」這一段，不把後面所有問題混在一起。
-- 處理：gateway 負責把遠端命令翻成 AMB82 已經會收的 UDP。
-
-名詞解釋：
-- 重用: 定義：保留已驗證的模組。 本案：在本頁對應到「Gateway → AMB82 → X3/RP2040」這段資訊流。
-- 車內路徑: 定義：Gateway/AMB82/X3/RP2040 之間的短距離控制鏈。 本案：在本頁對應到「Gateway → AMB82 → X3/RP2040」這段資訊流。
-
-
-## 065. ACK 與 telemetry 讓遠端知道車還活著
-
-流程：Gateway -> Lab App
-
-個案分析：
-- 現象：遠端操控不能只送命令，也要知道車端狀態。
-- 判讀：本頁只切開「Gateway → Lab App」這一段，不把後面所有問題混在一起。
-- 處理：沒有回報時，操作者不知道是車沒收到還是畫面只是延遲。
-
-名詞解釋：
-- ACK: 定義：收到命令的確認訊息。 本案：在本案用來確認某段命令已收到，但不一定代表馬達已動。
-- telemetry: 定義：設備狀態回報。 本案：在本案可回報電量、延遲、Wi-Fi 品質，協助遠端判斷狀態。
-
-
-## 066. 影像中繼比控制中繼更重
-
-流程：AMB82 RTSP -> Gateway -> Server
-
-個案分析：
-- 現象：控制命令很小，影像資料很大。
-- 判讀：本頁只切開「AMB82 RTSP → Gateway → Server」這一段，不把後面所有問題混在一起。
-- 處理：server 端可以再轉成適合遠端播放的格式。
-
-名詞解釋：
-- 轉碼: 定義：把影像轉成另一種格式或參數。 本案：在本頁對應到「AMB82 RTSP → Gateway → Server」這段資訊流。
-- uplink: 定義：車端往 server 上傳的網路方向。 本案：在本頁對應到「AMB82 RTSP → Gateway → Server」這段資訊流。
-
-
-## 067. WebRTC 通常放在 gateway 或 server
-
-流程：AMB82 -> Gateway / Server -> Browser/App
-
-個案分析：
-- 現象：不是寫在 X3/RP2040，也通常不是直接寫在 AMB82。
-- 判讀：本頁只切開「AMB82 → Gateway / Server → Browser/App」這一段，不把後面所有問題混在一起。
-- 處理：X3/RP2040 只負責馬達控制，不適合處理影像協定。
-
-名詞解釋：
-- WebRTC: 定義：低延遲影音通訊技術。 本案：在本頁對應到「AMB82 → Gateway / Server → Browser/App」這段資訊流。
-- bridge: 定義：把一種協定轉接到另一種協定。 本案：在本頁對應到「AMB82 → Gateway / Server → Browser/App」這段資訊流。
-
-
-## 068. server 申請需求
-
-流程：Server -> Firewall
-
-個案分析：
-- 現象：要跨校園，server 需要被 lab 與車端都連得到。
-- 判讀：本頁只切開「Server → Firewall」這一段，不把後面所有問題混在一起。
-- 處理：若要轉發影像，還要評估頻寬、CPU、儲存與資安。
+- 現象：未來若要跨校園，WebSocketViewer 需要 gateway/server 中繼，不能只靠 lab 直接連車上 IP。
+- 判讀：本頁只切開「Server → Firewall → Dashboard」這一段，不把後面所有問題混在一起。
+- 處理：下一步才規劃 gateway 主動連 server，再把影像與控制狀態 relay 出去。
 
 名詞解釋：
 - DNS: 定義：把名稱轉成 IP。 本案：在 V5 讓 lab 與 gateway 用固定名稱找到 server，不必記 IP。
-- firewall: 定義：限制哪些連線可以進出的規則。 本案：在本頁對應到「Server → Firewall」這段資訊流。
+- token: 定義：限制誰可以控制車的通行證。 本案：在 V5 用來限制誰可以控制車，避免任何人都能送命令。
 
 
-## 069. 同一個 FORWARD 在各版本的路徑
+## 069. 同一個 FORWARD：目前 V5 與未來遠端版
 
-流程：V1-V4 -> V5
+流程：目前 V5 -> Future Remote
 
 個案分析：
-- 現象：比較版本時，先看哪一段多了節點。
-- 判讀：本頁只切開「V1-V4 → V5」這一段，不把後面所有問題混在一起。
-- 處理：新增 server/gateway 後，要多測 ACK 與延遲。
+- 現象：目前 V5 沒有 server/gateway；控制仍走 App -> AMB82 -> X3/RP2040，server/gateway 是 future work。
+- 判讀：本頁只切開「目前 V5 → Future Remote」這一段，不把後面所有問題混在一起。
+- 處理：把目前 V5 與 Future Remote 分開：先驗證車內控制，再把 server/gateway 當下一階段測試。
 
 名詞解釋：
-- 車外路徑: 定義：Lab 到 server 到車上 gateway。 本案：在本頁對應到「V1-V4 → V5」這段資訊流。
-- 車內路徑: 定義：Gateway 到 AMB82 到 X3/RP2040 到馬達。 本案：在本頁對應到「V1-V4 → V5」這段資訊流。
+- 車外路徑: 定義：Lab 到 server 到車上 gateway。 本案：在本頁對應到「目前 V5 → Future Remote」這段資訊流。
+- 車內路徑: 定義：App 到 AMB82 到 X3/RP2040。 本案：在本頁對應到「目前 V5 → Future Remote」這段資訊流。
 
 
 ## 070. Ping 只證明 IP 可達，不證明服務可用
