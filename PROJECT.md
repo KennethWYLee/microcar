@@ -10,6 +10,17 @@
 - GitHub Pages：`https://kennethwylee.github.io/microcar/`
 - Repository：獨立 Git repository，不再巢狀放在 `robodev/`。
 
+## 網站資訊與決策依據
+
+- 網站資訊、內容編排、功能調整與發布歷程主要依據：
+  `codex://threads/019d66f5-f174-7ff2-ab98-fa30052e7e0d`。
+- 使用者目前的明確指示優先於該 task 的較早紀錄。
+- `../robodev/microcar/` 與 `../robodev/trackedcar/` 仍保存程式、教材與硬體
+  資料來源；從這些來源選擇哪些內容放上網站時，以上述 Codex task 的網站
+  決策為主要依據。
+- 若該 task、目前網站檔案與 `robodev` 來源互相衝突，先保留各自版本並回報
+  差異，不自行混合不相容的腳位、版本、教材內容或發布範圍。
+
 ## 來源與發布邊界
 
 - microcar 權威來源：`../robodev/microcar/`
