@@ -51,9 +51,15 @@ python -B tools/verify_site.py
   `roboweb/`；保留 `.git`、commit 歷史、branch 與 remote。
 - 2026-08-28：網站產生器改從同層的 `../robodev/` 讀取 microcar 與
   trackedcar 權威來源。
+- 2026-08-28：公開課堂照片只使用人物、螢幕、QR code、存取資訊與教室識別
+  內容已不可辨認的版本；原始人物照片與課堂影片不放在公開 repository。
+- 2026-08-28：公開 ZIP 不得包含真實 Wi-Fi 名稱或密碼、IDE 工作檔；公開
+  PDF/PPTX 先清除個人中繼資料，簡報中的電子郵件不公開。
+- 2026-08-28：未被網站引用的舊版簡報 archive 不再公開。授權範圍依
+  `README.md` 與 `NOTICE.md`，不把整個 repository 視為單一授權作品。
 
 ## Git 狀態
 
 - Branch：`main`
 - Remote：`https://github.com/KennethWYLee/microcar.git`
-- 搬移前本機比 `origin/main` 超前 3 個 commits；尚未 push。
+- 本次公開內容清理完成後，需 commit、更新遠端歷史並驗證 GitHub Pages。

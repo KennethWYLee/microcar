@@ -8,6 +8,8 @@ import zipfile
 from dataclasses import dataclass
 from pathlib import Path
 
+from sanitize_public_assets import sanitize_pdf, sanitize_pptx
+
 
 REPO = Path(__file__).resolve().parents[1]
 COURSE_SOURCE_DIR = REPO.parent / "robodev"
@@ -34,7 +36,7 @@ TRACKED_CAR_COURSE_DIR = (
     / "course_tracked_car_v1_v5_complete"
 )
 DOWNLOAD_TOPIC_09_DIR = REPO / "downloads" / "topic-09-tracked-car-info-flow"
-ASSET_VERSION = "20260512-terms"
+ASSET_VERSION = "20260828-privacy"
 
 # These pages contain hand-maintained content that this script must not overwrite.
 MANUALLY_MAINTAINED_PAGES = (
@@ -190,7 +192,7 @@ TOPICS: tuple[Topic, ...] = (
         summary="本主題把差速控制、避障、循跡與伺服掃描整合成無人車應用，適合銜接較完整的小車任務。",
         chips=("Obstacle", "Line", "Servo"),
         accent="product-advanced",
-        image="assets/video-line-following-demo-poster.jpg",
+        image="assets/privacy-line-following-scene.jpg",
     ),
     Topic(
         source="05_專題化_cases.md",
@@ -201,7 +203,7 @@ TOPICS: tuple[Topic, ...] = (
         summary="本主題把前面學到的輸入、輸出、馬達、感測與循跡控制整合成任務挑戰，並加入規則式、P、PD、PID 循跡演算法 cases。",
         chips=("Project", "Strategy", "PID"),
         accent="product-algorithm",
-        image="assets/photo-student-work.jpg",
+        image="assets/privacy-student-work.jpg",
     ),
 )
 
@@ -2422,7 +2424,9 @@ def copy_extra_sources() -> None:
 
     python_pdf = ROBOT_HANDOUT_DIR / "機器人程式設計實務-Python.pdf"
     if python_pdf.exists():
-        shutil.copy2(python_pdf, REPO / "downloads" / "robot-programming-practice-python.pdf")
+        public_python_pdf = REPO / "downloads" / "robot-programming-practice-python.pdf"
+        shutil.copy2(python_pdf, public_python_pdf)
+        sanitize_pdf(public_python_pdf)
         try:
             import fitz  # type: ignore
 
@@ -2435,7 +2439,9 @@ def copy_extra_sources() -> None:
 
     fan_ppt = ROBOT_HANDOUT_DIR / "擺頭電扇-課程簡報.pptx"
     if fan_ppt.exists():
-        shutil.copy2(fan_ppt, DOWNLOAD_TOPIC_08_DIR / "fan-course-slides.pptx")
+        public_fan_ppt = DOWNLOAD_TOPIC_08_DIR / "fan-course-slides.pptx"
+        shutil.copy2(fan_ppt, public_fan_ppt)
+        sanitize_pptx(public_fan_ppt)
         fan_assets = {
             "image28.png": "fan-assembled.png",
             "image26.png": "fan-board.png",
@@ -2453,7 +2459,12 @@ def copy_extra_sources() -> None:
     for source_name, target_name in TRACKED_CAR_DOWNLOADS:
         source = TRACKED_CAR_COURSE_DIR / source_name
         if source.exists():
-            shutil.copy2(source, DOWNLOAD_TOPIC_09_DIR / target_name)
+            target = DOWNLOAD_TOPIC_09_DIR / target_name
+            shutil.copy2(source, target)
+            if target.suffix.lower() == ".pdf":
+                sanitize_pdf(target)
+            elif target.suffix.lower() == ".pptx":
+                sanitize_pptx(target)
 
 
 def generated_pages() -> dict[Path, str]:
@@ -2530,7 +2541,9 @@ def check_generated_files() -> list[str]:
     for source, target in required_source_copies():
         if not source.exists():
             problems.append(f"來源不存在：{source}")
-        elif not target.exists() or target.read_bytes() != source.read_bytes():
+        elif not target.exists():
+            problems.append(f"下載副本需要同步：{target.relative_to(REPO)}")
+        elif target.suffix.lower() not in {".pdf", ".pptx"} and target.read_bytes() != source.read_bytes():
             problems.append(f"下載副本需要同步：{target.relative_to(REPO)}")
     if DOWNLOAD_FIRMWARE_DIR.exists():
         problems.append("網站不得保存本機 UF2：downloads/firmware/")

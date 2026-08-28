@@ -72,8 +72,17 @@ python -B tools/verify_site.py
 ```
 
 此指令檢查本機連結與頁內錨點、圖片替代文字、程式檢視器對應、Python 與
-JavaScript 語法、ZIP/PPTX 結構、PDF/7z 檔頭、程式碼可讀性樣式，以及網站
-是否誤放本機 UF2。它不取代實體車測試或人工畫面檢查。
+JavaScript 語法、ZIP/PPTX 結構、PDF/7z 檔頭、下載檔中的 Wi-Fi 值、文件與
+圖片中繼資料、未匿名化的原始課堂媒體、程式碼可讀性樣式，以及網站是否誤放
+本機 UF2。它不取代實體車測試或人工畫面檢查。
+
+公開下載檔如需從本機教材重新同步，產生器會在複製後移除 PDF/PPTX 的個人
+中繼資料與簡報中的電子郵件。另可執行下列指令，重新清理目前下載區中的
+Wi-Fi 值、IDE 工作檔與文件中繼資料：
+
+```powershell
+python -B tools/sanitize_public_assets.py
+```
 
 01-05 主題由 Markdown cases 產生，原始檔放在 `downloads/case-md/`。06 主題提供 Flutter `main.dart` 與 Pico BLE 小車端程式，07 主題提供 Python PDF，08 主題提供擺頭電扇課程簡報，09 主題提供履帶車 V1-V5 的 56 張基準版與 83 張課堂強化版 PDF/PPTX 與學生講義。
 
@@ -140,6 +149,8 @@ Raspberry Pi Pico /
 除另有標示外，本網站文字教材與自製教學圖片採用 [Creative Commons 姓名標示-非商業性-相同方式分享 4.0 國際授權條款](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hant)。
 
 程式碼、第三方素材、PDF、PPT、商標、外部引用圖片與原始教材檔案，依各自檔案或來源授權為準。教材與程式仍在驗證中，實際上課前請先由教師測試。
+
+授權範圍與公開素材的隱私處理另見 [NOTICE.md](./NOTICE.md)。
 
 ## 建議使用方式
 
