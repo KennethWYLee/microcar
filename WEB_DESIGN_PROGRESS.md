@@ -1,17 +1,17 @@
 # 網頁設計進度紀錄
 
-最後更新：2026-08-27
+最後更新：2026-08-28
 
 ## 目前位置
 
-- 本機網站專案：`C:\Users\User\Documents\Lecture materials\robodev\webdev`
+- 本機網站專案：`C:\Users\User\Documents\Lecture materials\roboweb`
 - GitHub Repository：`https://github.com/KennethWYLee/microcar`
 - GitHub Pages：`https://kennethwylee.github.io/microcar/`
 - 發布分支：`main`
 
 ## 專案維護準則
 
-- 後續整份 `microcar` 專案維護需先遵循 `C:\Users\User\Documents\Lecture materials\CLAUDE.md`。
+- 後續整份 `roboweb` 專案維護需先遵循 `C:\Users\User\Documents\Lecture materials\CLAUDE.md`。
 - 工作方式以先釐清假設、保持簡單、只做必要修改、修改後驗證為原則。
 - `CLAUDE.md` 中針對其他 codebase 的專用路徑規則不硬套到本靜態網站；但「不要亂改無關內容、不要覆蓋正式資料、驗證後再交付」仍作為本專案共同準則。
 
@@ -20,7 +20,18 @@
 - `C:\Users\User\Documents\Lecture materials\robodev\microcar\website_cases`：microcar 的 MicroPython 案例來源。
 - `C:\Users\User\Documents\Lecture materials\robodev\trackedcar\website_cases\09_Ameba82_智慧無人車`：trackedcar 主題可供網站整理的案例來源。
 - `C:\Users\User\Documents\Lecture materials\robodev\microcar\無人車網頁開發`：microcar 的 Flutter 介面、預覽輸出與藍牙控制整合素材。
-- 上述來源都放在 `webdev` 網站 repo 外；完成內容、授權與發布範圍檢查後，才把需要公開的副本放入網站正式路徑。
+- 上述來源都放在 `roboweb` 網站 repo 外；完成內容、授權與發布範圍檢查後，才把需要公開的副本放入網站正式路徑。
+
+## 2026-08-28 移動網站 repository
+
+- 使用者核准網站資料夾名稱 `roboweb`。
+- 完整網站 repository 已從
+  `C:\Users\User\Documents\Lecture materials\robodev\webdev` 移至
+  `C:\Users\User\Documents\Lecture materials\roboweb`。
+- `.git`、commit 歷史與 `https://github.com/KennethWYLee/microcar.git` remote
+  均保留；GitHub repository 名稱與 GitHub Pages 網址不因本機資料夾移動而改變。
+- microcar 與 trackedcar 的權威來源仍在 `robodev/`，網站產生器透過
+  `../robodev/microcar/` 與 `../robodev/trackedcar/` 讀取來源。
 
 ## 目前網站架構
 
@@ -110,7 +121,8 @@
   01-08 主題頁，不覆寫首頁、下載總覽、Firmware、開始設定與 09 主題，且
   不會建立 `downloads/firmware/` 或複製 UF2。
 - 2026-08-27：五份 case Markdown、相容性報告、06 藍牙程式與 09 履帶車
-  56/83 頁授課檔均已與 `../microcar/`、`../trackedcar/` 現行來源同步。
+  56/83 頁授課檔均已與 `../robodev/microcar/`、
+  `../robodev/trackedcar/` 現行來源同步。
 - 2026-08-27：`tools/verify_site.py` 檢查 19 個 HTML、677 個本機連結與
   錨點、12 個程式載入路徑、25 個網站 Python 檔、JavaScript、6 個
   ZIP/PPTX、4 個 PDF 與 2 個 7z，未發現阻擋問題。
@@ -122,10 +134,10 @@
 
 ## 後續建議
 
-1. 先依 `../microcar/docs/hardware_test_plan.md` 完成 Pico / Mango 小車實機
+1. 先依 `../robodev/microcar/docs/hardware_test_plan.md` 完成 Pico / Mango 小車實機
    測試。完成條件是板型、供電、停止、馬達方向、感測器、I2C 與 BootCamp
    都有可追溯結果。
-2. 小車完成後，再依 `../trackedcar/docs/hardware_test_plan.md` 測試 AMB82 +
+2. 小車完成後，再依 `../robodev/trackedcar/docs/hardware_test_plan.md` 測試 AMB82 +
    X3/RP2040 履帶車，不沿用小車的腳位與供電假設。
 3. 逐步把 01-09 每個 case 或教材檔對應到明確的板子端檔案位置與電腦端檔案位置。
 4. 將 `robodev/microcar/website_cases` 視為日後網站程式碼的穩定來源，減少從舊資料夾取檔造成版本混亂。

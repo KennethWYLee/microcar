@@ -46,9 +46,10 @@
 
 ## 教材來源與下載
 
-網站原始檔位於 `webdev/`；microcar 的程式與課程教材來源位於
-`../microcar/`，trackedcar 的來源位於 `../trackedcar/`。網站只保存經過
-篩選後需要公開的教材副本，不把兩種車的完整研發資料一起上傳。
+網站 repository 位於 `roboweb/`；microcar 的程式與課程教材來源位於
+`../robodev/microcar/`，trackedcar 的來源位於
+`../robodev/trackedcar/`。網站只保存經過篩選後需要公開的教材副本，不把
+兩種車的完整研發資料一起上傳。
 
 `tools/build_case_topic_pages.py` 只重建 01-08 主題頁，並把核准公開的
 microcar 與 trackedcar 教材同步到 `downloads/`。首頁、下載總覽、Firmware
@@ -109,7 +110,7 @@ Firmware 不再保存於網站 repo。請依板子名稱前往 MicroPython 官�
 本教材特別把「電腦本機端」與「Pico 板子端」分開說明。網站、PDF、PPT、Markdown 與下載素材會先留在電腦；只有 Pico 需要 import 的函式庫，或要直接執行的 MicroPython 程式，才需要用 Thonny 上傳到 Pico。
 
 ```text
-電腦本機 webdev/
+電腦本機 roboweb/
 ├─ index.html / setup.html / topic-xx.html
 ├─ downloads/
 │  ├─ case-md/

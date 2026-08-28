@@ -10,8 +10,9 @@ from pathlib import Path
 
 
 REPO = Path(__file__).resolve().parents[1]
+COURSE_SOURCE_DIR = REPO.parent / "robodev"
 SOURCE_DIR = (
-    REPO.parent
+    COURSE_SOURCE_DIR
     / "microcar"
     / "主題整理"
     / "01_課程講義與教材"
@@ -27,7 +28,7 @@ DOWNLOAD_TOPIC_08_DIR = REPO / "downloads" / "topic-08-fan-application"
 FIRMWARE_SOURCE_DIR = ROBOT_DIR / "firmware"
 DOWNLOAD_FIRMWARE_DIR = REPO / "downloads" / "firmware"
 TRACKED_CAR_COURSE_DIR = (
-    REPO.parent
+    COURSE_SOURCE_DIR
     / "trackedcar"
     / "course_materials"
     / "course_tracked_car_v1_v5_complete"
