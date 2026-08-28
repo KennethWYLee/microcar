@@ -62,7 +62,9 @@ python -B tools/verify_site.py
 
 - Branch：`main`
 - Remote：`https://github.com/KennethWYLee/microcar.git`
-- 2026-08-28：公開工作樹清理 commit `be9a7cb` 已推送至 `origin/main`；GitHub
-  Pages 已提供匿名化圖片與清理後 ZIP，原始人物照片與課堂影片 URL 回傳 404。
-- 舊 commit 仍保存清理前的 ZIP、文件與人物媒體；若要從 GitHub 歷史移除，
-  需在取得明確核准後重寫歷史並 force-push。
+- 2026-08-28：取得使用者明確核准後重寫 `main` 歷史；清理前的 ZIP、PDF、
+  PPTX、人物媒體與舊簡報路徑已從先前 commits 移除，已清理版本只在最新
+  commit 重新加入。
+- 發布後需確認遠端 ref、GitHub Pages、移除檔案 URL 與下載檔 hash。歷史
+  重寫不能使曾公開的憑證失效，也不能控制既有 fork 或快取，因此密碼仍需
+  另行更換。
