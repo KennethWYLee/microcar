@@ -12,7 +12,7 @@
 
 ## 維護準則
 
-本專案後續維護需先遵循 `C:\Users\User\Documents\Lecture materials\CLAUDE.md`。實作時以先釐清假設、保持簡單、只做必要修改、修改後驗證為原則；若 `CLAUDE.md` 中有針對其他 codebase 的專用路徑規則，則不硬套到本靜態網站，但保留其謹慎變更與可驗證交付的精神。
+本專案後續維護先讀根目錄 `AGENTS.md` 與 `PROJECT.md`，確認教材來源、人工維護頁與產生器的範圍；工作規則以同目錄的 `CLAUDE.md` 保存相同副本。
 
 ## 目前 9 個主題
 
@@ -27,7 +27,7 @@
 9. `09 履帶車網路資訊流：V1-V5 遠端控制與影像串流`
 
 `09 履帶車網路資訊流` 來自
-`robodev/trackedcar/course_materials/course_tracked_car_v1_v5_complete`，
+`../NTUB_UGV/trackedcar/course_materials/course_tracked_car_v1_v5_complete`，
 目前整理 56 張基準版與 83 張課堂強化版到網站，不整包上傳開發資料夾。
 
 ## 網站頁面
@@ -35,7 +35,7 @@
 - `index.html`：首頁與 9 主題總覽。
 - `setup.html`：開始前設定，包含 `mango` 函式庫上傳、import 測試與馬達校正。
 - `bootcamp.html`：BootCamp 快速體驗課。
-- `firmware.html`：Firmware 區，依 Pico / Pico W / Pico 2 / Pico 2 W 板子名稱連到 MicroPython 官方下載頁，並提供對應表、刷機步驟與 Port 消失時的 flash_nuke 救援流程。
+- `firmware.html`：Firmware 區，依 Pico / Pico W / Pico 2 / Pico 2 W 板子名稱連到 MicroPython 官方下載頁，並提供對應表、刷機步驟與 Port 消失時的官方 flash 重設說明及清除工具發行頁入口。
 - `topic-01-intro.html` 到 `topic-05-project-cases.html`：五個小車核心主題。
 - `topic-06-bluetooth-car.html`：Flutter App 與 Pico BLE 藍芽遙控小車。
 - `topic-07-board-python.html`：依 `機器人程式設計實務-Python.pdf` 整理的電路板與腳位導讀。
@@ -46,9 +46,9 @@
 
 ## 教材來源與下載
 
-網站 repository 位於 `roboweb/`；microcar 的程式與課程教材來源位於
-`../robodev/microcar/`，trackedcar 的來源位於
-`../robodev/trackedcar/`。網站只保存經過篩選後需要公開的教材副本，不把
+網站 repository 位於 `NTUB_microcar_web/`；microcar 的程式與課程教材來源位於
+`../NTUB_UGV/microcar/`，trackedcar 的來源位於
+`../NTUB_UGV/trackedcar/`。網站只保存經過篩選後需要公開的教材副本，不把
 兩種車的完整研發資料一起上傳。
 
 `tools/build_case_topic_pages.py` 只重建 01-08 主題頁，並把核准公開的
@@ -119,7 +119,7 @@ Firmware 不再保存於網站 repo。請依板子名稱前往 MicroPython 官�
 本教材特別把「電腦本機端」與「Pico 板子端」分開說明。網站、PDF、PPT、Markdown 與下載素材會先留在電腦；只有 Pico 需要 import 的函式庫，或要直接執行的 MicroPython 程式，才需要用 Thonny 上傳到 Pico。
 
 ```text
-電腦本機 roboweb/
+電腦本機 NTUB_microcar_web/
 ├─ index.html / setup.html / topic-xx.html
 ├─ downloads/
 │  ├─ case-md/

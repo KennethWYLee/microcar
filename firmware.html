@@ -185,7 +185,7 @@
         <div class="section-heading">
           <p class="eyebrow">Solution</p>
           <h2>Thonny 沒有出現 Port 時</h2>
-          <p>如果今天刷完韌體後，Thonny 看不到 Pico 的 Port，可以先用 flash_nuke 清空板子的外部 flash，再重新刷入正確的 MicroPython 韌體。這是救援流程，不是一般上課每次都要做的步驟。</p>
+          <p>Thonny 看不到 Pico 的 Port 時，先檢查連線與板型；確定需要重設外部 flash 後，再依下方官方流程重新安裝 MicroPython。清除會刪除板子上的韌體、程式與檔案，能讀取時請先備份；這不是一般上課每次都要做的步驟。</p>
         </div>
         <div class="resource-roadmap">
           <article class="content-card resource-step">
@@ -195,15 +195,15 @@
           </article>
           <article class="content-card resource-step">
             <span class="zone-badge student">Recover 02</span>
-            <strong>拖入 flash_nuke.uf2 清空板子</strong>
-            <p>把 Raspberry Pi 官方的 flash nuke UF2 拖到剛出現的磁碟。板子會自動退出並重開，這一步會清空外部 flash，因此板子上的程式也會被清掉。</p>
-            <a class="button ghost block" href="https://www.raspberrypi.com/documentation/microcontrollers/pico-series.html#reset-flash-memory">查看官方說明</a>
-            <a class="button ghost block" href="https://datasheets.raspberrypi.com/soft/flash_nuke.uf2">官方 flash_nuke.uf2</a>
+            <strong>從官方入口下載清除用 UF2</strong>
+            <p>Raspberry Pi 官方目前提供 <code>nuke_universal.uf2</code>，可用於本頁列出的 Pico / Pico W（RP2040）與 Pico 2 / Pico 2 W（RP2350）。請從下方官方說明或發行頁取得檔案，再拖入 BOOTSEL 磁碟。</p>
+            <a class="button ghost block" href="https://www.raspberrypi.com/documentation/microcontrollers/pico-series.html#reset-flash-memory">查看官方重設說明</a>
+            <a class="button ghost block" href="https://github.com/raspberrypi/pico-sdk-prebuilts/releases">官方清除工具發行頁</a>
           </article>
           <article class="content-card resource-step">
             <span class="zone-badge student">Recover 03</span>
-            <strong>再進一次 BOOTSEL</strong>
-            <p>清空後，重新按住 <code>BOOTSEL</code> 接上 USB，讓電腦再次出現可拖曳 UF2 的磁碟。</p>
+            <strong>等待回到 BOOTSEL 磁碟</strong>
+            <p>清除完成後，工具會讓板子回到 <code>BOOTSEL</code> 模式。確認電腦再次出現 <code>RPI-RP2</code> 或 <code>RP2350</code> 磁碟後，再進行下一步。</p>
           </article>
           <article class="content-card resource-step">
             <span class="zone-badge student">Recover 04</span>

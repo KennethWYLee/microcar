@@ -1,25 +1,24 @@
 # 網頁設計進度紀錄
 
-最後更新：2026-08-28
+最後更新：2026-09-18（目前路徑與規則入口）
 
 ## 目前位置
 
-- 本機網站專案：`C:\Users\User\Documents\Lecture materials\roboweb`
+- 本機網站專案：`C:\Users\User\Documents\NTUB_microcar_web`
 - GitHub Repository：`https://github.com/KennethWYLee/microcar`
 - GitHub Pages：`https://kennethwylee.github.io/microcar/`
 - 發布分支：`main`
 
 ## 專案維護準則
 
-- 後續整份 `roboweb` 專案維護需先遵循 `C:\Users\User\Documents\Lecture materials\CLAUDE.md`。
-- 工作方式以先釐清假設、保持簡單、只做必要修改、修改後驗證為原則。
-- `CLAUDE.md` 中針對其他 codebase 的專用路徑規則不硬套到本靜態網站；但「不要亂改無關內容、不要覆蓋正式資料、驗證後再交付」仍作為本專案共同準則。
+- 先讀本目錄 `AGENTS.md`、`PROJECT.md` 與相關來源；`CLAUDE.md` 與規則入口保持相同內容。
+- 維護中的教材來源、產生器與人工維護頁各依其指定角色修改，完成後執行受影響的檢查。
 
 ## 本機開發來源
 
-- `C:\Users\User\Documents\Lecture materials\robodev\microcar\website_cases`：microcar 的 MicroPython 案例來源。
-- `C:\Users\User\Documents\Lecture materials\robodev\trackedcar\website_cases\09_Ameba82_智慧無人車`：trackedcar 主題可供網站整理的案例來源。
-- `C:\Users\User\Documents\Lecture materials\robodev\microcar\無人車網頁開發`：microcar 的 Flutter 介面、預覽輸出與藍牙控制整合素材。
+- `C:\Users\User\Documents\NTUB_UGV\microcar\website_cases`：microcar 的 MicroPython 案例來源。
+- `C:\Users\User\Documents\NTUB_UGV\trackedcar\website_cases\09_Ameba82_智慧無人車`：trackedcar 主題可供網站整理的案例來源。
+- `C:\Users\User\Documents\NTUB_UGV\microcar\無人車網頁開發`：microcar 的 Flutter 介面、預覽輸出與藍牙控制整合素材。
 - 上述來源都放在 `roboweb` 網站 repo 外；完成內容、授權與發布範圍檢查後，才把需要公開的副本放入網站正式路徑。
 
 ## 2026-08-28 移動網站 repository
@@ -142,3 +141,49 @@
 3. 逐步把 01-09 每個 case 或教材檔對應到明確的板子端檔案位置與電腦端檔案位置。
 4. 將 `robodev/microcar/website_cases` 視為日後網站程式碼的穩定來源，減少從舊資料夾取檔造成版本混亂。
 5. 若未來要把 AmebaAI / AmebaNN 車納入網站，另開延伸主題，不混入目前 Pico 小車與履帶車主線。
+
+
+## 2026-09-20 修正首頁與手機顯示
+
+使用者要求修正本次網站檢查發現的四項問題。本次修改範圍為 `index.html`、
+`script.js`、`styles.css`、`firmware.html`，同步更新 README 的 Firmware 說明
+與專案紀錄。保留開始工作前已有的來源路徑、規則與文件修改。
+
+- 原首頁在 390×667 畫面捲到九主題總覽時維持透明；改成 390×844 才出現。
+  移除 IntersectionObserver 與隱藏樣式，讓內容直接顯示，無須等待捲動動畫。
+- 合併首頁重複的主題、學習路線與逐項下載介紹，只保留一份九主題總覽。
+  保留 `topic-roadmap` 錨點、設定、BootCamp、下載與 Firmware 入口；下載檔仍由
+  下載區提供。390px 寬度的首頁高度約由 1.8 萬縮至 7,600 像素。
+- 首頁統一採既有的 01–05 核心順序與 06–09 延伸選讀說明，保留 06 先完成 03、
+  07 備課與除錯、08 延伸作品、09 需小車及通訊基礎的條件。
+- 移除載入頁面時將捲動位置拉回導覽列的動作；桌面段落跳轉預留導覽列高度，
+  手機使用較小間距。主題與救援段落跳轉後不再回到頁首或遮住標題。
+- 抽查主題 05 時發現教材段落與長網址使手機頁面超寬；限制內容欄寬度並允許
+  長網址換行。程式碼的空白與縮排保留，在程式區塊內橫向捲動。
+- Firmware 救援入口由舊的 `flash_nuke.uf2` 改為官方說明及發行頁，更新
+  `nuke_universal.uf2`、資料清除提醒、適用板型與清除後回到 BOOTSEL 的步驟。
+  不保存 UF2 檔案。
+
+韌體依據（2026-09-20 核對）：
+
+- [Raspberry Pi：Reset flash memory](https://www.raspberrypi.com/documentation/microcontrollers/pico-series.html#reset-flash-memory)
+- [Raspberry Pi：Pico SDK Prebuilt UF2s](https://github.com/raspberrypi/pico-sdk-prebuilts)
+- [官方工具發行頁](https://github.com/raspberrypi/pico-sdk-prebuilts/releases)
+
+本機驗證：
+
+- `tools/build_case_topic_pages.py --check` 通過；本次未重建或同步生成教材。
+- `tools/verify_site.py` 通過：19 個 HTML、649 個本機引用與錨點、12 個程式
+  載入路徑／8 個使用中的代碼、26 個 Python、6 個 ZIP/PPTX、4 個 PDF、2 個 7z，
+  以及 JavaScript 語法、既有網站與素材檢查。
+- 以瀏覽器檢查 390×667、390×844 首頁：九張主題卡存在、內容皆可見、無橫向
+  溢出；點擊首頁主題入口與捲動均正常。
+- 1280×900 桌面首頁及主題跳轉已檢查，主題標題在固定導覽列下方可見。
+- Firmware 桌面及 390×667 救援段落可讀；主題 05 在 390×667 無頁面橫向
+  溢出，程式碼維持區塊內捲動；主題 05 與 BootCamp 的複製按鈕回報「已複製」，
+  BootCamp 程式成功載入，該次瀏覽器記錄無 JavaScript 錯誤。
+- 本機原預覽位址受其他應用留下的瀏覽器快取干擾，已改用獨立連接埠測試，
+  不修改或清除其他應用資料。
+- 另一代理完成原始碼檢閱，確認主題入口、錨點、下載入口及既有內容條件保留。
+  以上為本機瀏覽器及靜態證據，未 commit、push、發布或測試實體硬體。
+  官方 UF2 未下載，二進位內容與 hash 未驗證；7z 檢查仍僅涵蓋既有檔頭檢查。

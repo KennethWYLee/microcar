@@ -12,7 +12,7 @@ from sanitize_public_assets import sanitize_pdf, sanitize_pptx
 
 
 REPO = Path(__file__).resolve().parents[1]
-COURSE_SOURCE_DIR = REPO.parent / "robodev"
+COURSE_SOURCE_DIR = REPO.parent / "NTUB_UGV"
 SOURCE_DIR = (
     COURSE_SOURCE_DIR
     / "microcar"

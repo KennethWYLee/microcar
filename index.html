@@ -42,15 +42,14 @@
       <section class="hero reveal">
         <div class="hero-copy">
           <p class="eyebrow">Topic-based Learning</p>
-          <h1>用 9 個主題完成 Raspberry Pi Pico 小車與履帶車課程</h1>
+          <h1>Raspberry Pi Pico 小車與履帶車課程</h1>
           <p class="hero-text">
-            本網站已改成依教材主題學習：從 LED、按鈕與狀態控制開始，逐步進入感測輸出、小車移動、無人車策略與專題化任務。
-            後續再加入藍芽遙控小車、Python 電路板教材、擺頭電扇應用與履帶車網路資訊流，讓課程可以從小車走到完整作品與真實系統除錯。
+            先完成開始前設定，再依序學習 01–05 小車核心主題。06–09 提供藍芽遙控、電路板教材、擺頭電扇與履帶車網路資訊流，可依需求與先備能力選讀。
           </p>
           <div class="hero-actions">
             <a class="button primary" href="setup.html">先做開始設定</a>
             <a class="button secondary" href="bootcamp.html">一小時 BootCamp</a>
-            <a class="button ghost" href="downloads.html">下載教材</a>
+            <a class="button ghost" href="#topic-roadmap">查看 9 個主題</a>
           </div>
           <div class="hero-points">
             <div class="point-card">
@@ -75,73 +74,6 @@
               <span>小車硬體與課堂實作</span>
             </div>
           </article>
-          <article class="gallery-card">
-            <img class="asset-preview" src="assets/control-board.png" alt="控制板示意">
-            <div class="gallery-caption">
-              <strong>Board</strong>
-              <span>控制板、腳位與輸出入</span>
-            </div>
-          </article>
-          <article class="gallery-card">
-            <img class="asset-preview" src="assets/fan-assembled.png" alt="擺頭電扇作品">
-            <div class="gallery-caption">
-              <strong>Project</strong>
-              <span>小車、藍芽、擺頭電扇與履帶車資訊流</span>
-            </div>
-          </article>
-        </div>
-      </section>
-
-
-      <section class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">Microcar Path</p>
-          <h2>從零到能操控小車的主線</h2>
-          <p>如果學生的目標是完整操控小車，建議先走這條主線。06-09 可以在核心能力完成後再作為進階、延伸與系統整合。</p>
-        </div>
-        <div class="resource-roadmap">
-          <article class="content-card resource-step">
-            <span class="zone-badge student">00</span>
-            <strong>開始前設定</strong>
-            <p>先讓 Thonny、MicroPython、mango 函式庫與馬達方向全部確認正確。</p>
-            <a class="button ghost" href="setup.html">前往這一步</a>
-          </article>
-          <article class="content-card resource-step">
-            <span class="zone-badge student">BootCamp</span>
-            <strong>一小時快速體驗</strong>
-            <p>用完整程式先讓小車前進、後退、左轉、右轉與停止，建立成功經驗。</p>
-            <a class="button ghost" href="bootcamp.html">前往這一步</a>
-          </article>
-          <article class="content-card resource-step">
-            <span class="zone-badge student">01</span>
-            <strong>輸出入與狀態</strong>
-            <p>用 LED、按鈕、狀態變數和 Shell 指令建立硬體控制直覺。</p>
-            <a class="button ghost" href="topic-01-intro.html">前往這一步</a>
-          </article>
-          <article class="content-card resource-step">
-            <span class="zone-badge student">02</span>
-            <strong>感測與回饋</strong>
-            <p>把蜂鳴器、RGB、超音波與 ADC 讀值轉成可以觀察的聲光反應。</p>
-            <a class="button ghost" href="topic-02-sensor-output.html">前往這一步</a>
-          </article>
-          <article class="content-card resource-step">
-            <span class="zone-badge student">03</span>
-            <strong>馬達與校正</strong>
-            <p>確認左右輪、方向、速度差與基本動作，讓小車可以穩定受控。</p>
-            <a class="button ghost" href="topic-03-car-motion.html">前往這一步</a>
-          </article>
-          <article class="content-card resource-step">
-            <span class="zone-badge student">04</span>
-            <strong>自走任務</strong>
-            <p>把馬達和感測器整合成避障、循跡、伺服掃描等無人車行為。</p>
-            <a class="button ghost" href="topic-04-autonomous-car.html">前往這一步</a>
-          </article>
-          <article class="content-card resource-step">
-            <span class="zone-badge student">05</span>
-            <strong>專題整合</strong>
-            <p>用狀態機、策略比較與循跡演算法完成可以展示與調參的作品。</p>
-            <a class="button ghost" href="topic-05-project-cases.html">前往這一步</a>
-          </article>
         </div>
       </section>
 
@@ -149,90 +81,88 @@
       <section class="section reveal">
         <div class="section-heading">
           <p class="eyebrow">Quick Start</p>
-          <h2>BootCamp 保留為快速體驗課</h2>
-          <p>BootCamp 是一小時活動入口，適合先讓學生用 Thonny 連上 Raspberry Pi Pico 小車，貼上程式並用鍵盤控制基本動作。它會保留在網站中，但不併入正式主題編號。</p>
+          <h2>先完成設定，再開始學習</h2>
+          <p>開始前設定是所有學習者的第一站。完成後可先參加一小時 BootCamp，或直接進入 01–05 小車核心主題。</p>
         </div>
         <div class="page-grid">
-          <article class="content-card tool-focus-card">
-            <span class="zone-badge student">BootCamp</span>
-            <h3>先完成連線與基本控制</h3>
-            <p>學生照著 12 個步驟操作：開啟 Thonny、建立新檔、貼上完整程式、按 Run，最後用 W / A / S / D / X 控制小車。</p>
-            <a class="button primary" href="bootcamp.html">打開 BootCamp</a>
+          <article class="content-card">
+            <h3>開始前設定</h3>
+            <p>確認 Thonny 連線、MicroPython、mango 函式庫與馬達方向，再開始後續練習。</p>
+            <a class="button primary" href="setup.html">前往開始設定</a>
           </article>
-          <article class="content-card tool-focus-card">
-            <span class="zone-badge teacher">正式主題</span>
-            <h3>BootCamp 之後再進入 9 主題</h3>
-            <p>完成快速體驗後，再依序進入入門、感測與輸出、小車移動、無人車、專題化、藍芽遙控、電路板教材、擺頭電扇應用與履帶車網路資訊流。</p>
-            <a class="button ghost" href="#topic-roadmap">查看 9 個主題</a>
+          <article class="content-card">
+            <h3>一小時 BootCamp</h3>
+            <p>照著 12 個步驟連接小車、貼上完整程式，用 W / A / S / D / X 體驗基本控制。這是快速體驗課，不列入正式主題編號。</p>
+            <a class="button secondary" href="bootcamp.html">打開 BootCamp</a>
           </article>
         </div>
       </section>
 
-      <section class="section product-band reveal">
+      <section id="topic-roadmap" class="section product-band reveal">
         <div class="section-heading">
           <p class="eyebrow">Current Topics</p>
-          <h2>目前網站主線改為 9 個教材主題</h2>
-          <p>01-05 是小車核心能力，06 是藍芽遙控延伸，07-08 把電路板與擺頭電扇作品整理成可授課應用，09 則整理履帶車遠端控制與影像串流的研發教材。</p>
+          <h2>9 個主題：核心學習與延伸應用</h2>
+          <p>01–05 建議依序學習，建立小車核心能力。06–09 可依需求與先備能力選讀：06 建議先完成 03；07 可供備課與除錯查閱；08 是延伸作品；09 適合已具備小車與通訊基礎的學習者。</p>
         </div>
         <div class="product-rail">
           <article class="product-panel product-primary">
-            <span class="zone-badge teacher">主題 01</span>
+            <span class="zone-badge teacher">主題 01 · 核心</span>
             <h3>01 入門：LED、按鈕與狀態控制</h3>
             <p>本主題讓學習者先理解輸出、輸入、判斷與狀態，適合作為 Raspberry Pi Pico 小車課程的起點。</p>
             <div class="chip-list compact"><span>LED</span><span>Button</span><span>State</span></div>
             <a class="button primary" href="topic-01-intro.html">進入主題 01</a>
           </article>
           <article class="product-panel product-teacher">
-            <span class="zone-badge teacher">主題 02</span>
+            <span class="zone-badge teacher">主題 02 · 核心</span>
             <h3>02 感測與輸出：蜂鳴器、RGB 與超音波</h3>
             <p>本主題從蜂鳴器與 RGB 輸出延伸到超音波距離感測，讓學生看見程式如何回應環境變化。</p>
             <div class="chip-list compact"><span>Buzzer</span><span>RGB</span><span>Ultrasonic</span></div>
             <a class="button primary" href="topic-02-sensor-output.html">進入主題 02</a>
           </article>
           <article class="product-panel product-student">
-            <span class="zone-badge teacher">主題 03</span>
+            <span class="zone-badge teacher">主題 03 · 核心</span>
             <h3>03 小車移動：馬達、速度與控制模組</h3>
             <p>本主題聚焦馬達方向、PWM 速度、左右輪差速與模組化，建立小車可以穩定移動的基礎。</p>
             <div class="chip-list compact"><span>Motor</span><span>PWM</span><span>Drive</span></div>
             <a class="button primary" href="topic-03-car-motion.html">進入主題 03</a>
           </article>
           <article class="product-panel product-advanced">
-            <span class="zone-badge teacher">主題 04</span>
+            <span class="zone-badge teacher">主題 04 · 核心</span>
             <h3>04 無人車：差速、避障、循跡與伺服掃描</h3>
             <p>本主題把差速控制、避障、循跡與伺服掃描整合成無人車應用，適合銜接較完整的小車任務。</p>
             <div class="chip-list compact"><span>Obstacle</span><span>Line</span><span>Servo</span></div>
             <a class="button primary" href="topic-04-autonomous-car.html">進入主題 04</a>
           </article>
           <article class="product-panel product-algorithm">
-            <span class="zone-badge teacher">主題 05</span>
+            <span class="zone-badge teacher">主題 05 · 核心</span>
             <h3>05 專題化：任務設計、策略比較與成果評量</h3>
             <p>本主題把前面學到的輸入、輸出、馬達、感測與循跡控制整合成任務挑戰，並加入規則式、P、PD、PID 循跡演算法 cases。</p>
             <div class="chip-list compact"><span>Project</span><span>Strategy</span><span>PID</span></div>
             <a class="button primary" href="topic-05-project-cases.html">進入主題 05</a>
           </article>
           <article class="product-panel product-advanced">
-            <span class="zone-badge teacher">主題 06</span>
+            <span class="zone-badge teacher">主題 06 · 延伸</span>
             <h3>06 藍芽遙控小車：Flutter App 與 Pico BLE</h3>
             <p>本主題是進階遙控單元，建議先完成 03 小車移動，再使用既有 Flutter 介面與 Pico BLE 小車程式完成手機控制。</p>
             <div class="chip-list compact"><span>Flutter</span><span>BLE</span><span>Remote</span></div>
             <a class="button primary" href="topic-06-bluetooth-car.html">進入主題 06</a>
           </article>
           <article class="product-panel product-primary">
-            <span class="zone-badge teacher">主題 07</span>
+            <span class="zone-badge teacher">主題 07 · 延伸</span>
             <h3>07 電路板教材：Python 控制與腳位導讀</h3>
             <p>本主題依照機器人程式設計實務-Python.pdf 與相容性驗證報告，整理 Raspberry Pi Pico 主板、腳位、輸入輸出與馬達控制的授課導讀。</p>
             <div class="chip-list compact"><span>Pico</span><span>Pinout</span><span>Python</span></div>
             <a class="button primary" href="topic-07-board-python.html">進入主題 07</a>
           </article>
           <article class="product-panel product-teacher">
-            <span class="zone-badge teacher">主題 08</span>
+            <span class="zone-badge teacher">主題 08 · 延伸</span>
             <h3>08 電路板應用：擺頭電扇</h3>
             <p>本主題是延伸作品單元，使用擺頭電扇-課程簡報整理風扇機構、Pico X2 腳位與 PWM 控制應用，不屬於小車核心必修。</p>
             <div class="chip-list compact"><span>Fan</span><span>Mechanism</span><span>PWM</span></div>
             <a class="button primary" href="topic-08-fan-application.html">進入主題 08</a>
           </article>
           <article class="product-panel product-advanced">
-            <span class="zone-badge teacher">主題 09</span>
+            <span class="zone-badge teacher">主題 09 · 延伸</span>
             <h3>09 履帶車網路資訊流</h3>
             <p>本主題整理履帶車 V1-V5 開發歷程，聚焦 UDP 控制、UART 轉接、AMB82、X3/RP2040、RTSP 影像串流、延遲與跨網段中繼。</p>
             <div class="chip-list compact"><span>Tracked Car</span><span>RTSP</span><span>UDP</span></div>
@@ -241,154 +171,21 @@
         </div>
       </section>
 
-      <section id="topic-roadmap" class="section reveal">
+      <section id="resources" class="section reveal">
         <div class="section-heading">
-          <p class="eyebrow">Topic Roadmap</p>
-          <h2>建議依序從主題 1 走到主題 9</h2>
-          <p>這個順序會先建立輸出入與狀態概念，再逐步走向移動控制、無人車策略、藍芽遙控、電路板作品應用與履帶車系統資訊流。</p>
-        </div>
-        <div class="page-grid-3">
-          <article class="content-card">
-            <span class="zone-badge student">主題 01</span>
-            <h3>01 入門：LED、按鈕與狀態控制</h3>
-            <p>從最小硬體控制開始建立程式直覺</p>
-            <a class="button ghost" href="topic-01-intro.html">打開主題頁</a>
-          </article>
-          <article class="content-card">
-            <span class="zone-badge student">主題 02</span>
-            <h3>02 感測與輸出：蜂鳴器、RGB 與超音波</h3>
-            <p>把感測資料轉成聲光回饋</p>
-            <a class="button ghost" href="topic-02-sensor-output.html">打開主題頁</a>
-          </article>
-          <article class="content-card">
-            <span class="zone-badge student">主題 03</span>
-            <h3>03 小車移動：馬達、速度與控制模組</h3>
-            <p>讓小車從單顆馬達走到雙輪控制</p>
-            <a class="button ghost" href="topic-03-car-motion.html">打開主題頁</a>
-          </article>
-          <article class="content-card">
-            <span class="zone-badge student">主題 04</span>
-            <h3>04 無人車：差速、避障、循跡與伺服掃描</h3>
-            <p>把感測器與馬達整合成自走策略</p>
-            <a class="button ghost" href="topic-04-autonomous-car.html">打開主題頁</a>
-          </article>
-          <article class="content-card">
-            <span class="zone-badge student">主題 05</span>
-            <h3>05 專題化：任務設計、策略比較與成果評量</h3>
-            <p>把多個技巧整合成可以展示的作品</p>
-            <a class="button ghost" href="topic-05-project-cases.html">打開主題頁</a>
-          </article>
-          <article class="content-card">
-            <span class="zone-badge student">主題 06</span>
-            <h3>06 藍芽遙控小車：Flutter App 與 Pico BLE</h3>
-            <p>把手機 App、藍芽通訊與小車端程式串成一個完整遙控專案</p>
-            <a class="button ghost" href="topic-06-bluetooth-car.html">打開主題頁</a>
-          </article>
-          <article class="content-card">
-            <span class="zone-badge student">主題 07</span>
-            <h3>07 電路板教材：Python 控制與腳位導讀</h3>
-            <p>不拆成基礎單元，而是用原 PDF 建立完整板子導讀與腳位對照</p>
-            <a class="button ghost" href="topic-07-board-python.html">打開主題頁</a>
-          </article>
-          <article class="content-card">
-            <span class="zone-badge student">主題 08</span>
-            <h3>08 電路板應用：擺頭電扇</h3>
-            <p>把電路板控制放進真實作品，從機構、電路到智慧控制完整整合</p>
-            <a class="button ghost" href="topic-08-fan-application.html">打開主題頁</a>
-          </article>
-          <article class="content-card">
-            <span class="zone-badge student">主題 09</span>
-            <h3>09 履帶車網路資訊流</h3>
-            <p>用 V1-V5 開發歷程理解 UDP、UART、RTSP、延遲與跨網段中繼</p>
-            <a class="button ghost" href="topic-09-tracked-car-info-flow.html">打開主題頁</a>
-          </article>
-        </div>
-      </section>
-
-      <section class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">Downloads</p>
-          <h2>教材檔與原始程式已放入下載區</h2>
-          <p>01-05 保留 Markdown 原始教材；06-09 則提供 Flutter 程式、Python PDF、擺頭電扇簡報與履帶車資訊流精簡教材等對應檔案。</p>
-        </div>
-        <div class="download-grid">
-          <article class="download-card">
-            <span class="download-type">主題 01</span>
-            <h3>01 入門：LED、按鈕與狀態控制</h3>
-            <p>本主題讓學習者先理解輸出、輸入、判斷與狀態，適合作為 Raspberry Pi Pico 小車課程的起點。</p>
-            <a class="button ghost block" href="downloads/case-md/01_入門_cases.md">下載 Markdown</a>
-          </article>
-          <article class="download-card">
-            <span class="download-type">主題 02</span>
-            <h3>02 感測與輸出：蜂鳴器、RGB 與超音波</h3>
-            <p>本主題從蜂鳴器與 RGB 輸出延伸到超音波距離感測，讓學生看見程式如何回應環境變化。</p>
-            <a class="button ghost block" href="downloads/case-md/02_感測輸出_cases.md">下載 Markdown</a>
-          </article>
-          <article class="download-card">
-            <span class="download-type">主題 03</span>
-            <h3>03 小車移動：馬達、速度與控制模組</h3>
-            <p>本主題聚焦馬達方向、PWM 速度、左右輪差速與模組化，建立小車可以穩定移動的基礎。</p>
-            <a class="button ghost block" href="downloads/case-md/03_小車移動_cases.md">下載 Markdown</a>
-          </article>
-          <article class="download-card">
-            <span class="download-type">主題 04</span>
-            <h3>04 無人車：差速、避障、循跡與伺服掃描</h3>
-            <p>本主題把差速控制、避障、循跡與伺服掃描整合成無人車應用，適合銜接較完整的小車任務。</p>
-            <a class="button ghost block" href="downloads/case-md/04_無人車_cases.md">下載 Markdown</a>
-          </article>
-          <article class="download-card">
-            <span class="download-type">主題 05</span>
-            <h3>05 專題化：任務設計、策略比較與成果評量</h3>
-            <p>本主題把前面學到的輸入、輸出、馬達、感測與循跡控制整合成任務挑戰，並加入規則式、P、PD、PID 循跡演算法 cases。</p>
-            <a class="button ghost block" href="downloads/case-md/05_專題化_cases.md">下載 Markdown</a>
-          </article>
-          <article class="download-card">
-            <span class="download-type">主題 06</span>
-            <h3>06 藍芽遙控小車：Flutter App 與 Pico BLE</h3>
-            <p>本主題是進階遙控單元，建議先完成 03 小車移動，再使用既有 Flutter 介面與 Pico BLE 小車程式完成手機控制。</p>
-            <a class="button ghost block" href="downloads/topic-06-bluetooth-car/main.dart">下載 Flutter main.dart</a>
-          </article>
-          <article class="download-card">
-            <span class="download-type">主題 07</span>
-            <h3>07 電路板教材：Python 控制與腳位導讀</h3>
-            <p>本主題依照機器人程式設計實務-Python.pdf 與相容性驗證報告，整理 Raspberry Pi Pico 主板、腳位、輸入輸出與馬達控制的授課導讀。</p>
-            <a class="button ghost block" href="downloads/robot-programming-practice-python.pdf">下載 Python PDF</a>
-          </article>
-          <article class="download-card">
-            <span class="download-type">主題 08</span>
-            <h3>08 電路板應用：擺頭電扇</h3>
-            <p>本主題是延伸作品單元，使用擺頭電扇-課程簡報整理風扇機構、Pico X2 腳位與 PWM 控制應用，不屬於小車核心必修。</p>
-            <a class="button ghost block" href="downloads/topic-08-fan-application/fan-course-slides.pptx">下載擺頭電扇簡報</a>
-          </article>
-          <article class="download-card">
-            <span class="download-type">主題 09</span>
-            <h3>09 履帶車網路資訊流</h3>
-            <p>本主題整理履帶車 V1-V5 開發歷程，提供 56 張基準版與 83 張課堂強化版。</p>
-            <a class="button primary block" href="https://micropython.org/download/RPI_PICO/">Raspberry Pi Pico 官方韌體</a>
-            <a class="button ghost block" href="downloads/topic-09-tracked-car-info-flow/tracked-car-v1-v5-56slides.pdf">下載 56 張 PDF</a>
-            <a class="button primary block" href="downloads/topic-09-tracked-car-info-flow/tracked-car-v1-v5-83slides-classroom.pdf">下載 83 張 PDF</a>
-          </article>
-        </div>
-      </section>
-
-      <section class="section reveal">
-        <div class="section-heading">
-          <p class="eyebrow">Firmware</p>
-          <h2>韌體改連官方下載頁</h2>
-          <p>如果你需要替 Raspberry Pi Pico / Pico W / Pico 2 / Pico 2 W 更新韌體，請到 Firmware 區依板子名稱前往 MicroPython 官方下載頁。</p>
+          <p class="eyebrow">Downloads &amp; Firmware</p>
+          <h2>教材下載與韌體設定</h2>
         </div>
         <div class="page-grid">
           <article class="content-card">
-            <span class="zone-badge teacher">Firmware</span>
-            <h3>4 種板子對應 4 個官方頁</h3>
-            <p>已整理 Raspberry Pi Pico、Pico W、Pico 2、Pico 2 W 的官方下載入口，並標出 RP2040 / RP2350 與 W / 非 W 的差異。</p>
-            <a class="button primary" href="firmware.html">打開 Firmware 區</a>
+            <h3>依主題下載教材</h3>
+            <p>01–05 提供 Markdown 教材；06–09 提供 Flutter 程式、Python PDF、擺頭電扇簡報，以及履帶車 56 張與 83 張授課教材。</p>
+            <a class="button primary" href="downloads.html">前往下載區</a>
           </article>
           <article class="content-card">
-            <span class="zone-badge student">Cloud</span>
-            <h3>不要從本站下載韌體</h3>
-            <p>韌體由 MicroPython 官方頁維護，本網站只提供板子名稱與官方入口，避免本地檔案過期。</p>
-            <a class="button ghost" href="downloads.html">先看下載總覽</a>
+            <h3>依板型選擇官方韌體</h3>
+            <p>查看 Pico、Pico W、Pico 2、Pico 2 W 的官方下載入口、刷機步驟與 Port 消失時的處理方式。</p>
+            <a class="button ghost" href="firmware.html">前往 Firmware 區</a>
           </article>
         </div>
       </section>

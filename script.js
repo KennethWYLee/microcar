@@ -1,35 +1,3 @@
-document.documentElement.classList.add("js");
-
-const revealNodes = document.querySelectorAll(".reveal");
-
-if (revealNodes.length) {
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.16 }
-  );
-
-  revealNodes.forEach(node => observer.observe(node));
-}
-
-const activeNavLink = document.querySelector(".site-nav a[aria-current='page']");
-
-if (activeNavLink) {
-  requestAnimationFrame(() => {
-    activeNavLink.scrollIntoView({
-      behavior: "auto",
-      block: "nearest",
-      inline: "center"
-    });
-  });
-}
-
 const codePages = {
   "keyboard-car-control": {
     path: "downloads/keyboard-car-control.py",
