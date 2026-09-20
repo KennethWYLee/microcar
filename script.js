@@ -1,3 +1,70 @@
+const siteHeader = document.querySelector(".site-header");
+const siteNav = siteHeader?.querySelector(".site-nav");
+
+if (siteHeader && siteNav) {
+  const mobileNav = window.matchMedia("(max-width: 820px)");
+  const controls = document.createElement("div");
+  controls.className = "nav-controls";
+
+  const setupLink = siteNav.querySelector('a[href="setup.html"]');
+  if (setupLink) {
+    const shortcut = setupLink.cloneNode(true);
+    shortcut.className = "button primary nav-setup";
+    controls.append(shortcut);
+  }
+
+  const toggle = document.createElement("button");
+  toggle.type = "button";
+  toggle.className = "button ghost nav-toggle";
+  siteNav.id = siteNav.id || "site-navigation";
+  toggle.setAttribute("aria-controls", siteNav.id);
+  controls.append(toggle);
+
+  const setNavOpen = open => {
+    siteHeader.classList.toggle("nav-open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.textContent = open ? "收合選單" : "主題選單";
+  };
+
+  toggle.addEventListener("click", () => {
+    setNavOpen(toggle.getAttribute("aria-expanded") !== "true");
+  });
+  siteHeader.addEventListener("keydown", event => {
+    if (event.key === "Escape" && mobileNav.matches && siteHeader.classList.contains("nav-open")) {
+      setNavOpen(false);
+      toggle.focus();
+    }
+  });
+  siteNav.addEventListener("click", event => {
+    if (mobileNav.matches && event.target.closest("a")) {
+      setNavOpen(false);
+    }
+  });
+  let focusedShortcut = null;
+  controls.addEventListener("focusin", event => {
+    focusedShortcut = event.target;
+  });
+  controls.addEventListener("focusout", () => {
+    if (mobileNav.matches) {
+      focusedShortcut = null;
+    }
+  });
+  mobileNav.addEventListener("change", () => {
+    if (mobileNav.matches && siteNav.contains(document.activeElement)) {
+      toggle.focus();
+    } else if (!mobileNav.matches && focusedShortcut) {
+      const destination = focusedShortcut.classList.contains("nav-setup") ? setupLink : siteNav.querySelector("a");
+      destination?.focus();
+      focusedShortcut = null;
+    }
+    setNavOpen(false);
+  });
+
+  setNavOpen(false);
+  siteHeader.insertBefore(controls, siteNav);
+  siteHeader.classList.add("nav-ready");
+}
+
 const codePages = {
   "keyboard-car-control": {
     path: "downloads/keyboard-car-control.py",

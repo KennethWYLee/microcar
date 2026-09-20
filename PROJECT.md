@@ -3,7 +3,7 @@
 > 工作規則見本目錄 `AGENTS.md`，並遵循使用者的全域指示；本檔記錄網站 repository 的來源、發布邊界、
 > 維護方式與目前狀態。
 
-- 最後盤點日期：2026-09-20（首頁、手機顯示與韌體救援入口）
+- 最後盤點日期：2026-09-20（首頁、導覽、字型、平板排版與韌體救援入口）
 - 歷史名稱：`roboweb`，先前記錄為使用者於 2026-08-28 指定的資料夾名稱。
 - 本機位置：`C:\Users\User\Documents\NTUB_microcar_web`
 - GitHub repository：`https://github.com/KennethWYLee/microcar`
