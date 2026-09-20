@@ -560,7 +560,7 @@ FILE_LOCATION_GUIDES: dict[str, dict[str, tuple[str, ...] | str]] = {
         "computer_tree": (
             "downloads/topic-06-bluetooth-car/",
             "├─ main.dart                  ← Flutter App 主畫面",
-            "├─ controler_ble.7z           ← App 專案壓縮檔",
+            "├─ controler_ble.7z           ← Pico 端 Python 程式壓縮檔",
             "└─ flutter-app-preview.png    ← 網頁預覽圖",
         ),
         "pico_title": "Raspberry Pi Pico 端",
