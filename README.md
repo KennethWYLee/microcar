@@ -71,10 +71,39 @@ python -B tools/build_case_topic_pages.py --check
 python -B tools/verify_site.py
 ```
 
+## 網站介面套件與搜尋
+
+網站使用固定版本的 [Lucide](https://github.com/lucide-icons/lucide) 圖示、
+[Fuse.js](https://github.com/krisk/Fuse) 教材搜尋及
+[Prism](https://github.com/PrismJS/prism) 程式碼配色。
+套件檔案隨網站放在 `assets/vendor/`，瀏覽時不需向 CDN 取得程式。
+完整授權、固定版本與雜湊見該目錄及 `NOTICE.md`。
+
+`assets/site-ui.css` 整理共用排版，`assets/site-tools.js` 提供搜尋視窗。
+搜尋只使用目前公開導覽所連到的 HTML 標題、段落、案例入口與主題標籤；
+不讀取完整教材來源、下載檔或私人資料。搜尋庫與索引在第一次開啟搜尋時載入。
+Python 與 Dart 配色保留程式原文；複製按鈕仍複製程式文字。
+
+網頁內容或教材標題更新後，重建並核對搜尋索引：
+
+```powershell
+python -B tools/build_ui_search_index.py
+python -B tools/build_ui_search_index.py --check
+python -B tools/vendor_ui_packages.py --check
+python -B tools/verify_site.py
+```
+
+套件的 `--check` 只驗證本機檔案，不連網或改檔。需要重建相同版本的套件資產時，
+執行 `python -B tools/vendor_ui_packages.py`，工具會驗證固定來源的 SHA-256。
+若要升級版本，需重新核對上游、授權、來源雜湊與網站互動。
+
+## 網站檢查涵蓋範圍
+
 此指令檢查本機連結與頁內錨點、圖片替代文字、程式檢視器對應、Python 與
 JavaScript 語法、ZIP/PPTX 結構、PDF/7z 檔頭、下載檔中的 Wi-Fi 值、文件與
 圖片中繼資料、未匿名化的原始課堂媒體、程式碼可讀性樣式，以及網站是否誤放
-本機 UF2。它不取代實體車測試或人工畫面檢查。
+本機 UF2，另核對介面套件檔案雜湊、網站 JavaScript 與搜尋索引是否過期。
+它不取代實體車測試或人工畫面檢查。
 
 公開下載檔如需從本機教材重新同步，產生器會在複製後移除 PDF/PPTX 的個人
 中繼資料與簡報中的電子郵件。另可執行下列指令，重新清理目前下載區中的

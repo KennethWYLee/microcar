@@ -36,7 +36,7 @@ TRACKED_CAR_COURSE_DIR = (
     / "course_tracked_car_v1_v5_complete"
 )
 DOWNLOAD_TOPIC_09_DIR = REPO / "downloads" / "topic-09-tracked-car-info-flow"
-ASSET_VERSION = "20260920-layout"
+ASSET_VERSION = "20261026-ui"
 
 # These pages contain hand-maintained content that this script must not overwrite.
 MANUALLY_MAINTAINED_PAGES = (
@@ -908,6 +908,7 @@ def render_firmware_page() -> str:
   <title>Firmware 區 | Raspberry Pi Pico 小車主題教材</title>
   <meta name="description" content="下載 Raspberry Pi Pico / Pico W / Pico 2 / Pico 2 W 對應的 mango lite UF2 firmware，並查看板子對應表與刷機步驟。">
   <link rel="stylesheet" href="styles.css?v={ASSET_VERSION}">
+  <link rel="stylesheet" href="assets/site-ui.css?v={ASSET_VERSION}">
 </head>
 <body class="downloads-page">
   <div class="page-shell">
@@ -1028,7 +1029,9 @@ def render_firmware_page() -> str:
     </main>
 {footer_html()}
   </div>
+  <script src="assets/vendor/prism/prism.min.js" data-manual></script>
   <script src="script.js?v={ASSET_VERSION}"></script>
+  <script type="module" src="assets/site-tools.js?v={ASSET_VERSION}"></script>
 </body>
 </html>
 """
@@ -1241,6 +1244,7 @@ def render_topic_page(topic: Topic) -> str:
   <title>{html.escape(topic.title)} | Raspberry Pi Pico 小車主題教材</title>
   <meta name="description" content="{html.escape(topic.summary)}">
   <link rel="stylesheet" href="styles.css?v={ASSET_VERSION}">
+  <link rel="stylesheet" href="assets/site-ui.css?v={ASSET_VERSION}">
 </head>
 <body class="topic-page">
   <div class="page-shell">
@@ -1336,7 +1340,9 @@ def render_topic_page(topic: Topic) -> str:
     </main>
 {footer_html()}
   </div>
+  <script src="assets/vendor/prism/prism.min.js" data-manual></script>
   <script src="script.js?v={ASSET_VERSION}"></script>
+  <script type="module" src="assets/site-tools.js?v={ASSET_VERSION}"></script>
 </body>
 </html>
 """
@@ -1372,6 +1378,7 @@ def render_static_topic_page(topic: StaticTopic, body_html: str) -> str:
   <title>{html.escape(topic.title)} | Raspberry Pi Pico 小車主題教材</title>
   <meta name="description" content="{html.escape(topic.summary)}">
   <link rel="stylesheet" href="styles.css?v={ASSET_VERSION}">
+  <link rel="stylesheet" href="assets/site-ui.css?v={ASSET_VERSION}">
 </head>
 <body class="topic-page">
   <div class="page-shell">
@@ -1436,7 +1443,9 @@ def render_static_topic_page(topic: StaticTopic, body_html: str) -> str:
     </main>
 {footer_html()}
   </div>
+  <script src="assets/vendor/prism/prism.min.js" data-manual></script>
   <script src="script.js?v={ASSET_VERSION}"></script>
+  <script type="module" src="assets/site-tools.js?v={ASSET_VERSION}"></script>
 </body>
 </html>
 """
@@ -1896,6 +1905,7 @@ stop()"""
   <title>開始前設定 | Raspberry Pi Pico 小車主題教材</title>
   <meta name="description" content="開始 Raspberry Pi Pico 小車課程前，先完成 Thonny、MicroPython、mango 函式庫、馬達校正與自學檢查。">
   <link rel="stylesheet" href="styles.css?v={ASSET_VERSION}">
+  <link rel="stylesheet" href="assets/site-ui.css?v={ASSET_VERSION}">
 </head>
 <body class="topic-page">
   <div class="page-shell">
@@ -2007,7 +2017,9 @@ stop()"""
     </main>
 {footer_html()}
   </div>
+  <script src="assets/vendor/prism/prism.min.js" data-manual></script>
   <script src="script.js?v={ASSET_VERSION}"></script>
+  <script type="module" src="assets/site-tools.js?v={ASSET_VERSION}"></script>
 </body>
 </html>
 """
@@ -2069,6 +2081,7 @@ def render_index() -> str:
   <title>Raspberry Pi Pico 小車主題教材</title>
   <meta name="description" content="以 8 個主題整理 Raspberry Pi Pico 小車教材：入門、感測輸出、小車移動、無人車、專題化、藍芽遙控、電路板教材與擺頭電扇應用。">
   <link rel="stylesheet" href="styles.css?v={ASSET_VERSION}">
+  <link rel="stylesheet" href="assets/site-ui.css?v={ASSET_VERSION}">
 </head>
 <body class="home-page">
   <div class="page-shell">
@@ -2209,7 +2222,9 @@ def render_index() -> str:
     </main>
 {footer_html()}
   </div>
+  <script src="assets/vendor/prism/prism.min.js" data-manual></script>
   <script src="script.js?v={ASSET_VERSION}"></script>
+  <script type="module" src="assets/site-tools.js?v={ASSET_VERSION}"></script>
 </body>
 </html>
 """
@@ -2241,6 +2256,7 @@ def render_downloads() -> str:
   <title>下載區 | Raspberry Pi Pico 小車主題教材</title>
   <meta name="description" content="下載 Raspberry Pi Pico 小車 8 個主題教材、原始程式、PDF 與擺頭電扇簡報。">
   <link rel="stylesheet" href="styles.css?v={ASSET_VERSION}">
+  <link rel="stylesheet" href="assets/site-ui.css?v={ASSET_VERSION}">
 </head>
 <body class="downloads-page">
   <div class="page-shell">
@@ -2370,7 +2386,9 @@ def render_downloads() -> str:
     </main>
 {footer_html()}
   </div>
+  <script src="assets/vendor/prism/prism.min.js" data-manual></script>
   <script src="script.js?v={ASSET_VERSION}"></script>
+  <script type="module" src="assets/site-tools.js?v={ASSET_VERSION}"></script>
 </body>
 </html>
 """

@@ -1,0 +1,191 @@
+{
+  "outputs": {
+    ".gitattributes": {
+      "bytes": 62,
+      "sha256": "b080964a70fa12d2d978b368a6f1f3e165c02e084841086816b81ba830fc1a49"
+    },
+    "README.md": {
+      "bytes": 2105,
+      "sha256": "ef1acc31dffa1060d62ea005d66748e0c4cafbfab3e6f7c831a626e27cb0e47f"
+    },
+    "fuse/LICENSE": {
+      "bytes": 11343,
+      "sha256": "cc807e3caa26cdee316bab2ff6fdb508a2f619b74959fe59e513ef6e61635ebe"
+    },
+    "fuse/fuse.min.mjs": {
+      "bytes": 26095,
+      "sha256": "5ab524d12492bb233568e9600046e1aaa9623d36ebe689589144f7dc9b1da6f7"
+    },
+    "lucide/LICENSE": {
+      "bytes": 3208,
+      "sha256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57"
+    },
+    "lucide/icons.svg": {
+      "bytes": 6557,
+      "sha256": "9bad2e509967befe6396e0a96fca51a4f206d6ac3fc67a0c0ae79a059b194af9"
+    },
+    "prism/LICENSE": {
+      "bytes": 1066,
+      "sha256": "2b947f0901a7ffcf08a89957da9783c0e9c6e72cb6ce8e959f501ab5409e4d2b"
+    },
+    "prism/prism.min.js": {
+      "bytes": 11944,
+      "sha256": "c747e8cb3f543bf28466a0162183951f59ee264cfbf5dd7dc801f8a748645de2"
+    }
+  },
+  "packages": {
+    "fuse": {
+      "license": "Apache-2.0",
+      "repository": "https://github.com/krisk/Fuse",
+      "transformation": "Unmodified full minified ES module.",
+      "version": "7.5.0"
+    },
+    "lucide": {
+      "license": "ISC; MIT for Feather-derived icons (see full LICENSE)",
+      "repository": "https://github.com/lucide-icons/lucide",
+      "transformation": "Selected SVG geometry combined into symbols; code-2 is the upstream code-xml alias.",
+      "version": "1.61.0"
+    },
+    "prism": {
+      "license": "MIT",
+      "repository": "https://github.com/PrismJS/prism",
+      "transformation": "Concatenated core, Python, C-like and Dart components; individual component bytes unchanged.",
+      "version": "1.30.0"
+    }
+  },
+  "schema_version": 1,
+  "sources": {
+    "fuse/LICENSE": {
+      "sha256": "cc807e3caa26cdee316bab2ff6fdb508a2f619b74959fe59e513ef6e61635ebe",
+      "url": "https://raw.githubusercontent.com/krisk/Fuse/v7.5.0/LICENSE"
+    },
+    "fuse/fuse.min.mjs": {
+      "sha256": "5ab524d12492bb233568e9600046e1aaa9623d36ebe689589144f7dc9b1da6f7",
+      "url": "https://raw.githubusercontent.com/krisk/Fuse/v7.5.0/dist/fuse.min.mjs"
+    },
+    "lucide/LICENSE": {
+      "sha256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/1.61.0/LICENSE"
+    },
+    "lucide/alias-code-2": {
+      "sha256": "15e854f007aa9fbda5799b00468bc46d3c47582c404f549d79b4bac79b733e2b",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/1.61.0/icons/code-xml.json"
+    },
+    "lucide/arrow-right": {
+      "sha256": "288397fdb73bb4f783cf9eabb726ff47357df1d4e3f1201dd748090579f108b9",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/1.61.0/icons/arrow-right.svg"
+    },
+    "lucide/arrow-up-right": {
+      "sha256": "50b2503b9d11881142255466b7e3461d022b919735841c321d72003ac9959fe1",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/1.61.0/icons/arrow-up-right.svg"
+    },
+    "lucide/book-open": {
+      "sha256": "9b9bed0ff057283d5c5c5a1c71f8d3e927db26a56639603a92fdf7b25961510e",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/1.61.0/icons/book-open.svg"
+    },
+    "lucide/car": {
+      "sha256": "6d70bc146ca53b9c140a859319df471616c1ee6758bfb31a346d549d1fe92211",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/1.61.0/icons/car.svg"
+    },
+    "lucide/check": {
+      "sha256": "7f33acc9a77a61659531044525fc008edebe215bf4dcf1c789c8674ad3277db0",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/1.61.0/icons/check.svg"
+    },
+    "lucide/chevron-down": {
+      "sha256": "66ea878e72ed3488bb3b464c39dfdccee8d1f78e560dccea40e5e12da0e87e87",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/1.61.0/icons/chevron-down.svg"
+    },
+    "lucide/circuit-board": {
+      "sha256": "30abef5cc7eaa8fe6121ae4a281c0144cb47e5b73d4ef6b265634c85757f4a66",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/1.61.0/icons/circuit-board.svg"
+    },
+    "lucide/clock": {
+      "sha256": "e9d3e3acf4d1c280fcf8092293439dc0a4756a908ceb859de144b12451cd1cb9",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/1.61.0/icons/clock.svg"
+    },
+    "lucide/code-2": {
+      "sha256": "a6d2110227be375be21da7324d3c09262c1bf019d06bdeab356d515342ab7cce",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/1.61.0/icons/code-xml.svg"
+    },
+    "lucide/compass": {
+      "sha256": "c5a4d147bf48424f48b514712dd61c1b07cb689612a7baef87c88870092c1659",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/1.61.0/icons/compass.svg"
+    },
+    "lucide/copy": {
+      "sha256": "ea80e566c7a12628a447cb53179b19aea4f60b9143e2becd0d0f20bf260e5718",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/1.61.0/icons/copy.svg"
+    },
+    "lucide/cpu": {
+      "sha256": "ec83bb69ec029d367d749afc445b39c8e95891ebf99b0400652677c2b149b99c",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/1.61.0/icons/cpu.svg"
+    },
+    "lucide/download": {
+      "sha256": "3daeee13ded5a3afa2198b1bb4e2262d163922f97d96ac6ff9953e8ed4fe039d",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/1.61.0/icons/download.svg"
+    },
+    "lucide/fan": {
+      "sha256": "6ed585fa7a183086480baf6aaeb531cbe65e977222c6462dcb1e4662a6744b54",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/1.61.0/icons/fan.svg"
+    },
+    "lucide/lightbulb": {
+      "sha256": "e33bbec15b1e64cca958e086850f951c0dc2201cd5778bb3695fda3cb6ea457d",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/1.61.0/icons/lightbulb.svg"
+    },
+    "lucide/menu": {
+      "sha256": "af6491988ac1ba30dc5414f485bc48713e957e1edb0fbef4a0dd8691c3c21598",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/1.61.0/icons/menu.svg"
+    },
+    "lucide/network": {
+      "sha256": "626be730feea1e5ea7539fbf78b4a3fcb927ce5d7dc43364f2216908672ac792",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/1.61.0/icons/network.svg"
+    },
+    "lucide/radio": {
+      "sha256": "e55ef723902350caaabb68c8814ba57c4c2d237e0747a5f0520624e6f2f8c861",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/1.61.0/icons/radio.svg"
+    },
+    "lucide/search": {
+      "sha256": "283d371c2e433817bb9c0c8310caa6c77fa4177c0f4f1168d9c83b97af7389dc",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/1.61.0/icons/search.svg"
+    },
+    "lucide/settings": {
+      "sha256": "0ae27fd0f81999229e3127ac96c5b32edfea448e291d509e76212b917551d66b",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/1.61.0/icons/settings.svg"
+    },
+    "lucide/sliders-horizontal": {
+      "sha256": "e43a00e5eb684e6cbb61083bed2528d7a3fa5f265693eb2b5f314cd432aa65f4",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/1.61.0/icons/sliders-horizontal.svg"
+    },
+    "lucide/sparkles": {
+      "sha256": "f5499f33f09d7158151e9bd2ec0faf79ff8fb57292f84fdd7286d96d0f0424d8",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/1.61.0/icons/sparkles.svg"
+    },
+    "lucide/terminal": {
+      "sha256": "4f9b6488b237757d5cb615ccd07502fa99774826839e2a99017784bdb2596f1a",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/1.61.0/icons/terminal.svg"
+    },
+    "lucide/x": {
+      "sha256": "4a9cdab38fbb96162e7dace28e33f4ca0e49d8963a6162abc3d4691b7d675117",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/1.61.0/icons/x.svg"
+    },
+    "prism/LICENSE": {
+      "sha256": "2b947f0901a7ffcf08a89957da9783c0e9c6e72cb6ce8e959f501ab5409e4d2b",
+      "url": "https://raw.githubusercontent.com/PrismJS/prism/v1.30.0/LICENSE"
+    },
+    "prism/clike": {
+      "sha256": "c76ba4e240932bdc75546be30e550f5ba5e13815ff71511c76e9e27ac3072444",
+      "url": "https://raw.githubusercontent.com/PrismJS/prism/v1.30.0/components/prism-clike.min.js"
+    },
+    "prism/core": {
+      "sha256": "6caad316dd991f24f8004e0b9c19c055cb5829ff65e973fbee406f96d81b8e7e",
+      "url": "https://raw.githubusercontent.com/PrismJS/prism/v1.30.0/components/prism-core.min.js"
+    },
+    "prism/dart": {
+      "sha256": "906161333796982dcfee193b58d1cc7e1bf953c158bb25cfd07bf37c85df5e11",
+      "url": "https://raw.githubusercontent.com/PrismJS/prism/v1.30.0/components/prism-dart.min.js"
+    },
+    "prism/python": {
+      "sha256": "ed4385685bcf2d4935c8dbbab4bde16603da1329e092d2bf36c3dadd67e9a85c",
+      "url": "https://raw.githubusercontent.com/PrismJS/prism/v1.30.0/components/prism-python.min.js"
+    }
+  }
+}

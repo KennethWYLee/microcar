@@ -3,9 +3,9 @@
 > 工作規則見本目錄 `AGENTS.md`，並遵循使用者的全域指示；本檔記錄網站 repository 的來源、發布邊界、
 > 維護方式與目前狀態。
 
-- 最後盤點日期：2026-09-20（首頁、導覽、字型、平板排版與韌體救援入口）
+- 最後盤點日期：2026-10-26（GitHub 介面套件、教材搜尋與閱讀排版）
 - 歷史名稱：`roboweb`，先前記錄為使用者於 2026-08-28 指定的資料夾名稱。
-- 本機位置：`C:\Users\User\Documents\NTUB_microcar_web`
+- 本機位置：`C:\Users\User\Documents\projects\NTUB_microcar_web`
 - GitHub repository：`https://github.com/KennethWYLee/microcar`
 - GitHub Pages：`https://kennethwylee.github.io/microcar/`
 - Repository：獨立 Git repository，不再巢狀放在 `robodev/`。
@@ -92,6 +92,16 @@ python -B tools/verify_site.py
   已驗證的專案規則、來源路徑與維護紀錄；公開網站部署結果需於推送後另行確認。
 
 ## 整理決策
+
+- 2026-10-26：依使用者要求選用 GitHub 套件改善網站介面，採固定版本
+  Lucide 1.61.0、Fuse.js 7.5.0 與 Prism 1.30.0，資產及完整授權保存於
+  `assets/vendor/`。不依賴瀏覽時取得外部 CDN 程式。
+- 共用排版使用 `assets/site-ui.css`，搜尋互動使用 `assets/site-tools.js`；
+  主題內容、課程順序及硬體程式仍由既有來源與產生器維護。
+- 公開搜尋索引由 `tools/build_ui_search_index.py` 從公開導覽頁的標題、
+  可跳轉段落、案例入口與主題標籤產生；不掃描來源專案、私人檔案或下載內容。
+- 目前建置依產生器的 `COURSE_SOURCE_DIR = ../NTUB_UGV` 解析；
+  舊搬移前的絕對路徑保留為歷史紀錄，不作為建置依據。
 
 - 2026-08-28：完整網站 repository 從 `robodev/webdev/` 移至工作區根層的
   `roboweb/`；保留 `.git`、commit 歷史、branch 與 remote。

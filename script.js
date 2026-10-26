@@ -1,15 +1,34 @@
+const createSiteIcon = name => {
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("class", "site-icon");
+  svg.setAttribute("viewBox", "0 0 24 24");
+  svg.setAttribute("aria-hidden", "true");
+  svg.setAttribute("focusable", "false");
+  const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+  use.setAttribute("href", `assets/vendor/lucide/icons.svg#${name}`);
+  svg.append(use);
+  return svg;
+};
+
+const setIconLabel = (node, label, icon) => {
+  const text = document.createElement("span");
+  text.textContent = label;
+  node.replaceChildren(createSiteIcon(icon), text);
+};
+
 const siteHeader = document.querySelector(".site-header");
 const siteNav = siteHeader?.querySelector(".site-nav");
 
 if (siteHeader && siteNav) {
-  const mobileNav = window.matchMedia("(max-width: 820px)");
+  const mobileNav = window.matchMedia("(max-width: 1100px)");
   const controls = document.createElement("div");
-  controls.className = "nav-controls";
+  controls.className = "nav-controls header-actions";
 
   const setupLink = siteNav.querySelector('a[href="setup.html"]');
   if (setupLink) {
     const shortcut = setupLink.cloneNode(true);
     shortcut.className = "button primary nav-setup";
+    setIconLabel(shortcut, setupLink.textContent, "settings");
     controls.append(shortcut);
   }
 
@@ -23,7 +42,7 @@ if (siteHeader && siteNav) {
   const setNavOpen = open => {
     siteHeader.classList.toggle("nav-open", open);
     toggle.setAttribute("aria-expanded", String(open));
-    toggle.textContent = open ? "收合選單" : "主題選單";
+    setIconLabel(toggle, open ? "收合選單" : "主題選單", open ? "x" : "menu");
   };
 
   toggle.addEventListener("click", () => {
@@ -64,6 +83,42 @@ if (siteHeader && siteNav) {
   siteHeader.insertBefore(controls, siteNav);
   siteHeader.classList.add("nav-ready");
 }
+
+const topicIcons = ["lightbulb", "radio", "car", "compass", "sliders-horizontal", "radio", "circuit-board", "fan", "network"];
+document.querySelectorAll(".home-page .product-panel").forEach((card, index) => {
+  const top = document.createElement("div");
+  top.className = "topic-card-top";
+  const tile = document.createElement("span");
+  tile.className = "icon-tile";
+  tile.append(createSiteIcon(topicIcons[index] || "book-open"));
+  top.append(tile);
+  const badge = card.querySelector(".zone-badge");
+  if (badge) top.append(badge);
+  card.prepend(top);
+});
+
+document.querySelectorAll("a.button:not(.nav-setup)").forEach(link => {
+  const href = link.getAttribute("href") || "";
+  const icon = href.startsWith("downloads/") || href === "downloads.html" ? "download"
+    : href === "firmware.html" ? "cpu" : href === "setup.html" ? "settings"
+    : href.includes("code-viewer") ? "code-2" : "arrow-right";
+  if (link.closest(".product-panel")) link.append(createSiteIcon(icon));
+  else link.prepend(createSiteIcon(icon));
+});
+
+const revealLinkedCase = () => {
+  let id;
+  try {
+    id = decodeURIComponent(window.location.hash.slice(1));
+  } catch {
+    return;
+  }
+  const target = document.getElementById(id);
+  const detail = target?.closest("details.case-detail");
+  if (detail && !detail.open) detail.open = true;
+};
+revealLinkedCase();
+window.addEventListener("hashchange", revealLinkedCase);
 
 const codePages = {
   "keyboard-car-control": {
@@ -1235,6 +1290,29 @@ const escapeHtml = value =>
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;");
 
+const highlightedCodeLines = (text, language = "python") => {
+  const grammar = window.Prism?.languages?.[language];
+  if (!grammar) return text.split("\n").map(escapeHtml);
+  const lines = [""];
+  const append = (token, classes = []) => {
+    if (Array.isArray(token)) {
+      token.forEach(part => append(part, classes));
+    } else if (typeof token === "string") {
+      token.split("\n").forEach((part, index) => {
+        if (index) lines.push("");
+        const value = escapeHtml(part);
+        lines[lines.length - 1] += classes.length ? `<span class="token ${classes.join(" ")}">${value}</span>` : value;
+      });
+    } else {
+      const names = [token.type, ...(Array.isArray(token.alias) ? token.alias : [token.alias])]
+        .filter(name => typeof name === "string" && /^[a-z][a-z0-9-]*$/i.test(name));
+      append(token.content, [...classes, ...names]);
+    }
+  };
+  append(window.Prism.tokenize(text, grammar));
+  return lines;
+};
+
 const renderCode = (node, text, highlights = []) => {
   if (!node) {
     return;
@@ -1246,6 +1324,7 @@ const renderCode = (node, text, highlights = []) => {
     tone: item.tone
   }));
   const lines = text.split("\n");
+  const highlighted = highlightedCodeLines(text);
 
   node.innerHTML = lines
     .map((line, index) => {
@@ -1253,7 +1332,7 @@ const renderCode = (node, text, highlights = []) => {
       const activeRange = ranges.find(range => lineNo >= range.start && lineNo <= range.end);
       const toneClass = activeRange ? ` highlight-${activeRange.tone}` : "";
       const highlightClass = activeRange ? " is-highlight" : "";
-      return `<span class="code-line${highlightClass}${toneClass}"><span class="code-line-no">${lineNo}</span><span class="code-line-text">${escapeHtml(line) || "&nbsp;"}</span></span>`;
+      return `<span class="code-line${highlightClass}${toneClass}"><span class="code-line-no">${lineNo}</span><span class="code-line-text">${highlighted[index] || "&nbsp;"}</span></span>`;
     })
     .join("");
 };
@@ -1277,9 +1356,9 @@ const renderHighlights = (node, highlights) => {
 };
 
 const setCopyButtonState = (button, label) => {
-  button.textContent = label;
+  setIconLabel(button, label, label === "已複製" ? "check" : "copy");
   window.setTimeout(() => {
-    button.textContent = button.dataset.defaultLabel;
+    setIconLabel(button, button.dataset.defaultLabel, "copy");
   }, 1500);
 };
 
@@ -1289,6 +1368,7 @@ const attachCopyHandler = (button, getText) => {
   }
 
   button.dataset.defaultLabel = button.textContent;
+  setIconLabel(button, button.dataset.defaultLabel, "copy");
   button.addEventListener("click", async () => {
     try {
       await navigator.clipboard.writeText(getText());
@@ -1393,6 +1473,12 @@ attachInlineCodeBlock("line-advanced-full-code", "line-advanced-copy-code", "lin
 document.querySelectorAll(".case-code-card").forEach(card => {
   const button = card.querySelector(".copy-md-code");
   const code = card.querySelector("code");
+  if (code && !code.id) {
+    const language = /Flutter|Dart/i.test(card.querySelector(".code-toolbar")?.textContent || "") ? "dart" : "python";
+    const original = code.textContent;
+    code.innerHTML = highlightedCodeLines(original, language).join("\n");
+    code.classList.add(`language-${language}`);
+  }
   attachCopyHandler(button, () => code?.textContent ?? "");
 });
 

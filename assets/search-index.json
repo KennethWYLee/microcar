@@ -1,0 +1,982 @@
+[
+  {
+    "url": "index.html",
+    "title": "Raspberry Pi Pico 小車與履帶車課程",
+    "category": "課程頁面",
+    "summary": "以 9 個主題整理 Raspberry Pi Pico 小車與履帶車教材：入門、感測輸出、小車移動、無人車、專題化、藍芽遙控、電路板教材、擺頭電扇與履帶車網路資訊流。",
+    "keywords": "Raspberry Pi Pico 小車與履帶車課程 LED Button State Buzzer RGB Ultrasonic Motor PWM Drive Obstacle Line Servo Project Strategy PID Flutter BLE Remote Pico Pinout Python Fan Mechanism PWM Tracked Car RTSP UDP"
+  },
+  {
+    "url": "setup.html",
+    "title": "開始前設定：先讓小車真的能跑",
+    "category": "課程頁面",
+    "summary": "開始 Raspberry Pi Pico 小車課程前，先完成 Thonny、MicroPython、mango 函式庫、馬達校正與自學檢查。",
+    "keywords": "開始前設定：先讓小車真的能跑"
+  },
+  {
+    "url": "bootcamp.html",
+    "title": "BootCamp",
+    "category": "課程頁面",
+    "summary": "用 12 個步驟完成 Raspberry Pi Pico 小車 BootCamp，從開新檔、貼程式到用鍵盤控制小車。",
+    "keywords": "BootCamp"
+  },
+  {
+    "url": "topic-01-intro.html",
+    "title": "01 入門：LED、按鈕與狀態控制",
+    "category": "課程頁面",
+    "summary": "本主題讓學習者先理解輸出、輸入、判斷與狀態，適合作為 Raspberry Pi Pico 小車課程的起點。",
+    "keywords": "01 入門：LED、按鈕與狀態控制 LED Button State"
+  },
+  {
+    "url": "topic-02-sensor-output.html",
+    "title": "02 感測與輸出：蜂鳴器、RGB 與超音波",
+    "category": "課程頁面",
+    "summary": "本主題從蜂鳴器與 RGB 輸出延伸到超音波距離感測，讓學生看見程式如何回應環境變化。",
+    "keywords": "02 感測與輸出：蜂鳴器、RGB 與超音波 Buzzer RGB Ultrasonic"
+  },
+  {
+    "url": "topic-03-car-motion.html",
+    "title": "03 小車移動：馬達、速度與控制模組",
+    "category": "課程頁面",
+    "summary": "本主題聚焦馬達方向、PWM 速度、左右輪差速與模組化，建立小車可以穩定移動的基礎。",
+    "keywords": "03 小車移動：馬達、速度與控制模組 Motor PWM Drive"
+  },
+  {
+    "url": "topic-04-autonomous-car.html",
+    "title": "04 無人車：差速、避障、循跡與伺服掃描",
+    "category": "課程頁面",
+    "summary": "本主題把差速控制、避障、循跡與伺服掃描整合成無人車應用，適合銜接較完整的小車任務。",
+    "keywords": "04 無人車：差速、避障、循跡與伺服掃描 Obstacle Line Servo"
+  },
+  {
+    "url": "topic-05-project-cases.html",
+    "title": "05 專題化：任務設計、策略比較與成果評量",
+    "category": "課程頁面",
+    "summary": "本主題把前面學到的輸入、輸出、馬達、感測與循跡控制整合成任務挑戰，並加入規則式、P、PD、PID 循跡演算法 cases。",
+    "keywords": "05 專題化：任務設計、策略比較與成果評量 Project Strategy PID"
+  },
+  {
+    "url": "topic-06-bluetooth-car.html",
+    "title": "06 藍芽遙控小車：Flutter App 與 Pico BLE",
+    "category": "課程頁面",
+    "summary": "本主題是進階遙控單元，建議先完成 03 小車移動，再使用既有 Flutter 介面與 Pico BLE 小車程式完成手機控制。",
+    "keywords": "06 藍芽遙控小車：Flutter App 與 Pico BLE Flutter BLE Remote"
+  },
+  {
+    "url": "topic-07-board-python.html",
+    "title": "07 電路板教材：Python 控制與腳位導讀",
+    "category": "課程頁面",
+    "summary": "本主題依照機器人程式設計實務-Python.pdf 與相容性驗證報告，整理 Raspberry Pi Pico 主板、腳位、輸入輸出與馬達控制的授課導讀。",
+    "keywords": "07 電路板教材：Python 控制與腳位導讀 Pico Pinout Python"
+  },
+  {
+    "url": "topic-08-fan-application.html",
+    "title": "08 電路板應用：擺頭電扇",
+    "category": "課程頁面",
+    "summary": "本主題是延伸作品單元，使用擺頭電扇-課程簡報整理風扇機構、Pico X2 腳位與 PWM 控制應用，不屬於小車核心必修。",
+    "keywords": "08 電路板應用：擺頭電扇 Fan Mechanism PWM"
+  },
+  {
+    "url": "topic-09-tracked-car-info-flow.html",
+    "title": "09 履帶車網路資訊流：V1-V5 遠端控制與影像串流",
+    "category": "課程頁面",
+    "summary": "本主題整理履帶車 V1-V5 開發歷程，聚焦 UDP 控制、UART 轉接、AMB82、X3/RP2040、RTSP 影像串流、延遲與跨網段中繼。",
+    "keywords": "09 履帶車網路資訊流：V1-V5 遠端控制與影像串流 UDP UART RTSP AMB82 X3/RP2040"
+  },
+  {
+    "url": "firmware.html",
+    "title": "Firmware 官方下載入口",
+    "category": "課程頁面",
+    "summary": "依 Raspberry Pi Pico / Pico W / Pico 2 / Pico 2 W 板子名稱前往 MicroPython 官方 firmware 下載頁，並查看刷機與 Port 消失救援流程。",
+    "keywords": "Firmware 官方下載入口"
+  },
+  {
+    "url": "downloads.html",
+    "title": "9 個主題教材下載區",
+    "category": "課程頁面",
+    "summary": "下載 Raspberry Pi Pico 小車與履帶車 9 個主題教材、原始程式、PDF、PPTX 與講義。",
+    "keywords": "9 個主題教材下載區"
+  },
+  {
+    "url": "index.html#topic-roadmap",
+    "title": "9 個主題：核心學習與延伸應用",
+    "category": "Raspberry Pi Pico 小車與履帶車課程",
+    "summary": "前往「Raspberry Pi Pico 小車與履帶車課程」的這個段落。",
+    "keywords": "以 9 個主題整理 Raspberry Pi Pico 小車與履帶車教材：入門、感測輸出、小車移動、無人車、專題化、藍芽遙控、電路板教材、擺頭電扇與履帶車網路資訊流。"
+  },
+  {
+    "url": "index.html#resources",
+    "title": "教材下載與韌體設定",
+    "category": "Raspberry Pi Pico 小車與履帶車課程",
+    "summary": "前往「Raspberry Pi Pico 小車與履帶車課程」的這個段落。",
+    "keywords": "以 9 個主題整理 Raspberry Pi Pico 小車與履帶車教材：入門、感測輸出、小車移動、無人車、專題化、藍芽遙控、電路板教材、擺頭電扇與履帶車網路資訊流。"
+  },
+  {
+    "url": "setup.html#file-location",
+    "title": "先分清楚：電腦本機端 vs Pico 板子端",
+    "category": "開始前設定",
+    "summary": "前往「開始前設定：先讓小車真的能跑」的這個段落。",
+    "keywords": "開始 Raspberry Pi Pico 小車課程前，先完成 Thonny、MicroPython、mango 函式庫、馬達校正與自學檢查。"
+  },
+  {
+    "url": "setup.html#setup-steps",
+    "title": "開始前先完成 6 件事",
+    "category": "開始前設定",
+    "summary": "前往「開始前設定：先讓小車真的能跑」的這個段落。",
+    "keywords": "開始 Raspberry Pi Pico 小車課程前，先完成 Thonny、MicroPython、mango 函式庫、馬達校正與自學檢查。"
+  },
+  {
+    "url": "setup.html#completion-check",
+    "title": "完成這個主題前，學生應該做得到",
+    "category": "開始前設定",
+    "summary": "前往「開始前設定：先讓小車真的能跑」的這個段落。",
+    "keywords": "開始 Raspberry Pi Pico 小車課程前，先完成 Thonny、MicroPython、mango 函式庫、馬達校正與自學檢查。"
+  },
+  {
+    "url": "bootcamp.html#file-location",
+    "title": "BootCamp 只需要一份主程式，先貼上執行，不急著存成 main.py",
+    "category": "BootCamp",
+    "summary": "前往「BootCamp」的這個段落。",
+    "keywords": "用 12 個步驟完成 Raspberry Pi Pico 小車 BootCamp，從開新檔、貼程式到用鍵盤控制小車。"
+  },
+  {
+    "url": "bootcamp.html#thonny-steps",
+    "title": "學生請照著下面 12 個步驟，從上往下完成",
+    "category": "BootCamp",
+    "summary": "前往「BootCamp」的這個段落。",
+    "keywords": "用 12 個步驟完成 Raspberry Pi Pico 小車 BootCamp，從開新檔、貼程式到用鍵盤控制小車。"
+  },
+  {
+    "url": "bootcamp.html#full-code",
+    "title": "把這份完整程式貼到 Thonny 就可以開始操作",
+    "category": "BootCamp",
+    "summary": "前往「BootCamp」的這個段落。",
+    "keywords": "用 12 個步驟完成 Raspberry Pi Pico 小車 BootCamp，從開新檔、貼程式到用鍵盤控制小車。"
+  },
+  {
+    "url": "bootcamp.html#code-walkthrough",
+    "title": "貼上程式後，就從這裡開始一步一步看",
+    "category": "BootCamp",
+    "summary": "前往「BootCamp」的這個段落。",
+    "keywords": "用 12 個步驟完成 Raspberry Pi Pico 小車 BootCamp，從開新檔、貼程式到用鍵盤控制小車。"
+  },
+  {
+    "url": "topic-01-intro.html#file-location",
+    "title": "01 入門的檔案放置方式",
+    "category": "01 入門",
+    "summary": "前往「01 入門：LED、按鈕與狀態控制」的這個段落。",
+    "keywords": "本主題讓學習者先理解輸出、輸入、判斷與狀態，適合作為 Raspberry Pi Pico 小車課程的起點。"
+  },
+  {
+    "url": "topic-01-intro.html#case-map",
+    "title": "先用地圖看完整學習順序",
+    "category": "01 入門",
+    "summary": "前往「01 入門：LED、按鈕與狀態控制」的這個段落。",
+    "keywords": "本主題讓學習者先理解輸出、輸入、判斷與狀態，適合作為 Raspberry Pi Pico 小車課程的起點。"
+  },
+  {
+    "url": "topic-01-intro.html#case-list",
+    "title": "逐步教學內容",
+    "category": "01 入門",
+    "summary": "前往「01 入門：LED、按鈕與狀態控制」的這個段落。",
+    "keywords": "本主題讓學習者先理解輸出、輸入、判斷與狀態，適合作為 Raspberry Pi Pico 小車課程的起點。"
+  },
+  {
+    "url": "topic-01-intro.html#completion-check",
+    "title": "完成這個主題前，學生應該做得到",
+    "category": "01 入門",
+    "summary": "前往「01 入門：LED、按鈕與狀態控制」的這個段落。",
+    "keywords": "本主題讓學習者先理解輸出、輸入、判斷與狀態，適合作為 Raspberry Pi Pico 小車課程的起點。"
+  },
+  {
+    "url": "topic-01-intro.html#case-1",
+    "title": "內建 LED 閃爍",
+    "category": "01 入門",
+    "summary": "閱讀「01 入門：LED、按鈕與狀態控制」中的案例與程式。",
+    "keywords": "01 入門：LED、按鈕與狀態控制"
+  },
+  {
+    "url": "topic-01-intro.html#case-2",
+    "title": "LED 訊號節奏設計",
+    "category": "01 入門",
+    "summary": "閱讀「01 入門：LED、按鈕與狀態控制」中的案例與程式。",
+    "keywords": "01 入門：LED、按鈕與狀態控制"
+  },
+  {
+    "url": "topic-01-intro.html#case-3",
+    "title": "按鈕即時控制 LED",
+    "category": "01 入門",
+    "summary": "閱讀「01 入門：LED、按鈕與狀態控制」中的案例與程式。",
+    "keywords": "01 入門：LED、按鈕與狀態控制"
+  },
+  {
+    "url": "topic-01-intro.html#case-4",
+    "title": "按鈕切換 LED 狀態",
+    "category": "01 入門",
+    "summary": "閱讀「01 入門：LED、按鈕與狀態控制」中的案例與程式。",
+    "keywords": "01 入門：LED、按鈕與狀態控制"
+  },
+  {
+    "url": "topic-01-intro.html#case-5",
+    "title": "短按與長按判斷",
+    "category": "01 入門",
+    "summary": "閱讀「01 入門：LED、按鈕與狀態控制」中的案例與程式。",
+    "keywords": "01 入門：LED、按鈕與狀態控制"
+  },
+  {
+    "url": "topic-01-intro.html#case-6",
+    "title": "小車啟動前狀態燈",
+    "category": "01 入門",
+    "summary": "閱讀「01 入門：LED、按鈕與狀態控制」中的案例與程式。",
+    "keywords": "01 入門：LED、按鈕與狀態控制"
+  },
+  {
+    "url": "topic-01-intro.html#case-7",
+    "title": "按鈕中斷計數器",
+    "category": "01 入門",
+    "summary": "閱讀「01 入門：LED、按鈕與狀態控制」中的案例與程式。",
+    "keywords": "01 入門：LED、按鈕與狀態控制"
+  },
+  {
+    "url": "topic-01-intro.html#case-8",
+    "title": "非阻塞式待機燈與按鈕模式",
+    "category": "01 入門",
+    "summary": "閱讀「01 入門：LED、按鈕與狀態控制」中的案例與程式。",
+    "keywords": "01 入門：LED、按鈕與狀態控制"
+  },
+  {
+    "url": "topic-01-intro.html#case-9",
+    "title": "Shell 指令控制 LED",
+    "category": "01 入門",
+    "summary": "閱讀「01 入門：LED、按鈕與狀態控制」中的案例與程式。",
+    "keywords": "01 入門：LED、按鈕與狀態控制"
+  },
+  {
+    "url": "topic-01-intro.html#case-10",
+    "title": "開機自我測試程式",
+    "category": "01 入門",
+    "summary": "閱讀「01 入門：LED、按鈕與狀態控制」中的案例與程式。",
+    "keywords": "01 入門：LED、按鈕與狀態控制"
+  },
+  {
+    "url": "topic-02-sensor-output.html#file-location",
+    "title": "02 感測與輸出的檔案放置方式",
+    "category": "02 感測與輸出",
+    "summary": "前往「02 感測與輸出：蜂鳴器、RGB 與超音波」的這個段落。",
+    "keywords": "本主題從蜂鳴器與 RGB 輸出延伸到超音波距離感測，讓學生看見程式如何回應環境變化。"
+  },
+  {
+    "url": "topic-02-sensor-output.html#case-map",
+    "title": "先用地圖看完整學習順序",
+    "category": "02 感測與輸出",
+    "summary": "前往「02 感測與輸出：蜂鳴器、RGB 與超音波」的這個段落。",
+    "keywords": "本主題從蜂鳴器與 RGB 輸出延伸到超音波距離感測，讓學生看見程式如何回應環境變化。"
+  },
+  {
+    "url": "topic-02-sensor-output.html#case-list",
+    "title": "逐步教學內容",
+    "category": "02 感測與輸出",
+    "summary": "前往「02 感測與輸出：蜂鳴器、RGB 與超音波」的這個段落。",
+    "keywords": "本主題從蜂鳴器與 RGB 輸出延伸到超音波距離感測，讓學生看見程式如何回應環境變化。"
+  },
+  {
+    "url": "topic-02-sensor-output.html#completion-check",
+    "title": "完成這個主題前，學生應該做得到",
+    "category": "02 感測與輸出",
+    "summary": "前往「02 感測與輸出：蜂鳴器、RGB 與超音波」的這個段落。",
+    "keywords": "本主題從蜂鳴器與 RGB 輸出延伸到超音波距離感測，讓學生看見程式如何回應環境變化。"
+  },
+  {
+    "url": "topic-02-sensor-output.html#case-1",
+    "title": "蜂鳴器單音控制",
+    "category": "02 感測與輸出",
+    "summary": "閱讀「02 感測與輸出：蜂鳴器、RGB 與超音波」中的案例與程式。",
+    "keywords": "02 感測與輸出：蜂鳴器、RGB 與超音波"
+  },
+  {
+    "url": "topic-02-sensor-output.html#case-2",
+    "title": "蜂鳴器旋律播放器",
+    "category": "02 感測與輸出",
+    "summary": "閱讀「02 感測與輸出：蜂鳴器、RGB 與超音波」中的案例與程式。",
+    "keywords": "02 感測與輸出：蜂鳴器、RGB 與超音波"
+  },
+  {
+    "url": "topic-02-sensor-output.html#case-3",
+    "title": "RGB 狀態燈",
+    "category": "02 感測與輸出",
+    "summary": "閱讀「02 感測與輸出：蜂鳴器、RGB 與超音波」中的案例與程式。",
+    "keywords": "02 感測與輸出：蜂鳴器、RGB 與超音波"
+  },
+  {
+    "url": "topic-02-sensor-output.html#case-4",
+    "title": "RGB 跑馬燈",
+    "category": "02 感測與輸出",
+    "summary": "閱讀「02 感測與輸出：蜂鳴器、RGB 與超音波」中的案例與程式。",
+    "keywords": "02 感測與輸出：蜂鳴器、RGB 與超音波"
+  },
+  {
+    "url": "topic-02-sensor-output.html#case-5",
+    "title": "超音波距離監測",
+    "category": "02 感測與輸出",
+    "summary": "閱讀「02 感測與輸出：蜂鳴器、RGB 與超音波」中的案例與程式。",
+    "keywords": "02 感測與輸出：蜂鳴器、RGB 與超音波"
+  },
+  {
+    "url": "topic-02-sensor-output.html#case-6",
+    "title": "距離警示器",
+    "category": "02 感測與輸出",
+    "summary": "閱讀「02 感測與輸出：蜂鳴器、RGB 與超音波」中的案例與程式。",
+    "keywords": "02 感測與輸出：蜂鳴器、RGB 與超音波"
+  },
+  {
+    "url": "topic-02-sensor-output.html#case-7",
+    "title": "ADC 旋鈕控制 LED 亮度",
+    "category": "02 感測與輸出",
+    "summary": "閱讀「02 感測與輸出：蜂鳴器、RGB 與超音波」中的案例與程式。",
+    "keywords": "02 感測與輸出：蜂鳴器、RGB 與超音波"
+  },
+  {
+    "url": "topic-02-sensor-output.html#case-8",
+    "title": "ADC 旋鈕控制蜂鳴器音高",
+    "category": "02 感測與輸出",
+    "summary": "閱讀「02 感測與輸出：蜂鳴器、RGB 與超音波」中的案例與程式。",
+    "keywords": "02 感測與輸出：蜂鳴器、RGB 與超音波"
+  },
+  {
+    "url": "topic-02-sensor-output.html#case-9",
+    "title": "超音波距離 RGB 條形圖",
+    "category": "02 感測與輸出",
+    "summary": "閱讀「02 感測與輸出：蜂鳴器、RGB 與超音波」中的案例與程式。",
+    "keywords": "02 感測與輸出：蜂鳴器、RGB 與超音波"
+  },
+  {
+    "url": "topic-02-sensor-output.html#case-10",
+    "title": "距離移動平均濾波警示器",
+    "category": "02 感測與輸出",
+    "summary": "閱讀「02 感測與輸出：蜂鳴器、RGB 與超音波」中的案例與程式。",
+    "keywords": "02 感測與輸出：蜂鳴器、RGB 與超音波"
+  },
+  {
+    "url": "topic-03-car-motion.html#file-location",
+    "title": "03 小車移動的檔案放置方式",
+    "category": "03 小車移動",
+    "summary": "前往「03 小車移動：馬達、速度與控制模組」的這個段落。",
+    "keywords": "本主題聚焦馬達方向、PWM 速度、左右輪差速與模組化，建立小車可以穩定移動的基礎。"
+  },
+  {
+    "url": "topic-03-car-motion.html#case-map",
+    "title": "先用地圖看完整學習順序",
+    "category": "03 小車移動",
+    "summary": "前往「03 小車移動：馬達、速度與控制模組」的這個段落。",
+    "keywords": "本主題聚焦馬達方向、PWM 速度、左右輪差速與模組化，建立小車可以穩定移動的基礎。"
+  },
+  {
+    "url": "topic-03-car-motion.html#case-list",
+    "title": "逐步教學內容",
+    "category": "03 小車移動",
+    "summary": "前往「03 小車移動：馬達、速度與控制模組」的這個段落。",
+    "keywords": "本主題聚焦馬達方向、PWM 速度、左右輪差速與模組化，建立小車可以穩定移動的基礎。"
+  },
+  {
+    "url": "topic-03-car-motion.html#completion-check",
+    "title": "完成這個主題前，學生應該做得到",
+    "category": "03 小車移動",
+    "summary": "前往「03 小車移動：馬達、速度與控制模組」的這個段落。",
+    "keywords": "本主題聚焦馬達方向、PWM 速度、左右輪差速與模組化，建立小車可以穩定移動的基礎。"
+  },
+  {
+    "url": "topic-03-car-motion.html#case-1",
+    "title": "單顆馬達方向測試",
+    "category": "03 小車移動",
+    "summary": "閱讀「03 小車移動：馬達、速度與控制模組」中的案例與程式。",
+    "keywords": "03 小車移動：馬達、速度與控制模組"
+  },
+  {
+    "url": "topic-03-car-motion.html#case-2",
+    "title": "雙馬達基本移動",
+    "category": "03 小車移動",
+    "summary": "閱讀「03 小車移動：馬達、速度與控制模組」中的案例與程式。",
+    "keywords": "03 小車移動：馬達、速度與控制模組"
+  },
+  {
+    "url": "topic-03-car-motion.html#case-3",
+    "title": "PWM 馬達速度控制",
+    "category": "03 小車移動",
+    "summary": "閱讀「03 小車移動：馬達、速度與控制模組」中的案例與程式。",
+    "keywords": "03 小車移動：馬達、速度與控制模組"
+  },
+  {
+    "url": "topic-03-car-motion.html#case-4",
+    "title": "雙輪速度差轉向",
+    "category": "03 小車移動",
+    "summary": "閱讀「03 小車移動：馬達、速度與控制模組」中的案例與程式。",
+    "keywords": "03 小車移動：馬達、速度與控制模組"
+  },
+  {
+    "url": "topic-03-car-motion.html#case-5",
+    "title": "使用 `mango.motor.Motor` 控制馬達",
+    "category": "03 小車移動",
+    "summary": "閱讀「03 小車移動：馬達、速度與控制模組」中的案例與程式。",
+    "keywords": "03 小車移動：馬達、速度與控制模組"
+  },
+  {
+    "url": "topic-03-car-motion.html#case-6",
+    "title": "小車控制模組化",
+    "category": "03 小車移動",
+    "summary": "閱讀「03 小車移動：馬達、速度與控制模組」中的案例與程式。",
+    "keywords": "03 小車移動：馬達、速度與控制模組"
+  },
+  {
+    "url": "topic-03-car-motion.html#case-7",
+    "title": "雙馬達方向校正工具",
+    "category": "03 小車移動",
+    "summary": "閱讀「03 小車移動：馬達、速度與控制模組」中的案例與程式。",
+    "keywords": "03 小車移動：馬達、速度與控制模組"
+  },
+  {
+    "url": "topic-03-car-motion.html#case-8",
+    "title": "軟啟動與軟停止",
+    "category": "03 小車移動",
+    "summary": "閱讀「03 小車移動：馬達、速度與控制模組」中的案例與程式。",
+    "keywords": "03 小車移動：馬達、速度與控制模組"
+  },
+  {
+    "url": "topic-03-car-motion.html#case-9",
+    "title": "動作腳本播放器",
+    "category": "03 小車移動",
+    "summary": "閱讀「03 小車移動：馬達、速度與控制模組」中的案例與程式。",
+    "keywords": "03 小車移動：馬達、速度與控制模組"
+  },
+  {
+    "url": "topic-03-car-motion.html#case-10",
+    "title": "Shell 文字指令遙控車",
+    "category": "03 小車移動",
+    "summary": "閱讀「03 小車移動：馬達、速度與控制模組」中的案例與程式。",
+    "keywords": "03 小車移動：馬達、速度與控制模組"
+  },
+  {
+    "url": "topic-04-autonomous-car.html#file-location",
+    "title": "04 無人車任務的檔案放置方式",
+    "category": "04 無人車",
+    "summary": "前往「04 無人車：差速、避障、循跡與伺服掃描」的這個段落。",
+    "keywords": "本主題把差速控制、避障、循跡與伺服掃描整合成無人車應用，適合銜接較完整的小車任務。"
+  },
+  {
+    "url": "topic-04-autonomous-car.html#case-map",
+    "title": "先用地圖看完整學習順序",
+    "category": "04 無人車",
+    "summary": "前往「04 無人車：差速、避障、循跡與伺服掃描」的這個段落。",
+    "keywords": "本主題把差速控制、避障、循跡與伺服掃描整合成無人車應用，適合銜接較完整的小車任務。"
+  },
+  {
+    "url": "topic-04-autonomous-car.html#case-list",
+    "title": "逐步教學內容",
+    "category": "04 無人車",
+    "summary": "前往「04 無人車：差速、避障、循跡與伺服掃描」的這個段落。",
+    "keywords": "本主題把差速控制、避障、循跡與伺服掃描整合成無人車應用，適合銜接較完整的小車任務。"
+  },
+  {
+    "url": "topic-04-autonomous-car.html#completion-check",
+    "title": "完成這個主題前，學生應該做得到",
+    "category": "04 無人車",
+    "summary": "前往「04 無人車：差速、避障、循跡與伺服掃描」的這個段落。",
+    "keywords": "本主題把差速控制、避障、循跡與伺服掃描整合成無人車應用，適合銜接較完整的小車任務。"
+  },
+  {
+    "url": "topic-04-autonomous-car.html#case-1",
+    "title": "差速控制展示",
+    "category": "04 無人車",
+    "summary": "閱讀「04 無人車：差速、避障、循跡與伺服掃描」中的案例與程式。",
+    "keywords": "04 無人車：差速、避障、循跡與伺服掃描"
+  },
+  {
+    "url": "topic-04-autonomous-car.html#case-2",
+    "title": "固定左轉避障車",
+    "category": "04 無人車",
+    "summary": "閱讀「04 無人車：差速、避障、循跡與伺服掃描」中的案例與程式。",
+    "keywords": "04 無人車：差速、避障、循跡與伺服掃描"
+  },
+  {
+    "url": "topic-04-autonomous-car.html#case-3",
+    "title": "倒車後轉向避障",
+    "category": "04 無人車",
+    "summary": "閱讀「04 無人車：差速、避障、循跡與伺服掃描」中的案例與程式。",
+    "keywords": "04 無人車：差速、避障、循跡與伺服掃描"
+  },
+  {
+    "url": "topic-04-autonomous-car.html#case-4",
+    "title": "左右交替避障策略",
+    "category": "04 無人車",
+    "summary": "閱讀「04 無人車：差速、避障、循跡與伺服掃描」中的案例與程式。",
+    "keywords": "04 無人車：差速、避障、循跡與伺服掃描"
+  },
+  {
+    "url": "topic-04-autonomous-car.html#case-5",
+    "title": "尋跡感測器讀值與基礎循跡",
+    "category": "04 無人車",
+    "summary": "閱讀「04 無人車：差速、避障、循跡與伺服掃描」中的案例與程式。",
+    "keywords": "04 無人車：差速、避障、循跡與伺服掃描"
+  },
+  {
+    "url": "topic-04-autonomous-car.html#case-6",
+    "title": "伺服掃描式避障",
+    "category": "04 無人車",
+    "summary": "閱讀「04 無人車：差速、避障、循跡與伺服掃描」中的案例與程式。",
+    "keywords": "04 無人車：差速、避障、循跡與伺服掃描"
+  },
+  {
+    "url": "topic-04-autonomous-car.html#case-7",
+    "title": "I2C 掃描與尋跡感測器診斷",
+    "category": "04 無人車",
+    "summary": "閱讀「04 無人車：差速、避障、循跡與伺服掃描」中的案例與程式。",
+    "keywords": "04 無人車：差速、避障、循跡與伺服掃描"
+  },
+  {
+    "url": "topic-04-autonomous-car.html#case-8",
+    "title": "加權循跡比例控制",
+    "category": "04 無人車",
+    "summary": "閱讀「04 無人車：差速、避障、循跡與伺服掃描」中的案例與程式。",
+    "keywords": "04 無人車：差速、避障、循跡與伺服掃描"
+  },
+  {
+    "url": "topic-04-autonomous-car.html#case-9",
+    "title": "循跡結合超音波避障",
+    "category": "04 無人車",
+    "summary": "閱讀「04 無人車：差速、避障、循跡與伺服掃描」中的案例與程式。",
+    "keywords": "04 無人車：差速、避障、循跡與伺服掃描"
+  },
+  {
+    "url": "topic-04-autonomous-car.html#case-10",
+    "title": "伺服多角度環境掃描",
+    "category": "04 無人車",
+    "summary": "閱讀「04 無人車：差速、避障、循跡與伺服掃描」中的案例與程式。",
+    "keywords": "04 無人車：差速、避障、循跡與伺服掃描"
+  },
+  {
+    "url": "topic-05-project-cases.html#file-location",
+    "title": "05 專題化的檔案放置方式",
+    "category": "05 專題化",
+    "summary": "前往「05 專題化：任務設計、策略比較與成果評量」的這個段落。",
+    "keywords": "本主題把前面學到的輸入、輸出、馬達、感測與循跡控制整合成任務挑戰，並加入規則式、P、PD、PID 循跡演算法 cases。"
+  },
+  {
+    "url": "topic-05-project-cases.html#case-map",
+    "title": "先用地圖看完整學習順序",
+    "category": "05 專題化",
+    "summary": "前往「05 專題化：任務設計、策略比較與成果評量」的這個段落。",
+    "keywords": "本主題把前面學到的輸入、輸出、馬達、感測與循跡控制整合成任務挑戰，並加入規則式、P、PD、PID 循跡演算法 cases。"
+  },
+  {
+    "url": "topic-05-project-cases.html#case-list",
+    "title": "逐步教學內容",
+    "category": "05 專題化",
+    "summary": "前往「05 專題化：任務設計、策略比較與成果評量」的這個段落。",
+    "keywords": "本主題把前面學到的輸入、輸出、馬達、感測與循跡控制整合成任務挑戰，並加入規則式、P、PD、PID 循跡演算法 cases。"
+  },
+  {
+    "url": "topic-05-project-cases.html#completion-check",
+    "title": "完成這個主題前，學生應該做得到",
+    "category": "05 專題化",
+    "summary": "前往「05 專題化：任務設計、策略比較與成果評量」的這個段落。",
+    "keywords": "本主題把前面學到的輸入、輸出、馬達、感測與循跡控制整合成任務挑戰，並加入規則式、P、PD、PID 循跡演算法 cases。"
+  },
+  {
+    "url": "topic-05-project-cases.html#case-1",
+    "title": "按鈕啟停避障車",
+    "category": "05 專題化",
+    "summary": "閱讀「05 專題化：任務設計、策略比較與成果評量」中的案例與程式。",
+    "keywords": "05 專題化：任務設計、策略比較與成果評量"
+  },
+  {
+    "url": "topic-05-project-cases.html#case-2",
+    "title": "避障策略比較實驗",
+    "category": "05 專題化",
+    "summary": "閱讀「05 專題化：任務設計、策略比較與成果評量」中的案例與程式。",
+    "keywords": "05 專題化：任務設計、策略比較與成果評量"
+  },
+  {
+    "url": "topic-05-project-cases.html#case-3",
+    "title": "測試紀錄與參數調整",
+    "category": "05 專題化",
+    "summary": "閱讀「05 專題化：任務設計、策略比較與成果評量」中的案例與程式。",
+    "keywords": "05 專題化：任務設計、策略比較與成果評量"
+  },
+  {
+    "url": "topic-05-project-cases.html#case-4",
+    "title": "循跡挑戰賽",
+    "category": "05 專題化",
+    "summary": "閱讀「05 專題化：任務設計、策略比較與成果評量」中的案例與程式。",
+    "keywords": "05 專題化：任務設計、策略比較與成果評量"
+  },
+  {
+    "url": "topic-05-project-cases.html#case-5",
+    "title": "伺服閘門運送任務",
+    "category": "05 專題化",
+    "summary": "閱讀「05 專題化：任務設計、策略比較與成果評量」中的案例與程式。",
+    "keywords": "05 專題化：任務設計、策略比較與成果評量"
+  },
+  {
+    "url": "topic-05-project-cases.html#case-6",
+    "title": "總整合任務：可啟停的避障任務車",
+    "category": "05 專題化",
+    "summary": "閱讀「05 專題化：任務設計、策略比較與成果評量」中的案例與程式。",
+    "keywords": "05 專題化：任務設計、策略比較與成果評量"
+  },
+  {
+    "url": "topic-05-project-cases.html#case-7",
+    "title": "任務計時賽",
+    "category": "05 專題化",
+    "summary": "閱讀「05 專題化：任務設計、策略比較與成果評量」中的案例與程式。",
+    "keywords": "05 專題化：任務設計、策略比較與成果評量"
+  },
+  {
+    "url": "topic-05-project-cases.html#case-8",
+    "title": "多模式任務車",
+    "category": "05 專題化",
+    "summary": "閱讀「05 專題化：任務設計、策略比較與成果評量」中的案例與程式。",
+    "keywords": "05 專題化：任務設計、策略比較與成果評量"
+  },
+  {
+    "url": "topic-05-project-cases.html#case-9",
+    "title": "循跡參數實驗與資料記錄",
+    "category": "05 專題化",
+    "summary": "閱讀「05 專題化：任務設計、策略比較與成果評量」中的案例與程式。",
+    "keywords": "05 專題化：任務設計、策略比較與成果評量"
+  },
+  {
+    "url": "topic-05-project-cases.html#case-10",
+    "title": "期末專題骨架：狀態機任務車",
+    "category": "05 專題化",
+    "summary": "閱讀「05 專題化：任務設計、策略比較與成果評量」中的案例與程式。",
+    "keywords": "05 專題化：任務設計、策略比較與成果評量"
+  },
+  {
+    "url": "topic-05-project-cases.html#case-11",
+    "title": "規則式循跡演算法比較",
+    "category": "05 專題化",
+    "summary": "閱讀「05 專題化：任務設計、策略比較與成果評量」中的案例與程式。",
+    "keywords": "05 專題化：任務設計、策略比較與成果評量"
+  },
+  {
+    "url": "topic-05-project-cases.html#case-12",
+    "title": "P 比例循跡控制",
+    "category": "05 專題化",
+    "summary": "閱讀「05 專題化：任務設計、策略比較與成果評量」中的案例與程式。",
+    "keywords": "05 專題化：任務設計、策略比較與成果評量"
+  },
+  {
+    "url": "topic-05-project-cases.html#case-13",
+    "title": "PD 循跡控制與擺動修正",
+    "category": "05 專題化",
+    "summary": "閱讀「05 專題化：任務設計、策略比較與成果評量」中的案例與程式。",
+    "keywords": "05 專題化：任務設計、策略比較與成果評量"
+  },
+  {
+    "url": "topic-05-project-cases.html#case-14",
+    "title": "PID 循跡調參挑戰",
+    "category": "05 專題化",
+    "summary": "閱讀「05 專題化：任務設計、策略比較與成果評量」中的案例與程式。",
+    "keywords": "05 專題化：任務設計、策略比較與成果評量"
+  },
+  {
+    "url": "topic-06-bluetooth-car.html#file-location",
+    "title": "06 藍芽遙控小車的檔案放置方式",
+    "category": "06 藍芽遙控小車",
+    "summary": "前往「06 藍芽遙控小車：Flutter App 與 Pico BLE」的這個段落。",
+    "keywords": "本主題是進階遙控單元，建議先完成 03 小車移動，再使用既有 Flutter 介面與 Pico BLE 小車程式完成手機控制。"
+  },
+  {
+    "url": "topic-06-bluetooth-car.html#learning-route",
+    "title": "藍芽遙控小車的完整路徑",
+    "category": "06 藍芽遙控小車",
+    "summary": "前往「06 藍芽遙控小車：Flutter App 與 Pico BLE」的這個段落。",
+    "keywords": "本主題是進階遙控單元，建議先完成 03 小車移動，再使用既有 Flutter 介面與 Pico BLE 小車程式完成手機控制。"
+  },
+  {
+    "url": "topic-06-bluetooth-car.html#classroom-flow",
+    "title": "建議上課流程",
+    "category": "06 藍芽遙控小車",
+    "summary": "前往「06 藍芽遙控小車：Flutter App 與 Pico BLE」的這個段落。",
+    "keywords": "本主題是進階遙控單元，建議先完成 03 小車移動，再使用既有 Flutter 介面與 Pico BLE 小車程式完成手機控制。"
+  },
+  {
+    "url": "topic-06-bluetooth-car.html#completion-check",
+    "title": "完成這個主題前，學生應該做得到",
+    "category": "06 藍芽遙控小車",
+    "summary": "前往「06 藍芽遙控小車：Flutter App 與 Pico BLE」的這個段落。",
+    "keywords": "本主題是進階遙控單元，建議先完成 03 小車移動，再使用既有 Flutter 介面與 Pico BLE 小車程式完成手機控制。"
+  },
+  {
+    "url": "topic-07-board-python.html#file-location",
+    "title": "07 電路板教材的檔案放置方式",
+    "category": "07 電路板教材",
+    "summary": "前往「07 電路板教材：Python 控制與腳位導讀」的這個段落。",
+    "keywords": "本主題依照機器人程式設計實務-Python.pdf 與相容性驗證報告，整理 Raspberry Pi Pico 主板、腳位、輸入輸出與馬達控制的授課導讀。"
+  },
+  {
+    "url": "topic-07-board-python.html#learning-route",
+    "title": "把 PDF 變成一張可上課的板子地圖",
+    "category": "07 電路板教材",
+    "summary": "前往「07 電路板教材：Python 控制與腳位導讀」的這個段落。",
+    "keywords": "本主題依照機器人程式設計實務-Python.pdf 與相容性驗證報告，整理 Raspberry Pi Pico 主板、腳位、輸入輸出與馬達控制的授課導讀。"
+  },
+  {
+    "url": "topic-07-board-python.html#classroom-flow",
+    "title": "目前教材採用的腳位對照",
+    "category": "07 電路板教材",
+    "summary": "前往「07 電路板教材：Python 控制與腳位導讀」的這個段落。",
+    "keywords": "本主題依照機器人程式設計實務-Python.pdf 與相容性驗證報告，整理 Raspberry Pi Pico 主板、腳位、輸入輸出與馬達控制的授課導讀。"
+  },
+  {
+    "url": "topic-07-board-python.html#completion-check",
+    "title": "完成這個主題前，學生應該做得到",
+    "category": "07 電路板教材",
+    "summary": "前往「07 電路板教材：Python 控制與腳位導讀」的這個段落。",
+    "keywords": "本主題依照機器人程式設計實務-Python.pdf 與相容性驗證報告，整理 Raspberry Pi Pico 主板、腳位、輸入輸出與馬達控制的授課導讀。"
+  },
+  {
+    "url": "topic-08-fan-application.html#file-location",
+    "title": "08 電路板應用的檔案放置方式",
+    "category": "08 電路板應用",
+    "summary": "前往「08 電路板應用：擺頭電扇」的這個段落。",
+    "keywords": "本主題是延伸作品單元，使用擺頭電扇-課程簡報整理風扇機構、Pico X2 腳位與 PWM 控制應用，不屬於小車核心必修。"
+  },
+  {
+    "url": "topic-08-fan-application.html#learning-route",
+    "title": "從小車走到真實作品：智慧型可擺動電風扇",
+    "category": "08 電路板應用",
+    "summary": "前往「08 電路板應用：擺頭電扇」的這個段落。",
+    "keywords": "本主題是延伸作品單元，使用擺頭電扇-課程簡報整理風扇機構、Pico X2 腳位與 PWM 控制應用，不屬於小車核心必修。"
+  },
+  {
+    "url": "topic-08-fan-application.html#classroom-flow",
+    "title": "建議教學順序",
+    "category": "08 電路板應用",
+    "summary": "前往「08 電路板應用：擺頭電扇」的這個段落。",
+    "keywords": "本主題是延伸作品單元，使用擺頭電扇-課程簡報整理風扇機構、Pico X2 腳位與 PWM 控制應用，不屬於小車核心必修。"
+  },
+  {
+    "url": "topic-08-fan-application.html#completion-check",
+    "title": "完成這個主題前，學生應該做得到",
+    "category": "08 電路板應用",
+    "summary": "前往「08 電路板應用：擺頭電扇」的這個段落。",
+    "keywords": "本主題是延伸作品單元，使用擺頭電扇-課程簡報整理風扇機構、Pico X2 腳位與 PWM 控制應用，不屬於小車核心必修。"
+  },
+  {
+    "url": "topic-09-tracked-car-info-flow.html#info-flow-glossary",
+    "title": "先看懂這五個名詞在車上哪裡出現",
+    "category": "09 履帶車網路資訊流",
+    "summary": "前往「09 履帶車網路資訊流：V1-V5 遠端控制與影像串流」的這個段落。",
+    "keywords": "本主題整理履帶車 V1-V5 開發歷程，聚焦 UDP 控制、UART 轉接、AMB82、X3/RP2040、RTSP 影像串流、延遲與跨網段中繼。"
+  },
+  {
+    "url": "topic-09-tracked-car-info-flow.html#term-udp",
+    "title": "UDP：App 把控制命令丟到車上的方式",
+    "category": "09 履帶車網路資訊流",
+    "summary": "前往「09 履帶車網路資訊流：V1-V5 遠端控制與影像串流」的這個段落。",
+    "keywords": "本主題整理履帶車 V1-V5 開發歷程，聚焦 UDP 控制、UART 轉接、AMB82、X3/RP2040、RTSP 影像串流、延遲與跨網段中繼。"
+  },
+  {
+    "url": "topic-09-tracked-car-info-flow.html#term-uart",
+    "title": "UART：AMB82 跟 X3/RP2040 之間的板間簡訊",
+    "category": "09 履帶車網路資訊流",
+    "summary": "前往「09 履帶車網路資訊流：V1-V5 遠端控制與影像串流」的這個段落。",
+    "keywords": "本主題整理履帶車 V1-V5 開發歷程，聚焦 UDP 控制、UART 轉接、AMB82、X3/RP2040、RTSP 影像串流、延遲與跨網段中繼。"
+  },
+  {
+    "url": "topic-09-tracked-car-info-flow.html#term-rtsp",
+    "title": "RTSP：把攝影機畫面串回 App 的影像路線",
+    "category": "09 履帶車網路資訊流",
+    "summary": "前往「09 履帶車網路資訊流：V1-V5 遠端控制與影像串流」的這個段落。",
+    "keywords": "本主題整理履帶車 V1-V5 開發歷程，聚焦 UDP 控制、UART 轉接、AMB82、X3/RP2040、RTSP 影像串流、延遲與跨網段中繼。"
+  },
+  {
+    "url": "topic-09-tracked-car-info-flow.html#term-amb82",
+    "title": "AMB82：網路與影像的入口板",
+    "category": "09 履帶車網路資訊流",
+    "summary": "前往「09 履帶車網路資訊流：V1-V5 遠端控制與影像串流」的這個段落。",
+    "keywords": "本主題整理履帶車 V1-V5 開發歷程，聚焦 UDP 控制、UART 轉接、AMB82、X3/RP2040、RTSP 影像串流、延遲與跨網段中繼。"
+  },
+  {
+    "url": "topic-09-tracked-car-info-flow.html#term-x3-rp2040",
+    "title": "X3/RP2040：真正讓馬達動起來的控制板",
+    "category": "09 履帶車網路資訊流",
+    "summary": "前往「09 履帶車網路資訊流：V1-V5 遠端控制與影像串流」的這個段落。",
+    "keywords": "本主題整理履帶車 V1-V5 開發歷程，聚焦 UDP 控制、UART 轉接、AMB82、X3/RP2040、RTSP 影像串流、延遲與跨網段中繼。"
+  },
+  {
+    "url": "topic-09-tracked-car-info-flow.html#file-location",
+    "title": "09 履帶車教材的檔案放置方式",
+    "category": "09 履帶車網路資訊流",
+    "summary": "前往「09 履帶車網路資訊流：V1-V5 遠端控制與影像串流」的這個段落。",
+    "keywords": "本主題整理履帶車 V1-V5 開發歷程，聚焦 UDP 控制、UART 轉接、AMB82、X3/RP2040、RTSP 影像串流、延遲與跨網段中繼。"
+  },
+  {
+    "url": "topic-09-tracked-car-info-flow.html#learning-route",
+    "title": "履帶車從 V1 到 V5 的學習路線",
+    "category": "09 履帶車網路資訊流",
+    "summary": "前往「09 履帶車網路資訊流：V1-V5 遠端控制與影像串流」的這個段落。",
+    "keywords": "本主題整理履帶車 V1-V5 開發歷程，聚焦 UDP 控制、UART 轉接、AMB82、X3/RP2040、RTSP 影像串流、延遲與跨網段中繼。"
+  },
+  {
+    "url": "topic-09-tracked-car-info-flow.html#classroom-flow",
+    "title": "建議教學順序",
+    "category": "09 履帶車網路資訊流",
+    "summary": "前往「09 履帶車網路資訊流：V1-V5 遠端控制與影像串流」的這個段落。",
+    "keywords": "本主題整理履帶車 V1-V5 開發歷程，聚焦 UDP 控制、UART 轉接、AMB82、X3/RP2040、RTSP 影像串流、延遲與跨網段中繼。"
+  },
+  {
+    "url": "topic-09-tracked-car-info-flow.html#completion-check",
+    "title": "完成這個主題前，學生應該做得到",
+    "category": "09 履帶車網路資訊流",
+    "summary": "前往「09 履帶車網路資訊流：V1-V5 遠端控制與影像串流」的這個段落。",
+    "keywords": "本主題整理履帶車 V1-V5 開發歷程，聚焦 UDP 控制、UART 轉接、AMB82、X3/RP2040、RTSP 影像串流、延遲與跨網段中繼。"
+  },
+  {
+    "url": "firmware.html#firmware-map",
+    "title": "先選對 RP2040 / RP2350 板子",
+    "category": "Firmware 官方下載入口",
+    "summary": "前往「Firmware 官方下載入口」的這個段落。",
+    "keywords": "依 Raspberry Pi Pico / Pico W / Pico 2 / Pico 2 W 板子名稱前往 MicroPython 官方 firmware 下載頁，並查看刷機與 Port 消失救援流程。"
+  },
+  {
+    "url": "firmware.html#firmware-downloads",
+    "title": "依板子名稱前往官方下載頁",
+    "category": "Firmware 官方下載入口",
+    "summary": "前往「Firmware 官方下載入口」的這個段落。",
+    "keywords": "依 Raspberry Pi Pico / Pico W / Pico 2 / Pico 2 W 板子名稱前往 MicroPython 官方 firmware 下載頁，並查看刷機與 Port 消失救援流程。"
+  },
+  {
+    "url": "firmware.html#port-recovery",
+    "title": "Thonny 沒有出現 Port 時",
+    "category": "Firmware 官方下載入口",
+    "summary": "前往「Firmware 官方下載入口」的這個段落。",
+    "keywords": "依 Raspberry Pi Pico / Pico W / Pico 2 / Pico 2 W 板子名稱前往 MicroPython 官方 firmware 下載頁，並查看刷機與 Port 消失救援流程。"
+  },
+  {
+    "url": "downloads.html#file-location",
+    "title": "下載檔不是全部都要上傳到 Pico",
+    "category": "9 個主題教材下載區",
+    "summary": "前往「9 個主題教材下載區」的這個段落。",
+    "keywords": "下載 Raspberry Pi Pico 小車與履帶車 9 個主題教材、原始程式、PDF、PPTX 與講義。"
+  },
+  {
+    "url": "downloads.html#required-downloads",
+    "title": "開始前必備檔案",
+    "category": "9 個主題教材下載區",
+    "summary": "前往「9 個主題教材下載區」的這個段落。",
+    "keywords": "下載 Raspberry Pi Pico 小車與履帶車 9 個主題教材、原始程式、PDF、PPTX 與講義。"
+  },
+  {
+    "url": "downloads.html#setup-thonny",
+    "title": "開始前設定頁",
+    "category": "9 個主題教材下載區",
+    "summary": "前往「9 個主題教材下載區」的這個段落。",
+    "keywords": "下載 Raspberry Pi Pico 小車與履帶車 9 個主題教材、原始程式、PDF、PPTX 與講義。"
+  },
+  {
+    "url": "downloads.html#bootcamp-downloads",
+    "title": "BootCamp 程式與教學檔",
+    "category": "9 個主題教材下載區",
+    "summary": "前往「9 個主題教材下載區」的這個段落。",
+    "keywords": "下載 Raspberry Pi Pico 小車與履帶車 9 個主題教材、原始程式、PDF、PPTX 與講義。"
+  },
+  {
+    "url": "downloads.html#download-teaching-plan",
+    "title": "1 小時授課建議",
+    "category": "9 個主題教材下載區",
+    "summary": "前往「9 個主題教材下載區」的這個段落。",
+    "keywords": "下載 Raspberry Pi Pico 小車與履帶車 9 個主題教材、原始程式、PDF、PPTX 與講義。"
+  },
+  {
+    "url": "downloads.html#download-keyboard",
+    "title": "小車鍵盤控制範例",
+    "category": "9 個主題教材下載區",
+    "summary": "前往「9 個主題教材下載區」的這個段落。",
+    "keywords": "下載 Raspberry Pi Pico 小車與履帶車 9 個主題教材、原始程式、PDF、PPTX 與講義。"
+  },
+  {
+    "url": "downloads.html#download-motor",
+    "title": "馬達基本函式",
+    "category": "9 個主題教材下載區",
+    "summary": "前往「9 個主題教材下載區」的這個段落。",
+    "keywords": "下載 Raspberry Pi Pico 小車與履帶車 9 個主題教材、原始程式、PDF、PPTX 與講義。"
+  },
+  {
+    "url": "downloads.html#download-sensor",
+    "title": "距離感測與 RGB 範例",
+    "category": "9 個主題教材下載區",
+    "summary": "前往「9 個主題教材下載區」的這個段落。",
+    "keywords": "下載 Raspberry Pi Pico 小車與履帶車 9 個主題教材、原始程式、PDF、PPTX 與講義。"
+  },
+  {
+    "url": "downloads.html#topic-downloads",
+    "title": "依主題下載教材",
+    "category": "9 個主題教材下載區",
+    "summary": "前往「9 個主題教材下載區」的這個段落。",
+    "keywords": "下載 Raspberry Pi Pico 小車與履帶車 9 個主題教材、原始程式、PDF、PPTX 與講義。"
+  },
+  {
+    "url": "downloads.html#topic-01-intro",
+    "title": "01 入門：LED、按鈕與狀態控制",
+    "category": "9 個主題教材下載區",
+    "summary": "前往「9 個主題教材下載區」的這個段落。",
+    "keywords": "下載 Raspberry Pi Pico 小車與履帶車 9 個主題教材、原始程式、PDF、PPTX 與講義。"
+  },
+  {
+    "url": "downloads.html#topic-02-sensor-output",
+    "title": "02 感測與輸出：蜂鳴器、RGB 與超音波",
+    "category": "9 個主題教材下載區",
+    "summary": "前往「9 個主題教材下載區」的這個段落。",
+    "keywords": "下載 Raspberry Pi Pico 小車與履帶車 9 個主題教材、原始程式、PDF、PPTX 與講義。"
+  },
+  {
+    "url": "downloads.html#topic-03-car-motion",
+    "title": "03 小車移動：馬達、速度與控制模組",
+    "category": "9 個主題教材下載區",
+    "summary": "前往「9 個主題教材下載區」的這個段落。",
+    "keywords": "下載 Raspberry Pi Pico 小車與履帶車 9 個主題教材、原始程式、PDF、PPTX 與講義。"
+  },
+  {
+    "url": "downloads.html#topic-04-autonomous-car",
+    "title": "04 無人車：差速、避障、循跡與伺服掃描",
+    "category": "9 個主題教材下載區",
+    "summary": "前往「9 個主題教材下載區」的這個段落。",
+    "keywords": "下載 Raspberry Pi Pico 小車與履帶車 9 個主題教材、原始程式、PDF、PPTX 與講義。"
+  },
+  {
+    "url": "downloads.html#topic-05-project-cases",
+    "title": "05 專題化：任務設計、策略比較與成果評量",
+    "category": "9 個主題教材下載區",
+    "summary": "前往「9 個主題教材下載區」的這個段落。",
+    "keywords": "下載 Raspberry Pi Pico 小車與履帶車 9 個主題教材、原始程式、PDF、PPTX 與講義。"
+  },
+  {
+    "url": "downloads.html#topic-06-bluetooth-car",
+    "title": "06 藍芽遙控小車：Flutter App 與 Pico BLE",
+    "category": "9 個主題教材下載區",
+    "summary": "前往「9 個主題教材下載區」的這個段落。",
+    "keywords": "下載 Raspberry Pi Pico 小車與履帶車 9 個主題教材、原始程式、PDF、PPTX 與講義。"
+  },
+  {
+    "url": "downloads.html#topic-07-board-python",
+    "title": "07 電路板教材：Python 控制與腳位導讀",
+    "category": "9 個主題教材下載區",
+    "summary": "前往「9 個主題教材下載區」的這個段落。",
+    "keywords": "下載 Raspberry Pi Pico 小車與履帶車 9 個主題教材、原始程式、PDF、PPTX 與講義。"
+  },
+  {
+    "url": "downloads.html#topic-08-fan-application",
+    "title": "08 電路板應用：擺頭電扇",
+    "category": "9 個主題教材下載區",
+    "summary": "前往「9 個主題教材下載區」的這個段落。",
+    "keywords": "下載 Raspberry Pi Pico 小車與履帶車 9 個主題教材、原始程式、PDF、PPTX 與講義。"
+  },
+  {
+    "url": "downloads.html#topic-09-tracked-car-info-flow",
+    "title": "09 履帶車網路資訊流",
+    "category": "9 個主題教材下載區",
+    "summary": "前往「9 個主題教材下載區」的這個段落。",
+    "keywords": "下載 Raspberry Pi Pico 小車與履帶車 9 個主題教材、原始程式、PDF、PPTX 與講義。"
+  }
+]

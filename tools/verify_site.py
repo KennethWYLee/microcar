@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import json
 import re
 import subprocess
 import sys
@@ -324,18 +325,32 @@ def verify_css(errors: list[str]) -> None:
 
 
 def verify_javascript(errors: list[str]) -> None:
+    for filename in ("script.js", "assets/site-tools.js", "assets/vendor/prism/prism.min.js", "assets/vendor/fuse/fuse.min.mjs"):
+        try:
+            result = subprocess.run(
+                ["node", "--check", str(REPO / filename)],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+        except FileNotFoundError:
+            errors.append("Node.js is unavailable; website scripts were not syntax checked")
+            return
+        if result.returncode:
+            errors.append(f"JavaScript syntax error in {filename}: {result.stderr.strip()}")
+
+
+def verify_ui_assets(errors: list[str]) -> None:
+    from build_ui_search_index import build_entries
+    from vendor_ui_packages import check
+
+    errors.extend(check())
     try:
-        result = subprocess.run(
-            ["node", "--check", str(REPO / "script.js")],
-            capture_output=True,
-            text=True,
-            check=False,
-        )
-    except FileNotFoundError:
-        errors.append("Node.js is unavailable; script.js was not syntax checked")
-        return
-    if result.returncode:
-        errors.append(f"JavaScript syntax error: {result.stderr.strip()}")
+        index = json.loads((REPO / "assets" / "search-index.json").read_text(encoding="utf-8"))
+        if index != build_entries():
+            errors.append("Search index is stale; run tools/build_ui_search_index.py")
+    except (OSError, ValueError) as exc:
+        errors.append(f"Cannot verify public search index: {exc}")
 
 
 def main() -> None:
@@ -350,6 +365,7 @@ def main() -> None:
     verify_media_privacy(errors)
     verify_css(errors)
     verify_javascript(errors)
+    verify_ui_assets(errors)
 
     uf2_files = list(REPO.rglob("*.uf2"))
     if uf2_files:
