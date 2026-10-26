@@ -36,7 +36,7 @@ TRACKED_CAR_COURSE_DIR = (
     / "course_tracked_car_v1_v5_complete"
 )
 DOWNLOAD_TOPIC_09_DIR = REPO / "downloads" / "topic-09-tracked-car-info-flow"
-ASSET_VERSION = "20261026-ui"
+ASSET_VERSION = "20261026-ui2"
 
 # These pages contain hand-maintained content that this script must not overwrite.
 MANUALLY_MAINTAINED_PAGES = (

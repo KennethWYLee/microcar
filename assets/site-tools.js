@@ -226,6 +226,11 @@ const initSearch = () => {
     (returnFocus.isConnected ? returnFocus : trigger).focus({ preventScroll: true });
   });
   dialog.addEventListener("keydown", event => {
+    if (event.key === "Escape" && !composing && !event.isComposing) {
+      event.preventDefault();
+      dialog.close();
+      return;
+    }
     if (event.key !== "Tab") return;
     const focusable = [...dialog.querySelectorAll('button:not([disabled]), input:not([disabled]), a[href]')]
       .filter(element => element.getClientRects().length);
